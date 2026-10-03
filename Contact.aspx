@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="Assignment.Contact" %>
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <uc:Header ID="HeaderControl" runat="server" />
     <main aria-labelledby="title">
         <h2 id="title"><%: Title %>.</h2>
         <h3>Your contact page.</h3>

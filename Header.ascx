@@ -1,20 +1,21 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Header.ascx.cs" Inherits="Assignment.WebUserControl1" %>
 
-<link rel="stylesheet" type="text/css" href="header.css" />
-
-<header style="background-color: #808080;justify-content:space-evenly;align-items:center ; color: white; display: flex">
-
-        <asp:Label ID="Label1" runat="server" Font-Size="XX-Large" Text="Label"></asp:Label>
-        <div style="display: inline; align-content:center">
-            <asp:LinkButton ID="homeButton" runat="server">Home</asp:LinkButton>
-            <asp:LinkButton ID="aboutButton" runat="server">About</asp:LinkButton>
-        </div>
-        <div style="display: inline; align-content:center">
-        <asp:Button ID="loginButton" runat="server" Text="Login" />
-        <asp:Button ID="registerButton" runat="server" Text="Get Started" />
+<header class="header-container" style="background-color: #808080; color: white; padding: 10px 20px; white-space: nowrap; display: flex; align-items: center; justify-content: space-between;">
+    
+    <div style="display: inline-block; width: 33%; text-align: left; vertical-align: middle;">
+        <span id="websiteName" runat="server" style="font-size: xx-large; font-weight: bold;">Ncient</span>
     </div>
-    
 
-    
+    <!-- Center: Navigation Links -->
+    <div style="display: inline-block; width: 33%; text-align: center; vertical-align: middle;">
+        <a id="homeButton" runat="server" href="Default.aspx" class="nav-link" style="color: white; text-decoration: none; margin-right: 15px;">Home</a>
+        <a id="aboutButton" runat="server" href="About.aspx" class="nav-link" style="color: white; text-decoration: none;">About</a>
+    </div>
+
+    <!-- Right: Action Buttons -->
+    <div style="display: inline-block; width: 33%; text-align: right; vertical-align: middle;">
+        <button id="loginButton" runat="server" type="button" style="margin-right: 5px;">Login</button>
+        <button id="registerButton" runat="server" type="button">Get Started</button>
+    </div>
 
 </header>

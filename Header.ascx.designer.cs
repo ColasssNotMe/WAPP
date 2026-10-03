@@ -15,13 +15,13 @@ namespace Assignment
     {
 
         /// <summary>
-        /// Label1 control.
+        /// websiteName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl websiteName;
 
         /// <summary>
         /// homeButton control.
@@ -30,7 +30,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton homeButton;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor homeButton;
 
         /// <summary>
         /// aboutButton control.
@@ -39,7 +39,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton aboutButton;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aboutButton;
 
         /// <summary>
         /// loginButton control.
@@ -48,7 +48,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button loginButton;
+        protected global::System.Web.UI.HtmlControls.HtmlButton loginButton;
 
         /// <summary>
         /// registerButton control.
@@ -57,6 +57,6 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button registerButton;
+        protected global::System.Web.UI.HtmlControls.HtmlButton registerButton;
     }
 }
