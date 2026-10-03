@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="Assignment.HomePage" %>
+
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 
 <!DOCTYPE html>
@@ -76,9 +77,9 @@
             cursor: pointer;
         }
 
-        .hero-button:hover {
-            background-color: #c8c8c8;
-        }
+            .hero-button:hover {
+                background-color: #c8c8c8;
+            }
 
         /* Right image */
         .hero-image {
@@ -88,6 +89,33 @@
             display: block;
         }
 
+        .stats-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #d9d9d9;
+            border-radius: 5px;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #333;
+        }
     </style>
 </head>
 
@@ -98,13 +126,11 @@
 
         <div class="hero-content">
 
-            <h1 class="hero-title">
-                Learn History.<br />
+            <h1 class="hero-title">Learn History.<br />
                 Test your Knowledge
             </h1>
 
-            <h2 class="hero-subtitle">
-                Discover the Past
+            <h2 class="hero-subtitle">Discover the Past
             </h2>
 
             <p class="hero-description">
@@ -128,11 +154,48 @@
 
         <div>
             <img class="hero-image"
-                 src="https://picsum.photos/240/136"
-                 alt="History Image" />
+                src="https://picsum.photos/240/136"
+                alt="History Image" />
         </div>
 
+
+
     </div>
+    <div class="stats-container">
+
+        <div class="stat-item">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Learning Material</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-number">120+</div>
+            <div class="stat-label">Quiz Question</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-number">98.4%</div>
+            <div class="stat-label">Grade Pass Student</div>
+        </div>
+    </div>
+
+
+    <hr style="margin: 20px 0; border: none; height: 2px; background-color: black" />
+
+    <div>
+        <h3>
+            <b>Everything You Need to Learn Sejarah
+            </b>
+        </h3>
+
+        <p >
+Built purposefully to replace dry textbook memorization with visual <br />storytelling, active recall drills, and direct educator guidance.
+
+        </p>
+
+    </div>
+
+
 
 </body>
 </html>
