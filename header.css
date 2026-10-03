@@ -1,0 +1,40 @@
+﻿.header-container {
+    background-color: #808080;
+    color: white;
+    padding: 10px 20px;
+    /* Grid layout creates 3 equal sections */
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+/* Left side stays on the left */
+.header-left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Center section stays in the exact middle */
+.header-center {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between Home and About */
+}
+
+/* Right section stays pinned to the far right */
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Space between Login and Get Started */
+}
+
+/* Optional link styling */
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+    .nav-link:hover {
+        text-decoration: underline;
+    }
