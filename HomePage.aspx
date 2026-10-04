@@ -1,22 +1,23 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="Assignment.HomePage" %>
 
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
 <!DOCTYPE html>
+<html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>History Quiz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" >
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style type="text/css">
         * {
             box-sizing: border-box;
-            font-family:"Plus Jakarta Sans",sans-serif;
+            font-family: "Plus Jakarta Sans",sans-serif;
         }
 
         body {
@@ -516,112 +517,110 @@
             </div>
         </div>
     </div>
-<!-- How Ncient Works Section -->
-<section class="how-it-works">
+    <!-- How Ncient Works Section -->
+    <section class="how-it-works">
 
-    <div class="how-it-works-container">
+        <div class="how-it-works-container">
 
-        <p class="how-label">
-            Simple Step
-        </p>
+            <p class="how-label">
+                Simple Step
+            </p>
 
-        <h2 class="how-title">
-            How Ncient Works
-        </h2>
+            <h2 class="how-title">How Ncient Works
+            </h2>
 
-        <p class="how-description">
-            A three-step evidence-based learning cycle tailored to help
+            <p class="how-description">
+                A three-step evidence-based learning cycle tailored to help
             Malaysian students retain historical concepts and conquer
             exam formats effortlessly.
-        </p>
+            </p>
 
 
-        <div class="how-cards">
+            <div class="how-cards">
 
-            <!-- Step 01 -->
-            <div class="how-card">
+                <!-- Step 01 -->
+                <div class="how-card">
 
-                <div class="how-card-top">
+                    <div class="how-card-top">
 
-                    <div class="how-number">
-                        01
+                        <div class="how-number">
+                            01
+                        </div>
+
+                        <div class="how-icon"></div>
+
                     </div>
 
-                    <div class="how-icon"></div>
+                    <h3 class="how-card-title">01 - Learn
+                    </h3>
 
-                </div>
-
-                <h3 class="how-card-title">
-                    01 - Learn
-                </h3>
-
-                <p class="how-card-description">
-                    Explore History learning materials and notes.
+                    <p class="how-card-description">
+                        Explore History learning materials and notes.
                     Study bite-sized chapter breakdowns, audio summaries,
                     and chronologies organized by standard KSSM syllabus units.
-                </p>
-
-            </div>
-
-
-            <!-- Step 02 -->
-            <div class="how-card">
-
-                <div class="how-card-top">
-
-                    <div class="how-number">
-                        02
-                    </div>
-
-                    <div class="how-icon"></div>
+                    </p>
 
                 </div>
 
-                <h3 class="how-card-title">
-                    02 - Practice
-                </h3>
 
-                <p class="how-card-description">
-                    Attempt quizzes and test your understanding.
-                    Challenge yourself with topical quizzes, past-year
-                    trials, and earn mastery badges to reinforce memory retention.
-                </p>
+                <!-- Step 02 -->
+                <div class="how-card">
 
-            </div>
+                    <div class="how-card-top">
 
+                        <div class="how-number">
+                            02
+                        </div>
 
-            <!-- Step 03 -->
-            <div class="how-card">
+                        <div class="how-icon"></div>
 
-                <div class="how-card-top">
-
-                    <div class="how-number">
-                        03
                     </div>
 
-                    <div class="how-icon"></div>
+                    <h3 class="how-card-title">02 - Practice
+                    </h3>
+
+                    <p class="how-card-description">
+                        Attempt quizzes and test your understanding.
+                    Challenge yourself with topical quizzes, past-year
+                    trials, and earn mastery badges to reinforce memory retention.
+                    </p>
 
                 </div>
 
-                <h3 class="how-card-title">
-                    03 - Improve
-                </h3>
 
-                <p class="how-card-description">
-                    Attempt quizzes and test your understanding.
+                <!-- Step 03 -->
+                <div class="how-card">
+
+                    <div class="how-card-top">
+
+                        <div class="how-number">
+                            03
+                        </div>
+
+                        <div class="how-icon"></div>
+
+                    </div>
+
+                    <h3 class="how-card-title">03 - Improve
+                    </h3>
+
+                    <p class="how-card-description">
+                        Attempt quizzes and test your understanding.
                     Challenge yourself with topical quizzes, past-year
                     trials, and earn mastery badges to reinforce memory retention.
-                </p>
+                    </p>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
+
+    <uc:Footer ID="FooterControl" runat="server" />
 
 </body>
 </html>

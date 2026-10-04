@@ -8,7 +8,7 @@
 
     <!-- Center: Navigation Links -->
     <div style="display: inline-block; width: 33%; text-align: center; vertical-align: middle;">
-        <a id="homeButton" runat="server" href="Default.aspx" class="nav-link" style="color: white; text-decoration: none; margin-right: 15px;">Home</a>
+        <a id="homeButton" runat="server" href="HomePage.aspx" class="nav-link" style="color: white; text-decoration: none; margin-right: 15px;">Home</a>
         <a id="aboutButton" runat="server" href="About.aspx" class="nav-link" style="color: white; text-decoration: none;">About</a>
     </div>
 
