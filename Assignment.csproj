@@ -127,7 +127,7 @@
     <Content Include="index.css" />
     <Content Include="LearningMaterial.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="Login.html" />
+    <Content Include="Login.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
