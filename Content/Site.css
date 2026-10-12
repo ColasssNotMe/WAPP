@@ -13,9 +13,16 @@ textarea {
     max-width: 280px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .body-content {
-        padding: 0;
-    }
+body {
+}
+
+
+button {
+    border: 10px;
+    background-color: #1c2541;
+    color: #000000;
+    padding: 7px 13px;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
 }
