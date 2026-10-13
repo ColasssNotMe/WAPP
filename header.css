@@ -1,5 +1,57 @@
-﻿
-.nav-link {
-    color: white;
-    text-decoration: none;
+﻿.site-header {
+    background-color: var(--bg-light);
+    border-bottom: 1px solid var(--bg-surface);
+    padding: 15px 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    white-space: nowrap;
+    
 }
+
+.header-left,
+.header-nav,
+.header-actions {
+    display: flex;
+    align-items: center;
+    width: 33%;
+}
+
+.header-left {
+    justify-content: flex-start;
+}
+
+.header-nav {
+    justify-content: center;
+}
+
+.header-actions {
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.header-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.header-nav .nav-link {
+    margin-right: 20px;
+    font-weight: 600;
+}
+
+    .header-nav .nav-link:last-child {
+        margin-right: 0;
+    }
+
+/* Optional: Highlight your primary CTA button */
+.header-actions .btn-primary {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+    .header-actions .btn-primary:hover {
+        background-color: #a72207;
+    }

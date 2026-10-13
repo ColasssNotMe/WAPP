@@ -121,7 +121,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="header.css" />
+    <Content Include="Header.css" />
     <Content Include="HomePage.aspx" />
     <Content Include="Homepage.css" />
     <Content Include="index.css" />
@@ -158,6 +158,9 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Header.ascx" />
     <Content Include="Footer.ascx" />
+    <Content Include="Content\logo.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -286,6 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
