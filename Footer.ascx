@@ -22,7 +22,7 @@
     }
 
     .footer-logo {
-        width: 6.5rem;
+        width: 4.5rem;
         height: 2.5rem;
         margin-bottom: 1rem;
     }
@@ -89,7 +89,7 @@
 
         <div class="footer-brand">
             <div class="footer-logo">
-                <img src="Images/logo.png" alt="Ncient Education Logo" />
+                <img src="img/logo.png" alt="Ncient Education Logo" />
             </div>
 
             <p>

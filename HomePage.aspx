@@ -20,6 +20,8 @@
 <body>
     <uc:Header ID="HeaderControl" runat="server" />
 
+    <div class="bg-container-color-only">
+
     <div class="hero">
 
         <div class="hero-content">
@@ -77,8 +79,9 @@
         </div>
     </div>
 
+    </div>
 
-    <hr style="margin: 20px 0; border: none; height: 2px; background-color: black" />
+    <hr style="margin: 0 0 20px 0; border: none; height: 2px; background-color: black" />
 
     <div class="learning-section">
 
@@ -179,6 +182,9 @@
             </div>
         </div>
     </div>
+
+    <hr style="margin: 0 20px 0 0; border: none; height: 2px; background-color: black" />
+
     <!-- How Ncient Works Section -->
     <section class="how-it-works">
 
@@ -209,11 +215,10 @@
                             01
                         </div>
 
-                        <div class="how-icon"></div>
 
                     </div>
 
-                    <h3 class="how-card-title">01 - Learn
+                    <h3 class="how-card-title">Learn
                     </h3>
 
                     <p class="how-card-description">
@@ -234,11 +239,10 @@
                             02
                         </div>
 
-                        <div class="how-icon"></div>
 
                     </div>
 
-                    <h3 class="how-card-title">02 - Practice
+                    <h3 class="how-card-title">Practice
                     </h3>
 
                     <p class="how-card-description">
@@ -259,11 +263,10 @@
                             03
                         </div>
 
-                        <div class="how-icon"></div>
 
                     </div>
 
-                    <h3 class="how-card-title">03 - Improve
+                    <h3 class="how-card-title">Improve
                     </h3>
 
                     <p class="how-card-description">

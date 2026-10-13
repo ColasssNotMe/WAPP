@@ -3,11 +3,18 @@
     width: 90%;
     max-width: var(--container-width);
     min-height: 50vh;
-    margin: 2.5rem auto;
+    margin: 0 auto;
+    padding-top: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 3.5rem;
+    background-color: var(--bg-surface)
+}
+
+.bg-container-color-only {
+    background-color: var(--bg-surface);
+    padding-bottom: 20px;
 }
 
 .hero-content {
@@ -102,7 +109,7 @@
     align-items: center;
     gap: 1rem;
     background-color: var(--bg-surface);
-    border: 1px solid rgb(17 17 17 / 5%);
+    border: 1px solid gray;
     border-radius: 0.75rem;
     padding: 1.25rem 1rem;
 }
@@ -236,7 +243,7 @@
 
 .how-it-works {
     width: 100%;
-    margin-top: 3rem;
+/*    margin-top: 3rem;*/
     padding: 3.5rem 0 4rem;
     background-color: var(--bg-surface);
     border-radius: 1.25rem 1.25rem 0 0;
@@ -375,66 +382,3 @@
     }
 }
 
-/* Mobile */
-@media (max-width: 600px) {
-    .hero {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1.5rem;
-        margin: 2rem auto;
-    }
-
-    .hero-content {
-        width: 100%;
-    }
-
-    .hero-subtitle {
-        text-align: left;
-    }
-
-    .hero-image {
-        width: 100%;
-        max-height: 16rem;
-        aspect-ratio: 16 / 9;
-    }
-
-    .button-container {
-        gap: 0.75rem;
-    }
-
-    .hero-button {
-        flex: 1 1 auto;
-    }
-
-    .stats-container {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 1.25rem;
-    }
-
-    .stat-item {
-        padding: 0.25rem 0;
-    }
-
-    .learning-section {
-        margin: 2.5rem auto 3rem;
-    }
-
-    .learning-cards,
-    .how-cards {
-        grid-template-columns: 1fr;
-    }
-
-    .learning-card {
-        min-height: auto;
-    }
-
-    .how-it-works {
-        padding: 2.5rem 0 3rem;
-    }
-
-    .how-card {
-        min-height: auto;
-    }
-}

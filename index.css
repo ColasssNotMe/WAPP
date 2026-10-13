@@ -5,11 +5,14 @@
    1. CSS Variables (Design Tokens)
    ========================================== */
 :root {
-    --primary-color: #111111;
-    --secondary-color: #555555;
-    --accent-color: #C82909;
-    --bg-light: #ffffff;
-    --bg-surface: #d9d9d9;
+    /* Classical Archive & Heritage palette */
+    --primary-color: #1C2541;
+    --secondary-color: #555B6E;
+    --accent-color: #880000;
+    --gold-color: #C5A059;
+    --bg-surface: #FAF6EE;
+    --bg-light: #F0EAE1;
+    --success-color: #3B5832;
     --container-width: 1000px;
 }
 
@@ -28,7 +31,7 @@ body {
     background-color: var(--bg-light);
     color: var(--primary-color);
     line-height: 1.5;
-    font-family:'Plus Jakarta Sans'
+    font-family: 'Plus Jakarta Sans'
 }
 
 /* ==========================================
@@ -98,5 +101,5 @@ button,
 
     button:hover,
     .button:hover {
-        background-color: #c8c8c8;
+        background-color: #E6DED2;
     }
