@@ -1,0 +1,325 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+}
+
+.dashboard {
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 2.5rem auto 3.5rem;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.welcome-title {
+    margin: 0;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    line-height: 1.15;
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: -0.03em;
+}
+
+.welcome-subtitle {
+    margin: 0.75rem 0 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--secondary-color);
+}
+
+/* Overall progress */
+.progress-card {
+    flex: 0 0 230px;
+    padding: 1.1rem;
+    background-color: var(--bg-surface);
+    border: 1px solid rgb(28 37 65 / 10%);
+    border-radius: 0.75rem;
+}
+
+.progress-label {
+    margin-bottom: 0.65rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.progress-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.progress-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-color);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 0.5rem;
+    background-color: #E4DDD1;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 75%;
+    height: 100%;
+    background-color: var(--gold-color);
+    border-radius: inherit;
+}
+
+/* Learning and quiz sections */
+.section-card {
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    background-color: var(--bg-surface);
+    border: 1px solid rgb(28 37 65 / 12%);
+    border-radius: 0.875rem;
+}
+
+.section-title {
+    padding: 1.15rem 1.25rem 0.9rem;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    border-bottom: 1px solid rgb(28 37 65 / 10%);
+}
+
+.learning-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 4.5rem;
+    padding: 0.9rem 1.25rem;
+    border-top: 1px solid rgb(28 37 65 / 8%);
+    transition: background-color 0.2s ease;
+}
+
+    .learning-item:first-of-type {
+        border-top: 0;
+    }
+
+    .learning-item:hover {
+        background-color: #F0EAE1;
+    }
+
+.item-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--accent-color);
+    background-color: #F0EAE1;
+    border: 1px solid rgb(136 0 0 / 12%);
+    border-radius: 0.7rem;
+}
+
+    .item-icon svg {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+
+.item-content {
+    min-width: 0;
+}
+
+.item-title {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.item-info {
+    margin: 0.35rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--secondary-color);
+}
+
+/* Live session */
+.live-session {
+    width:fit-content;
+    margin: 1.5rem auto 1.5rem  3.2rem;
+    padding: 0.9rem 1.25rem;
+    background-color: var(--bg-surface);
+    border: 2px solid var(--gold-color);
+    border-radius: 0.875rem;
+}
+
+.live-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.live-icon {
+    display: flex;
+    align-items: center;
+    color: var(--accent-color);
+}
+
+    .live-icon svg {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+
+.invite-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.invite-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.invite-input {
+    width: 12.5rem;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border: 1px solid #D6CDBF;
+    border-radius: 0.5rem;
+    background-color: #FFFFFF;
+    color: var(--primary-color);
+    outline: none;
+    font: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .invite-input:focus,
+    .classroom-input:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgb(136 0 0 / 10%);
+    }
+
+/* Join classroom */
+.join-card {
+    padding: 1.25rem;
+    background-color: var(--bg-surface);
+    border: 2px solid var(--accent-color);
+    border-radius: 0.875rem;
+}
+
+.join-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.join-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.plus-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    font-size: 1.4rem;
+    color: #FFFFFF;
+}
+
+.join-title {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.invite-code-badge {
+    padding: 0.4rem 0.75rem;
+    background-color: #E8DCC4;
+    border: 1px solid rgb(197 160 89 / 45%);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.join-description {
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--secondary-color);
+}
+
+.join-form {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.classroom-input {
+    flex: 1;
+    min-width: 0;
+    height: 2.8rem;
+    padding: 0 0.9rem;
+    border: 1px solid #D6CDBF;
+    border-radius: 0.5rem;
+    outline: none;
+    background-color: #FFFFFF;
+    font: inherit;
+    color: var(--primary-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .classroom-input::placeholder {
+        color: #777B87;
+    }
+
+.join-button {
+    min-width: 9rem;
+    height: 2.8rem;
+    padding: 0 1.25rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 0.5rem;
+    background-color: var(--accent-color);
+    color: #FFFFFF;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+    .join-button:hover {
+        background-color: #690000;
+        transform: translateY(-1px);
+    }
+
+    .join-button:focus-visible {
+        outline: 3px solid var(--gold-color);
+        outline-offset: 3px;
+    }
+
+.switch-info {
+    margin: 0.85rem 0 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--secondary-color);
+}
