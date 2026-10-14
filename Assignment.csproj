@@ -125,6 +125,8 @@
     <Content Include="Header.css" />
     <Content Include="HomePage.aspx" />
     <Content Include="Homepage.css" />
+    <Content Include="img\loginImage.jpg" />
+    <Content Include="img\registerImage.jpg" />
     <Content Include="index.css" />
     <Content Include="LearningMaterial.aspx" />
     <Content Include="Login.aspx" />
@@ -309,7 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="img\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

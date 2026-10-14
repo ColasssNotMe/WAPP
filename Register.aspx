@@ -15,9 +15,8 @@
     <form id="form1" runat="server">
         <main class="signup-page">
             <aside class="signup-visual" aria-label="Decorative welcome image">
-                <!-- Replace this visual placeholder with your own illustration or image. -->
                 <div class="visual-placeholder">
-                    <span class="visually-hidden">Decorative image placeholder</span>
+                    <img src="img/registerImage.jpg" />
                 </div>
             </aside>
 
@@ -47,8 +46,7 @@
                                 CssClass="field-label" Text="Username:" />
                             <div class="input-wrap">
                                 <span class="input-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24">
-                                        <rect x="4" y="5" width="16" height="14" rx="1"></rect><path d="m4 6 16 12M20 6 4 18"></path></svg>
+                                    <img src="svg/user.svg" width="20" height="20" />
                                 </span>
                                 <asp:TextBox ID="UsernameTextBox" runat="server" CssClass="form-input"
                                     MaxLength="40" autocomplete="username" />
@@ -63,8 +61,7 @@
                                 CssClass="field-label" Text="Email:" />
                             <div class="input-wrap">
                                 <span class="input-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24">
-                                        <rect x="4" y="5" width="16" height="14" rx="1"></rect><path d="m4 6 16 12M20 6 4 18"></path></svg>
+                                    <img src="svg/email.svg" width="20" height="20" />
                                 </span>
                                 <asp:TextBox ID="EmailTextBox" runat="server" CssClass="form-input"
                                     TextMode="Email" autocomplete="email" />
@@ -82,8 +79,7 @@
                                 CssClass="field-label" Text="Password:" />
                             <div class="input-wrap">
                                 <span class="input-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24">
-                                        <rect x="4" y="5" width="16" height="14" rx="1"></rect><path d="m4 6 16 12M20 6 4 18"></path></svg>
+                                    <img src="svg/password.svg" width="20" height="20" />
                                 </span>
                                 <asp:TextBox ID="PasswordTextBox" runat="server" CssClass="form-input password-input"
                                     TextMode="Password" autocomplete="new-password" />
@@ -103,8 +99,7 @@
                                 CssClass="field-label" Text="Confirm Password:" />
                             <div class="input-wrap">
                                 <span class="input-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24">
-                                        <rect x="4" y="5" width="16" height="14" rx="1"></rect><path d="m4 6 16 12M20 6 4 18"></path></svg>
+                                    <img src="svg/password.svg"  width="20" height="20"/>
                                 </span>
                                 <asp:TextBox ID="ConfirmPasswordTextBox" runat="server" CssClass="form-input password-input"
                                     TextMode="Password" autocomplete="new-password" />

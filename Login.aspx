@@ -68,9 +68,8 @@
             </section>
 
             <aside class="visual-panel" aria-label="Welcome illustration">
-                <!-- Replace this placeholder with an image or background illustration when ready. -->
                 <div class="visual-placeholder">
-                    <span class="visually-hidden">Decorative image placeholder</span>
+                    <img src="img/loginImage.jpg" />
                 </div>
             </aside>
         </main>
