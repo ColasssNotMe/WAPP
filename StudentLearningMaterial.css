@@ -1,0 +1,172 @@
+﻿/* ==========================================
+           Learning Materials Page
+           ========================================== */
+
+.learning-page {
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 2rem 0 4rem;
+}
+
+/* Page Header */
+
+.learning-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+    .learning-header h1 {
+        margin-bottom: 0.5rem;
+    }
+
+    .learning-header p {
+        max-width: 480px;
+        margin: 0 auto;
+        font-size: 0.85rem;
+    }
+
+/* Search */
+
+.search-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 2.8rem;
+}
+
+.search-box {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--white);
+    overflow: hidden;
+}
+
+    .search-box i {
+        margin-left: 12px;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+    }
+
+    .search-box input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        padding: 0 15px;
+        background: transparent;
+        font-family: inherit;
+        color: var(--primary-color);
+    }
+
+        .search-box input::placeholder {
+            color: #999;
+        }
+
+/* Materials Grid */
+
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 4rem;
+}
+
+/* Material Card */
+
+.material-card {
+    min-height: 143px;
+    padding: 10px 16px 12px;
+    border-radius: 9px;
+    background-color: var(--muted-surface);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Chapter Badge */
+
+.chapter-badge {
+    width: 70px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background-color: var(--white);
+    text-align: center;
+    font-size: 0.55rem;
+    color: var(--primary-color);
+    margin-bottom: 17px;
+}
+
+/* Card Icon */
+
+.material-icon {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+    .material-icon i {
+        font-size: 0.95rem;
+    }
+
+/* Card Content */
+
+.material-card h2 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 7px;
+}
+
+.material-card p {
+    max-width: 390px;
+    margin-bottom: 0;
+    font-size: 0.58rem;
+    line-height: 1.4;
+    color: var(--secondary-color);
+}
+
+/* Bottom Row */
+
+.card-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subtopic-count {
+    font-size: 0.5rem;
+    color: var(--secondary-color);
+}
+
+/* View Materials Button */
+
+.view-materials {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: var(--white);
+    color: var(--primary-color);
+    font-size: 0.55rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+    .view-materials:hover {
+        background-color: #E6DED2;
+        text-decoration: none;
+    }
+
+    .view-materials i {
+        font-size: 0.55rem;
+    }

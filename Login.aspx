@@ -46,7 +46,7 @@
                             </div>
                             <div class="input-wrap">
                                 <span class="input-icon password-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"></rect><path d="m4 6 8 7 8-7"></path></svg>
+                                    <img src="svg/password.svg"  width="20" height="20"/>
                                 </span>
                                 <asp:TextBox ID="PasswordTextBox" runat="server" CssClass="form-input password-input"
                                     TextMode="Password" autocomplete="current-password" />

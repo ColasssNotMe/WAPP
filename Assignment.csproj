@@ -196,6 +196,8 @@
     <Content Include="Site.Master" />
     <Content Include="StudentDashboard.aspx" />
     <Content Include="StudentDashboard.css" />
+    <Content Include="StudentLearningMaterial.aspx" />
+    <Content Include="StudentLearningMaterial.css" />
     <Content Include="StudentQuiz.aspx" />
     <Content Include="StudentQuiz.css" />
     <Content Include="ViewSwitcher.ascx" />
@@ -279,6 +281,13 @@
     </Compile>
     <Compile Include="StudentDashboard.aspx.designer.cs">
       <DependentUpon>StudentDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StudentLearningMaterial.aspx.cs">
+      <DependentUpon>StudentLearningMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentLearningMaterial.aspx.designer.cs">
+      <DependentUpon>StudentLearningMaterial.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentQuiz.aspx.cs">
       <DependentUpon>StudentQuiz.aspx</DependentUpon>
