@@ -16,7 +16,7 @@
 
     <!-- Right: Action Buttons -->
     <div class="header-actions">
-        <button id="loginButton" runat="server" type="button">Login</button>
-        <button id="registerButton" runat="server" type="button" class="btn-primary">Get Started</button>
+        <button id="loginButton" runat="server" type="button" onclick="window.location.href='Login.aspx'">Login</button>
+        <button id="registerButton" runat="server" type="button" class="btn-primary" onclick="window.location.href='Register.aspx'" >Get Started</button>
     </div>
 </header>

@@ -1,32 +1,88 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Assignment.Login" %>
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head runat="server">
-    <title>Login</title>
-    <link href="~/index.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign In | Ancient Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="index.css" rel="stylesheet" />
     <link href="Login.css" rel="stylesheet" />
-
 </head>
 <body>
-    <div class="wrapper">
+    <uc:Header runat="server" />
+    <form id="form1" runat="server">
+        <main class="login-page">
+            <section class="login-panel" aria-label="Sign in">
+                <div class="login-content">
+                    <header class="welcome-header">
+                        <h1>Welcome back</h1>
+                        <p>Don't have an account? <a href="Register.aspx">Sign up</a></p>
+                    </header>
 
-        <div class="left-side"></div>
-        <form id="form1" runat="server">
-            <div>
-                <label></label>
-            </div>
+                    <div class="form-fields">
+                        <div class="field-group">
+                            <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="EmailTextBox" CssClass="field-label"
+                                Text="Work or Academic Email:" />
+                            <div class="input-wrap">
+                                <span class="input-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"></rect><path d="m4 6 8 7 8-7"></path></svg>
+                                </span>
+                                <asp:TextBox ID="EmailTextBox" runat="server" CssClass="form-input" TextMode="Email"
+                                    autocomplete="username" />
+                            </div>
+                            <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="EmailTextBox"
+                                ErrorMessage="Please enter your email address." CssClass="validation-message" Display="Dynamic" />
+                            <asp:RegularExpressionValidator ID="EmailFormatValidator" runat="server" ControlToValidate="EmailTextBox"
+                                ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$" ErrorMessage="Enter a valid email address."
+                                CssClass="validation-message" Display="Dynamic" />
+                        </div>
 
+                        <div class="field-group password-group">
+                            <div class="label-row">
+                                <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="PasswordTextBox" CssClass="field-label"
+                                    Text="Password:" />
+                                <a href="ForgotPassword.aspx" class="forgot-link">Forgot Password?</a>
+                            </div>
+                            <div class="input-wrap">
+                                <span class="input-icon password-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"></rect><path d="m4 6 8 7 8-7"></path></svg>
+                                </span>
+                                <asp:TextBox ID="PasswordTextBox" runat="server" CssClass="form-input password-input"
+                                    TextMode="Password" autocomplete="current-password" />
+                                <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password" aria-pressed="false">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+                                </button>
+                            </div>
+                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="PasswordTextBox"
+                                ErrorMessage="Please enter your password." CssClass="validation-message" Display="Dynamic" />
+                        </div>
 
-            <div class="right-side">
-                <img class="login-image"
-                    src="https://picsum.photos/240/136"
-                    alt="History Image" />
-            </div>
-        </form>
-    </div>
+                        <label class="remember-row">
+                            <asp:CheckBox ID="RememberCheckBox" runat="server" />
+                            <span>Remember me for 30 days</span>
+                        </label>
 
+                        <asp:Button ID="SignInButton" runat="server" Text="Sign In to Ancient Archive  →"
+                            CssClass="sign-in-button"  />
 
+                        <asp:Label ID="LoginMessage" runat="server" CssClass="login-message" EnableViewState="false" />
+                    </div>
+                </div>
+            </section>
+
+            <aside class="visual-panel" aria-label="Welcome illustration">
+                <!-- Replace this placeholder with an image or background illustration when ready. -->
+                <div class="visual-placeholder">
+                    <span class="visually-hidden">Decorative image placeholder</span>
+                </div>
+            </aside>
+        </main>
+    </form>
+
+    <uc:Footer  runat="server" />
 </body>
 </html>
