@@ -5,10 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sign In | Ancient Archive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <title>Sign In </title>
     <link href="index.css" rel="stylesheet" />
     <link href="Login.css" rel="stylesheet" />
 </head>
@@ -61,12 +58,8 @@
                                 ErrorMessage="Please enter your password." CssClass="validation-message" Display="Dynamic" />
                         </div>
 
-                        <label class="remember-row">
-                            <asp:CheckBox ID="RememberCheckBox" runat="server" />
-                            <span>Remember me for 30 days</span>
-                        </label>
 
-                        <asp:Button ID="SignInButton" runat="server" Text="Sign In to Ancient Archive  →"
+                        <asp:Button ID="SignInButton" runat="server" Text="Sign In to Ncient  →"
                             CssClass="sign-in-button"  />
 
                         <asp:Label ID="LoginMessage" runat="server" CssClass="login-message" EnableViewState="false" />
