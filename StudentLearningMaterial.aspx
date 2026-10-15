@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentLearningMaterial.aspx.cs" Inherits="Assignment.StudentLearningMaterial" %>
 
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,191 +15,181 @@
 
 <body>
 
-<form id="form1" runat="server">
+    <uc:Header runat="server" />
+    <form id="form1" runat="server">
 
-    <main class="learning-page">
+        <main class="learning-page">
 
-        <!-- Page Header -->
-        <section class="learning-header">
+            <!-- Page Header -->
+            <section class="learning-header">
 
-            <h1>Learning Materials</h1>
+                <h1>Learning Materials</h1>
 
-            <p>
-                Explore Sejarah topics and learning notes designed
+                <p>
+                    Explore Sejarah topics and learning notes designed
                 <br />
-                to guide you through key historical milestones.
-            </p>
-
-        </section>
-
-
-        <!-- Search -->
-        <section class="search-container">
-
-            <div class="search-box">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input
-                    type="text"
-                    id="searchMaterials"
-                    placeholder="Search materials ..."
-                    onkeyup="searchMaterials()" />
-
-            </div>
-
-        </section>
-
-
-        <!-- Learning Materials -->
-        <section class="materials-grid" id="materialsGrid">
-
-            <!-- Card 1 -->
-            <article class="material-card">
-
-                <span class="chapter-badge">
-                    Chapter 1
-                </span>
-
-                <div class="material-icon">
-                    <i class="fa-regular fa-square"></i>
-                </div>
-
-                <h2>Early Civilizations</h2>
-
-                <p>
-                    Learn about important early civilizations and their
-                    development across Southeast Asia and global trade networks.
+                    to guide you through key historical milestones.
                 </p>
 
-                <div class="card-footer">
+            </section>
 
-                    <span class="subtopic-count">
-                        4 Core Subtopics
+
+            <!-- Search -->
+            <section class="search-container">
+
+                <div class="search-box">
+
+                    <img src="svg/search.svg" height="50" width="50" />
+
+                    <input
+                        type="text"
+                        id="searchMaterials"
+                        placeholder="Search materials ..."
+                        onkeyup="searchMaterials()" />
+
+                </div>
+
+            </section>
+
+
+            <!-- Learning Materials -->
+            <section class="materials-grid" id="materialsGrid">
+
+                <!-- Card 1 -->
+                <article class="material-card">
+
+                    <span class="chapter-badge">Chapter 1
                     </span>
 
-                    <a href="LearningMaterialDetails.aspx"
-                       class="view-materials">
-                        View Materials
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                    <div class="material-icon">
+                        <i class="fa-regular fa-square"></i>
+                    </div>
 
-                </div>
+                    <h2>Early Civilizations</h2>
 
-            </article>
-
-
-            <!-- Card 2 -->
-            <article class="material-card">
-
-                <span class="chapter-badge">
-                    Chapter 1
-                </span>
-
-                <div class="material-icon">
-                    <i class="fa-regular fa-square"></i>
-                </div>
-
-                <h2>Early Civilizations</h2>
-
-                <p>
-                    Learn about important early civilizations and their
+                    <p>
+                        Learn about important early civilizations and their
                     development across Southeast Asia and global trade networks.
-                </p>
+                    </p>
 
-                <div class="card-footer">
+                    <div class="card-footer">
 
-                    <span class="subtopic-count">
-                        4 Core Subtopics
+                        <span class="subtopic-count">4 Core Subtopics
+                        </span>
+
+                        <a href="LearningMaterialDetails.aspx"
+                            class="view-materials">View Materials
+                            <img src="svg/right-arrow.svg" width="50" height="50" />
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Card 2 -->
+                <article class="material-card">
+
+                    <span class="chapter-badge">Chapter 1
                     </span>
 
-                    <a href="LearningMaterialDetails.aspx"
-                       class="view-materials">
-                        View Materials
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                    <div class="material-icon">
+                        <i class="fa-regular fa-square"></i>
+                    </div>
 
-                </div>
+                    <h2>Early Civilizations</h2>
 
-            </article>
-
-
-            <!-- Card 3 -->
-            <article class="material-card">
-
-                <span class="chapter-badge">
-                    Chapter 1
-                </span>
-
-                <div class="material-icon">
-                    <i class="fa-regular fa-square"></i>
-                </div>
-
-                <h2>Early Civilizations</h2>
-
-                <p>
-                    Learn about important early civilizations and their
+                    <p>
+                        Learn about important early civilizations and their
                     development across Southeast Asia and global trade networks.
-                </p>
+                    </p>
 
-                <div class="card-footer">
+                    <div class="card-footer">
 
-                    <span class="subtopic-count">
-                        4 Core Subtopics
+                        <span class="subtopic-count">4 Core Subtopics
+                        </span>
+
+                        <a href="LearningMaterialDetails.aspx"
+                            class="view-materials">View Materials
+                        <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Card 3 -->
+                <article class="material-card">
+
+                    <span class="chapter-badge">Chapter 1
                     </span>
 
-                    <a href="LearningMaterialDetails.aspx"
-                       class="view-materials">
-                        View Materials
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                    <div class="material-icon">
+                        <i class="fa-regular fa-square"></i>
+                    </div>
 
-                </div>
+                    <h2>Early Civilizations</h2>
 
-            </article>
-
-
-            <!-- Card 4 -->
-            <article class="material-card">
-
-                <span class="chapter-badge">
-                    Chapter 1
-                </span>
-
-                <div class="material-icon">
-                    <i class="fa-regular fa-square"></i>
-                </div>
-
-                <h2>Early Civilizations</h2>
-
-                <p>
-                    Learn about important early civilizations and their
+                    <p>
+                        Learn about important early civilizations and their
                     development across Southeast Asia and global trade networks.
-                </p>
+                    </p>
 
-                <div class="card-footer">
+                    <div class="card-footer">
 
-                    <span class="subtopic-count">
-                        4 Core Subtopics
+                        <span class="subtopic-count">4 Core Subtopics
+                        </span>
+
+                        <a href="LearningMaterialDetails.aspx"
+                            class="view-materials">View Materials
+                        <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Card 4 -->
+                <article class="material-card">
+
+                    <span class="chapter-badge">Chapter 1
                     </span>
 
-                    <a href="LearningMaterialDetails.aspx"
-                       class="view-materials">
-                        View Materials
+                    <div class="material-icon">
+                        <i class="fa-regular fa-square"></i>
+                    </div>
+
+                    <h2>Early Civilizations</h2>
+
+                    <p>
+                        Learn about important early civilizations and their
+                    development across Southeast Asia and global trade networks.
+                    </p>
+
+                    <div class="card-footer">
+
+                        <span class="subtopic-count">4 Core Subtopics
+                        </span>
+
+                        <a href="LearningMaterialDetails.aspx"
+                            class="view-materials">View Materials
                         <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                        </a>
 
-                </div>
+                    </div>
 
-            </article>
+                </article>
 
-        </section>
+            </section>
 
-    </main>
+        </main>
 
-</form>
+    </form>
 
 
+    <uc:Footer runat="server" />
 
 </body>
 </html>

@@ -1,0 +1,368 @@
+﻿/* ==========================================
+   STUDENT PROFILE PAGE
+   ========================================== */
+
+.profile-page {
+    min-height: 100vh;
+    padding: 1rem 2rem 2rem;
+}
+
+
+/* ==========================================
+   MAIN LAYOUT
+   ========================================== */
+
+.profile-layout {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 1rem;
+    align-items: start;
+}
+
+
+/* ==========================================
+   LEFT PROFILE CARD
+   ========================================== */
+
+.profile-sidebar {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+}
+
+
+/* ==========================================
+   PROFILE HEADER
+   ========================================== */
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.8rem;
+}
+
+.profile-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.profile-name {
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   DIVIDER
+   ========================================== */
+
+.profile-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.1rem 0 0.75rem;
+}
+
+
+/* ==========================================
+   ACCOUNT INFORMATION
+   ========================================== */
+
+.account-section {
+    padding: 0.1rem 0 0.35rem;
+    font-size:0.85rem;
+}
+
+.section-label {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: var(--secondary-color);
+}
+
+.account-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    color: var(--secondary-color);
+}
+
+.account-value {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: right;
+    max-width: 125px;
+}
+
+
+/* ==========================================
+   PROFILE PHOTO
+   ========================================== */
+
+.photo-section {
+    text-align: center;
+    padding-top: 0.2rem;
+}
+
+.photo-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--secondary-color);
+    font-size:0.85rem;
+}
+
+
+/* Hide actual FileUpload */
+
+.file-upload {
+    display: none;
+}
+
+
+/* Upload button */
+
+.upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--white);
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    font-size:0.85rem;
+}
+
+    .upload-button:hover {
+        background-color: var(--bg-light);
+        border-color: var(--secondary-color);
+    }
+
+.upload-icon {
+    font-size: 1rem;
+}
+
+
+/* ==========================================
+   RIGHT CONTENT
+   ========================================== */
+
+.profile-content {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    box-shadow: var(--shadow);
+}
+
+
+/* ==========================================
+   TITLE
+   ========================================== */
+
+.profile-title {
+    margin: 0 0 1rem;
+    /* No font-size here.
+       Uses the font sizing from index.css. */
+
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   FORM GRID
+   ========================================== */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+
+/* ==========================================
+   FORM GROUP
+   ========================================== */
+
+.form-group {
+    margin-bottom: 0.7rem;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.35rem;
+        /* No font-size here.
+       Uses the normal font size from index.css. */
+
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+
+/* ==========================================
+   INPUT
+   ========================================== */
+
+.form-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    background-color: var(--white);
+    color: var(--primary-color);
+    font-family: inherit;
+    /* No font-size here */
+
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .form-input::placeholder {
+        color: #B4BAC4;
+    }
+
+    .form-input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(28, 37, 65, 0.06);
+    }
+
+
+/* Read-only role */
+
+.disabled-input {
+    background-color: #F7F7F7;
+    color: var(--secondary-color);
+    cursor: not-allowed;
+}
+
+
+/* ==========================================
+   FORM SECTION
+   ========================================== */
+
+.form-section {
+    margin-top: 0.3rem;
+}
+
+.form-section-header {
+    margin-top: 0.2rem;
+    /* No font-size */
+
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.section-line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.3rem 0 0.75rem;
+}
+
+
+/* ==========================================
+   PASSWORD
+   ========================================== */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-input {
+    padding-right: 5rem;
+}
+
+.change-button {
+    position: absolute;
+    right: 0.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 28px;
+    padding: 0 0.6rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-family: inherit;
+    /* No font-size */
+
+    cursor: pointer;
+}
+
+    .change-button:hover {
+        background-color: var(--secondary-color);
+    }
+
+.form-hint {
+    display: block;
+    margin-top: 0.3rem;
+    color: #AEB4BE;
+}
+
+
+/* ==========================================
+   ACTION BUTTONS
+   ========================================== */
+
+.profile-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    margin-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.save-button,
+.discard-button {
+    height: 40px;
+    padding: 0 1rem;
+    border-radius: 6px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* Save */
+
+.save-button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: 1px solid var(--primary-color);
+}
+
+    .save-button:hover {
+        background-color: var(--secondary-color);
+    }
+
+
+/* Discard */
+
+.discard-button {
+    background-color: var(--white);
+    color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+}
+
+    .discard-button:hover {
+        background-color: var(--bg-light);
+    }

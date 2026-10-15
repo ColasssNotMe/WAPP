@@ -23,7 +23,6 @@
     .learning-header p {
         max-width: 480px;
         margin: 0 auto;
-        font-size: 0.85rem;
     }
 
 /* Search */
@@ -47,7 +46,6 @@
     .search-box i {
         margin-left: 12px;
         color: var(--primary-color);
-        font-size: 0.9rem;
     }
 
     .search-box input {
@@ -93,9 +91,9 @@
     border-radius: 20px;
     background-color: var(--white);
     text-align: center;
-    font-size: 0.55rem;
     color: var(--primary-color);
     margin-bottom: 17px;
+    font-size:0.75rem
 }
 
 /* Card Icon */
@@ -110,17 +108,14 @@
     align-items: center;
     justify-content: center;
     color: var(--primary-color);
-    font-size: 1rem;
 }
 
     .material-icon i {
-        font-size: 0.95rem;
     }
 
 /* Card Content */
 
 .material-card h2 {
-    font-size: 0.9rem;
     font-weight: 500;
     margin-bottom: 7px;
 }
@@ -128,7 +123,6 @@
 .material-card p {
     max-width: 390px;
     margin-bottom: 0;
-    font-size: 0.58rem;
     line-height: 1.4;
     color: var(--secondary-color);
 }
@@ -143,7 +137,6 @@
 }
 
 .subtopic-count {
-    font-size: 0.5rem;
     color: var(--secondary-color);
 }
 
@@ -157,7 +150,6 @@
     border-radius: 20px;
     background-color: var(--white);
     color: var(--primary-color);
-    font-size: 0.55rem;
     font-weight: 500;
     text-decoration: none;
 }
@@ -167,6 +159,3 @@
         text-decoration: none;
     }
 
-    .view-materials i {
-        font-size: 0.55rem;
-    }
