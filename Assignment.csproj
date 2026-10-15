@@ -128,6 +128,8 @@
     <Content Include="index.css" />
     <Content Include="Login.aspx" />
     <Content Include="Login.css" />
+    <Content Include="MyClasses.aspx" />
+    <Content Include="MyClasses.css" />
     <Content Include="Register.aspx" />
     <Content Include="Register.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -246,6 +248,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyClasses.aspx.cs">
+      <DependentUpon>MyClasses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyClasses.aspx.designer.cs">
+      <DependentUpon>MyClasses.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">

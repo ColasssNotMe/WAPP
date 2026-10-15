@@ -1,0 +1,301 @@
+﻿/* ==========================================================================
+   CSS Variables: Classical Archive & Heritage Palette
+   ========================================================================== */
+:root {
+    --bg-main: #F0EAE1;
+    --bg-surface: #FAF6EE;
+    --text-primary: #1C2541;
+    --text-muted: #626C80;
+    --accent-red: #8B0000;
+    --accent-gold: #C5A059;
+    --accent-gold-light: rgba(197, 160, 89, 0.15);
+    --accent-success: #3B5832;
+    --border-color: #E4DCD0;
+    --border-hover: rgba(197, 160, 89, 0.5);
+    --card-shadow: 0 4px 20px -2px rgba(28, 37, 65, 0.04), 0 2px 6px -1px rgba(28, 37, 65, 0.02);
+    --card-shadow-hover: 0 12px 28px -4px rgba(28, 37, 65, 0.08), 0 4px 12px -2px rgba(28, 37, 65, 0.04);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-full: 9999px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Base Resets & Global Styles
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    padding: 32px 20px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.classes-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* ==========================================================================
+   1. Header Section
+   ========================================================================== */
+.classes-header {
+    display: grid;
+    grid-template-columns: 160px 1fr 160px;
+    align-items: center;
+    width: 100%;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    border: none;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+    cursor: pointer;
+    justify-self: start;
+}
+
+    .back-btn:hover {
+        background-color: rgba(28, 37, 65, 0.08);
+        color: var(--accent-gold);
+        transform: translateX(-3px);
+    }
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.2;
+}
+
+.btn-create {
+    padding: 10px 20px;
+    background-color: var(--text-primary);
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition);
+    justify-self: end;
+    white-space: nowrap;
+}
+
+    .btn-create:hover {
+        background-color: #2b385e;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(28, 37, 65, 0.15);
+    }
+
+@media (max-width: 768px) {
+    .classes-header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: space-between;
+    }
+
+    .page-title {
+        order: 1;
+        flex: 1;
+        text-align: left;
+        font-size: 1.6rem;
+    }
+
+    .back-btn {
+        order: 0;
+    }
+
+    .btn-create {
+        order: 2;
+        width: 100%;
+        margin-top: 8px;
+    }
+}
+
+/* ==========================================================================
+   2. Classroom Cards Grid
+   ========================================================================== */
+.classes-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+@media (min-width: 768px) {
+    .classes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .classes-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    padding: 24px;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.classroom-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--border-hover);
+}
+
+/* ==========================================================================
+   3. Card Header
+   ========================================================================== */
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.card-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.classroom-card:hover .card-icon-box {
+    background-color: var(--text-primary);
+    color: #FFFFFF;
+}
+
+.card-title-group {
+    flex: 1;
+    min-width: 0;
+}
+
+.class-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+
+.class-description {
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* ==========================================================================
+   4. Class Statistics List
+   ========================================================================== */
+.class-stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex: 1;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.stat-value {
+    color: var(--text-primary);
+    font-weight: 800;
+}
+
+/* ==========================================================================
+   5. Card Action Buttons Group
+   ========================================================================== */
+.card-actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-card-primary {
+    background-color: var(--text-primary);
+    color: #FFFFFF;
+    border: 1px solid transparent;
+}
+
+    .btn-card-primary:hover {
+        background-color: #2b385e;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(28, 37, 65, 0.15);
+    }
+
+.btn-card-secondary {
+    background-color: #FFFFFF;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+    .btn-card-secondary:hover {
+        background-color: var(--bg-main);
+        border-color: var(--accent-gold);
+        color: var(--text-primary);
+        transform: translateY(-1px);
+    }
