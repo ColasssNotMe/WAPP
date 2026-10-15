@@ -268,7 +268,6 @@
     <Compile Include="MyClasses.aspx.designer.cs">
       <DependentUpon>MyClasses.aspx</DependentUpon>
     </Compile>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
