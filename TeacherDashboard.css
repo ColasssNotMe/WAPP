@@ -1,0 +1,389 @@
+﻿/* CSS Variables for "Classical Archive & Heritage" Palette */
+:root {
+    --bg-main: #F0EAE1;
+    --bg-surface: #FAF6EE;
+    --text-primary: #1C2541;
+    --text-muted: #626C80;
+    --accent-red: #8B0000;
+    --accent-gold: #C5A059;
+    --accent-gold-light: rgba(197, 160, 89, 0.15);
+    --accent-success: #3B5832;
+    --border-color: #E4DCD0;
+    --border-hover: rgba(197, 160, 89, 0.5);
+    --card-shadow: 0 4px 20px -2px rgba(28, 37, 65, 0.04), 0 2px 6px -1px rgba(28, 37, 65, 0.02);
+    --card-shadow-hover: 0 12px 28px -4px rgba(28, 37, 65, 0.08), 0 4px 12px -2px rgba(28, 37, 65, 0.04);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-full: 9999px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Resets & Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.dashboard-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* Header Section */
+.dashboard-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+@media (min-width: 640px) {
+    .dashboard-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.header-title-group h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.header-title-group p {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+    .header-title-group p span {
+        color: var(--text-primary);
+        font-weight: 700;
+    }
+
+.active-classrooms-badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+@media (min-width: 640px) {
+    .active-classrooms-badge {
+        align-self: center;
+    }
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-success);
+    box-shadow: 0 0 0 3px rgba(59, 88, 50, 0.2);
+}
+
+/* Metric Cards Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+}
+
+@media (min-width: 640px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .metrics-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.metric-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+    .metric-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--card-shadow-hover);
+        border-color: var(--border-hover);
+    }
+
+.metric-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.metric-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.metric-icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-md);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.metric-card:hover .metric-icon-box {
+    background-color: var(--text-primary);
+    color: var(--bg-surface);
+}
+
+.metric-card.gold-card:hover .metric-icon-box {
+    background-color: var(--accent-gold);
+    color: #FFF;
+}
+
+.metric-card.red-card:hover .metric-icon-box {
+    background-color: var(--accent-red);
+    color: #FFF;
+}
+
+.metric-card.green-card:hover .metric-icon-box {
+    background-color: var(--accent-success);
+    color: #FFF;
+}
+
+.metric-value {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.metric-subtitle {
+    font-size: 0.775rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.metric-subtitle-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent-gold);
+    display: inline-block;
+}
+
+/* Main Content Grid */
+.main-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .main-content-grid {
+        grid-template-columns: 1.8fr 1fr;
+    }
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Card Section Styles */
+.dashboard-section-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.section-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background-color: var(--bg-main);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+}
+
+/* Activity Items List */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+    .activity-item:hover {
+        background-color: var(--bg-main);
+        border-color: rgba(228, 220, 208, 0.7);
+    }
+
+.activity-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.activity-item:hover .activity-icon-wrapper {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    background-color: #FFF;
+}
+
+.activity-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-title {
+    font-size: 0.925rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: var(--transition);
+}
+
+.activity-item:hover .activity-title {
+    color: var(--accent-red);
+}
+
+.activity-meta {
+    font-size: 0.775rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+.meta-divider {
+    margin: 0 4px;
+    color: var(--accent-gold);
+}
+
+/* Right Column: Classroom Summary */
+.summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+    .summary-row:hover {
+        background-color: var(--bg-main);
+        border-color: var(--border-color);
+    }
+
+.class-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.student-count {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.student-label {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.sticky-card {
+    position: sticky;
+    top: 24px;
+}
