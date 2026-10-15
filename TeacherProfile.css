@@ -1,0 +1,310 @@
+﻿/* ==========================================================================
+   CSS Variables: Classical Archive & Heritage Palette
+   ========================================================================== */
+:root {
+    --bg-main: #F0EAE1;
+    --bg-surface: #FAF6EE;
+    --text-primary: #1C2541;
+    --text-muted: #626C80;
+    --accent-red: #8B0000;
+    --accent-gold: #C5A059;
+    --accent-gold-light: rgba(197, 160, 89, 0.15);
+    --accent-success: #3B5832;
+    --border-color: #E4DCD0;
+    --border-hover: rgba(197, 160, 89, 0.5);
+    --input-focus: #1C2541;
+    --card-shadow: 0 4px 20px -2px rgba(28, 37, 65, 0.04), 0 2px 6px -1px rgba(28, 37, 65, 0.02);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-full: 9999px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Base Resets & Global Styles
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    padding: 32px 20px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.profile-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* ==========================================================================
+   1. Header Section: Left Back Arrow Button & Centered Title
+   ========================================================================== */
+.profile-header {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+    width: 100%;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    border: none;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+    .back-btn:hover {
+        background-color: rgba(28, 37, 65, 0.08);
+        color: var(--accent-gold);
+        transform: translateX(-3px);
+    }
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.2;
+}
+
+.header-spacer {
+    width: 44px;
+}
+
+/* Responsive adjust for smaller screens */
+@media (max-width: 640px) {
+    .profile-header {
+        grid-template-columns: 44px 1fr;
+    }
+
+    .header-spacer {
+        display: none;
+    }
+
+    .page-title {
+        text-align: left;
+        font-size: 1.6rem;
+    }
+}
+
+/* ==========================================================================
+   2. Main Layout Grid (Sidebar + Form)
+   ========================================================================== */
+.profile-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+@media (min-width: 900px) {
+    .profile-content-grid {
+        grid-template-columns: 340px 1fr;
+    }
+}
+
+.card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    padding: 28px;
+}
+
+/* ==========================================================================
+   3. Left Column: Profile Card Summary
+   ========================================================================== */
+.profile-summary-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.avatar-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 1.35rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: -0.01em;
+}
+
+.user-identity h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.user-identity p {
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.meta-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.meta-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.meta-value {
+    color: var(--text-primary);
+    font-weight: 700;
+    text-align: right;
+}
+
+/* ==========================================================================
+   4. Right Column: Account Settings Form
+   ========================================================================== */
+.account-settings-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.settings-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+    .form-group label {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 0.925rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: var(--transition);
+}
+
+    .form-control:focus {
+        border-color: var(--input-focus);
+        box-shadow: 0 0 0 3px rgba(28, 37, 65, 0.08);
+    }
+
+    .form-control::placeholder {
+        color: var(--text-muted);
+        opacity: 0.7;
+    }
+
+/* ==========================================================================
+   5. Form Buttons & Actions
+   ========================================================================== */
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid transparent;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--text-primary);
+    color: #FFFFFF;
+}
+
+    .btn-primary:hover {
+        background-color: #2b385e;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(28, 37, 65, 0.15);
+    }
+
+.btn-secondary {
+    background-color: #FFFFFF;
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+    .btn-secondary:hover {
+        background-color: var(--bg-main);
+        border-color: var(--accent-gold);
+        color: var(--text-primary);
+        transform: translateY(-1px);
+    }

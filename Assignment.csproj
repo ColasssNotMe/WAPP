@@ -199,6 +199,8 @@
     <Content Include="StudentQuiz.css" />
     <Content Include="TeacherDashboard.aspx" />
     <Content Include="TeacherDashboard.css" />
+    <Content Include="TeacherProfile.aspx" />
+    <Content Include="TeacherProfile.css" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -294,6 +296,13 @@
     </Compile>
     <Compile Include="TeacherDashboard.aspx.designer.cs">
       <DependentUpon>TeacherDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherProfile.aspx.cs">
+      <DependentUpon>TeacherProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeacherProfile.aspx.designer.cs">
+      <DependentUpon>TeacherProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
