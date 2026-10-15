@@ -126,7 +126,6 @@
     <Content Include="img\loginImage.jpg" />
     <Content Include="img\registerImage.jpg" />
     <Content Include="index.css" />
-    <Content Include="LearningMaterial.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Login.css" />
     <Content Include="Register.aspx" />
@@ -238,13 +237,6 @@
     </Compile>
     <Compile Include="HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LearningMaterial.aspx.cs">
-      <DependentUpon>LearningMaterial.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LearningMaterial.aspx.designer.cs">
-      <DependentUpon>LearningMaterial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
