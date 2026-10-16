@@ -24,7 +24,8 @@
                 <div class="signup-content">
                     <header class="signup-header">
                         <h1 id="signup-title">Create your free account</h1>
-                        <p>Already have an account? <a href="Login.aspx">Log in</a></p>
+                        <p>Already have an account? <a href="Login.aspx">Log in</a><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                        </p>
                     </header>
 
                     <div class="signup-fields">
@@ -148,7 +149,7 @@
                         </div>
 
                         <asp:Button ID="CreateAccountButton" runat="server" Text="Create Account  ⟶"
-                            CssClass="create-account-button"  />
+                            CssClass="create-account-button" OnClick="CreateAccountButton_Click"  />
                         <asp:Label ID="SignupMessage" runat="server" CssClass="signup-message" EnableViewState="false" />
                     </div>
                 </div>
