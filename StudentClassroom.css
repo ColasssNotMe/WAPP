@@ -1,0 +1,313 @@
+﻿/* ==========================================
+   MY CLASSROOMS PAGE
+   ========================================== */
+
+.classrooms-page {
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 28px 0 45px;
+}
+
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.classrooms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.header-left h1 {
+    margin: 0 0 7px;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.header-left p {
+    margin: 0;
+    font-size: 0.57rem;
+    color: var(--secondary-color);
+}
+
+.classroom-count {
+    padding: 4px 9px;
+    margin-top: 4px;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    font-size: 0.43rem;
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   META INFORMATION
+   ========================================== */
+
+.classroom-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 21px;
+    font-size: 0.44rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   SECTION HEADING
+   ========================================== */
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 13px;
+}
+
+    .section-heading h2 {
+        margin: 0;
+        font-size: 0.68rem;
+        font-weight: 600;
+    }
+
+    .section-heading span {
+        font-size: 0.43rem;
+        color: var(--secondary-color);
+    }
+
+
+/* ==========================================
+   CLASSROOM GRID
+   ========================================== */
+
+.classroom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+
+/* ==========================================
+   CLASSROOM CARD
+   ========================================== */
+
+.classroom-card {
+    min-height: 242px;
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   CARD TOP
+   ========================================== */
+
+.card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.book-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    border-radius: 7px;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+}
+
+.classroom-tag {
+    padding: 4px 9px;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    font-size: 0.4rem;
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   CLASSROOM CONTENT
+   ========================================== */
+
+.classroom-content h3 {
+    margin: 0 0 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.classroom-subtitle {
+    margin: 0 0 4px;
+    font-size: 0.46rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   TEACHER
+   ========================================== */
+
+.teacher-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.teacher-avatar {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    font-size: 0.42rem;
+    color: var(--primary-color);
+}
+
+.teacher-info > div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.teacher-label {
+    margin-bottom: 2px;
+    font-size: 0.4rem;
+    color: var(--secondary-color);
+}
+
+.teacher-info strong {
+    font-size: 0.46rem;
+    font-weight: 500;
+}
+
+
+/* ==========================================
+   DIVIDER
+   ========================================== */
+
+.card-divider {
+    width: 100%;
+    height: 1px;
+    margin-top: auto;
+    margin-bottom: 10px;
+    background-color: var(--border-color);
+}
+
+
+/* ==========================================
+   CARD FOOTER INFORMATION
+   ========================================== */
+
+.card-footer-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.4rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   VIEW CLASSROOM BUTTON
+   ========================================== */
+
+.view-classroom-button {
+    width: 100%;
+    padding: 6px 10px !important;
+    border: none;
+    border-radius: 6px !important;
+    background-color: #000 !important;
+    color: #fff !important;
+    font-size: 0.46rem !important;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+    .view-classroom-button:hover {
+        background-color: #222 !important;
+    }
+
+
+/* ==========================================
+   ANOTHER CLASSROOM
+   ========================================== */
+
+.another-classroom {
+    min-height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 10px 14px;
+    box-sizing: border-box;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.another-classroom-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plus-icon {
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+}
+
+.another-classroom h3 {
+    margin: 0 0 3px;
+    font-size: 0.58rem;
+    font-weight: 600;
+}
+
+.another-classroom p {
+    margin: 0;
+    font-size: 0.42rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   DASHBOARD BUTTON
+   ========================================== */
+
+.dashboard-button {
+    padding: 6px 12px !important;
+    background-color: var(--white) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 7px !important;
+    color: var(--primary-color) !important;
+    font-size: 0.46rem !important;
+    white-space: nowrap;
+}
+
+    .dashboard-button:hover {
+        background-color: #f5f5f5 !important;
+    }
+

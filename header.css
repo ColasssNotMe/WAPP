@@ -10,6 +10,14 @@
     margin-bottom: 1rem
 }
 
+.logo-button{
+    padding:0;
+}
+
+.logo-button:hover{
+   background:none; 
+}
+
 .header-left,
 .header-nav,
 .header-actions {

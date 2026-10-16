@@ -5,7 +5,9 @@
 <header class="site-header">
     <!-- Left: Logo -->
     <div class="header-left">
+        <button class="logo-button">
         <img src="img/logo.png" alt="Logo" class="header-logo" />
+        </button>
     </div>
 
     <!-- Center: Navigation Links -->

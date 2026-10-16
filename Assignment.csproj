@@ -127,6 +127,8 @@
     <Content Include="img\loginImage.jpg" />
     <Content Include="img\registerImage.jpg" />
     <Content Include="index.css" />
+    <Content Include="LiveSession.aspx" />
+    <Content Include="LiveSession.css" />
     <Content Include="Login.aspx" />
     <Content Include="Login.css" />
     <Content Include="NotePage.aspx" />
@@ -196,6 +198,8 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="StudentClassroom.aspx" />
+    <Content Include="StudentClassroom.css" />
     <Content Include="StudentDashboard.aspx" />
     <Content Include="StudentDashboard.css" />
     <Content Include="StudentLearningMaterial.aspx" />
@@ -204,6 +208,8 @@
     <Content Include="StudentProfile.css" />
     <Content Include="StudentQuiz.aspx" />
     <Content Include="StudentQuiz.css" />
+    <Content Include="StudentQuizList.aspx" />
+    <Content Include="StudentQuizList.css" />
     <Content Include="TeacherDashboard.aspx" />
     <Content Include="TeacherDashboard.css" />
     <Content Include="TeacherProfile.aspx" />
@@ -246,6 +252,13 @@
     </Compile>
     <Compile Include="HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LiveSession.aspx.cs">
+      <DependentUpon>LiveSession.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LiveSession.aspx.designer.cs">
+      <DependentUpon>LiveSession.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -290,6 +303,13 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="StudentClassroom.aspx.cs">
+      <DependentUpon>StudentClassroom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentClassroom.aspx.designer.cs">
+      <DependentUpon>StudentClassroom.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StudentDashboard.aspx.cs">
       <DependentUpon>StudentDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -317,6 +337,13 @@
     </Compile>
     <Compile Include="StudentQuiz.aspx.designer.cs">
       <DependentUpon>StudentQuiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StudentQuizList.aspx.cs">
+      <DependentUpon>StudentQuizList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentQuizList.aspx.designer.cs">
+      <DependentUpon>StudentQuizList.aspx</DependentUpon>
     </Compile>
     <Compile Include="TeacherDashboard.aspx.cs">
       <DependentUpon>TeacherDashboard.aspx</DependentUpon>

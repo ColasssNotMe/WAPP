@@ -1,0 +1,416 @@
+﻿/* ==========================================
+   LIVE SESSION PAGE
+   ========================================== */
+
+.live-session-page {
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 25px 0 40px;
+}
+
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.session-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.session-heading h1 {
+    font-size: 1.35rem;
+    margin: 0;
+}
+
+.class-name {
+    margin: 17px 0 0;
+    font-size: 0.48rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   LIVE INDICATOR
+   ========================================== */
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    margin-top: 2px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 15px;
+    font-size: 0.45rem;
+}
+
+.live-dot {
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+
+/* ==========================================
+   SESSION META
+   ========================================== */
+
+.session-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 17px;
+    font-size: 0.45rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   MAIN LAYOUT
+   ========================================== */
+
+.session-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2.35fr) minmax(230px, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+
+
+/* ==========================================
+   PRESENTATION CARD
+   ========================================== */
+
+.presentation-card {
+    overflow: hidden;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+}
+
+
+/* ==========================================
+   PRESENTATION HEADER
+   ========================================== */
+
+.presentation-header {
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.48rem;
+}
+
+.presenter-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.monitor-icon {
+    font-size: 0.65rem;
+}
+
+.presenter-info strong {
+    font-weight: 600;
+}
+
+.slide-number {
+    color: var(--secondary-color);
+    font-size: 0.43rem;
+}
+
+
+/* ==========================================
+   PRESENTATION SCREEN
+   ========================================== */
+
+.presentation-screen {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #D5D5D5;
+    position: relative;
+    overflow: hidden;
+}
+
+.presentation-placeholder {
+    position: absolute;
+    inset: 0;
+}
+
+
+/* diagonal X */
+
+.placeholder-cross {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #777;
+    top: 50%;
+    left: 0;
+}
+
+.cross-one {
+    transform: rotate(31deg);
+}
+
+.cross-two {
+    transform: rotate(-31deg);
+}
+
+
+/* ==========================================
+   PRESENTATION CONTROLS
+   ========================================== */
+
+.presentation-controls {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 10px;
+}
+
+.left-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.session-button,
+.leave-button {
+    padding: 5px 11px;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.48rem;
+    color: var(--primary-color);
+}
+
+    .session-button:hover,
+    .leave-button:hover {
+        background-color: var(--bg-surface);
+    }
+
+.leave-button {
+    margin-left: auto;
+}
+
+
+/* ==========================================
+   CHAT PANEL
+   ========================================== */
+
+.chat-panel {
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+}
+
+
+/* ==========================================
+   CHAT HEADER
+   ========================================== */
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+    .chat-header h2 {
+        margin: 0;
+        font-size: 0.72rem;
+        font-weight: 600;
+    }
+
+.chat-icon {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   CHAT DESCRIPTION
+   ========================================== */
+
+.chat-description {
+    margin: 9px 0;
+    font-size: 0.42rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   CHAT MESSAGES
+   ========================================== */
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 3px;
+}
+
+.chat-message {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 10px;
+}
+
+.message-avatar {
+    flex-shrink: 0;
+    width: 21px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F0F0F0;
+    border-radius: 50%;
+    font-size: 0.38rem;
+    color: var(--primary-color);
+}
+
+.message-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.message-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 2px;
+}
+
+    .message-top strong {
+        font-size: 0.42rem;
+        font-weight: 600;
+    }
+
+    .message-top span {
+        flex-shrink: 0;
+        font-size: 0.36rem;
+        color: var(--secondary-color);
+    }
+
+.message-content p {
+    margin: 0;
+    font-size: 0.41rem;
+    line-height: 1.35;
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   CHAT INPUT
+   ========================================== */
+
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--white);
+}
+
+.chat-input {
+    flex: 1;
+    min-width: 0;
+    height: 29px;
+    padding: 0 8px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.43rem;
+    color: var(--primary-color);
+}
+
+    .chat-input::placeholder {
+        color: #999;
+    }
+
+.send-button {
+    padding: 4px 8px;
+    border: none;
+    background: transparent;
+    font-size: 0.65rem;
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   SESSION INFORMATION
+   ========================================== */
+
+.session-info-card {
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    margin-top: 13px;
+    padding: 12px;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+}
+
+.teacher-avatar {
+    width: 33px;
+    height: 33px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 11px;
+    background-color: #F0F0F0;
+    border-radius: 50%;
+    font-size: 0.55rem;
+    color: var(--primary-color);
+}
+
+.session-details {
+    flex: 1;
+}
+
+    .session-details h2 {
+        margin: 0 0 2px;
+        font-size: 0.65rem;
+        font-weight: 600;
+    }
+
+    .session-details p {
+        margin: 0 0 2px;
+        font-size: 0.43rem;
+        color: var(--secondary-color);
+    }
+
+    .session-details span {
+        font-size: 0.4rem;
+        color: var(--secondary-color);
+    }
+
+.connection-status {
+    align-self: flex-start;
+    padding: 4px 8px;
+    margin-top: 2px;
+    background-color: #F1F1F1;
+    border-radius: 12px;
+    font-size: 0.4rem;
+    color: var(--primary-color);
+}
+
+

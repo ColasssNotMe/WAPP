@@ -60,7 +60,7 @@
 
 
                         <asp:Button ID="SignInButton" runat="server" Text="Sign In to Ncient  →"
-                            CssClass="sign-in-button"  />
+                            CssClass="sign-in-button" OnClick="SignInButton_Click"  />
 
                         <asp:Label ID="LoginMessage" runat="server" CssClass="login-message" EnableViewState="false" />
                     </div>
