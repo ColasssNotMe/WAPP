@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Assignment.Register" %>
+
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
@@ -24,7 +25,9 @@
                 <div class="signup-content">
                     <header class="signup-header">
                         <h1 id="signup-title">Create your free account</h1>
-                        <p>Already have an account? <a href="Login.aspx">Log in</a><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                        <p>
+                            Already have an account? <a href="Login.aspx">Log in</a>
+                            <asp:Label ID="errMsg" runat="server" Text=""></asp:Label>
                         </p>
                     </header>
 
@@ -32,10 +35,16 @@
                         <div class="field-group role-group">
                             <asp:Label ID="RoleLabel" runat="server" AssociatedControlID="RoleRadioList"
                                 CssClass="field-label" Text="Select your role" />
-                            <asp:RadioButtonList ID="RoleRadioList" runat="server" RepeatDirection="Horizontal"
-                                RepeatLayout="Flow" CssClass="role-options">
+                            <asp:RadioButtonList ID="RoleRadioList" runat="server"
+                                RepeatDirection="Horizontal"
+                                RepeatLayout="Flow"
+                                CssClass="role-options"
+                                AutoPostBack="true"
+                                OnSelectedIndexChanged="RoleRadioList_SelectedIndexChanged">
+
                                 <asp:ListItem Value="Student" Selected="True">Student</asp:ListItem>
                                 <asp:ListItem Value="Teacher">Teacher</asp:ListItem>
+
                             </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="RoleRequired" runat="server"
                                 ControlToValidate="RoleRadioList" InitialValue=""
@@ -55,6 +64,54 @@
                             <asp:RequiredFieldValidator ID="UsernameRequired" runat="server"
                                 ControlToValidate="UsernameTextBox" ErrorMessage="Please enter a username."
                                 CssClass="validation-message" Display="Dynamic" />
+                        </div>
+
+                        <div class="field-group">
+                            <asp:Label ID="FirstNameLabel" runat="server"
+                                AssociatedControlID="FirstNameTextBox"
+                                CssClass="field-label"
+                                Text="First Name:" />
+
+                            <div class="input-wrap">
+                                <span class="input-icon" aria-hidden="true">
+                                    <img src="svg/user.svg" width="20" height="20" />
+                                </span>
+
+                                <asp:TextBox ID="FirstNameTextBox" runat="server"
+                                    CssClass="form-input"
+                                    MaxLength="50"
+                                    autocomplete="given-name" />
+                            </div>
+
+                            <asp:RequiredFieldValidator ID="FirstNameRequired" runat="server"
+                                ControlToValidate="FirstNameTextBox"
+                                ErrorMessage="Please enter your first name."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
+                        </div>
+
+                        <div class="field-group">
+                            <asp:Label ID="LastNameLabel" runat="server"
+                                AssociatedControlID="LastNameTextBox"
+                                CssClass="field-label"
+                                Text="Last Name:" />
+
+                            <div class="input-wrap">
+                                <span class="input-icon" aria-hidden="true">
+                                    <img src="svg/user.svg" width="20" height="20" />
+                                </span>
+
+                                <asp:TextBox ID="LastNameTextBox" runat="server"
+                                    CssClass="form-input"
+                                    MaxLength="50"
+                                    autocomplete="family-name" />
+                            </div>
+
+                            <asp:RequiredFieldValidator ID="LastNameRequired" runat="server"
+                                ControlToValidate="LastNameTextBox"
+                                ErrorMessage="Please enter your last name."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
                         </div>
 
                         <div class="field-group">
@@ -100,7 +157,7 @@
                                 CssClass="field-label" Text="Confirm Password:" />
                             <div class="input-wrap">
                                 <span class="input-icon" aria-hidden="true">
-                                    <img src="svg/password.svg"  width="20" height="20"/>
+                                    <img src="svg/password.svg" width="20" height="20" />
                                 </span>
                                 <asp:TextBox ID="ConfirmPasswordTextBox" runat="server" CssClass="form-input password-input"
                                     TextMode="Password" autocomplete="new-password" />
@@ -132,24 +189,35 @@
                                 ErrorMessage="Please select your school." CssClass="validation-message" Display="Dynamic" />
                         </div>
 
-                        <div class="field-group">
-                            <asp:Label ID="FormLabel" runat="server" AssociatedControlID="FormDropDown"
-                                CssClass="field-label" Text="Form:" />
-                            <asp:DropDownList ID="FormDropDown" runat="server" CssClass="form-select">
+                        <asp:Panel ID="FormPanel" runat="server" CssClass="field-group">
+
+                            <asp:Label ID="FormLabel" runat="server"
+                                AssociatedControlID="FormDropDown"
+                                CssClass="field-label"
+                                Text="Form:" />
+
+                            <asp:DropDownList ID="FormDropDown" runat="server"
+                                CssClass="form-select">
+
                                 <asp:ListItem Value="" Text="Select your form" />
                                 <asp:ListItem Value="Form 1" Text="Form 1" />
                                 <asp:ListItem Value="Form 2" Text="Form 2" />
                                 <asp:ListItem Value="Form 3" Text="Form 3" />
                                 <asp:ListItem Value="Form 4" Text="Form 4" />
                                 <asp:ListItem Value="Form 5" Text="Form 5" />
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="FormRequired" runat="server"
-                                ControlToValidate="FormDropDown" InitialValue=""
-                                ErrorMessage="Please select your form." CssClass="validation-message" Display="Dynamic" />
-                        </div>
 
+                            </asp:DropDownList>
+
+                            <asp:RequiredFieldValidator ID="FormRequired" runat="server"
+                                ControlToValidate="FormDropDown"
+                                InitialValue=""
+                                ErrorMessage="Please select your form."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
+
+                        </asp:Panel>
                         <asp:Button ID="CreateAccountButton" runat="server" Text="Create Account  ⟶"
-                            CssClass="create-account-button" OnClick="CreateAccountButton_Click"  />
+                            CssClass="create-account-button" OnClick="CreateAccountButton_Click" />
                         <asp:Label ID="SignupMessage" runat="server" CssClass="signup-message" EnableViewState="false" />
                     </div>
                 </div>
