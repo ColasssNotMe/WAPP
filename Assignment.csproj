@@ -103,6 +103,8 @@
     <Content Include="App_Data\WAPP_log.ldf">
       <DependentUpon>WAPP.mdf</DependentUpon>
     </Content>
+    <Content Include="ClassroomDetails.aspx" />
+    <Content Include="ClassroomDetails.css" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -121,7 +123,11 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="CreateClassroom.css" />
+    <Content Include="CreateClassrooom.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="EditClassroom.aspx" />
+    <Content Include="EditClassroom.css" />
     <Content Include="favicon.ico" />
     <Content Include="Footer.css" />
     <Content Include="Global.asax" />
@@ -135,6 +141,12 @@
     <Content Include="LiveSession.css" />
     <Content Include="Login.aspx" />
     <Content Include="Login.css" />
+    <Content Include="ManageNotes.aspx" />
+    <Content Include="ManageNotes.css" />
+    <Content Include="ManageStudents.aspx" />
+    <Content Include="ManageStudents.css" />
+    <Content Include="ManageTopics.aspx" />
+    <Content Include="ManageTopics.css" />
     <Content Include="NotePage.aspx" />
     <Content Include="NotePage.css" />
     <Content Include="MyClasses.aspx" />
@@ -234,6 +246,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ClassroomDetails.aspx.cs">
+      <DependentUpon>ClassroomDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClassroomDetails.aspx.designer.cs">
+      <DependentUpon>ClassroomDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -241,12 +260,26 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CreateClassrooom.aspx.cs">
+      <DependentUpon>CreateClassrooom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateClassrooom.aspx.designer.cs">
+      <DependentUpon>CreateClassrooom.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditClassroom.aspx.cs">
+      <DependentUpon>EditClassroom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditClassroom.aspx.designer.cs">
+      <DependentUpon>EditClassroom.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -271,6 +304,27 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageNotes.aspx.cs">
+      <DependentUpon>ManageNotes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageNotes.aspx.designer.cs">
+      <DependentUpon>ManageNotes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageStudents.aspx.cs">
+      <DependentUpon>ManageStudents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageStudents.aspx.designer.cs">
+      <DependentUpon>ManageStudents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageTopics.aspx.cs">
+      <DependentUpon>ManageTopics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageTopics.aspx.designer.cs">
+      <DependentUpon>ManageTopics.aspx</DependentUpon>
     </Compile>
     <Compile Include="NotePage.aspx.cs">
       <DependentUpon>NotePage.aspx</DependentUpon>

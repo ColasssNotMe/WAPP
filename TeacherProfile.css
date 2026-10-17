@@ -43,11 +43,11 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 28px;
 }
 
 /* ==========================================================================
-   1. Header Section: Left Back Arrow Button & Centered Title
+   1. Header Section
    ========================================================================== */
 .profile-header {
     display: grid;
@@ -90,7 +90,6 @@ body {
     width: 44px;
 }
 
-/* Responsive adjust for smaller screens */
 @media (max-width: 640px) {
     .profile-header {
         grid-template-columns: 44px 1fr;
@@ -118,7 +117,7 @@ body {
 
 @media (min-width: 900px) {
     .profile-content-grid {
-        grid-template-columns: 340px 1fr;
+        grid-template-columns: 320px 1fr;
     }
 }
 
@@ -131,7 +130,7 @@ body {
 }
 
 /* ==========================================================================
-   3. Left Column: Profile Card Summary
+   3. Left Column: Sidebar Card
    ========================================================================== */
 .profile-summary-card {
     display: flex;
@@ -146,8 +145,8 @@ body {
 }
 
 .avatar-circle {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: var(--bg-main);
     border: 1px solid var(--border-color);
@@ -158,36 +157,41 @@ body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    letter-spacing: -0.01em;
 }
 
 .user-identity h2 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: var(--text-primary);
     line-height: 1.2;
 }
 
-.user-identity p {
-    font-size: 0.825rem;
-    font-weight: 500;
+.meta-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.section-subtitle {
+    font-size: 0.7rem;
+    font-weight: 800;
     color: var(--text-muted);
-    margin-top: 4px;
+    letter-spacing: 0.05em;
 }
 
 .meta-details-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
+    gap: 12px;
 }
 
 .meta-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.875rem;
+    font-size: 0.825rem;
 }
 
 .meta-label {
@@ -201,8 +205,45 @@ body {
     text-align: right;
 }
 
+.upload-photo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.upload-label {
+    font-size: 0.775rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.btn-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+    .btn-upload:hover {
+        background-color: #FFFFFF;
+        border-color: var(--accent-gold);
+        color: var(--accent-gold);
+    }
+
 /* ==========================================================================
-   4. Right Column: Account Settings Form
+   4. Right Column: Form
    ========================================================================== */
 .account-settings-card {
     display: flex;
@@ -220,26 +261,38 @@ body {
 .settings-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
+}
+
+.form-row-two {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+}
+
+@media (min-width: 640px) {
+    .form-row-two {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
     .form-group label {
-        font-size: 0.875rem;
+        font-size: 0.825rem;
         font-weight: 700;
         color: var(--text-primary);
     }
 
 .form-control {
     width: 100%;
-    padding: 12px 16px;
+    padding: 10px 14px;
     font-family: inherit;
-    font-size: 0.925rem;
+    font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-primary);
     background-color: #FFFFFF;
@@ -256,17 +309,67 @@ body {
 
     .form-control::placeholder {
         color: var(--text-muted);
-        opacity: 0.7;
+        opacity: 0.6;
     }
 
-/* ==========================================================================
-   5. Form Buttons & Actions
-   ========================================================================== */
+/* Section Divider Groups */
+.form-section-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.group-subtitle {
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+/* Inline Input Button (Password Field) */
+.input-with-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+    .input-with-button .form-control {
+        padding-right: 80px;
+    }
+
+.btn-inline {
+    position: absolute;
+    right: 6px;
+    padding: 6px 14px;
+    background-color: var(--text-primary);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+    .btn-inline:hover {
+        background-color: #2b385e;
+    }
+
+.field-hint {
+    font-size: 0.725rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* Form Actions */
 .form-actions {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
     margin-top: 8px;
 }
 
@@ -274,20 +377,20 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 24px;
+    padding: 10px 22px;
     font-family: inherit;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     font-weight: 700;
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: var(--transition);
-    border: 1px solid transparent;
     text-decoration: none;
 }
 
 .btn-primary {
     background-color: var(--text-primary);
     color: #FFFFFF;
+    border: 1px solid transparent;
 }
 
     .btn-primary:hover {
@@ -299,7 +402,7 @@ body {
 .btn-secondary {
     background-color: #FFFFFF;
     color: var(--text-primary);
-    border-color: var(--border-color);
+    border: 1px solid var(--border-color);
 }
 
     .btn-secondary:hover {
