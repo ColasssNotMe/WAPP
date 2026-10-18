@@ -14,6 +14,7 @@
     <nav class="header-nav">
         <a id="homeButton" runat="server" href="HomePage.aspx" class="nav-link">Home</a>
         <a id="aboutButton" runat="server" href="About.aspx" class="nav-link">About</a>
+        <a id="dashboardButton" runat="server" href="Homepage.aspx" class="nav-link">Dashboard</a>
         <asp:Label ID="roleDebug" runat="server" Text="role debug"></asp:Label>
     </nav>
 
