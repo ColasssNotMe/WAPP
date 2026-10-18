@@ -59,7 +59,7 @@ namespace Assignment
                     cmd1.Parameters.AddWithValue("@password", PasswordTextBox.Text);
                     cmd1.Parameters.AddWithValue("@firstName", FirstNameTextBox.Text.Trim());
                     cmd1.Parameters.AddWithValue("@lastName", LastNameTextBox.Text.Trim());
-                    cmd1.Parameters.AddWithValue("@role", RoleRadioList.SelectedValue);
+                    cmd1.Parameters.AddWithValue("@role", RoleRadioList.SelectedValue.Trim());
                     cmd1.Parameters.AddWithValue("@profilePic", null);
                     cmd1.Parameters.AddWithValue("@dateRegistered", DateTime.Now);
 

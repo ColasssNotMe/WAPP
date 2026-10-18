@@ -9,8 +9,8 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:WAPP %>" ProviderName="<%$ ConnectionStrings:WAPP.ProviderName %>" SelectCommand="SELECT * FROM [User]"></asp:SqlDataSource>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:WAPP %>" SelectCommand="SELECT * FROM [User]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

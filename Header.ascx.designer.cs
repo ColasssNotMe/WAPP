@@ -33,6 +33,24 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aboutButton;
 
         /// <summary>
+        /// roleDebug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label roleDebug;
+
+        /// <summary>
+        /// headerActions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl headerActions;
+
+        /// <summary>
         /// loginButton control.
         /// </summary>
         /// <remarks>
@@ -49,5 +67,14 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton registerButton;
+
+        /// <summary>
+        /// headerProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl headerProfile;
     }
 }
