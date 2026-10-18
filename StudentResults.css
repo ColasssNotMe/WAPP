@@ -1,0 +1,303 @@
+﻿/* ==========================================================================
+   CSS Variables: Classical Archive & Heritage Palette
+   ========================================================================== */
+:root {
+    --bg-main: #F0EAE1;
+    --bg-surface: #FAF6EE;
+    --text-primary: #1C2541;
+    --text-muted: #626C80;
+    --accent-red: #8B0000;
+    --accent-gold: #C5A059;
+    --accent-gold-light: rgba(197, 160, 89, 0.15);
+    --accent-success: #3B5832;
+    --border-color: #E4DCD0;
+    --border-hover: rgba(197, 160, 89, 0.5);
+    --card-shadow: 0 4px 20px -2px rgba(28, 37, 65, 0.04), 0 2px 6px -1px rgba(28, 37, 65, 0.02);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-full: 9999px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Base Resets & Global Styles
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    padding: 32px 20px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.results-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* ==========================================================================
+   1. Header Section
+   ========================================================================== */
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    border: none;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+    .back-btn:hover {
+        background-color: rgba(28, 37, 65, 0.08);
+        color: var(--accent-gold);
+        transform: translateX(-3px);
+    }
+
+.title-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.page-subtitle {
+    margin-top: 4px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   2. Main Layout Grid
+   ========================================================================== */
+.results-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (min-width: 992px) {
+    .results-content-grid {
+        grid-template-columns: 1.8fr 1fr;
+    }
+}
+
+.card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    padding: 28px;
+}
+
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   3. Left Column: Quiz Results Card
+   ========================================================================== */
+.quiz-results-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quiz-items-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+    .quiz-row:hover {
+        background-color: var(--bg-main);
+    }
+
+.quiz-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.quiz-name {
+    font-size: 0.925rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.quiz-meta {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.percentage-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+}
+
+.btn-detailed-report {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--text-primary);
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 8px;
+}
+
+    .btn-detailed-report:hover {
+        background-color: #2b385e;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(28, 37, 65, 0.15);
+    }
+
+/* ==========================================================================
+   4. Right Column: Result Details Card
+   ========================================================================== */
+.result-details-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.details-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.details-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.details-value {
+    color: var(--text-primary);
+    font-weight: 800;
+    text-align: right;
+}
+
+.info-callout {
+    background-color: rgba(28, 37, 65, 0.03);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.details-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--text-primary);
+    color: #FFFFFF;
+    border: 1px solid transparent;
+}
+
+    .btn-primary:hover {
+        background-color: #2b385e;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(28, 37, 65, 0.15);
+    }
+
+.btn-secondary {
+    background-color: #FFFFFF;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+    .btn-secondary:hover {
+        background-color: var(--bg-main);
+        border-color: var(--accent-gold);
+        color: var(--text-primary);
+        transform: translateY(-1px);
+    }

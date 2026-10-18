@@ -125,6 +125,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="CreateClassroom.css" />
     <Content Include="CreateClassrooom.aspx" />
+    <Content Include="CreateEditQuestions.aspx" />
+    <Content Include="CreateEditQuestions.css" />
+    <Content Include="CreateQuiz.aspx" />
+    <Content Include="CreateQuiz.css" />
     <Content Include="Default.aspx" />
     <Content Include="EditClassroom.aspx" />
     <Content Include="EditClassroom.css" />
@@ -139,10 +143,16 @@
     <Content Include="index.css" />
     <Content Include="LiveSession.aspx" />
     <Content Include="LiveSession.css" />
+    <Content Include="LiveSessionManagement.aspx" />
+    <Content Include="LiveSessionManagement.css" />
     <Content Include="Login.aspx" />
     <Content Include="Login.css" />
     <Content Include="ManageNotes.aspx" />
     <Content Include="ManageNotes.css" />
+    <Content Include="ManageQuestions.aspx" />
+    <Content Include="ManageQuestions.css" />
+    <Content Include="ManageQuiz.aspx" />
+    <Content Include="ManageQuiz.css" />
     <Content Include="ManageStudents.aspx" />
     <Content Include="ManageStudents.css" />
     <Content Include="ManageTopics.aspx" />
@@ -223,10 +233,14 @@
     <Content Include="StudentLearningMaterial.css" />
     <Content Include="StudentProfile.aspx" />
     <Content Include="StudentProfile.css" />
+    <Content Include="StudentProgess.aspx" />
+    <Content Include="StudentProgess.css" />
     <Content Include="StudentQuiz.aspx" />
     <Content Include="StudentQuiz.css" />
     <Content Include="StudentQuizList.aspx" />
     <Content Include="StudentQuizList.css" />
+    <Content Include="StudentResults.aspx" />
+    <Content Include="StudentResults.css" />
     <Content Include="TeacherDashboard.aspx" />
     <Content Include="TeacherDashboard.css" />
     <Content Include="TeacherProfile.aspx" />
@@ -267,6 +281,20 @@
     <Compile Include="CreateClassrooom.aspx.designer.cs">
       <DependentUpon>CreateClassrooom.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CreateEditQuestions.aspx.cs">
+      <DependentUpon>CreateEditQuestions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateEditQuestions.aspx.designer.cs">
+      <DependentUpon>CreateEditQuestions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateQuiz.aspx.cs">
+      <DependentUpon>CreateQuiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateQuiz.aspx.designer.cs">
+      <DependentUpon>CreateQuiz.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -298,6 +326,13 @@
     <Compile Include="LiveSession.aspx.designer.cs">
       <DependentUpon>LiveSession.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LiveSessionManagement.aspx.cs">
+      <DependentUpon>LiveSessionManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LiveSessionManagement.aspx.designer.cs">
+      <DependentUpon>LiveSessionManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -311,6 +346,20 @@
     </Compile>
     <Compile Include="ManageNotes.aspx.designer.cs">
       <DependentUpon>ManageNotes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageQuestions.aspx.cs">
+      <DependentUpon>ManageQuestions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageQuestions.aspx.designer.cs">
+      <DependentUpon>ManageQuestions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageQuiz.aspx.cs">
+      <DependentUpon>ManageQuiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageQuiz.aspx.designer.cs">
+      <DependentUpon>ManageQuiz.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManageStudents.aspx.cs">
       <DependentUpon>ManageStudents.aspx</DependentUpon>
@@ -397,6 +446,13 @@
     <Compile Include="StudentProfile.aspx.designer.cs">
       <DependentUpon>StudentProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="StudentProgess.aspx.cs">
+      <DependentUpon>StudentProgess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentProgess.aspx.designer.cs">
+      <DependentUpon>StudentProgess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StudentQuiz.aspx.cs">
       <DependentUpon>StudentQuiz.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -410,6 +466,13 @@
     </Compile>
     <Compile Include="StudentQuizList.aspx.designer.cs">
       <DependentUpon>StudentQuizList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StudentResults.aspx.cs">
+      <DependentUpon>StudentResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentResults.aspx.designer.cs">
+      <DependentUpon>StudentResults.aspx</DependentUpon>
     </Compile>
     <Compile Include="TeacherDashboard.aspx.cs">
       <DependentUpon>TeacherDashboard.aspx</DependentUpon>
