@@ -224,7 +224,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="SqlConnection.aspx" />
+    <Content Include="SqlConnectionPage.aspx" />
     <Content Include="StudentClassroom.aspx" />
     <Content Include="StudentClassroom.css" />
     <Content Include="StudentDashboard.aspx" />
@@ -411,12 +411,12 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="SqlConnection.aspx.cs">
-      <DependentUpon>SqlConnection.aspx</DependentUpon>
+    <Compile Include="SqlConnectionPage.aspx.cs">
+      <DependentUpon>SqlConnectionPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SqlConnection.aspx.designer.cs">
-      <DependentUpon>SqlConnection.aspx</DependentUpon>
+    <Compile Include="SqlConnectionPage.aspx.designer.cs">
+      <DependentUpon>SqlConnectionPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentClassroom.aspx.cs">
       <DependentUpon>StudentClassroom.aspx</DependentUpon>

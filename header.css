@@ -10,13 +10,13 @@
     margin-bottom: 1rem
 }
 
-.logo-button{
-    padding:0;
+.logo-button {
+    padding: 0;
 }
 
-.logo-button:hover{
-   background:none; 
-}
+    .logo-button:hover {
+        background: none;
+    }
 
 .header-left,
 .header-nav,
@@ -62,3 +62,18 @@
     .header-actions .btn-primary:hover {
         background-color: #a72207;
     }
+
+
+
+
+.header-profile {
+    button {
+        padding: 1px 10px;
+    }
+
+    img {
+        width: 35px;
+        height: 35px;
+    }
+}
+}

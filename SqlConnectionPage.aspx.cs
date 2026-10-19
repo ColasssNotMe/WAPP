@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace Assignment
 {
-    public partial class SqlConnection : System.Web.UI.Page
+    public partial class SqlConnectionPage : System.Web.UI.Page
     {
 
         protected void Page_Load(object sender, EventArgs e)

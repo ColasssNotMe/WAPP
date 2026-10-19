@@ -25,8 +25,8 @@
     </div>
 
     <div class="header-profile" runat="server" id="headerProfile">
-        <button>
-        <img src="<%= Session["profilePic"] %>" alt="Profile Picture" class="profile-pic" id="profilePic" />
+        <button id="profileButton" runat="server" onserverclick="ProfileButton_Click">
+        <img id="profilePic" runat="server" alt="Profile Picture" class="profile-pic"  />
         </button>
     </div>
 

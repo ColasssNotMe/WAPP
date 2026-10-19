@@ -54,14 +54,16 @@ namespace Assignment
                     if (reader.Read())
                     {
                         Session["email"] = EmailTextBox.Text;
-                        Session["username"] = reader["username"].ToString();
-                        Session["userId"] = reader["userId"].ToString();
-                        Session["role"] = reader["role"].ToString();
-                        Session["profilePic"] = reader["profilePic"].ToString();
-                        if (Session["profilePic"] == null)
+                        Session["username"] = reader["username"].ToString().Trim();
+                        Session["userId"] = reader["userId"].ToString().Trim();
+                        Session["role"] = reader["role"].ToString().Trim();
+                        Session["profilePic"] = reader["profilePic"].ToString().Trim();
+                        if (reader["profilePic"] == DBNull.Value ||
+                            string.IsNullOrWhiteSpace(reader["profilePic"].ToString()))
                         {
                             Session["profilePic"] = "svg/user.svg";
                         }
+
                         Session["role"] = reader["role"].ToString();
 
                         if (Session["role"].ToString().ToLower().Trim() == "admin")

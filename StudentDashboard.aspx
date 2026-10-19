@@ -26,7 +26,7 @@
             <header class="dashboard-header">
 
                 <div>
-                    <h1 class="welcome-title">Welcome back, Aiman!
+                    <h1 class="welcome-title" id="welcomeTitle" runat="server">
                 </h1>
 
                     <p class="welcome-subtitle">

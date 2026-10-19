@@ -6,7 +6,7 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            welcomeTitle.InnerText = "Welcome, " + Session["username"] + "!";
         }
     }
 }

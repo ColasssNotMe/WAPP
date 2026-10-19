@@ -13,6 +13,16 @@ namespace Assignment
                 headerActions.Style["visibility"] = "hidden";
                 headerProfile.Style["visibility"] = "visible";
                 roleDebug.Text = Session["role"]?.ToString();
+
+                string profilePath = Session["profilePic"]?.ToString();
+                if (string.IsNullOrWhiteSpace(profilePath))
+                {
+                    profilePath = "svg/user.svg";
+                }
+
+                profilePic.Src = ResolveUrl("~/" + profilePath);
+
+
                 if (Session["role"]?.ToString().ToLower().Trim() == "admin")
                 {
                     dashboardButton.Style["visibility"] = "visible";
@@ -38,6 +48,32 @@ namespace Assignment
             }
         }
 
+
+        protected void ProfileButton_Click(object sender, EventArgs e)
+        {
+            string role = Session["role"]?.ToString()?.ToLower().Trim();
+
+            if (role=="admin")
+            {
+                Response.Redirect("AdminProfile.aspx");
+            }else if (role=="teacher")
+            {
+                Response.Redirect("TeacherProfile.aspx");
+            }else if (role =="student")
+            {
+                Response.Redirect("StudentProfile.aspx");
+            }
+            else
+            {
+                Response.Redirect("HomePage"); 
+            }
+
+        }
+        protected void LogoutButton_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("Login.aspx");
+        }
 
 
     }

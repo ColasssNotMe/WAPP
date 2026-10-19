@@ -11,7 +11,7 @@ namespace Assignment
 {
 
 
-    public partial class SqlConnection
+    public partial class SqlConnectionPage
     {
 
         /// <summary>

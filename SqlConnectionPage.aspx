@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SqlConnection.aspx.cs" Inherits="Assignment.SqlConnection" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SqlConnectionPage.aspx.cs" Inherits="Assignment.SqlConnectionPage" %>
 
 <!DOCTYPE html>
 
