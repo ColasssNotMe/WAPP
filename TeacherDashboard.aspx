@@ -1,18 +1,23 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Dashboard</title>
     <!-- Google Fonts & Lucide Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Link to external stylesheet -->
+    <link href="index.css" rel="stylesheet" />
     <link rel="stylesheet" href="TeacherDashboard.css">
 </head>
 <body>
+        <uc:Header ID="HeaderControl" runat="server" />
 
     <div class="dashboard-container">
         
@@ -20,7 +25,7 @@
         <header class="dashboard-header">
             <div class="header-title-group">
                 <h1>Teacher Dashboard</h1>
-                <p>Welcome back, <span>Cikgu Nurul</span>. Here's what's happening in your classrooms today.</p>
+                <p>Welcome back, <span><asp:Label ID="lblTeacherName" runat="server" Text="Teacher"></asp:Label></span>. Here's what's happening in your classrooms today.</p>
             </div>
             <div class="active-classrooms-badge">
                 <span class="status-dot"></span>
@@ -213,5 +218,6 @@
     <script>
         lucide.createIcons();
     </script>
+     <uc:Footer ID="FooterControl" runat="server" />
 </body>
 </html>
