@@ -60,7 +60,7 @@ namespace Assignment
                     cmd1.Parameters.AddWithValue("@firstName", FirstNameTextBox.Text.Trim());
                     cmd1.Parameters.AddWithValue("@lastName", LastNameTextBox.Text.Trim());
                     cmd1.Parameters.AddWithValue("@role", RoleRadioList.SelectedValue.Trim());
-                    cmd1.Parameters.AddWithValue("@profilePic", null);
+                    cmd1.Parameters.AddWithValue("@profilePic", DBNull.Value);
                     cmd1.Parameters.AddWithValue("@dateRegistered", DateTime.Now);
 
                     cmd1.ExecuteNonQuery();
