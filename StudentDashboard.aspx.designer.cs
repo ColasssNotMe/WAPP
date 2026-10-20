@@ -15,15 +15,6 @@ namespace Assignment
     {
 
         /// <summary>
-        /// HeaderControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Assignment.WebUserControl1 HeaderControl;
-
-        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>
@@ -33,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// HeaderControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Assignment.WebUserControl1 HeaderControl;
+
+        /// <summary>
         /// welcomeTitle control.
         /// </summary>
         /// <remarks>
@@ -40,6 +40,42 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl welcomeTitle;
+
+        /// <summary>
+        /// LearningMaterialsRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater LearningMaterialsRepeater;
+
+        /// <summary>
+        /// materialPlaceholder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl materialPlaceholder;
+
+        /// <summary>
+        /// RecentQuizRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RecentQuizRepeater;
+
+        /// <summary>
+        /// quizPlaceholder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl quizPlaceholder;
 
         /// <summary>
         /// FooterControl control.

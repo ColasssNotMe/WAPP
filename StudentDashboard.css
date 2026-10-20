@@ -323,3 +323,35 @@
     line-height: 1.5;
     color: var(--secondary-color);
 }
+
+
+.empty-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2.5rem 1rem;
+    min-height: 10rem;
+}
+
+.empty-title {
+    width: 100%;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.empty-info {
+    width: 100%;
+    max-width: 30rem;
+    margin: 0.35rem auto 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--secondary-color);
+}
