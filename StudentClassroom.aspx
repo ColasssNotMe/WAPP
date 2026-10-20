@@ -215,7 +215,7 @@
             </p>
         </div>
 
-        <a href="#" class="dashboard-button">
+        <a href="StudentDashboard.aspx" class="dashboard-button">
             Go to dashboard
             <span>→</span>
         </a>

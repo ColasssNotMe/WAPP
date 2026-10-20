@@ -48,39 +48,27 @@ namespace Assignment
             using (SqlConnection conn = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+
+                using (
+               SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@userID", userID);
-
-                    conn.Open();
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
                         DataTable dt = new DataTable();
 
-                        dt.Columns.Add("Title");
-                        dt.Columns.Add("Info");
-
-                        while (reader.Read())
-                        {
-                            string title = reader["title"].ToString();
-                            string className = reader["className"].ToString();
-
-                            dt.Rows.Add(
-                                title,
-                                className
-                            );
-                        }
+                        da.Fill(dt);
 
                         LearningMaterialsRepeater.DataSource = dt;
                         LearningMaterialsRepeater.DataBind();
 
                         materialPlaceholder.Visible = dt.Rows.Count == 0;
                     }
+
                 }
+
             }
         }
-
 
         private void LoadRecentQuizzes()
         {

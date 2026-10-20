@@ -18,11 +18,12 @@ namespace Assignment
                 }
 
                 txtUsername.Text = Session["username"]?.ToString() ?? "";
+                usernameDisplay.InnerText = Session["username"]?.ToString() ?? "";
                 txtEmail.Text = Session["email"]?.ToString() ?? "";
                 txtRole.Text = Session["role"]?.ToString() ?? "Student";
 
-                LoadStudentProfile();
             }
+            LoadStudentProfile();
         }
 
         private void LoadStudentProfile()
@@ -32,15 +33,16 @@ namespace Assignment
 
             string query = @"
                 SELECT 
-                    firstName,
-                    lastName,
-                    age,
-                    grade,
-                    school,
-                    dateRegistered,
-                    subject
-                FROM Student
-                WHERE userId = @userId";
+                    u.firstName,
+                    u.lastName,
+                    s.age,
+                    s.gradeLevel,
+                    s.school,
+                    u.dateRegistered
+                FROM [User] u
+                INNER JOIN Student s
+                    ON u.userId = s.userId
+                WHERE u.userId = @userId";
 
             SqlConnection conn = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -56,7 +58,7 @@ namespace Assignment
                         txtFirstName.Text = reader["firstName"].ToString();
                         txtLastName.Text = reader["lastName"].ToString();
                         txtAge.Text = reader["age"].ToString();
-                        txtGrade.Text = reader["grade"].ToString();
+                        txtGrade.Text = reader["gradeLevel"].ToString();
                         txtSchool.Text = reader["school"].ToString();
                     }
                     reader.Close();
