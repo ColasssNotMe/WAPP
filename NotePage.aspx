@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<uc:Header runat="server" />
+    <uc:Header runat="server" />
 
     <form id="form1" runat="server">
 
@@ -40,8 +40,7 @@
 
                     <div class="topic-text">
                         <span class="topic-label">Previous Topic</span>
-                        <span class="topic-title">
-                            Chapter 2: Malaysian History
+                        <span class="topic-title">Chapter 2: Malaysian History
                         </span>
                     </div>
                 </a>
@@ -52,8 +51,7 @@
 
                     <div class="topic-text">
                         <span class="topic-label">Next Topic</span>
-                        <span class="topic-title">
-                            Chapter 4: Formation of Malaysia
+                        <span class="topic-title">Chapter 4: Formation of Malaysia
                         </span>
                     </div>
 
@@ -67,17 +65,26 @@
             <div class="pdf-container">
 
                 <iframe
-                    src="~/PDF/Chapter1.pdf"
+                    id="pdfFrame"
+                    runat="server"
                     class="pdf-frame"
-                    title="Chapter 1 Learning Material">
-                </iframe>
+                    title="Learning Material PDF"></iframe>
 
+                <div id="materialNotFound" runat="server"
+                    class="material-not-found"
+                    visible="false">
+                    <div class="empty-state">
+                        <div class="empty-icon">📄</div>
+                        <h2>Material Not Found</h2>
+                        <p>The learning material is unavailable or may have been removed.</p>
+                    </div>
+                </div>
             </div>
 
         </main>
     </form>
 
-<uc:Footer runat="server" />
+    <uc:Footer runat="server" />
 
 </body>
 </html>
