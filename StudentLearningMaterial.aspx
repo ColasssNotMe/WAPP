@@ -36,154 +36,67 @@
 
             <!-- Search -->
             <section class="search-container">
-
                 <div class="search-box">
-
                     <img src="svg/search.svg" height="50" width="50" />
-
-                    <input
-                        type="text"
-                        id="searchMaterials"
-                        placeholder="Search materials ..."
-                        onkeyup="searchMaterials()" />
-
+                    <asp:TextBox
+                        ID="txtSearch"
+                        runat="server"
+                        CssClass="search-input"
+                        placeholder="Search materials..."
+                        AutoPostBack="true"
+                        OnTextChanged="txtSearch_TextChanged"/>
                 </div>
-
             </section>
+
+
+
 
 
             <!-- Learning Materials -->
             <section class="materials-grid" id="materialsGrid">
 
-                <!-- Card 1 -->
-                <article class="material-card">
+                <asp:Repeater ID="rptMaterials" runat="server">
 
-                    <span class="chapter-badge">Chapter 1
-                    </span>
+                    <ItemTemplate>
 
-                    <div class="material-icon">
-                        <i class="fa-regular fa-square"></i>
-                    </div>
+                        <article class="material-card">
 
-                    <h2>Early Civilizations</h2>
+                            <span class="chapter-badge">Chapter <%# Eval("chapter") %>
+                            </span>
 
-                    <p>
-                        Learn about important early civilizations and their
-                    development across Southeast Asia and global trade networks.
-                    </p>
+                            <div class="material-icon">
+                                <i class="fa-regular fa-square"></i>
+                            </div>
 
-                    <div class="card-footer">
-
-                        <span class="subtopic-count">4 Core Subtopics
-                        </span>
-
-                        <a href="LearningMaterialDetails.aspx"
-                            class="view-materials">View Materials
-                            <img src="svg/right-arrow.svg" width="50" height="50" />
-                        </a>
-
-                    </div>
-
-                </article>
+                            <h2>
+                                <%# Eval("title") %>
+                            </h2>
 
 
-                <!-- Card 2 -->
-                <article class="material-card">
+                            <div class="card-footer">
 
-                    <span class="chapter-badge">Chapter 1
-                    </span>
+                                <p>
+                                    <%# Eval("duratinoMins") %>
+                                </p>
+                                <a href='LearningMaterialDetails.aspx?id=<%# Eval("materialID") %>'
+                                    class="view-materials">View Materials
 
-                    <div class="material-icon">
-                        <i class="fa-regular fa-square"></i>
-                    </div>
+                        <img src="svg/right-arrow.svg"
+                            width="20"
+                            height="20"
+                            alt="View" />
 
-                    <h2>Early Civilizations</h2>
+                                </a>
 
-                    <p>
-                        Learn about important early civilizations and their
-                    development across Southeast Asia and global trade networks.
-                    </p>
+                            </div>
 
-                    <div class="card-footer">
+                        </article>
 
-                        <span class="subtopic-count">4 Core Subtopics
-                        </span>
+                    </ItemTemplate>
 
-                        <a href="LearningMaterialDetails.aspx"
-                            class="view-materials">View Materials
-                        <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Card 3 -->
-                <article class="material-card">
-
-                    <span class="chapter-badge">Chapter 1
-                    </span>
-
-                    <div class="material-icon">
-                        <i class="fa-regular fa-square"></i>
-                    </div>
-
-                    <h2>Early Civilizations</h2>
-
-                    <p>
-                        Learn about important early civilizations and their
-                    development across Southeast Asia and global trade networks.
-                    </p>
-
-                    <div class="card-footer">
-
-                        <span class="subtopic-count">4 Core Subtopics
-                        </span>
-
-                        <a href="LearningMaterialDetails.aspx"
-                            class="view-materials">View Materials
-                        <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Card 4 -->
-                <article class="material-card">
-
-                    <span class="chapter-badge">Chapter 1
-                    </span>
-
-                    <div class="material-icon">
-                        <i class="fa-regular fa-square"></i>
-                    </div>
-
-                    <h2>Early Civilizations</h2>
-
-                    <p>
-                        Learn about important early civilizations and their
-                    development across Southeast Asia and global trade networks.
-                    </p>
-
-                    <div class="card-footer">
-
-                        <span class="subtopic-count">4 Core Subtopics
-                        </span>
-
-                        <a href="LearningMaterialDetails.aspx"
-                            class="view-materials">View Materials
-                        <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-
-                    </div>
-
-                </article>
+                </asp:Repeater>
 
             </section>
-
         </main>
 
     </form>

@@ -54,7 +54,7 @@
 
         <div>
             <img class="hero-image"
-                src="https://picsum.photos/240/136"
+                src="img/hero.png"
                 alt="History Image" />
         </div>
 

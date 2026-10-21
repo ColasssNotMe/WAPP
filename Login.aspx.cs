@@ -15,8 +15,8 @@ namespace Assignment
         protected void SignInButton_Click(object sender, EventArgs e)
         {
 
-            System.Data.SqlClient.SqlConnection conn =
-                new System.Data.SqlClient.SqlConnection(
+            SqlConnection conn =
+                new SqlConnection(
                     ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString
                 );
             conn.Open();

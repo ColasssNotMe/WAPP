@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentQuizList.aspx.cs" Inherits="Assignment.StudentQuizList" %>
 
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
 <!DOCTYPE html>
 
@@ -12,6 +14,7 @@
 </head>
 
 <body>
+    <uc:Header runat="server" />
 
 <form id="form1" runat="server">
 
@@ -408,6 +411,7 @@
     </main>
 
 </form>
+    <uc:Footer runat="server" />
 
 </body>
 </html>

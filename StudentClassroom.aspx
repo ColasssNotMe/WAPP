@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentClassroom.aspx.cs" Inherits="Assignment.StudentClassroom" %>
 
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
 <!DOCTYPE html>
 
@@ -15,366 +17,213 @@
 </head>
 
 <body>
+<uc:Header runat="server" />
 
-<form id="form1" runat="server">
-
-    <main class="classrooms-page">
-
-        <!-- =====================================
-             PAGE HEADER
-        ====================================== -->
-
-        <section class="classrooms-header">
-
-            <div class="header-left">
-
-                <h1>My Classrooms</h1>
-
-                <p>
-                    Choose a classroom to access your Sejarah lessons,
-                    quizzes and class discussions.
-                </p>
-
-            </div>
-
-            <div class="classroom-count">
-                3 joined classrooms
-            </div>
-
-        </section>
-
-
-        <!-- =====================================
-             CLASS / USER INFORMATION
-        ====================================== -->
-
-        <div class="classroom-meta">
-
-            <span>
+<main class="classroom-page">
+    <!-- Page Introduction -->
+    <section class="classroom-intro">
+        <div>
+            <h1>My Classrooms</h1>
+            <p>Choose a classroom to access your Sejarah lessons, quizzes and class discussions.</p>
+            <span class="classroom-breadcrumb">
                 Sejarah KSSM • Form 4 • SMK Taman Melawati
             </span>
+        </div>
 
-            <span>
-                Aiman bin Abdullah • user001
-            </span>
+        <span class="classroom-count">3 joined classrooms</span>
+    </section>
 
+
+    <!-- Joined Classrooms -->
+    <section class="joined-classrooms">
+
+        <div class="section-heading">
+            <h2>Joined Classrooms</h2>
+            <p>Your lessons and programs are organised by classroom.</p>
         </div>
 
 
-        <!-- =====================================
-             JOINED CLASSROOMS HEADER
-        ====================================== -->
+        <div class="classroom-grid">
 
-        <section class="joined-section">
+            <!-- Classroom 1 -->
+            <article class="classroom-card">
 
-            <div class="section-heading">
-
-                <h2>
-                    Joined Classrooms
-                </h2>
-
-                <span>
-                    Your lessons and progress are organised by classroom.
-                </span>
-
-            </div>
-
-
-            <!-- =====================================
-                 CLASSROOM CARDS
-            ====================================== -->
-
-            <div class="classroom-grid">
-
-
-                <!-- CLASSROOM 1 -->
-
-                <article class="classroom-card">
-
-                    <div class="card-top">
-
-                        <div class="book-icon">
-                            ♧
-                        </div>
-
-                        <span class="classroom-tag">
-                            Last viewed
-                        </span>
-
+                <div class="card-top">
+                    <div class="classroom-icon">
+                        <span>▣</span>
                     </div>
 
-
-                    <div class="classroom-content">
-
-                        <h3>
-                            4 Amanah • Sejarah
-                        </h3>
-
-                        <p class="classroom-subtitle">
-                            Form 4 • 4 Amanah
-                        </p>
-
-                        <p class="classroom-subtitle">
-                            Sejarah KSSM • 2026
-                        </p>
-
-
-                        <!-- Teacher -->
-
-                        <div class="teacher-info">
-
-                            <div class="teacher-avatar">
-                                CN
-                            </div>
-
-                            <div>
-
-                                <span class="teacher-label">
-                                    Teacher
-                                </span>
-
-                                <strong>
-                                    Cikgu Nurul
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="card-divider"></div>
-
-
-                    <div class="card-footer-info">
-
-                        <span>
-                            30 students
-                        </span>
-
-                        <span>
-                            Joined January 2026
-                        </span>
-
-                    </div>
-
-
-                    <asp:Button
-                        ID="btnClassroom1"
-                        runat="server"
-                        Text="View classroom   →"
-                        CssClass="view-classroom-button" />
-
-                </article>
-
-
-                <!-- CLASSROOM 2 -->
-
-                <article class="classroom-card">
-
-                    <div class="card-top">
-
-                        <div class="book-icon">
-                            ♧
-                        </div>
-
-                        <span class="classroom-tag">
-                            Revision group
-                        </span>
-
-                    </div>
-
-
-                    <div class="classroom-content">
-
-                        <h3>
-                            Sejarah Revision
-                        </h3>
-
-                        <p class="classroom-subtitle">
-                            Form 4 • 4 Amanah &amp; 4 Bestari
-                        </p>
-
-                        <p class="classroom-subtitle">
-                            Sejarah KSSM • 2026
-                        </p>
-
-
-                        <div class="teacher-info">
-
-                            <div class="teacher-avatar">
-                                CF
-                            </div>
-
-                            <div>
-
-                                <span class="teacher-label">
-                                    Teacher
-                                </span>
-
-                                <strong>
-                                    Cikgu Farid
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="card-divider"></div>
-
-
-                    <div class="card-footer-info">
-
-                        <span>
-                            48 students
-                        </span>
-
-                        <span>
-                            Joined August 2026
-                        </span>
-
-                    </div>
-
-
-                    <asp:Button
-                        ID="btnClassroom2"
-                        runat="server"
-                        Text="View classroom   →"
-                        CssClass="view-classroom-button" />
-
-                </article>
-
-
-                <!-- CLASSROOM 3 -->
-
-                <article class="classroom-card">
-
-                    <div class="card-top">
-
-                        <div class="book-icon">
-                            ♧
-                        </div>
-
-                        <span class="classroom-tag">
-                            Study group
-                        </span>
-
-                    </div>
-
-
-                    <div class="classroom-content">
-
-                        <h3>
-                            Sejarah KBAT Workshop
-                        </h3>
-
-                        <p class="classroom-subtitle">
-                            Form 4 • Mixed classes
-                        </p>
-
-                        <p class="classroom-subtitle">
-                            Sejarah KSSM • 2026
-                        </p>
-
-
-                        <div class="teacher-info">
-
-                            <div class="teacher-avatar">
-                                CA
-                            </div>
-
-                            <div>
-
-                                <span class="teacher-label">
-                                    Teacher
-                                </span>
-
-                                <strong>
-                                    Cikgu Aisyah
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="card-divider"></div>
-
-
-                    <div class="card-footer-info">
-
-                        <span>
-                            24 students
-                        </span>
-
-                        <span>
-                            Joined September 2026
-                        </span>
-
-                    </div>
-
-
-                    <asp:Button
-                        ID="btnClassroom3"
-                        runat="server"
-                        Text="View classroom   →"
-                        CssClass="view-classroom-button" />
-
-                </article>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================
-             JOIN ANOTHER CLASSROOM
-        ====================================== -->
-
-        <section class="another-classroom">
-
-            <div class="another-classroom-left">
-
-                <div class="plus-icon">
-                    +
+                    <span class="classroom-tag">Last viewed</span>
                 </div>
 
-                <div>
+                <div class="card-content">
 
-                    <h3>
-                        Looking for another classroom?
-                    </h3>
+                    <h3>4 Amanah • Sejarah</h3>
 
-                    <p>
-                        Use the invite code from your teacher in
-                        “Join New Classroom” on your dashboard.
+                    <p class="classroom-info">
+                        Form 4 • 4 Amanah
                     </p>
 
+                    <p class="classroom-info">
+                        Sejarah KSSM • 2026
+                    </p>
+
+                    <div class="teacher">
+                        <div class="teacher-avatar">CN</div>
+
+                        <div>
+                            <span>Teacher</span>
+                            <strong>Cikgu Nurul</strong>
+                        </div>
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="card-footer">
+
+                    <div class="classroom-stats">
+                        <span>30 students</span>
+                        <span>Joined January 2026</span>
+                    </div>
+
+                    <a href="#" class="view-classroom">
+                        View classroom
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </article>
 
 
-            <asp:Button
-                ID="btnDashboard"
-                runat="server"
-                Text="Go to dashboard   →"
-                CssClass="dashboard-button" />
+            <!-- Classroom 2 -->
+            <article class="classroom-card">
 
-        </section>
+                <div class="card-top">
+                    <div class="classroom-icon">
+                        <span>▣</span>
+                    </div>
+
+                    <span class="classroom-tag">Revision group</span>
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Sejarah Revision</h3>
+
+                    <p class="classroom-info">
+                        Form 4 • 4 Amanah & 4 Bestari
+                    </p>
+
+                    <p class="classroom-info">
+                        Sejarah KSSM • 2026
+                    </p>
+
+                    <div class="teacher">
+                        <div class="teacher-avatar">CF</div>
+
+                        <div>
+                            <span>Teacher</span>
+                            <strong>Cikgu Farid</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <div class="classroom-stats">
+                        <span>48 students</span>
+                        <span>Joined August 2026</span>
+                    </div>
+
+                    <a href="#" class="view-classroom">
+                        View classroom
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </article>
 
 
-    </main>
+            <!-- Classroom 3 -->
+            <article class="classroom-card">
 
-</form>
+                <div class="card-top">
+                    <div class="classroom-icon">
+                        <span>▣</span>
+                    </div>
 
+                    <span class="classroom-tag">Study group</span>
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Sejarah KBAT Workshop</h3>
+
+                    <p class="classroom-info">
+                        Form 4 • Mixed classes
+                    </p>
+
+                    <p class="classroom-info">
+                        Sejarah KSSM • 2026
+                    </p>
+
+                    <div class="teacher">
+                        <div class="teacher-avatar">CA</div>
+
+                        <div>
+                            <span>Teacher</span>
+                            <strong>Cikgu Aisyah</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <div class="classroom-stats">
+                        <span>24 students</span>
+                        <span>Joined September 2026</span>
+                    </div>
+
+                    <a href="#" class="view-classroom">
+                        View classroom
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- Find Another Classroom -->
+    <section class="find-classroom">
+
+        <div class="find-icon">+</div>
+
+        <div class="find-content">
+            <h3>Looking for another classroom?</h3>
+            <p>
+                Use the invite code from your teacher in
+                "Join New Classroom" on your dashboard.
+            </p>
+        </div>
+
+        <a href="StudentDashboard.aspx" class="dashboard-button">
+            Go to dashboard
+            <span>→</span>
+        </a>
+
+    </section>
+
+</main>
+    <uc:Footer runat="server" />
 </body>
 
 </html>

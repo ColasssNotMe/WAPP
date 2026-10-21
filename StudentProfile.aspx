@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="profile-name">
-                            <strong>Aiman</strong>
+                            <strong id="usernameDisplay" runat="server">Username</strong>
                         </div>
 
                     </div>
@@ -141,7 +141,7 @@
                                 ID="txtFirstName"
                                 runat="server"
                                 CssClass="form-input"
-                                Text="Nurul">
+                                placeholder="Enter first name">
                             </asp:TextBox>
 
                         </div>

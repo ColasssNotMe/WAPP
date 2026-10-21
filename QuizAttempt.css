@@ -1,0 +1,713 @@
+﻿/* ==========================================
+   QUIZ ATTEMPT PAGE
+   Uses the design tokens from index.css
+   ========================================== */
+
+
+/* ==========================================
+   1. PAGE HEADER
+   ========================================== */
+
+.quiz-header {
+    width: 100%;
+    min-height: 4.25rem;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    background-color: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+/* Logo */
+
+.quiz-logo {
+    width: 10rem;
+    flex-shrink: 0;
+}
+
+.logo-placeholder {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: relative;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--bg-light);
+}
+
+    .logo-placeholder::before,
+    .logo-placeholder::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        top: 50%;
+        left: 0;
+        background-color: var(--secondary-color);
+    }
+
+    .logo-placeholder::before {
+        transform: rotate(45deg);
+    }
+
+    .logo-placeholder::after {
+        transform: rotate(-45deg);
+    }
+
+
+/* Navigation */
+
+.quiz-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+    .quiz-nav a {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+        .quiz-nav a:hover {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+
+/* User section */
+
+.quiz-user {
+    width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    flex-shrink: 0;
+}
+
+.username {
+    font-size: 0.7rem;
+    color: var(--secondary-color);
+}
+
+.logout-button {
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.4rem;
+    background-color: var(--white);
+    color: var(--primary-color);
+    font-size: 0.65rem;
+    font-weight: 500;
+}
+
+    .logout-button:hover {
+        background-color: var(--bg-light);
+    }
+
+
+/* ==========================================
+   2. MAIN PAGE
+   ========================================== */
+
+.quiz-page {
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 2.25rem 0 3rem;
+}
+
+
+/* ==========================================
+   3. PAGE HEADING
+   ========================================== */
+
+.quiz-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.25rem;
+}
+
+    .quiz-heading h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--primary-color);
+    }
+
+    .quiz-heading p {
+        margin: 0.35rem 0 0;
+        font-size: 0.8rem;
+        line-height: 1.5;
+        color: var(--secondary-color);
+    }
+
+
+/* Back to quizzes */
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 0.15rem;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.4rem;
+    background-color: var(--white);
+    color: var(--primary-color);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+    .back-button:hover {
+        background-color: var(--bg-light);
+        text-decoration: none;
+    }
+
+
+/* ==========================================
+   4. CLASSROOM LABEL
+   ========================================== */
+
+.classroom-label {
+    margin-bottom: 0.75rem;
+    font-size: 0.7rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   5. QUIZ INFORMATION CARD
+   ========================================== */
+
+.quiz-info-card {
+    min-height: 4.5rem;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 0.55rem;
+    box-shadow: var(--shadow);
+}
+
+
+/* Quiz title */
+
+.quiz-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+
+/* Time */
+
+.time-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+}
+
+.time-label {
+    font-size: 0.6rem;
+    color: var(--secondary-color);
+}
+
+.time-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   6. MAIN QUIZ GRID
+   ========================================== */
+
+.quiz-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+
+/* ==========================================
+   7. QUESTION CARD
+   ========================================== */
+
+.question-card {
+    padding: 1.25rem;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 0.55rem;
+    box-shadow: var(--shadow);
+}
+
+
+/* Question header */
+
+.question-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.85rem;
+}
+
+.question-number {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.55rem;
+    border-radius: 0.3rem;
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    font-size: 0.65rem;
+    font-weight: 600;
+}
+
+.question-mark {
+    font-size: 0.65rem;
+    color: var(--secondary-color);
+}
+
+
+/* Question */
+
+.question-title {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--primary-color);
+}
+
+
+/* Instruction */
+
+.question-instruction {
+    margin: 0 0 1rem;
+    font-size: 0.7rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   8. ANSWER OPTIONS
+   ========================================== */
+
+.answer-option {
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.65rem 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.45rem;
+    background-color: var(--white);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+
+    /* Hide native radio */
+
+    .answer-option input {
+        display: none;
+    }
+
+
+/* Answer letter */
+
+.answer-letter {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 0.3rem;
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+
+/* Answer text */
+
+.answer-text {
+    flex: 1;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: var(--primary-color);
+}
+
+
+/* Radio circle */
+
+.answer-radio {
+    width: 0.8rem;
+    height: 0.8rem;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    background-color: var(--white);
+}
+
+
+/* Hover */
+
+.answer-option:hover {
+    border-color: var(--secondary-color);
+    background-color: var(--bg-surface);
+}
+
+
+/* Selected */
+
+.answer-option.selected {
+    border-color: var(--primary-color);
+    background-color: var(--bg-surface);
+}
+
+    .answer-option.selected .answer-letter {
+        background-color: var(--primary-color);
+        color: var(--white);
+    }
+
+    .answer-option.selected .answer-radio {
+        border: 2px solid var(--primary-color);
+        background-color: var(--primary-color);
+        box-shadow: inset 0 0 0 2px var(--white);
+    }
+
+
+/* ==========================================
+   9. ANSWER STATUS
+   ========================================== */
+
+.answer-status {
+    display: flex;
+    align-items: center;
+    margin-top: 0.85rem;
+    font-size: 0.65rem;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   10. QUESTION NAVIGATION
+   ========================================== */
+
+.question-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.previous-button,
+.next-button {
+    padding: 0.55rem 0.85rem;
+    border-radius: 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+
+/* Previous */
+
+.previous-button {
+    border: 1px solid var(--border-color);
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+    .previous-button:hover {
+        background-color: var(--bg-light);
+    }
+
+
+/* Next */
+
+.next-button {
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+    .next-button:hover {
+        border-color: var(--accent-color);
+        background-color: var(--accent-color);
+        color: var(--white);
+    }
+
+
+/* ==========================================
+   11. QUESTION NAVIGATOR
+   ========================================== */
+
+.navigator-card {
+    padding: 1.1rem;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 0.55rem;
+    box-shadow: var(--shadow);
+}
+
+    .navigator-card h3 {
+        margin: 0 0 1rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+
+/* ==========================================
+   12. PROGRESS
+   ========================================== */
+
+.navigator-progress {
+    margin-bottom: 1rem;
+}
+
+.progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.45rem;
+    font-size: 0.65rem;
+    color: var(--secondary-color);
+}
+
+    .progress-info strong {
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+
+
+/* Progress bar */
+
+.progress-bar {
+    width: 100%;
+    height: 0.25rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: var(--bg-light);
+}
+
+.progress-value {
+    width: 27%;
+    height: 100%;
+    border-radius: 1rem;
+    background-color: var(--primary-color);
+}
+
+
+/* ==========================================
+   13. QUESTION NUMBER GRID
+   ========================================== */
+
+.question-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.nav-question {
+    width: 1.8rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    background-color: var(--white);
+    color: var(--secondary-color);
+    font-size: 0.65rem;
+    font-weight: 500;
+}
+
+
+    /* Hover */
+
+    .nav-question:hover {
+        border-color: var(--secondary-color);
+        background-color: var(--bg-light);
+    }
+
+
+    /* Answered */
+
+    .nav-question.answered {
+        border-color: var(--secondary-color);
+        background-color: var(--secondary-color);
+        color: var(--white);
+    }
+
+
+    /* Current */
+
+    .nav-question.current {
+        border-color: var(--primary-color);
+        background-color: var(--primary-color);
+        color: var(--white);
+    }
+
+
+/* ==========================================
+   14. NAVIGATOR LEGEND
+   ========================================== */
+
+.navigator-legend {
+    padding-top: 0.75rem;
+    margin-bottom: 0.9rem;
+    border-top: 1px solid var(--border-color);
+}
+
+    .navigator-legend p {
+        margin: 0.2rem 0;
+        font-size: 0.6rem;
+        line-height: 1.45;
+        color: var(--secondary-color);
+    }
+
+    .navigator-legend strong {
+        color: var(--primary-color);
+    }
+
+
+/* ==========================================
+   15. SUBMIT QUIZ
+   ========================================== */
+
+.submit-quiz-button {
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.4rem;
+    background-color: var(--white);
+    color: var(--primary-color);
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+    .submit-quiz-button:hover {
+        background-color: var(--bg-light);
+    }
+
+
+/* ==========================================
+   16. REMAINING QUESTIONS
+   ========================================== */
+
+.remaining-text {
+    margin: 0.7rem 0 0;
+    font-size: 0.6rem;
+    line-height: 1.5;
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================
+   17. FOOTER
+   ========================================== */
+
+.quiz-footer {
+    min-height: 8.5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2.5rem;
+    padding: 1.75rem 2rem;
+    background-color: var(--muted-surface);
+    border-top: 1px solid var(--border-color);
+}
+
+
+/* Footer logo */
+
+.footer-logo-placeholder {
+    width: 7.5rem;
+    height: 2.3rem;
+    position: relative;
+    margin-bottom: 0.65rem;
+    border: 1px solid var(--secondary-color);
+}
+
+
+    /* X */
+
+    .footer-logo-placeholder::before,
+    .footer-logo-placeholder::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        top: 50%;
+        left: 0;
+        background-color: var(--secondary-color);
+    }
+
+    .footer-logo-placeholder::before {
+        transform: rotate(17deg);
+    }
+
+    .footer-logo-placeholder::after {
+        transform: rotate(-17deg);
+    }
+
+
+/* Footer description */
+
+.footer-logo p {
+    max-width: 20rem;
+    margin: 0;
+    font-size: 0.6rem;
+    line-height: 1.55;
+    color: var(--secondary-color);
+}
+
+
+/* Footer columns */
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+    .footer-column h4 {
+        margin: 0 0 0.4rem;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--primary-color);
+    }
+
+    .footer-column a {
+        font-size: 0.6rem;
+        font-weight: 400;
+        color: var(--secondary-color);
+        text-decoration: none;
+    }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+
