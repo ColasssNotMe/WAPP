@@ -99,6 +99,18 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="About.css" />
+    <Content Include="AdminClassroomManagement.aspx" />
+    <Content Include="AdminClassroomManagement.css" />
+    <Content Include="AdminDashboard.aspx" />
+    <Content Include="AdminDashboard.css" />
+    <Content Include="AdminMaterialManagement.aspx" />
+    <Content Include="AdminMaterialManagement.css" />
+    <Content Include="AdminProfile.aspx" />
+    <Content Include="AdminProfile.css" />
+    <Content Include="AdminQuizManagement.aspx" />
+    <Content Include="AdminQuizManagement.css" />
+    <Content Include="AdminUserManagement.aspx" />
+    <Content Include="AdminUserManagement.css" />
     <Content Include="App_Data\WAPP.mdf" />
     <Content Include="App_Data\WAPP_log.ldf">
       <DependentUpon>WAPP.mdf</DependentUpon>
@@ -257,6 +269,48 @@
     </Compile>
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminClassroomManagement.aspx.cs">
+      <DependentUpon>AdminClassroomManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminClassroomManagement.aspx.designer.cs">
+      <DependentUpon>AdminClassroomManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard.aspx.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard.aspx.designer.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMaterialManagement.aspx.cs">
+      <DependentUpon>AdminMaterialManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMaterialManagement.aspx.designer.cs">
+      <DependentUpon>AdminMaterialManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminProfile.aspx.cs">
+      <DependentUpon>AdminProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminProfile.aspx.designer.cs">
+      <DependentUpon>AdminProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminQuizManagement.aspx.cs">
+      <DependentUpon>AdminQuizManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminQuizManagement.aspx.designer.cs">
+      <DependentUpon>AdminQuizManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminUserManagement.aspx.cs">
+      <DependentUpon>AdminUserManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminUserManagement.aspx.designer.cs">
+      <DependentUpon>AdminUserManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
