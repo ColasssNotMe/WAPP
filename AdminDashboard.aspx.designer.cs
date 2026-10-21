@@ -24,6 +24,33 @@ namespace Assignment
         protected global::Assignment.WebUserControl1 HeaderControl;
 
         /// <summary>
+        /// student_num control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl student_num;
+
+        /// <summary>
+        /// teacher_num control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl teacher_num;
+
+        /// <summary>
+        /// teacher_approval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl teacher_approval;
+
+        /// <summary>
         /// FooterControl control.
         /// </summary>
         /// <remarks>

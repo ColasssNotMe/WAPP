@@ -27,13 +27,13 @@
     <section class="stats-grid" aria-label="Platform statistics">
       <article class="stat-card">
         <p class="stat-label">Students</p>
-        <p class="stat-value">1,248</p>
+        <p class="stat-value" id="student_num" runat="server"></p>
         <p class="stat-note">Across 24 schools</p>
       </article>
       <article class="stat-card">
         <p class="stat-label">Teachers</p>
-        <p class="stat-value">86</p>
-        <p class="stat-note">8 awaiting approval</p>
+        <p class="stat-value" id="teacher_num" runat="server">86</p>
+        <p class="stat-note" id="teacher_approval" runat="server">8 awaiting approval</p>
       </article>
       <article class="stat-card">
         <p class="stat-label">Classrooms</p>
@@ -53,7 +53,7 @@
         <p class="panel-description">Your most common administration tasks, one step away.</p>
 
         <div class="action-grid">
-          <a class="action-card" href="user-management.html">
+          <a class="action-card" href="AdminUserManagement.aspx">
             <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
               <circle cx="10" cy="7" r="4"/>
@@ -63,7 +63,7 @@
             <span class="action-description">Review accounts and access.</span>
           </a>
 
-          <a class="action-card" href="teacher-approvals.html">
+          <a class="action-card" href="AdminTeacherApprovals.aspx">
             <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="9" cy="7" r="4"/>
               <path d="M3 21v-2a6 6 0 0 1 11.5-2.5"/>
@@ -73,7 +73,7 @@
             <span class="action-description">8 registrations need a decision.</span>
           </a>
 
-          <a class="action-card" href="content-management.html">
+          <a class="action-card" href="AdminMaterialManagement.aspx">
             <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/>
               <path d="M4 5.5v13A2.5 2.5 0 0 1 6.5 16H20"/>
@@ -100,7 +100,7 @@
             <strong>5 pending</strong>
           </div>
         </div>
-        <a class="review-button" href="teacher-approvals.html">Review teacher requests</a>
+        <a class="review-button" href="AdminUserManagement.aspx">Review teacher requests</a>
       </aside>
     </section>
   </main>
