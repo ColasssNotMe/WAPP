@@ -19,7 +19,7 @@
         <h1>User Management</h1>
         <p>Manage platform accounts, roles, and access for students, teachers, and administrators.</p>
       </div>
-      <span class="overview-pill" id="totalUsers" runat="server"></span>
+      <span class="overview-pill">1,338 users</span>
     </header>
 
     <div class="notice-bar" role="status">

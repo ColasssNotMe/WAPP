@@ -32,17 +32,17 @@
       </article>
       <article class="stat-card">
         <p class="stat-label">Teachers</p>
-        <p class="stat-value" id="teacher_num" runat="server"></p>
+        <p class="stat-value" id="teacher_num" runat="server">86</p>
         <p class="stat-note" id="teacher_approval" runat="server">8 awaiting approval</p>
       </article>
       <article class="stat-card">
         <p class="stat-label">Classrooms</p>
-        <p class="stat-value" id="classroom_num" runat="server"></p>
+        <p class="stat-value">142</p>
         <p class="stat-note">128 active classrooms</p>
       </article>
       <article class="stat-card">
         <p class="stat-label">Quizzes</p>
-        <p class="stat-value" id="quiz_num" runat="server"></p>
+        <p class="stat-value">324</p>
         <p class="stat-note">18 published this week</p>
       </article>
     </section>
@@ -63,7 +63,7 @@
             <span class="action-description">Review accounts and access.</span>
           </a>
 
-          <a class="action-card" href="AdminUserManagement.aspx">
+          <a class="action-card" href="AdminTeacherApprovals.aspx">
             <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="9" cy="7" r="4"/>
               <path d="M3 21v-2a6 6 0 0 1 11.5-2.5"/>
