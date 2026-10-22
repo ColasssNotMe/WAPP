@@ -51,6 +51,24 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl teacher_approval;
 
         /// <summary>
+        /// classroom_num control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl classroom_num;
+
+        /// <summary>
+        /// quiz_num control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl quiz_num;
+
+        /// <summary>
         /// FooterControl control.
         /// </summary>
         /// <remarks>

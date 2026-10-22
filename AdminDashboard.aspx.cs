@@ -1,6 +1,9 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,40 +14,68 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            student_num.InnerText = "TEST";
+            //if (Session["UserID"] == null)
+            //{
+            //    Response.Redirect("Homepage.aspx");
+            //    return;
+            //}
+
             if (!IsPostBack)
             {
                 loadData();
             }
         }
 
+
+
         private void loadData()
         {
-            string query = "SELECT COUNT(*) FROM [User] WHERE [role] = @Role";
+            string student = "SELECT * FROM [User] WHERE [role] = 'Student'";
+            string teacher = "SELECT * FROM [User] WHERE [role] = 'Teacher'";
+            //string teacher_pending = "SELECT * FROM [User] WHERE [role] = 'Teacher' AND [isApproved] = 0";
+            string classroom = "SELECT * FROM [Class]";
+            string quiz = "SELECT * FROM [Quiz]";
 
-            string connString = ConfigurationManager
-                .ConnectionStrings["WAPP"].ConnectionString;
 
-            try
+            string connString = ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connString))
             {
-                using (SqlConnection conn = new SqlConnection(connString))
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                conn.Open();
+                try
                 {
-                    cmd.Parameters.Add("@Role", SqlDbType.NVarChar, 50)
-                                  .Value = "student";
+                    SqlCommand cmd = new SqlCommand(student, conn);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
 
-                    conn.Open();
+                    da.Fill(dt);
+                    student_num.InnerText = dt.Rows.Count.ToString();
 
-                    int studentCount = Convert.ToInt32(
-                        cmd.ExecuteScalar()
-                    );
+                    cmd = new SqlCommand(teacher, conn);
+                    da = new SqlDataAdapter(cmd);
+                    dt = new DataTable();
 
-                    student_num.InnerText = studentCount.ToString();
+                    da.Fill(dt);
+                    teacher_num.InnerText = dt.Rows.Count.ToString();
+
+                    cmd = new SqlCommand(classroom, conn);
+                    da = new SqlDataAdapter(cmd);
+                    dt = new DataTable();
+                    da.Fill(dt);
+                    classroom_num.InnerText = dt.Rows.Count.ToString();
+
+                    cmd = new SqlCommand(quiz, conn);
+                    da = new SqlDataAdapter(cmd);
+                    dt = new DataTable();
+                    da.Fill(dt);
+                    quiz_num.InnerText = dt.Rows.Count.ToString();
+
+
                 }
-            }
-            catch (Exception ex)
-            {
-                student_num.InnerText = "Error: " + ex.Message;
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
     }
