@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Configuration;
+using System.Data.SqlClient;
+
 
 namespace Assignment
 {
@@ -16,14 +19,17 @@ namespace Assignment
         private void loadUserData()
         {
 
-            //            const SqlCommand = "SELECT * FROM User WHERE userID = @userID";
+            string query = "SELECT * FROM [User] WHERE userID = @userID";
 
-            //            try {
 
-            //            } catch (Exception ex) {
-            //                ShowErrorMessage("An error occurred while loading user data: " + ex.Message);
-            //}
-            //}
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@userID", Session["UserID"].ToString());
+                }
+                //ShowErrorMessage("An error occurred while loading user data: " + ex.Message);
+            }
         }
     }
 }
