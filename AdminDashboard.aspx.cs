@@ -11,35 +11,44 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            student_num.InnerText = "TEST";
+            //if (Session["UserID"] == null)
+            //{
+            //    Response.Redirect("Homepage.aspx");
+            //    return;
+            //}
+
             if (!IsPostBack)
             {
                 loadData();
             }
         }
 
+
         private void loadData()
         {
-            string query = "SELECT COUNT(*) FROM [User] WHERE [role] = @Role";
+            string student = "SELECT COUNT(*) FROM [User] WHERE [role] = 'Student'";
+            string teacher = "SELECT COUNT(*) FROM [User] WHERE [role] = 'Teacher'";
+            string classroom = "SELECT COUNT(*) FROM [Class]";
+            string quiz = "SELECT COUNT(*) FROM [Quiz]";
 
-            string connString = ConfigurationManager
-                .ConnectionStrings["WAPP"].ConnectionString;
-
+            string connString = ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connString))
-                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.Add("@Role", SqlDbType.NVarChar, 50)
-                                  .Value = "student";
-
                     conn.Open();
 
-                    int studentCount = Convert.ToInt32(
-                        cmd.ExecuteScalar()
-                    );
+                    SqlCommand cmd = new SqlCommand(student, conn);
+                    student_num.InnerText = cmd.ExecuteScalar().ToString();
 
-                    student_num.InnerText = studentCount.ToString();
+                    cmd = new SqlCommand(teacher, conn);
+                    teacher_num.InnerText = cmd.ExecuteScalar().ToString();
+
+                    cmd = new SqlCommand(classroom, conn);
+                    classroom_num.InnerText = cmd.ExecuteScalar().ToString();
+
+                    cmd = new SqlCommand(quiz, conn);
+                    quiz_num.InnerText = cmd.ExecuteScalar().ToString();
                 }
             }
             catch (Exception ex)
@@ -47,5 +56,6 @@ namespace Assignment
                 student_num.InnerText = "Error: " + ex.Message;
             }
         }
+
     }
 }
