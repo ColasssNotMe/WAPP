@@ -11,16 +11,63 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["UserID"] == null)
-            //{
-            //    Response.Redirect("Homepage.aspx");
-            //    return;
-            //}
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
 
             if (!IsPostBack)
             {
                 loadData();
+                welcomeMessage.InnerText = "Welcome, " + Session["Username"].ToString() + "!";
             }
+        }
+
+        protected void AddAdminButton_Click(object sender, EventArgs e)
+        {
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
+            const string duplicateQuery = "SELECT COUNT(*) FROM [User] WHERE email = @email";
+            const string insertQuery = @"
+                INSERT INTO [User]
+                    (username, email, password, firstName, lastName, role, profilePic, dateRegistered)
+                VALUES
+                    (@username, @email, @password, @firstName, @lastName, 'Admin', NULL, @dateRegistered)";
+
+            string connectionString = ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand duplicateCommand = new SqlCommand(duplicateQuery, conn))
+                {
+                    duplicateCommand.Parameters.AddWithValue("@email", adminEmail.Text.Trim());
+                    if (Convert.ToInt32(duplicateCommand.ExecuteScalar()) > 0)
+                    {
+                        adminMessage.Text = "That email is already registered.";
+                        adminMessage.CssClass = "admin-message error";
+                        return;
+                    }
+                }
+
+                using (SqlCommand insertCommand = new SqlCommand(insertQuery, conn))
+                {
+                    string username = adminUsername.Text.Trim();
+                    insertCommand.Parameters.AddWithValue("@username", username);
+                    insertCommand.Parameters.AddWithValue("@email", adminEmail.Text.Trim());
+                    insertCommand.Parameters.AddWithValue("@password", adminPassword.Text);
+                    insertCommand.Parameters.AddWithValue("@firstName", username);
+                    insertCommand.Parameters.AddWithValue("@lastName", string.Empty);
+                    insertCommand.Parameters.AddWithValue("@dateRegistered", DateTime.Now);
+                    insertCommand.ExecuteNonQuery();
+                }
+            }
+
+            Response.Redirect(Request.RawUrl);
         }
 
 
