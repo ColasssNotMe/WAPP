@@ -13,7 +13,7 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["userId"] == null)
+            if (Session["userID"] == null)
             {
                 Response.Redirect("Login.aspx");
                 return;
@@ -29,14 +29,14 @@ namespace Assignment
         {
             try
             {
-                int userId = Convert.ToInt32(Session["userId"]);
+                int userId = Convert.ToInt32(Session["userID"]);
 
                 using (SqlConnection conn = new SqlConnection(ConnString))
                 {
                     conn.Open();
                     const string userQuery =
-                        "SELECT username, email, firstName, lastName, phone, joinedDate " +
-                        "FROM [Users] WHERE [userID] = @userID";
+                        "SELECT username, email, firstName, lastName, dateRegistered " +
+                        "FROM [User] WHERE [userID] = @userID";
 
                     using (SqlCommand cmd = new SqlCommand(userQuery, conn))
                     {
@@ -54,12 +54,12 @@ namespace Assignment
                                 usernameInput.Value = reader["username"].ToString();
                                 email.Value = reader["email"].ToString();
                                 fullName.Value = name;
-                                phone.Value = reader["phone"].ToString();
+                                //phone.Value = reader["phone"].ToString();
 
-                                if (reader["joinedDate"] != DBNull.Value)
+                                if (reader["dateRegistered"] != DBNull.Value)
                                 {
                                     joinedDate.InnerText =
-                                        Convert.ToDateTime(reader["joinedDate"]).ToString("MMMM yyyy");
+                                        Convert.ToDateTime(reader["dateRegistered"]).ToString("MMMM yyyy");
                                 }
                             }
                         }
