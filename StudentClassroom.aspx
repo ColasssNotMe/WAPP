@@ -17,213 +17,258 @@
 </head>
 
 <body>
-<uc:Header runat="server" />
 
-<main class="classroom-page">
-    <!-- Page Introduction -->
-    <section class="classroom-intro">
-        <div>
-            <h1>My Classrooms</h1>
-            <p>Choose a classroom to access your Sejarah lessons, quizzes and class discussions.</p>
-            <span class="classroom-breadcrumb">
-                Sejarah KSSM • Form 4 • SMK Taman Melawati
-            </span>
-        </div>
+    <uc:Header runat="server" />
 
-        <span class="classroom-count">3 joined classrooms</span>
-    </section>
+    <form id="form1" runat="server">
 
+        <main class="classroom-page">
 
-    <!-- Joined Classrooms -->
-    <section class="joined-classrooms">
+            <!-- ==========================================
+                 PAGE INTRODUCTION
+            =========================================== -->
 
-        <div class="section-heading">
-            <h2>Joined Classrooms</h2>
-            <p>Your lessons and programs are organised by classroom.</p>
-        </div>
+            <section class="classroom-intro">
 
+                <div>
 
-        <div class="classroom-grid">
+                    <h1>My Classrooms</h1>
 
-            <!-- Classroom 1 -->
-            <article class="classroom-card">
-
-                <div class="card-top">
-                    <div class="classroom-icon">
-                        <span>▣</span>
-                    </div>
-
-                    <span class="classroom-tag">Last viewed</span>
-                </div>
-
-                <div class="card-content">
-
-                    <h3>4 Amanah • Sejarah</h3>
-
-                    <p class="classroom-info">
-                        Form 4 • 4 Amanah
+                    <p>
+                        Choose a classroom to access your Sejarah
+                        lessons, quizzes and class discussions.
                     </p>
 
-                    <p class="classroom-info">
-                        Sejarah KSSM • 2026
+
+                </div>
+
+
+                <span
+                    class="classroom-count"
+                    id="classroomCount"
+                    runat="server">
+                    0 joined classrooms
+                </span>
+
+            </section>
+
+
+            <!-- ==========================================
+                 JOINED CLASSROOMS
+            =========================================== -->
+
+            <section class="joined-classrooms">
+
+                <div class="section-heading">
+
+                    <h2>Joined Classrooms</h2>
+
+                    <p>
+                        Your lessons and programs are organised by classroom.
                     </p>
 
-                    <div class="teacher">
-                        <div class="teacher-avatar">CN</div>
+                </div>
 
-                        <div>
-                            <span>Teacher</span>
-                            <strong>Cikgu Nurul</strong>
-                        </div>
-                    </div>
+
+                <!-- ==========================================
+                     CLASSROOM GRID
+                =========================================== -->
+
+                <div class="classroom-grid">
+
+                    <asp:Repeater
+                        ID="ClassroomRepeater"
+                        runat="server"
+                        OnItemCommand="ClassroomRepeater_ItemCommand">
+
+                        <ItemTemplate>
+
+                            <!-- ==========================================
+                                 CLASSROOM CARD
+                            =========================================== -->
+
+                            <article class="classroom-card">
+
+
+                                <!-- Card Top -->
+
+                                <div class="card-top">
+
+                                    <div class="classroom-icon">
+                                        <span>▣</span>
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Card Content -->
+
+                                <div class="card-content">
+
+                                    <!-- Classroom Name -->
+
+                                    <h3>
+                                        <%# Eval("className") %>
+                                    </h3>
+
+
+                                    <!-- Classroom Description -->
+
+                                    <p class="classroom-info">
+                                        <%# Eval("description") %>
+                                    </p>
+
+
+                                    <!-- Subject -->
+
+                                    <p class="classroom-info">
+                                        <%# Eval("subject") %>
+                                    </p>
+
+
+                                    <!-- Teacher -->
+
+                                    <div class="teacher">
+
+                                        <div class="teacher-avatar">
+
+                                            <asp:Image
+                                                ID="TeacherProfilePic"
+                                                runat="server"
+                                                ImageUrl='<%# Eval("profilePic") %>'
+                                                AlternateText="Teacher profile picture" />
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <span>Teacher</span>
+
+                                            <strong>
+                                                <%# Eval("lastName") %>
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Card Footer -->
+
+                                <div class="card-footer">
+
+
+                                    <!-- Classroom Statistics -->
+
+                                    <div class="classroom-stats">
+
+                                        <span>
+                                            <%# Eval("studentCount") %> students
+                                        </span>
+
+                                        <span>
+                                            Joined
+                                            <%# Eval("enrollDate", "{0:MMMM yyyy}") %>
+                                        </span>
+
+                                    </div>
+
+
+                                    <!-- View Classroom -->
+
+                                    <asp:LinkButton
+                                        ID="ViewClassroomButton"
+                                        runat="server"
+                                        CssClass="view-classroom"
+                                        CommandName="ViewClassroom"
+                                        CommandArgument='<%# Eval("classID") %>'>
+
+                                        View classroom
+                                        <span>→</span>
+
+                                    </asp:LinkButton>
+
+
+                                </div>
+
+                            </article>
+
+                        </ItemTemplate>
+
+                    </asp:Repeater>
+
+
+                    <!-- ==========================================
+                         EMPTY CLASSROOM MESSAGE
+                    =========================================== -->
+
+                    <asp:Panel
+                        ID="emptyClassroomPanel"
+                        runat="server"
+                        CssClass="empty-classroom"
+                        Visible="false">
+
+                        <h3>No classrooms joined</h3>
+
+                        <p>
+                            You have not joined any classrooms yet.
+                            Ask your teacher for an invite code.
+                        </p>
+
+
+                    </asp:Panel>
 
                 </div>
 
-                <div class="card-footer">
+            </section>
 
-                    <div class="classroom-stats">
-                        <span>30 students</span>
-                        <span>Joined January 2026</span>
-                    </div>
 
-                    <a href="#" class="view-classroom">
-                        View classroom
-                        <span>→</span>
-                    </a>
+            <!-- ==========================================
+                 FIND ANOTHER CLASSROOM
+            =========================================== -->
 
+            <section class="find-classroom">
+
+                <div class="find-icon">
+                    +
                 </div>
 
-            </article>
 
+                <div class="find-content">
 
-            <!-- Classroom 2 -->
-            <article class="classroom-card">
+                    <h3>
+                        Looking for another classroom?
+                    </h3>
 
-                <div class="card-top">
-                    <div class="classroom-icon">
-                        <span>▣</span>
-                    </div>
-
-                    <span class="classroom-tag">Revision group</span>
-                </div>
-
-                <div class="card-content">
-
-                    <h3>Sejarah Revision</h3>
-
-                    <p class="classroom-info">
-                        Form 4 • 4 Amanah & 4 Bestari
+                    <p>
+                        Use the invite code from your teacher in
+                        "Join New Classroom" on your dashboard.
                     </p>
 
-                    <p class="classroom-info">
-                        Sejarah KSSM • 2026
-                    </p>
-
-                    <div class="teacher">
-                        <div class="teacher-avatar">CF</div>
-
-                        <div>
-                            <span>Teacher</span>
-                            <strong>Cikgu Farid</strong>
-                        </div>
-                    </div>
-
                 </div>
 
-                <div class="card-footer">
 
-                    <div class="classroom-stats">
-                        <span>48 students</span>
-                        <span>Joined August 2026</span>
-                    </div>
+                <a
+                    href="StudentDashboard.aspx"
+                    class="dashboard-button">
 
-                    <a href="#" class="view-classroom">
-                        View classroom
-                        <span>→</span>
-                    </a>
+                    Go to dashboard
+                    <span>→</span>
 
-                </div>
+                </a>
 
-            </article>
+            </section>
 
+        </main>
 
-            <!-- Classroom 3 -->
-            <article class="classroom-card">
-
-                <div class="card-top">
-                    <div class="classroom-icon">
-                        <span>▣</span>
-                    </div>
-
-                    <span class="classroom-tag">Study group</span>
-                </div>
-
-                <div class="card-content">
-
-                    <h3>Sejarah KBAT Workshop</h3>
-
-                    <p class="classroom-info">
-                        Form 4 • Mixed classes
-                    </p>
-
-                    <p class="classroom-info">
-                        Sejarah KSSM • 2026
-                    </p>
-
-                    <div class="teacher">
-                        <div class="teacher-avatar">CA</div>
-
-                        <div>
-                            <span>Teacher</span>
-                            <strong>Cikgu Aisyah</strong>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="card-footer">
-
-                    <div class="classroom-stats">
-                        <span>24 students</span>
-                        <span>Joined September 2026</span>
-                    </div>
-
-                    <a href="#" class="view-classroom">
-                        View classroom
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </section>
+    </form>
 
 
-    <!-- Find Another Classroom -->
-    <section class="find-classroom">
-
-        <div class="find-icon">+</div>
-
-        <div class="find-content">
-            <h3>Looking for another classroom?</h3>
-            <p>
-                Use the invite code from your teacher in
-                "Join New Classroom" on your dashboard.
-            </p>
-        </div>
-
-        <a href="StudentDashboard.aspx" class="dashboard-button">
-            Go to dashboard
-            <span>→</span>
-        </a>
-
-    </section>
-
-</main>
     <uc:Footer runat="server" />
+
 </body>
 
 </html>

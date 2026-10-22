@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentQuizList.aspx.cs" Inherits="Assignment.StudentQuizList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"
+    CodeBehind="StudentQuizList.aspx.cs"
+    Inherits="Assignment.StudentQuizList" %>
 
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
@@ -6,42 +8,41 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Sejarah Quizzes</title>
 
-    <link href="index.css" rel="stylesheet" type="text/css" />
-    <link href="StudentQuizList.css" rel="stylesheet" type="text/css" />
+<head runat="server">
+    <title>Quiz History</title>
+
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="StudentQuizList.css" />
 </head>
 
 <body>
-    <uc:Header runat="server" />
 
 <form id="form1" runat="server">
 
+    <uc:Header runat="server" />
+
     <main class="quiz-page">
 
-        <!-- =========================
-             PAGE HEADER
-        ========================== -->
-
+        <!-- PAGE HEADER -->
         <section class="quiz-header">
 
-            <h1>Sejarah Quizzes</h1>
+            <h1>Quiz History</h1>
 
             <p>
-                Test your understanding of the topics you have<br />
-                learned with curated checkpoint assessments.
+                Complete quizzes from your enrolled classes and review your previous attempts.
             </p>
 
+            <!-- SEARCH -->
             <div class="quiz-search">
 
                 <span class="search-icon">⌕</span>
 
                 <asp:TextBox
-                    ID="txtSearch"
+                    ID="searchBox"
                     runat="server"
                     CssClass="search-input"
-                    placeholder="Search quizzes ...">
+                    placeholder="Search quizzes...">
                 </asp:TextBox>
 
             </div>
@@ -49,9 +50,9 @@
         </section>
 
 
-        <!-- =========================
+        <!-- ==========================================
              AVAILABLE QUIZZES
-        ========================== -->
+             ========================================== -->
 
         <section class="quiz-section">
 
@@ -59,167 +60,77 @@
                 Available Quizzes
             </h2>
 
+            <asp:Panel
+                ID="availableEmptyPanel"
+                runat="server"
+                Visible="false"
+                CssClass="empty-state">
+
+                <p>No quizzes are currently available.</p>
+
+            </asp:Panel>
+
+
             <div class="quiz-grid">
 
-                <!-- Quiz 1 -->
+                <asp:Repeater
+                    ID="availableQuizRepeater"
+                    runat="server"
+                    OnItemCommand="AvailableQuizRepeater_ItemCommand">
 
-                <article class="quiz-card">
+                    <ItemTemplate>
 
-                    <div class="quiz-card-top">
+                        <div class="quiz-card">
 
-                        <span class="question-badge">
-                            15 Questions
-                        </span>
+                            <div class="quiz-card-top">
 
-                        <span class="quiz-duration">
-                            ♧ 20 Minutes
-                        </span>
+                                <span class="question-badge">
+                                    <%# Eval("QuestionCount") %> Questions
+                                </span>
 
-                    </div>
+                                <span class="quiz-duration">
+                                    <%# Eval("DurationText") %>
+                                </span>
 
-                    <h3>
-                        Chapter 3: Road to Independence
-                    </h3>
-
-                    <p class="quiz-description">
-                        Covers Malayan Union opposition, CLC 1949,
-                        1955 Federal Election, and Merdeka London Mission.
-                    </p>
-
-                    <div class="quiz-card-action">
-
-                        <asp:Button
-                            ID="btnStartQuiz1"
-                            runat="server"
-                            Text="Start Quiz →"
-                            CssClass="quiz-button" />
-
-                    </div>
-
-                </article>
+                            </div>
 
 
-                <!-- Quiz 2 -->
-
-                <article class="quiz-card">
-
-                    <div class="quiz-card-top">
-
-                        <span class="question-badge">
-                            15 Questions
-                        </span>
-
-                        <span class="quiz-duration">
-                            ♧ 20 Minutes
-                        </span>
-
-                    </div>
-
-                    <h3>
-                        Chapter 3: Road to Independence
-                    </h3>
-
-                    <p class="quiz-description">
-                        Covers Malayan Union opposition, CLC 1949,
-                        1955 Federal Election, and Merdeka London Mission.
-                    </p>
-
-                    <div class="quiz-card-action">
-
-                        <asp:Button
-                            ID="btnStartQuiz2"
-                            runat="server"
-                            Text="Start Quiz →"
-                            CssClass="quiz-button" />
-
-                    </div>
-
-                </article>
+                            <h3>
+                                <%# Eval("Title") %>
+                            </h3>
 
 
-                <!-- Quiz 3 -->
-
-                <article class="quiz-card">
-
-                    <div class="quiz-card-top">
-
-                        <span class="question-badge">
-                            15 Questions
-                        </span>
-
-                        <span class="quiz-duration">
-                            ♧ 20 Minutes
-                        </span>
-
-                    </div>
-
-                    <h3>
-                        Chapter 3: Road to Independence
-                    </h3>
-
-                    <p class="quiz-description">
-                        Covers Malayan Union opposition, CLC 1949,
-                        1955 Federal Election, and Merdeka London Mission.
-                    </p>
-
-                    <div class="quiz-card-action">
-
-                        <asp:Button
-                            ID="btnStartQuiz3"
-                            runat="server"
-                            Text="Start Quiz →"
-                            CssClass="quiz-button" />
-
-                    </div>
-
-                </article>
+                            <p class="quiz-description">
+                                <%# Eval("Description") %>
+                            </p>
 
 
-                <!-- Quiz 4 -->
+                            <div class="quiz-card-action">
 
-                <article class="quiz-card">
+                                <asp:Button
+                                    ID="startQuizButton"
+                                    runat="server"
+                                    Text="Start Quiz"
+                                    CssClass="quiz-button"
+                                    CommandName="StartQuiz"
+                                    CommandArgument='<%# Eval("QuizID") %>' />
 
-                    <div class="quiz-card-top">
+                            </div>
 
-                        <span class="question-badge">
-                            15 Questions
-                        </span>
+                        </div>
 
-                        <span class="quiz-duration">
-                            ♧ 20 Minutes
-                        </span>
+                    </ItemTemplate>
 
-                    </div>
-
-                    <h3>
-                        Chapter 3: Road to Independence
-                    </h3>
-
-                    <p class="quiz-description">
-                        Covers Malayan Union opposition, CLC 1949,
-                        1955 Federal Election, and Merdeka London Mission.
-                    </p>
-
-                    <div class="quiz-card-action">
-
-                        <asp:Button
-                            ID="btnStartQuiz4"
-                            runat="server"
-                            Text="Start Quiz →"
-                            CssClass="quiz-button" />
-
-                    </div>
-
-                </article>
+                </asp:Repeater>
 
             </div>
 
         </section>
 
 
-        <!-- =========================
+        <!-- ==========================================
              COMPLETED QUIZZES
-        ========================== -->
+             ========================================== -->
 
         <section class="quiz-section completed-section">
 
@@ -227,182 +138,80 @@
                 Completed Quizzes
             </h2>
 
+
+            <asp:Panel
+                ID="completedEmptyPanel"
+                runat="server"
+                Visible="false"
+                CssClass="empty-state">
+
+                <p>You have not completed any quizzes yet.</p>
+
+            </asp:Panel>
+
+
             <div class="quiz-grid">
 
-                <!-- Completed Quiz 1 -->
+                <asp:Repeater
+                    ID="completedQuizRepeater"
+                    runat="server"
+                    OnItemCommand="CompletedQuizRepeater_ItemCommand">
 
-                <article class="completed-card">
+                    <ItemTemplate>
 
-                    <div class="completed-card-top">
+                        <div class="completed-card">
 
-                        <h3>
-                            Chapter 3: Road to Independence
-                        </h3>
+                            <div class="completed-card-top">
 
-                        <span class="score-badge">
-                            Score : 10 / 15
-                        </span>
+                                <h3>
+                                    <%# Eval("Title") %>
+                                </h3>
 
-                    </div>
+                                <span class="score-badge">
+                                    <%# Eval("ScoreText") %>
+                                </span>
 
-                    <p class="completed-info">
-                        completed 1 day 30 min ago
-                        &nbsp; | &nbsp;
-                        10m 43s taken
-                    </p>
+                            </div>
 
-                    <div class="progress-container">
 
-                        <div
-                            class="progress-bar"
-                            style="width: 50%;">
+                            <p class="completed-info">
+
+                                <%# Eval("QuestionCount") %> Questions
+                                <br />
+
+                                Time taken:
+                                <%# Eval("TimeTakenText") %>
+
+                            </p>
+
+
+                            <div class="progress-container">
+
+                                <div
+                                    class="progress-bar"
+                                    style='width: <%# Eval("ScorePercentage") %>%;'>
+                                </div>
+
+                            </div>
+
+
+                            <div class="completed-action">
+
+                                <asp:Button
+                                    ID="viewResultButton"
+                                    runat="server"
+                                    Text="View Result"
+                                    CssClass="quiz-button"
+                                    CommandName="ViewResult"
+                                    CommandArgument='<%# Eval("QuizID") %>' />
+
+                            </div>
+
                         </div>
 
-                    </div>
+                    </ItemTemplate>
 
-                    <div class="completed-action">
-
-                        <asp:Button
-                            ID="btnReviewQuiz1"
-                            runat="server"
-                            Text="Review Quiz →"
-                            CssClass="quiz-button" />
-
-                    </div>
-
-                </article>
-
-
-                <!-- Completed Quiz 2 -->
-
-                <article class="completed-card">
-
-                    <div class="completed-card-top">
-
-                        <h3>
-                            Chapter 3: Road to Independence
-                        </h3>
-
-                        <span class="score-badge">
-                            Score : 10 / 15
-                        </span>
-
-                    </div>
-
-                    <p class="completed-info">
-                        completed 1 day 30 min ago
-                        &nbsp; | &nbsp;
-                        10m 43s taken
-                    </p>
-
-                    <div class="progress-container">
-
-                        <div
-                            class="progress-bar"
-                            style="width: 50%;">
-                        </div>
-
-                    </div>
-
-                    <div class="completed-action">
-
-                        <asp:Button
-                            ID="btnReviewQuiz2"
-                            runat="server"
-                            Text="Review Quiz →"
-                            CssClass="quiz-button" />
-
-                    </div>
-
-                </article>
-
-
-                <!-- Completed Quiz 3 -->
-
-                <article class="completed-card">
-
-                    <div class="completed-card-top">
-
-                        <h3>
-                            Chapter 3: Road to Independence
-                        </h3>
-
-                        <span class="score-badge">
-                            Score : 10 / 15
-                        </span>
-
-                    </div>
-
-                    <p class="completed-info">
-                        completed 1 day 30 min ago
-                        &nbsp; | &nbsp;
-                        10m 43s taken
-                    </p>
-
-                    <div class="progress-container">
-
-                        <div
-                            class="progress-bar"
-                            style="width: 50%;">
-                        </div>
-
-                    </div>
-
-                    <div class="completed-action">
-
-                        <asp:Button
-                            ID="btnReviewQuiz3"
-                            runat="server"
-                            Text="Review Quiz →"
-                            CssClass="quiz-button" />
-
-                    </div>
-
-                </article>
-
-
-                <!-- Completed Quiz 4 -->
-
-                <article class="completed-card">
-
-                    <div class="completed-card-top">
-
-                        <h3>
-                            Chapter 3: Road to Independence
-                        </h3>
-
-                        <span class="score-badge">
-                            Score : 10 / 15
-                        </span>
-
-                    </div>
-
-                    <p class="completed-info">
-                        completed 1 day 30 min ago
-                        &nbsp; | &nbsp;
-                        10m 43s taken
-                    </p>
-
-                    <div class="progress-container">
-
-                        <div
-                            class="progress-bar"
-                            style="width: 50%;">
-                        </div>
-
-                    </div>
-
-                    <div class="completed-action">
-
-                        <asp:Button
-                            ID="btnReviewQuiz4"
-                            runat="server"
-                            Text="Review Quiz →"
-                            CssClass="quiz-button" />
-
-                    </div>
-
-                </article>
+                </asp:Repeater>
 
             </div>
 
@@ -410,8 +219,9 @@
 
     </main>
 
-</form>
     <uc:Footer runat="server" />
+
+</form>
 
 </body>
 </html>
