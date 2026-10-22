@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data.SqlClient;
 
+
 namespace Assignment
 {
     public partial class AdminProfile : System.Web.UI.Page
