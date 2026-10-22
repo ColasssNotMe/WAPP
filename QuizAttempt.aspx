@@ -19,15 +19,11 @@
 
     <form id="form1" runat="server">
 
-
-
-        <!-- =========================
-         MAIN CONTENT
-    ========================== -->
-
         <main class="quiz-page">
 
-            <!-- Page heading -->
+            <!-- =========================
+                 PAGE HEADING
+            ========================== -->
 
             <div class="quiz-heading">
 
@@ -42,15 +38,17 @@
                 <asp:HyperLink
                     ID="BackToQuizzes"
                     runat="server"
-                    NavigateUrl="Quizzes.aspx"
+                    NavigateUrl="StudentQuizList.aspx"
                     CssClass="back-button">
-                ←&nbsp; Back to quizzes
+                    ←&nbsp; Back to quizzes
                 </asp:HyperLink>
 
             </div>
 
 
-            <!-- Classroom -->
+            <!-- =========================
+                 CLASSROOM
+            ========================== -->
 
             <div class="classroom-label">
                 &lt;Classroom Name&gt;
@@ -58,16 +56,16 @@
 
 
             <!-- =========================
-             QUIZ INFORMATION
-        ========================== -->
+                 QUIZ INFORMATION
+            ========================== -->
 
             <section class="quiz-info-card">
 
                 <div>
-
-                    <span class="quiz-title">Road to Independence
-                    </span>
-
+                    <span
+                        class="quiz-title"
+                        id="quizTitle"
+                        runat="server"></span>
                 </div>
 
                 <div class="time-section">
@@ -84,31 +82,37 @@
 
 
             <!-- =========================
-             QUIZ AREA
-        ========================== -->
+                 QUIZ AREA
+            ========================== -->
 
             <div class="quiz-layout">
 
 
                 <!-- =========================
-                 QUESTION
-            ========================== -->
+                     QUESTION
+                ========================== -->
 
                 <section class="question-card">
 
                     <div class="question-top">
 
-                        <span class="question-number">Question 4 of 15
-                        </span>
+                        <span
+                            class="question-number"
+                            id="questionNumber"
+                            runat="server"></span>
 
-                        <span class="question-mark">1 mark
-                        </span>
+                        <span
+                            class="question-mark"
+                            id="questionMark"
+                            runat="server"></span>
 
                     </div>
 
 
-                    <h2 class="question-title">What was the main purpose of the Merdeka Mission to London in 1956?
-                    </h2>
+                    <h2
+                        class="question-title"
+                        id="questionTitle"
+                        runat="server"></h2>
 
 
                     <p class="question-instruction">
@@ -116,95 +120,37 @@
                     </p>
 
 
-                    <!-- Option A -->
+                    <!-- =========================
+                         ANSWER AREA
 
-                    <label class="answer-option">
+                         Keep your existing answer
+                         controls here for now.
+                    ========================== -->
 
-                        <input
-                            type="radio"
-                            name="question4"
-                            value="A" />
+                    <div id="answerArea" runat="server">
 
-                        <span class="answer-letter">A
-                        </span>
+                        <!--
+                            Your answer options can be
+                            dynamically loaded here later
+                            once the Answer table structure
+                            is available.
+                        -->
 
-                        <span class="answer-text">To introduce the Malaysian Union
-                        </span>
-
-                        <span class="answer-radio"></span>
-
-                    </label>
-
-
-                    <!-- Option B -->
-
-                    <label class="answer-option selected">
-
-                        <input
-                            type="radio"
-                            name="question4"
-                            value="B"
-                            checked="checked" />
-
-                        <span class="answer-letter">B
-                        </span>
-
-                        <span class="answer-text">To negotiate independence with the British government
-                        </span>
-
-                        <span class="answer-radio"></span>
-
-                    </label>
+                    </div>
 
 
-                    <!-- Option C -->
-
-                    <label class="answer-option">
-
-                        <input
-                            type="radio"
-                            name="question4"
-                            value="C" />
-
-                        <span class="answer-letter">C
-                        </span>
-
-                        <span class="answer-text">To establish the Communities Liaison Committee
-                        </span>
-
-                        <span class="answer-radio"></span>
-
-                    </label>
-
-
-                    <!-- Option D -->
-
-                    <label class="answer-option">
-
-                        <input
-                            type="radio"
-                            name="question4"
-                            value="D" />
-
-                        <span class="answer-letter">D
-                        </span>
-
-                        <span class="answer-text">To organise the first Federal Legislative Council election
-                        </span>
-
-                        <span class="answer-radio"></span>
-
-                    </label>
-
-
-                    <!-- Auto save -->
+                    <!-- =========================
+                         AUTO SAVE
+                    ========================== -->
 
                     <div class="answer-status">
                         ✓&nbsp; Answer saved automatically · Just now
                     </div>
 
 
-                    <!-- Navigation -->
+                    <!-- =========================
+                         NAVIGATION
+                    ========================== -->
 
                     <div class="question-navigation">
 
@@ -212,13 +158,15 @@
                             ID="PreviousButton"
                             runat="server"
                             Text="←  Previous"
-                            CssClass="previous-button" />
+                            CssClass="previous-button"
+                            OnClick="PreviousButton_Click" />
 
                         <asp:Button
                             ID="NextButton"
                             runat="server"
                             Text="Next question  →"
-                            CssClass="next-button" />
+                            CssClass="next-button"
+                            OnClick="NextButton_Click" />
 
                     </div>
 
@@ -226,8 +174,8 @@
 
 
                 <!-- =========================
-                 QUESTION NAVIGATOR
-            ========================== -->
+                     QUESTION NAVIGATOR
+                ========================== -->
 
                 <aside class="navigator-card">
 
@@ -239,91 +187,58 @@
 
                         <div class="progress-info">
 
-                            <span>4 of 15 answered
+                            <span id="answeredText" runat="server">0 of 0 answered
                             </span>
 
-                            <strong>27%
+                            <strong id="progressPercentage" runat="server">0%
                             </strong>
 
                         </div>
 
                         <div class="progress-bar">
 
-                            <div class="progress-value"></div>
+                            <div
+                                class="progress-value"
+                                id="progressValue"
+                                runat="server">
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <!-- Question buttons -->
+                    <!-- =========================
+                         DYNAMIC QUESTION BUTTONS
+                    ========================== -->
 
                     <div class="question-grid">
 
-                        <button type="button" class="nav-question answered">
-                            01
-                        </button>
+                        <asp:Repeater
+                            ID="QuestionNavigatorRepeater"
+                            runat="server"
+                            OnItemCommand="QuestionNavigatorRepeater_ItemCommand">
 
-                        <button type="button" class="nav-question answered">
-                            02
-                        </button>
+                            <ItemTemplate>
 
-                        <button type="button" class="nav-question answered">
-                            03
-                        </button>
+                                <asp:LinkButton
+                                    ID="QuestionButton"
+                                    runat="server"
+                                    Text='<%# Container.ItemIndex + 1 %>'
+                                    CommandName="GoToQuestion"
+                                    CommandArgument='<%# Container.ItemIndex %>'
+                                    CssClass='<%# GetQuestionButtonClass(Container.ItemIndex) %>'>
+                                </asp:LinkButton>
 
-                        <button type="button" class="nav-question current">
-                            04
-                        </button>
+                            </ItemTemplate>
 
-                        <button type="button" class="nav-question">
-                            05
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            06
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            07
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            08
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            09
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            10
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            11
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            12
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            13
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            14
-                        </button>
-
-                        <button type="button" class="nav-question">
-                            15
-                        </button>
-
+                        </asp:Repeater>
                     </div>
 
 
-                    <!-- Legend -->
+                    <!-- =========================
+                         LEGEND
+                    ========================== -->
 
                     <div class="navigator-legend">
 
@@ -336,11 +251,17 @@
                         </p>
 
                         <p>
-                            Current question: <strong>4</strong>
+                            Current question:
+                            <strong id="currentQuestionLegend" runat="server">1
+                            </strong>
                         </p>
 
                     </div>
 
+
+                    <!-- =========================
+                         SUBMIT
+                    ========================== -->
 
                     <asp:Button
                         ID="SubmitQuizButton"
@@ -349,9 +270,12 @@
                         CssClass="submit-quiz-button" />
 
 
-                    <p class="remaining-text">
-                        11 questions are still unanswered.
-                    You can review them before submitting.
+                    <p
+                        class="remaining-text"
+                        id="remainingText"
+                        runat="server">
+                        0 questions are still unanswered.
+                        You can review them before submitting.
                     </p>
 
                 </aside>
@@ -359,7 +283,6 @@
             </div>
 
         </main>
-
 
     </form>
 

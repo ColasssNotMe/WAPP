@@ -24,84 +24,48 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// txtSearch control.
+        /// searchBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        protected global::System.Web.UI.WebControls.TextBox searchBox;
 
         /// <summary>
-        /// btnStartQuiz1 control.
+        /// availableEmptyPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnStartQuiz1;
+        protected global::System.Web.UI.WebControls.Panel availableEmptyPanel;
 
         /// <summary>
-        /// btnStartQuiz2 control.
+        /// availableQuizRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnStartQuiz2;
+        protected global::System.Web.UI.WebControls.Repeater availableQuizRepeater;
 
         /// <summary>
-        /// btnStartQuiz3 control.
+        /// completedEmptyPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnStartQuiz3;
+        protected global::System.Web.UI.WebControls.Panel completedEmptyPanel;
 
         /// <summary>
-        /// btnStartQuiz4 control.
+        /// completedQuizRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnStartQuiz4;
-
-        /// <summary>
-        /// btnReviewQuiz1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReviewQuiz1;
-
-        /// <summary>
-        /// btnReviewQuiz2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReviewQuiz2;
-
-        /// <summary>
-        /// btnReviewQuiz3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReviewQuiz3;
-
-        /// <summary>
-        /// btnReviewQuiz4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReviewQuiz4;
+        protected global::System.Web.UI.WebControls.Repeater completedQuizRepeater;
     }
 }
