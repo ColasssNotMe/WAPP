@@ -8,8 +8,6 @@ namespace Assignment
 {
     public partial class StudentQuizList : System.Web.UI.Page
     {
-        private readonly string connectionString =
-            ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -81,44 +79,47 @@ namespace Assignment
             DataTable dt = new DataTable();
 
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(query, conn))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
             {
-                cmd.Parameters.AddWithValue("@classID", classID);
-                cmd.Parameters.AddWithValue("@userID", userID);
 
-                conn.Open();
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    dt.Load(reader);
+                    cmd.Parameters.AddWithValue("@classID", classID);
+                    cmd.Parameters.AddWithValue("@userID", userID);
+
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
                 }
+
+
+                dt.Columns.Add("DurationText", typeof(string));
+                dt.Columns.Add("Description", typeof(string));
+
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    int duration = Convert.ToInt32(row["DurationMins"]);
+
+                    row["DurationText"] =
+                        duration > 0
+                            ? duration + " mins"
+                            : "No time limit";
+
+                    row["Description"] =
+                        "Complete this quiz to test your knowledge.";
+                }
+
+
+                availableQuizRepeater.DataSource = dt;
+                availableQuizRepeater.DataBind();
+
+
+                availableEmptyPanel.Visible = dt.Rows.Count == 0;
             }
-
-
-            dt.Columns.Add("DurationText", typeof(string));
-            dt.Columns.Add("Description", typeof(string));
-
-
-            foreach (DataRow row in dt.Rows)
-            {
-                int duration = Convert.ToInt32(row["DurationMins"]);
-
-                row["DurationText"] =
-                    duration > 0
-                        ? duration + " mins"
-                        : "No time limit";
-
-                row["Description"] =
-                    "Complete this quiz to test your knowledge.";
-            }
-
-
-            availableQuizRepeater.DataSource = dt;
-            availableQuizRepeater.DataBind();
-
-
-            availableEmptyPanel.Visible = dt.Rows.Count == 0;
         }
 
 
