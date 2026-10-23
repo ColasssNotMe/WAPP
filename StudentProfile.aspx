@@ -32,7 +32,11 @@
                     <div class="profile-header">
 
                         <div class="profile-avatar">
-                            CN
+                            <img
+                                id="profilePic"
+                                runat="server"
+                                src="~/svg/user.svg"
+                                alt="Profile Picture" />
                         </div>
 
                         <div class="profile-name">

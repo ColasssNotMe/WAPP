@@ -85,9 +85,9 @@ namespace Assignment
                 {
                     const string studentQuery = @"
                 INSERT INTO Student
-                    (userID, age, gradeLevel, school)
+                    (userID, gradeLevel, school)
                 VALUES
-                    (@userID, NULL, @gradeLevel, @school)";
+                    (@userID, @gradeLevel, @school)";
 
                     using (SqlCommand studentCommand =
                            new SqlCommand(studentQuery, conn))

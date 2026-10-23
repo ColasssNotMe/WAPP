@@ -10,7 +10,6 @@ namespace Assignment
         {
             if (!IsPostBack)
             {
-                // Check whether user is logged in
                 if (Session["userId"] == null)
                 {
                     Response.Redirect("Login.aspx");
@@ -22,6 +21,9 @@ namespace Assignment
                 txtEmail.Text = Session["email"]?.ToString() ?? "";
                 txtRole.Text = Session["role"]?.ToString() ?? "Student";
 
+                string profilePicUrl = Session["profilePic"]?.ToString() ?? "~/svg/user.svg";
+
+                profilePic.Src = profilePicUrl;
             }
             LoadStudentProfile();
         }
@@ -44,27 +46,37 @@ namespace Assignment
                     ON u.userId = s.userId
                 WHERE u.userId = @userId";
 
-            SqlConnection conn = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(query, conn);
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                cmd.Parameters.AddWithValue("@userId", Session["userId"]);
-
-                conn.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlCommand cmd = new SqlCommand(query, conn);
                 {
-                    if (reader.Read())
+                    cmd.Parameters.AddWithValue("@userId", Session["userId"]);
+
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
                     {
-                        txtFirstName.Text = reader["firstName"].ToString();
-                        txtLastName.Text = reader["lastName"].ToString();
-                        txtAge.Text = reader["age"].ToString();
-                        txtGrade.Text = reader["gradeLevel"].ToString();
-                        txtSchool.Text = reader["school"].ToString();
+                        if (reader.Read())
+                        {
+                            string firstName = reader["firstName"].ToString();
+                            string lastName = reader["lastName"].ToString();
+
+                            txtFirstName.Text = reader["firstName"].ToString();
+                            txtLastName.Text = reader["lastName"].ToString();
+                            txtAge.Text = reader["age"].ToString();
+                            txtGrade.Text = reader["gradeLevel"].ToString();
+                            txtSchool.Text = reader["school"].ToString();
+                        }
+                        reader.Close();
+                        conn.Close();
                     }
-                    reader.Close();
-                    conn.Close();
                 }
             }
         }
+
+        private void SaveProfile()
+        {
+        }
+
     }
 }

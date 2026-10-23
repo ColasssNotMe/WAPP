@@ -56,26 +56,26 @@
                 <!-- Overall Progress -->
 
                 <div class="progress-card">
-
                     <div class="progress-label">
-                        Overall Progress
+                        Quiz Progress
                     </div>
 
                     <div class="progress-content">
-
-                        <span class="progress-number">75%
+                        <span
+                            id="progressNumber"
+                            runat="server"
+                            class="progress-number">0%
                         </span>
 
                         <div class="progress-bar">
-
-                            <div class="progress-fill"></div>
-
+                            <div
+                                id="progressFill"
+                                runat="server"
+                                class="progress-fill">
+                            </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </header>
 
 
@@ -281,8 +281,6 @@
                     visible="false">
 
                     <div class="empty-icon">
-
-
                     </div>
 
                     <p class="empty-title">No Recent Quizzes</p>
@@ -342,27 +340,25 @@
                     <input
                         type="text"
                         class="classroom-input"
+                        id="classroomCodeInput"
+                        runat="server"
                         placeholder="Enter invite code" />
 
-                    <button
-                        type="button"
-                        class="join-button">
-                        Join
-
-                    </button>
+                    <asp:Button
+                        ID="JoinButton"
+                        runat="server"
+                        Text="Join"
+                        CssClass="join-button"
+                        OnClick="JoinClassroom_Click" />
 
                 </div>
 
-
-                <!-- Information -->
-
-                <p class="switch-info">
-                    You can switch between classrooms later from
-                    the classroom selection page.
-
+                <p
+                    id="errInfo"
+                    runat="server"
+                    class="error-info"
+                    visible="false">
                 </p>
-
-
             </section>
 
 

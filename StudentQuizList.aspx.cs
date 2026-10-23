@@ -174,7 +174,8 @@ namespace Assignment
             DataTable dt = new DataTable();
 
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@userID", userID);

@@ -72,12 +72,12 @@
 }
 
 .progress-fill {
-    width: 75%;
+    width: 0%;
     height: 100%;
     background-color: var(--gold-color);
     border-radius: inherit;
+    transition: width 0.3s ease;
 }
-
 /* Learning and quiz sections */
 .section-card {
     margin-bottom: 1.25rem;
@@ -354,4 +354,15 @@
     line-height: 1.5;
     text-align: center;
     color: var(--secondary-color);
+}
+
+.error-info {
+    margin: 0.65rem 0 0;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--accent-color);
+    background-color: #FBEAEA;
+    border: 1px solid rgb(136 0 0 / 18%);
+    border-radius: 0.5rem;
 }
