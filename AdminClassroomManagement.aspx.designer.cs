@@ -24,6 +24,24 @@ namespace Assignment
         protected global::Assignment.WebUserControl1 HeaderControl;
 
         /// <summary>
+        /// totalClassrooms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl totalClassrooms;
+
+        /// <summary>
+        /// rptClassrooms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptClassrooms;
+
+        /// <summary>
         /// FooterControl control.
         /// </summary>
         /// <remarks>

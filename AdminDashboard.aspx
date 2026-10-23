@@ -25,6 +25,7 @@
       <span class="overview-pill">Platform overview</span>
       <button type="button" class="overview-pill" onclick="document.getElementById('addAdminModal').style.display='flex';">Add new admin</button>
     </header>
+    <a  href="AdminProfile.aspx" text="View Profile">
 
     <div id="addAdminModal" class="admin-modal" style="display:none;">
       <div class="admin-modal-content" role="dialog" aria-modal="true" aria-labelledby="addAdminTitle">
@@ -43,6 +44,7 @@
         <asp:Button ID="addAdminButton" runat="server" Text="Create admin" CssClass="review-button" OnClick="AddAdminButton_Click" />
       </div>
     </div>
+
 
     <section class="stats-grid" aria-label="Platform statistics">
       <article class="stat-card">
@@ -66,7 +68,7 @@
         <p class="stat-note">18 published this week</p>
       </article>
     </section>
-
+    
     <section class="content-grid" aria-label="Administration tools and attention items">
       <section class="panel quick-panel">
         <h2 class="panel-heading">Quick actions</h2>
