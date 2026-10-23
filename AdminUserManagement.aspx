@@ -1,103 +1,184 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminUserManagement.aspx.cs" Inherits="Assignment.AdminUserManagement" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"
+    CodeBehind="AdminUserManagement.aspx.cs"
+    Inherits="Assignment.AdminUserManagement" %>
+
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Management | Ncient</title>
-  <link rel="stylesheet" href="AdminUserManagement.css">
-  <link rel="stylesheet" href="index.css">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management | Ncient</title>
+
+    <link rel="stylesheet" href="AdminUserManagement.css" />
+    <link rel="stylesheet" href="index.css" />
 </head>
 <body>
+<form id="form1" runat="server">
+
     <uc:Header ID="HeaderControl" runat="server" />
-  <main class="dashboard">
-    <header class="page-header">
-      <div>
-        <h1>User Management</h1>
-        <p>Manage platform accounts, roles, and access for students, teachers, and administrators.</p>
-      </div>
-      <span class="overview-pill">1,338 users</span>
-    </header>
 
-    <div class="notice-bar" role="status">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>
-        <path d="M12 9v4M12 17h.01"/>
-      </svg>
-      <span>8 teachers are awaiting approval. Pending teachers cannot access teacher functions until approved.</span>
-    </div>
+    <main class="dashboard">
 
-    <section class="content-grid" aria-label="User directory and details">
-      <section class="panel">
-        <h2 class="panel-heading">User directory</h2>
-        <p class="panel-description">1,248 accounts · 1,176 students · 60 teachers · 12 administrators</p>
+        <header class="page-header">
+            <div>
+                <h1>User Management</h1>
+                <p>
+                    Manage platform accounts, roles, and access for
+                    students, teachers, and administrators.
+                </p>
+            </div>
 
-        <div class="tab-list" role="tablist">
-          <button class="tab" type="button" role="tab" aria-selected="true">All Users</button>
-          <button class="tab" type="button" role="tab" aria-selected="false">Students</button>
-          <button class="tab" type="button" role="tab" aria-selected="false">Teachers</button>
-          <a class="tab" href="teacher-approvals.html">Pending Teacher Approvals</a>
-        </div>
+            <span class="overview-pill">
+                <asp:Label ID="lblTotalUsers" runat="server" Text="0" />
+                users
+            </span>
+        </header>
 
-        <div class="filter-row">
-          <label class="search-field">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input type="search" placeholder="Search name, username or email" aria-label="Search users" />
-          </label>
-          <button class="select-button" type="button">
-            Account status: All
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-        </div>
+        <asp:Panel ID="pendingNotice" runat="server" CssClass="notice-bar">
+            <span class="notice-icon">&#9888;</span>
+            <span>
+                <asp:Label ID="lblPendingCount" runat="server" Text="0" />
+                teachers are awaiting approval. Pending teachers cannot
+                access teacher functions until approved.
+            </span>
+        </asp:Panel>
 
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr><th>Name</th><th>Username</th><th>Email</th><th>Role</th><th>Account Status</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-              <tr><td class="user-name">Nur Aisyah Rahman</td><td>aisyah.rahman</td><td class="user-email">aisyah.rahman@ncient.my</td><td>Admin</td><td class="status status--active">Active</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="user-name">Ahmad Farid Abdullah</td><td>ahmad.farid</td><td class="user-email">farid.abdullah@ncient.my</td><td>Teacher</td><td class="status status--active">Active</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="user-name">Siti Hajar Ismail</td><td>siti.hajar</td><td class="user-email">siti.hajar@ncient.my</td><td>Teacher</td><td class="status status--active">Active</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="user-name">Nurul Izzah Hassan</td><td>nurul.izzah</td><td class="user-email">nurul.izzah@ncient.my</td><td>Teacher</td><td class="status status--pending">Pending</td><td class="row-actions"><a href="teacher-approvals.html">Review</a></td></tr>
-              <tr><td class="user-name">Raj Kumar</td><td>raj.kumar</td><td class="user-email">raj.kumar@ncient.my</td><td>Teacher</td><td class="status status--pending">Pending</td><td class="row-actions"><a href="teacher-approvals.html">Review</a></td></tr>
-              <tr><td class="user-name">Aina Sofea Zulkifli</td><td>aina.sofea</td><td class="user-email">aina.sofea@ncient.my</td><td>Student</td><td class="status status--active">Active</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="user-name">Muhammad Danish</td><td>muhammad.danish</td><td class="user-email">danish@ncient.my</td><td>Student</td><td class="status status--active">Active</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="user-name">Lim Wei Jun</td><td>lim.wei.jun</td><td class="user-email">wei.jun@ncient.my</td><td>Student</td><td class="status status--disabled">Disabled</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-            </tbody>
-          </table>
-        </div>
+        <section class="panel">
 
-        <div class="pagination">
-          <span class="pagination-note">Showing 1–8 of 1,248 accounts</span>
-          <div class="pagination-controls">
-            <button class="page-button" type="button">Previous</button>
-            <button class="page-button" type="button" aria-current="page">1</button>
-            <button class="page-button" type="button">Next</button>
-          </div>
-        </div>
-      </section>
+            <div class="section-heading">
+                <div>
+                    <h2 class="panel-heading">User Directory</h2>
+                    <p class="panel-description">
+                        View and manage platform accounts.
+                    </p>
+                </div>
+            </div>
 
-      <aside class="panel">
-        <h2 class="panel-heading">User Details</h2>
-        <dl class="detail-list">
-          <dt>Name</dt><dd>Aiman bin Abdullah</dd>
-          <dt>User ID</dt><dd>user001</dd>
-          <dt>Role</dt><dd>Student</dd>
-          <dt>School</dt><dd>SMK Taman Melawati</dd>
-          <dt>Registered</dt><dd>12 Jan 2026</dd>
-          <dt>Last active</dt><dd>Today, 10:15 AM</dd>
-          <dt>Status</dt><dd class="status--active">Active</dd>
-        </dl>
-        <p class="detail-note">Role changes update platform permissions. Suspended accounts cannot sign in.</p>
-        <button class="primary-button" type="button">Edit user</button>
-      </aside>
-    </section>
-  </main>
+            <!-- Four sections -->
+            <div class="tab-list">
+
+                <asp:LinkButton ID="btnAllUsers" runat="server"
+                    CssClass="tab"
+                    OnClick="btnAllUsers_Click">
+                    All Users
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnStudents" runat="server"
+                    CssClass="tab"
+                    OnClick="btnStudents_Click">
+                    Students
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnTeachers" runat="server"
+                    CssClass="tab"
+                    OnClick="btnTeachers_Click">
+                    Teachers
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnPendingTeachers" runat="server"
+                    CssClass="tab"
+                    OnClick="btnPendingTeachers_Click">
+                    Pending Teachers
+                </asp:LinkButton>
+
+            </div>
+
+            <div class="directory-summary">
+                <asp:Label ID="lblSectionTitle" runat="server"
+                    Text="All Users" />
+                <span class="summary-count">
+                    <asp:Label ID="lblSectionCount" runat="server" Text="0" />
+                    accounts
+                </span>
+            </div>
+
+            <!-- Search -->
+            <div class="filter-row">
+                <asp:TextBox ID="txtSearch" runat="server"
+                    CssClass="search-input"
+                    placeholder="Search name, username or email" />
+
+                <asp:Button ID="btnSearch" runat="server"
+                    Text="Search"
+                    CssClass="search-button"
+                    OnClick="btnSearch_Click" />
+
+                <asp:Button ID="btnReset" runat="server"
+                    Text="Reset"
+                    CssClass="reset-button"
+                    CausesValidation="false"
+                    OnClick="btnReset_Click" />
+            </div>
+
+            <!-- User table -->
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Account Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <asp:Repeater ID="UserRepeater" runat="server">
+                            <ItemTemplate>
+                                <tr>
+                                    <td class="user-name">
+                                        <%#: Eval("firstName") %>
+                                    </td>
+
+                                    <td>
+                                        <%#: Eval("username") %>
+                                    </td>
+
+                                    <td class="user-email">
+                                        <%#: Eval("email") %>
+                                    </td>
+
+                                    <td>
+                                        <%#: Eval("role") %>
+                                    </td>
+
+                                    <td>
+                                        <span class='<%# GetStatusClass(Eval("status")) %>'>
+                                            <%#: Eval("status") %>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </tbody>
+                </table>
+            </div>
+
+            <asp:Panel ID="emptyMessage" runat="server"
+                CssClass="empty-message" Visible="false">
+                No user accounts found.
+            </asp:Panel>
+
+            <div class="pagination">
+                <span class="pagination-note">
+                    Showing
+                    <asp:Label ID="lblShowing" runat="server" Text="0" />
+                    of
+                    <asp:Label ID="lblTotal" runat="server" Text="0" />
+                    accounts
+                </span>
+            </div>
+
+        </section>
+
+    </main>
+
     <uc:Footer ID="FooterControl" runat="server" />
+
+</form>
 </body>
 </html>
-
