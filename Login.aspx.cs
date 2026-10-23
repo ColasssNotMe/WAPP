@@ -14,83 +14,72 @@ namespace Assignment
 
         protected void SignInButton_Click(object sender, EventArgs e)
         {
+            string connectionString =
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
-            SqlConnection conn =
-                new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString
-                );
-            conn.Open();
+            string query = @"
+        SELECT *
+        FROM [User]
+        WHERE Email = @email
+        AND Password = @password";
 
-            string query = @"SELECT * FROM [User] WHERE Email=@email AND Password=@password";
-
-
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@email", EmailTextBox.Text);
-            cmd.Parameters.AddWithValue("@password", PasswordTextBox.Text);
-
-            int count = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-
-
-            if (EmailTextBox.Text == "admin@company.com" && PasswordTextBox.Text == "password")
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                Session["email"] = EmailTextBox.Text;
-                Session["username"] = "admin";
-                Session["userId"] = 0;
-                Session["role"] = "admin";
-                Response.Redirect("Dashboard.aspx");
-            }
-            else
-            {
-                if (count > 0)
+                cmd.Parameters.AddWithValue("@email", EmailTextBox.Text.Trim());
+                cmd.Parameters.AddWithValue("@password", PasswordTextBox.Text);
+
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    string query1 = @"SELECT * FROM [User] WHERE Email=@email AND Password=@password";
-
-                    SqlCommand cmd1 = new SqlCommand(query1, conn);
-
-                    cmd1.Parameters.AddWithValue("@email", EmailTextBox.Text);
-                    cmd1.Parameters.AddWithValue("@password", PasswordTextBox.Text);
-
-                    SqlDataReader reader = cmd1.ExecuteReader();
                     if (reader.Read())
                     {
-                        Session["email"] = EmailTextBox.Text;
+                        // Store user information in Session
+                        Session["email"] = EmailTextBox.Text.Trim();
                         Session["username"] = reader["username"].ToString().Trim();
-                        Session["userId"] = reader["userId"].ToString().Trim();
+                        Session["userId"] = reader["userId"];
                         Session["role"] = reader["role"].ToString().Trim();
-                        Session["profilePic"] = reader["profilePic"].ToString().Trim();
+
+                        // Handle profile picture
                         if (reader["profilePic"] == DBNull.Value ||
                             string.IsNullOrWhiteSpace(reader["profilePic"].ToString()))
                         {
                             Session["profilePic"] = "svg/user.svg";
                         }
+                        else
+                        {
+                            Session["profilePic"] = reader["profilePic"].ToString().Trim();
+                        }
 
-                        Session["role"] = reader["role"].ToString();
+                        // Redirect based on role
+                        string role = reader["role"].ToString().Trim().ToLower();
 
-                        if (Session["role"].ToString().ToLower().Trim() == "admin")
+                        if (role == "admin")
                         {
                             Response.Redirect("AdminDashboard.aspx");
                         }
-                        else if (Session["role"].ToString().ToLower().Trim() == "teacher")
+                        else if (role == "teacher")
                         {
                             Response.Redirect("TeacherDashboard.aspx");
-
                         }
-                        else if (Session["role"].ToString().ToLower().Trim() == "student")
+                        else if (role == "student")
                         {
-
                             Response.Redirect("StudentDashboard.aspx");
                         }
                         else
                         {
                             Response.Redirect("Homepage.aspx");
                         }
-
+                    }
+                    else
+                    {
+                        // No matching email and password
+                        LoginMessage.Text = "Invalid email or password.";
+                        LoginMessage.Visible = true;
                     }
                 }
-
             }
-
-
         }
     }
 }

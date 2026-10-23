@@ -51,44 +51,35 @@
 
                     <div class="account-section">
 
-                        <span class="section-label">ACCOUNT INFO
-                        </span>
+                        <span class="section-label">ACCOUNT INFO</span>
 
                         <div class="account-row">
                             <span>User ID</span>
-                            <span class="account-value">—</span>
+                            <span id="accountUserId" runat="server" class="account-value">—</span>
                         </div>
 
                         <div class="account-row">
                             <span>Username</span>
-                            <span class="account-value">—</span>
+                            <span id="accountUsername" runat="server" class="account-value">—</span>
                         </div>
 
                         <div class="account-row">
                             <span>Role</span>
-                            <span class="account-value">Student</span>
+                            <span id="accountRole" runat="server" class="account-value">—</span>
                         </div>
 
                         <div class="account-row">
                             <span>Date Registered</span>
-                            <span class="account-value">January 2026
-                            </span>
+                            <span id="accountDateRegistered" runat="server" class="account-value">—</span>
                         </div>
 
                         <div class="account-row">
                             <span>School</span>
-                            <span class="account-value">SMK Taman Melawati
-                            </span>
+                            <span id="accountSchool" runat="server" class="account-value">—</span>
                         </div>
 
-                        <div class="account-row">
-                            <span>Subject</span>
-                            <span class="account-value">Sejarah KSSM
-                            </span>
-                        </div>
 
                     </div>
-
                     <div class="profile-divider"></div>
 
                     <!-- Profile Picture -->
@@ -242,23 +233,6 @@
 
                         <div class="form-grid">
 
-                            <!-- Age -->
-
-                            <div class="form-group">
-
-                                <label for="txtAge">
-                                    Age
-                                </label>
-
-                                <asp:TextBox
-                                    ID="txtAge"
-                                    runat="server"
-                                    CssClass="form-input"
-                                    TextMode="Number"
-                                    placeholder="Enter age">
-                                </asp:TextBox>
-
-                            </div>
 
 
                             <!-- Grade Level -->
