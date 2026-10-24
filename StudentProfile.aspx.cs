@@ -217,12 +217,6 @@ namespace Assignment
                 ".webp"
             };
 
-            if (Array.IndexOf(allowedExtensions, extension) == -1)
-            {
-                throw new Exception("Please upload a valid image file.");
-            }
-
-
             string filePath =
                 Path.Combine(folderPath, fileName);
 
@@ -261,6 +255,48 @@ namespace Assignment
 
                 saveResult.Visible = true;
             }
+        }
+
+        protected void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            string connectionString =
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
+            string query = @"
+                UPDATE [User]
+                SET
+                    password = @password
+                WHERE userId = @userId;
+            ";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue(
+                        "@password",
+                        txtPassword.Text.Trim());
+
+                    cmd.Parameters.AddWithValue(
+                        "@userId",
+                        Session["userId"]);
+
+                    conn.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            saveResult.InnerText =
+                "Profile updated successfully.";
+
+            saveResult.Attributes["class"] =
+                "save-result success";
+
+            saveResult.Visible = true;
+
+
+
         }
     }
 }

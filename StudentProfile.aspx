@@ -306,7 +306,7 @@
                                     runat="server"
                                     CssClass="form-input password-input"
                                     TextMode="Password"
-                                    Text="password123">
+                                    Text="password123" OnTextChanged="txtPassword_TextChanged">
                                 </asp:TextBox>
 
                                 <asp:Button
@@ -314,14 +314,12 @@
                                     runat="server"
                                     Text="Change"
                                     CssClass="change-button"
-                                    CausesValidation="false" />
+                                     />
 
                             </div>
 
                             <span class="form-hint">Use a strong password of at least 8 characters.
-                            </span>
-
-                        </div>
+                                               </div>
 
                     </div>
 
