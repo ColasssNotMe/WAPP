@@ -35,17 +35,19 @@
 
         <!-- Metric Cards Grid -->
         <section class="metrics-grid">
-            <!-- Card 1: Students -->
-            <div class="metric-card">
-                <div class="metric-card-header">
-                    <span class="metric-label">Students</span>
-                    <div class="metric-icon-box">
-                        <i data-lucide="users" style="width: 18px; height: 18px;"></i>
-                    </div>
-                </div>
-                <div class="metric-value">102</div>
-                <div class="metric-subtitle">Across all classes</div>
+<!-- Card 1: Students -->
+<a href="ManageStudents.aspx" style="text-decoration: none; color: inherit; display: block;">
+    <div class="metric-card">
+        <div class="metric-card-header">
+            <span class="metric-label">Students</span>
+            <div class="metric-icon-box">
+                <i data-lucide="users" style="width: 18px; height: 18px;"></i>
             </div>
+        </div>
+        <div class="metric-value">102</div>
+        <div class="metric-subtitle">Across all classes</div>
+    </div>
+</a>
 
             <!-- Card 2: Live sessions -->
             <div class="metric-card gold-card">
@@ -62,6 +64,7 @@
             </div>
 
             <!-- Card 3: Quizzes -->
+            <a href="ManageQuiz.aspx" style="text-decoration: none; color: inherit; display: block;">
             <div class="metric-card red-card">
                 <div class="metric-card-header">
                     <span class="metric-label">Quizzes</span>
@@ -72,8 +75,9 @@
                 <div class="metric-value">12</div>
                 <div class="metric-subtitle">Ready for review</div>
             </div>
-
+            </a>
             <!-- Card 4: Notes -->
+            <a href="ManageNotes.aspx" style="text-decoration: none; color: inherit; display: block;">
             <div class="metric-card green-card">
                 <div class="metric-card-header">
                     <span class="metric-label">Notes</span>
@@ -84,6 +88,7 @@
                 <div class="metric-value">18</div>
                 <div class="metric-subtitle">Published this month</div>
             </div>
+                </a>
         </section>
 
         <!-- Main Content Grid -->
@@ -213,11 +218,9 @@
         </div>
 
     </div>
-
-    <!-- Render Icons Script -->
-    <script>
+        <script>
         lucide.createIcons();
-    </script>
+        </script>
      <uc:Footer ID="FooterControl" runat="server" />
 </body>
 </html>
