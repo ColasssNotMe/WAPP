@@ -32,11 +32,12 @@
                     <div class="profile-header">
 
                         <div class="profile-avatar">
-                            <img
-                                id="profilePic"
+                            <asp:Image
+                                ID="profilePic"
                                 runat="server"
-                                src="~/svg/user.svg"
-                                alt="Profile Picture" />
+                                ImageUrl="~/svg/user.svg"
+                                AlternateText="Profile Picture"
+                                CssClass="profile-image" />
                         </div>
 
                         <div class="profile-name">
@@ -117,6 +118,8 @@
                     <h2 class="profile-title">Student Profile
                     </h2>
 
+                    <div id="saveResult" runat="server" class="save-result" visible="false">
+                    </div>
 
                     <!-- ============================= -->
                     <!-- BASIC INFORMATION -->
@@ -333,7 +336,8 @@
                             ID="btnSave"
                             runat="server"
                             Text="Save changes"
-                            CssClass="save-button" />
+                            CssClass="save-button"
+                            OnClick="btnSave_Click" />
 
                         <asp:Button
                             ID="btnDiscard"
@@ -343,11 +347,9 @@
                             CausesValidation="false" />
 
                     </div>
-
                 </section>
 
             </div>
-
         </main>
 
     </form>

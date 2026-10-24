@@ -18,12 +18,18 @@ namespace Assignment
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
             string query = @"
-        SELECT *
+        SELECT 
+            u.userID,
+            u.username,
+            u.role,
+            u.email,
+            u.profilePic,
+            t.approved
         FROM [User] u
-        INNER JOIN Teacher t
+        LEFT JOIN Teacher t
             ON u.userID = t.userID
-        WHERE Email = @email
-        AND Password = @password";
+        WHERE u.email = @email
+        AND u.password = @password";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -38,33 +44,36 @@ namespace Assignment
                     {
                         if (reader.Read())
                         {
-                            Session["email"] = EmailTextBox.Text.Trim();
+                            string role = reader["role"].ToString().Trim().ToLower();
+
+                            Session["email"] = reader["email"].ToString().Trim();
                             Session["username"] = reader["username"].ToString().Trim();
-                            Session["userId"] = reader["userId"];
+                            Session["userId"] = reader["userID"];
                             Session["role"] = reader["role"].ToString().Trim();
 
                             if (reader["profilePic"] == DBNull.Value ||
                                 string.IsNullOrWhiteSpace(reader["profilePic"].ToString()))
                             {
-                                Session["profilePic"] = "svg/user.svg";
+                                Session["profilePic"] = "~/svg/user.svg";
                             }
                             else
                             {
-                                Session["profilePic"] = reader["profilePic"].ToString().Trim();
+                                Session["profilePic"] =
+                                    reader["profilePic"].ToString().Trim();
                             }
-
-                            //Redirect based on role
-                            string role = reader["role"].ToString().Trim().ToLower();
 
                             if (role == "admin")
                             {
                                 Response.Redirect("AdminDashboard.aspx");
                             }
+
                             else if (role == "teacher")
                             {
-                                if (reader["approved"] == DBNull.Value || reader["approved"].ToString().ToLower() != "true")
+                                if (reader["approved"] == DBNull.Value ||
+                                    reader["approved"].ToString().ToLower() != "true")
                                 {
-                                    LoginMessage.Text = "Your account is not yet approved.";
+                                    LoginMessage.Text =
+                                        "Your account is not yet approved.";
                                     LoginMessage.Visible = true;
                                 }
                                 else
@@ -72,10 +81,12 @@ namespace Assignment
                                     Response.Redirect("TeacherDashboard.aspx");
                                 }
                             }
+
                             else if (role == "student")
                             {
                                 Response.Redirect("StudentDashboard.aspx");
                             }
+
                             else
                             {
                                 Response.Redirect("Homepage.aspx");
@@ -88,7 +99,6 @@ namespace Assignment
                         }
                     }
                 }
-
             }
         }
     }

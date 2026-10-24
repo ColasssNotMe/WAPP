@@ -20,7 +20,7 @@ namespace Assignment
                     profilePath = "svg/user.svg";
                 }
 
-                profilePic.Src = ResolveUrl("~/" + profilePath);
+                profilePic.Src = ResolveUrl(profilePath);
 
 
                 if (Session["role"]?.ToString().ToLower().Trim() == "admin")
