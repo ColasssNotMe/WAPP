@@ -19,66 +19,76 @@ namespace Assignment
 
             string query = @"
         SELECT *
-        FROM [User]
+        FROM [User] u
+        INNER JOIN Teacher t
+            ON u.userID = t.userID
         WHERE Email = @email
         AND Password = @password";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.AddWithValue("@email", EmailTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@password", PasswordTextBox.Text);
-
-                conn.Open();
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    if (reader.Read())
-                    {
-                        // Store user information in Session
-                        Session["email"] = EmailTextBox.Text.Trim();
-                        Session["username"] = reader["username"].ToString().Trim();
-                        Session["userId"] = reader["userId"];
-                        Session["role"] = reader["role"].ToString().Trim();
+                    cmd.Parameters.AddWithValue("@email", EmailTextBox.Text.Trim());
+                    cmd.Parameters.AddWithValue("@password", PasswordTextBox.Text);
 
-                        // Handle profile picture
-                        if (reader["profilePic"] == DBNull.Value ||
-                            string.IsNullOrWhiteSpace(reader["profilePic"].ToString()))
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
                         {
-                            Session["profilePic"] = "svg/user.svg";
+                            Session["email"] = EmailTextBox.Text.Trim();
+                            Session["username"] = reader["username"].ToString().Trim();
+                            Session["userId"] = reader["userId"];
+                            Session["role"] = reader["role"].ToString().Trim();
+
+                            if (reader["profilePic"] == DBNull.Value ||
+                                string.IsNullOrWhiteSpace(reader["profilePic"].ToString()))
+                            {
+                                Session["profilePic"] = "svg/user.svg";
+                            }
+                            else
+                            {
+                                Session["profilePic"] = reader["profilePic"].ToString().Trim();
+                            }
+
+                            //Redirect based on role
+                            string role = reader["role"].ToString().Trim().ToLower();
+
+                            if (role == "admin")
+                            {
+                                Response.Redirect("AdminDashboard.aspx");
+                            }
+                            else if (role == "teacher")
+                            {
+                                if (reader["approved"] == DBNull.Value || reader["approved"].ToString().ToLower() != "true")
+                                {
+                                    LoginMessage.Text = "Your account is not yet approved.";
+                                    LoginMessage.Visible = true;
+                                }
+                                else
+                                {
+                                    Response.Redirect("TeacherDashboard.aspx");
+                                }
+                            }
+                            else if (role == "student")
+                            {
+                                Response.Redirect("StudentDashboard.aspx");
+                            }
+                            else
+                            {
+                                Response.Redirect("Homepage.aspx");
+                            }
                         }
                         else
                         {
-                            Session["profilePic"] = reader["profilePic"].ToString().Trim();
+                            LoginMessage.Text = "Invalid email or password.";
+                            LoginMessage.Visible = true;
                         }
-
-                        // Redirect based on role
-                        string role = reader["role"].ToString().Trim().ToLower();
-
-                        if (role == "admin")
-                        {
-                            Response.Redirect("AdminDashboard.aspx");
-                        }
-                        else if (role == "teacher")
-                        {
-                            Response.Redirect("TeacherDashboard.aspx");
-                        }
-                        else if (role == "student")
-                        {
-                            Response.Redirect("StudentDashboard.aspx");
-                        }
-                        else
-                        {
-                            Response.Redirect("Homepage.aspx");
-                        }
-                    }
-                    else
-                    {
-                        // No matching email and password
-                        LoginMessage.Text = "Invalid email or password.";
-                        LoginMessage.Visible = true;
                     }
                 }
+
             }
         }
     }
