@@ -40,7 +40,7 @@ namespace Assignment
                     .ConnectionString;
 
             string query = @"
-                SELECT fileURL
+                SELECT fileURL,title,chapter
                 FROM Material
                 WHERE materialID = @materialID
                   AND status = 'Active'";
@@ -56,23 +56,26 @@ namespace Assignment
 
                 conn.Open();
 
-                object result = cmd.ExecuteScalar();
-
-                if (result == null ||
-                    result == DBNull.Value)
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    ShowError();
-                    return;
+                    if (reader.Read())
+                    {
+                        string fileURL = reader["fileURL"].ToString();
+                        string title = reader["title"].ToString();
+                        string chapter = reader["chapter"].ToString();
+                        titleLabel.InnerText = title;
+                        chapterLabel.InnerText = chapter;
+                        if (fileURL.StartsWith("~/"))
+                        {
+                            fileURL = ResolveUrl(fileURL);
+                        }
+                        pdfFrame.Attributes["src"] = fileURL;
+                    }
+                    else
+                    {
+                        ShowError();
+                    }
                 }
-
-                string fileURL = result.ToString();
-
-                if (fileURL.StartsWith("~/"))
-                {
-                    fileURL = ResolveUrl(fileURL);
-                }
-
-                pdfFrame.Attributes["src"] = fileURL;
             }
         }
 

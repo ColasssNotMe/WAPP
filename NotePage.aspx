@@ -20,12 +20,9 @@
 
         <!-- Breadcrumb -->
         <div class="breadcrumb">
-            <span>☒</span>
             Learning Material
-            <span>/</span>
-            Form 4
-            <span>/</span>
-            Chapter 1
+            <span id="titleLabel" runat="server">/</span>
+            <span id="chapterLabel" runat="server">/</span>
         </div>
 
         <!-- Main Content -->
@@ -34,28 +31,12 @@
             <!-- Chapter Navigation -->
             <div class="chapter-navigation">
 
-                <!-- Previous Topic -->
-                <a href="#" class="topic-navigation previous-topic">
+                <a href="StudentLearningMaterial.aspx" class="topic-navigation previous-topic">
                     <span class="arrow">←</span>
 
-                    <div class="topic-text">
-                        <span class="topic-label">Previous Topic</span>
-                        <span class="topic-title">Chapter 2: Malaysian History
-                        </span>
-                    </div>
-                </a>
-
-
-                <!-- Next Topic -->
-                <a href="#" class="topic-navigation next-topic">
-
-                    <div class="topic-text">
-                        <span class="topic-label">Next Topic</span>
-                        <span class="topic-title">Chapter 4: Formation of Malaysia
-                        </span>
-                    </div>
-
-                    <span class="arrow">→</span>
+                    <span class="topic-text">
+                        <span class="topic-title">Back to Learning Material</span>
+                    </span>
                 </a>
 
             </div>
