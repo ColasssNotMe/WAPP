@@ -269,13 +269,15 @@ namespace Assignment
                 WHERE userId = @userId;
             ";
 
+            PasswordManager passwordManager = new PasswordManager();
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue(
                         "@password",
-                        txtPassword.Text.Trim());
+                        passwordManager.HashPassword(txtPassword.Text.Trim()));
 
                     cmd.Parameters.AddWithValue(
                         "@userId",

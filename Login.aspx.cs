@@ -31,12 +31,14 @@ namespace Assignment
         WHERE u.email = @email
         AND u.password = @password";
 
+            PasswordManager passwordManager = new PasswordManager();
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@email", EmailTextBox.Text.Trim());
-                    cmd.Parameters.AddWithValue("@password", PasswordTextBox.Text);
+                    cmd.Parameters.AddWithValue("@password", passwordManager.HashPassword(PasswordTextBox.Text));
 
                     conn.Open();
 

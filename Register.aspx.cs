@@ -66,12 +66,14 @@ namespace Assignment
 
                 int userId;
 
+                PasswordManager passwordManager = new PasswordManager();
+
                 using (SqlCommand command =
                        new SqlCommand(userQuery, conn))
                 {
                     command.Parameters.AddWithValue("@username", UsernameTextBox.Text.Trim());
                     command.Parameters.AddWithValue("@email", EmailTextBox.Text.Trim());
-                    command.Parameters.AddWithValue("@password", PasswordTextBox.Text);
+                    command.Parameters.AddWithValue("@password", passwordManager.HashPassword(PasswordTextBox.Text));
                     command.Parameters.AddWithValue("@firstName", FirstNameTextBox.Text.Trim());
                     command.Parameters.AddWithValue("@lastName", LastNameTextBox.Text.Trim());
                     command.Parameters.AddWithValue("@role", RoleRadioList.SelectedValue);
