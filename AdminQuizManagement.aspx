@@ -2,95 +2,149 @@
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quiz Management | Ncient</title>
-      <link rel="stylesheet" href="AdminQuizManagement.css">
+  <link rel="stylesheet" href="AdminQuizManagement.css">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
+  <form id="form1" runat="server">
     <uc:Header ID="HeaderControl" runat="server" />
-  <main class="dashboard">
-    <header class="page-header">
-      <div>
-        <h1>Quiz Management</h1>
-        <p>Review, publish, and manage Sejarah quizzes across all teachers and classrooms.</p>
-      </div>
-      <button class="primary-button" type="button">Create Quiz +</button>
-    </header>
 
-    <section class="content-grid" aria-label="Quiz library and details">
-      <section class="panel">
-        <h2 class="panel-heading">Quiz library</h2>
-        <p class="panel-description">64 quizzes · 48 published · 16 drafts</p>
-
-        <div class="tab-list" role="tablist">
-          <button class="tab" type="button" role="tab" aria-selected="true">Quizzes</button>
-          <button class="tab" type="button" role="tab" aria-selected="false">Questions</button>
+    <main class="dashboard">
+      <header class="page-header">
+        <div>
+          <h1>Quiz Management</h1>
+          <p>Review and manage Sejarah quizzes across all teachers and classrooms.</p>
         </div>
+        <asp:Button ID="btnCreate" runat="server" CssClass="primary-button" Text="Create Quiz +" OnClick="btnCreate_Click" />
+      </header>
 
-        <div class="filter-row">
-          <label class="search-field">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input type="search" placeholder="Search quiz title" aria-label="Search quiz title" />
-          </label>
-          <button class="select-button" type="button">
-            Status: All
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-        </div>
+      <section class="content-grid" aria-label="Quiz library and details">
+        <section class="panel">
+          <h2 class="panel-heading">Quiz library</h2>
+          <p class="panel-description">
+            <asp:Label ID="lblTotalQuizzes" runat="server" /> quizzes ·
+            <asp:Label ID="lblQuestionCount" runat="server" /> questions
+          </p>
 
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr><th>Quiz Title</th><th>Category</th><th>Topic</th><th>Created By</th><th>Number of Questions</th><th>Status</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-              <tr aria-selected="true"><td class="quiz-title">Kebangkitan Nasionalisme</td><td>Tingkatan 4</td><td class="quiz-topic">Nasionalisme</td><td>Siti Hajar</td><td class="quiz-count">20</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="quiz-title">Perlembagaan Persekutuan</td><td>Tingkatan 5</td><td class="quiz-topic">Perlembagaan</td><td>Ahmad Farid</td><td class="quiz-count">15</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="quiz-title">Pembentukan Malaysia</td><td>Tingkatan 5</td><td class="quiz-topic">Pembentukan Malaysia</td><td>Siti Hajar</td><td class="quiz-count">20</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="quiz-title">Warisan Negara Bangsa</td><td>Tingkatan 4</td><td class="quiz-topic">Kesultanan Melayu Melaka</td><td>Ahmad Farid</td><td class="quiz-count">15</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="quiz-title">Penentangan Masyarakat Tempatan</td><td>Tingkatan 3</td><td class="quiz-topic">Tokoh Pejuang Tempatan</td><td>Siti Hajar</td><td class="quiz-count">2</td><td class="status status--draft">Draft</td><td class="row-actions"><a href="#">Edit</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="quiz-title">Sistem Demokrasi Berparlimen</td><td>Tingkatan 5</td><td class="quiz-topic">—</td><td>Ahmad Farid</td><td class="quiz-count">10</td><td class="status status--draft">Draft</td><td class="row-actions"><a href="#">Edit</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="quiz-title">Malayan Union 1946</td><td>Tingkatan 4</td><td class="quiz-topic">Malayan Union</td><td>Siti Hajar</td><td class="quiz-count">12</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="quiz-title">Kemerdekaan Negara</td><td>Tingkatan 4</td><td class="quiz-topic">Kemerdekaan</td><td>Ahmad Farid</td><td class="quiz-count">18</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="pagination">
-          <span class="pagination-note">Showing 1–8 of 64 quizzes</span>
-          <div class="pagination-controls">
-            <button class="page-button" type="button">Previous</button>
-            <button class="page-button" type="button" aria-current="page">1</button>
-            <button class="page-button" type="button">Next</button>
+          <div class="tab-list">
+            <asp:Button ID="btnTabQuizzes" runat="server" CssClass="tab active" Text="Quizzes" OnClick="btnTabQuizzes_Click" />
+            <asp:Button ID="btnTabQuestions" runat="server" CssClass="tab" Text="Questions" OnClick="btnTabQuestions_Click" />
           </div>
-        </div>
-      </section>
 
-      <aside class="panel">
-        <h2 class="panel-heading">Quiz Details</h2>
-        <dl class="detail-list">
-          <dt>Quiz</dt><dd>Quiz – Chapter 3</dd>
-          <dt>Teacher</dt><dd>Cikgu Nurul</dd>
-          <dt>Form</dt><dd>Form 4</dd>
-          <dt>Classroom</dt><dd>4 Amanah • Sejarah</dd>
-          <dt>Questions</dt><dd>15</dd>
-          <dt>Status</dt><dd class="status--published">Published</dd>
-        </dl>
-        <p class="detail-note">Covers world conflicts and the Japanese occupation in our country, including KBAT application questions.</p>
-        <div class="detail-actions">
-          <button class="primary-button" type="button">Edit quiz</button>
-          <button class="secondary-button" type="button">Unpublish quiz</button>
-        </div>
-      </aside>
-    </section>
-  </main>
+          <div class="filter-row">
+            <label class="search-field">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <asp:TextBox ID="txtSearch" runat="server" />
+            </label>
+            <asp:Button ID="btnSearch" runat="server" CssClass="primary-button" Text="Search" OnClick="btnSearch_Click" />
+            <asp:Button ID="btnReset" runat="server" CssClass="secondary-button" Text="Reset" OnClick="btnReset_Click" />
+          </div>
+
+          <!-- Quizzes tab -->
+          <asp:Panel ID="pnlQuizzes" runat="server">
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr><th>Quiz Title</th><th>Class</th><th>Subject</th><th>Created By</th><th>Number of Questions</th><th>Total Marks</th><th>Created Date</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                  <asp:Repeater ID="QuizRepeater" runat="server" OnItemCommand="Row_Command">
+                    <ItemTemplate>
+                      <tr aria-selected='<%# GetSelected(Eval("quizID")) %>'>
+                        <td class="quiz-title"><%# Eval("title") %></td>
+                        <td><%# GetText(Eval("className")) %></td>
+                        <td><%# GetText(Eval("subject")) %></td>
+                        <td><%# GetText(Eval("teacherName")) %></td>
+                        <td class="quiz-count"><%# Eval("questionCount") %></td>
+                        <td class="quiz-count"><%# Eval("totalMarks") %></td>
+                        <td><%# Eval("createdDate", "{0:dd MMM yyyy}") %></td>
+                        <td class="row-actions">
+                          <asp:LinkButton runat="server" CssClass="row-link" CommandName="SelectQuiz"
+                              CommandArgument='<%# Eval("quizID") %>' Text="View" />
+                        </td>
+                      </tr>
+                    </ItemTemplate>
+                  </asp:Repeater>
+                  <asp:PlaceHolder ID="emptyQuizzes" runat="server" Visible="false">
+                    <tr><td colspan="8" class="empty-row">No quizzes found.</td></tr>
+                  </asp:PlaceHolder>
+                </tbody>
+              </table>
+            </div>
+          </asp:Panel>
+
+          <!-- Questions tab -->
+          <asp:Panel ID="pnlQuestions" runat="server" Visible="false">
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr><th>Question</th><th>Quiz</th><th>Type</th><th>Correct Answer</th><th>Marks</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                  <asp:Repeater ID="QuestionRepeater" runat="server" OnItemCommand="Row_Command">
+                    <ItemTemplate>
+                      <tr aria-selected='<%# GetSelected(Eval("quizID")) %>'>
+                        <td class="quiz-title question-text"><%# Eval("questionText") %></td>
+                        <td><%# GetText(Eval("quizTitle")) %></td>
+                        <td><%# GetText(Eval("questionType")) %></td>
+                        <td><%# GetText(Eval("answerText")) %></td>
+                        <td class="quiz-count"><%# Eval("marks") %></td>
+                        <td class="row-actions">
+                          <asp:LinkButton runat="server" CssClass="row-link" CommandName="SelectQuiz"
+                              CommandArgument='<%# Eval("quizID") %>' Text="View quiz" />
+                        </td>
+                      </tr>
+                    </ItemTemplate>
+                  </asp:Repeater>
+                  <asp:PlaceHolder ID="emptyQuestions" runat="server" Visible="false">
+                    <tr><td colspan="6" class="empty-row">No questions found.</td></tr>
+                  </asp:PlaceHolder>
+                </tbody>
+              </table>
+            </div>
+          </asp:Panel>
+
+          <div class="pagination">
+            <span class="pagination-note">
+              Showing <asp:Label ID="lblShowing" runat="server" /> of
+              <asp:Label ID="lblTotal" runat="server" />
+              <asp:Label ID="lblItemName" runat="server" />
+            </span>
+          </div>
+        </section>
+
+        <aside class="panel">
+          <h2 class="panel-heading">Quiz Details</h2>
+
+          <asp:Panel ID="pnlDetails" runat="server">
+            <dl class="detail-list">
+              <dt>Quiz</dt><dd><asp:Label ID="lblDetTitle" runat="server" /></dd>
+              <dt>Teacher</dt><dd><asp:Label ID="lblDetTeacher" runat="server" /></dd>
+              <dt>Class</dt><dd><asp:Label ID="lblDetClass" runat="server" /></dd>
+              <dt>Subject</dt><dd><asp:Label ID="lblDetSubject" runat="server" /></dd>
+              <dt>Questions</dt><dd><asp:Label ID="lblDetQuestions" runat="server" /></dd>
+              <dt>Total Marks</dt><dd><asp:Label ID="lblDetMarks" runat="server" /></dd>
+              <dt>Created</dt><dd><asp:Label ID="lblDetDate" runat="server" /></dd>
+            </dl>
+            <div class="detail-actions">
+              <asp:Button ID="btnEdit" runat="server" CssClass="primary-button" Text="Edit quiz" OnClick="btnEdit_Click" />
+            </div>
+          </asp:Panel>
+
+          <asp:Panel ID="pnlNoSelection" runat="server" Visible="false">
+            <p class="detail-note">No quiz selected.</p>
+          </asp:Panel>
+        </aside>
+      </section>
+    </main>
+
     <uc:Footer ID="FooterControl" runat="server" />
+  </form>
 </body>
 </html>
-

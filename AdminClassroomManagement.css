@@ -1,4 +1,5 @@
-﻿body {
+﻿
+body {
     margin: 0;
     padding: 44px 24px 56px;
     background: var(--bg-surface);
@@ -46,7 +47,7 @@
     white-space: nowrap;
 }
 
-/* Layout */
+/* Main layout */
 .layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 306px;
@@ -55,6 +56,7 @@
 }
 
 .card {
+    min-width: 0;
     background: var(--white);
     border: 1px solid var(--border-color);
     border-radius: 14px;
@@ -74,7 +76,7 @@
         color: var(--secondary-color);
     }
 
-/* Tabs */
+/* C# tab navigation */
 .tabs {
     display: flex;
     gap: 4px;
@@ -84,107 +86,99 @@
 }
 
 .tab {
-    appearance: none;
+    display: inline-block;
     border: 0;
+    border-bottom: 2px solid transparent;
     background: transparent;
     padding: 10px 14px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    font: inherit;
+    margin-bottom: -1px;
+    border-radius: 8px 8px 0 0;
+    font-family: inherit;
     font-size: 12px;
     font-weight: 500;
     color: var(--secondary-color);
+    text-decoration: none;
     cursor: pointer;
+    transition: background .2s ease, color .2s ease;
 }
 
-    .tab[aria-selected="true"] {
+    .tab:hover {
+        color: var(--primary-color);
         background: var(--bg-light);
+    }
+
+    .tab.active {
+        background: var(--bg-light);
+        border-bottom-color: var(--gold-color);
         color: var(--primary-color);
         font-weight: 600;
     }
 
-    .tab:hover {
-        color: var(--primary-color);
-    }
-
-/* Toolbar */
+/* Section toolbar */
 .toolbar {
     display: flex;
     gap: 8px;
-    margin: 14px 0 14px;
+    margin: 14px 0;
 }
 
-.search {
+.search-input {
     flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    min-width: 0;
     height: 32px;
+    box-sizing: border-box;
     padding: 0 12px;
     background: var(--white);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    color: var(--secondary-color);
+    outline: none;
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--primary-color);
 }
 
-    .search:focus-within {
+    .search-input::placeholder {
+        color: var(--secondary-color);
+        opacity: .85;
+    }
+
+    .search-input:focus {
         border-color: var(--gold-color);
-        box-shadow: 0 0 0 3px rgba(197,160,89,.2);
+        box-shadow: 0 0 0 3px rgba(197, 160, 89, .2);
     }
-
-    .search svg {
-        flex: none;
-    }
-
-    .search input {
-        flex: 1;
-        min-width: 0;
-        border: 0;
-        outline: 0;
-        background: transparent;
-        font: inherit;
-        font-size: 12px;
-        color: var(--primary-color);
-    }
-
-        .search input::placeholder {
-            color: var(--secondary-color);
-            opacity: .85;
-        }
 
 .select {
-    display: flex;
-    align-items: center;
-    gap: 14px;
     height: 32px;
-    padding: 0 12px;
+    max-width: 100%;
+    padding: 0 10px;
     background: var(--white);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    font: inherit;
+    font-family: inherit;
     font-size: 12px;
     color: var(--secondary-color);
     cursor: pointer;
 }
 
-/* Table */
+/* Tables */
 .table-wrap {
+    width: 100%;
     overflow-x: auto;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
     min-width: 520px;
+    border-collapse: collapse;
 }
 
 thead th {
+    padding: 9px 8px;
     background: var(--bg-light);
     color: var(--secondary-color);
     font-size: 11px;
     font-weight: 500;
     text-align: left;
-    padding: 9px 8px;
+    white-space: nowrap;
 }
 
     thead th:first-child {
@@ -207,17 +201,9 @@ tbody tr:last-child td {
     border-bottom: 0;
 }
 
-tbody tr {
-    cursor: pointer;
+tbody tr:hover td {
+    background: rgba(240, 234, 225, .45);
 }
-
-    tbody tr:hover td {
-        background: rgba(240, 234, 225, .45);
-    }
-
-    tbody tr.is-selected td {
-        background: rgba(197, 160, 89, .1);
-    }
 
 td.name {
     font-weight: 600;
@@ -225,21 +211,8 @@ td.name {
 }
 
 td.teacher {
-    max-width: 110px;
+    max-width: 130px;
 }
-
-.status {
-    font-weight: 600;
-}
-
-    .status.active {
-        color: var(--primary-color);
-    }
-
-    .status.inactive {
-        color: var(--secondary-color);
-        font-weight: 400;
-    }
 
 .actions {
     white-space: nowrap;
@@ -247,64 +220,57 @@ td.teacher {
     font-weight: 600;
 }
 
-    .actions button {
-        border: 0;
-        background: none;
-        padding: 0;
-        font: inherit;
-        color: inherit;
-        cursor: pointer;
+    .actions a {
+        color: var(--primary-color);
+        text-decoration: none;
     }
 
-        .actions button:hover {
+        .actions a:hover {
             color: var(--accent-color);
+            text-decoration: underline;
         }
 
-    .actions .dot {
+/* Status text */
+.status {
+    font-weight: 600;
+}
+
+    .status.active,
+    .status.live,
+    .status.ok {
+        color: var(--success-color);
+    }
+
+    .status.inactive,
+    .status.completed {
         color: var(--secondary-color);
-        margin: 0 2px;
         font-weight: 400;
     }
 
-/* Footer / pagination */
+    .status.scheduled {
+        color: var(--primary-color);
+    }
+
+    .status.cancelled {
+        color: var(--accent-color);
+    }
+
+.empty {
+    padding: 24px 8px;
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+/* Table footer */
 .table-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     margin-top: 14px;
     font-size: 11px;
     color: var(--secondary-color);
 }
-
-.pager {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-page {
-    height: 30px;
-    padding: 0 14px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background: var(--white);
-    font: inherit;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--primary-color);
-    cursor: pointer;
-}
-
-    .btn-page:hover {
-        border-color: var(--gold-color);
-    }
-
-    .btn-page.current {
-        width: 28px;
-        padding: 0;
-        border-color: transparent;
-        background: var(--bg-light);
-    }
 
 /* Details panel */
 .details h2 {
@@ -347,18 +313,19 @@ td.teacher {
     line-height: 1.55;
 }
 
+/* Buttons */
 .btn-row {
     display: flex;
     gap: 8px;
 }
 
 .btn {
-    height: 36px;
+    min-height: 36px;
     padding: 0 14px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
     background: var(--white);
-    font: inherit;
+    font-family: inherit;
     font-size: 12px;
     font-weight: 500;
     color: var(--primary-color);
@@ -375,11 +342,8 @@ td.teacher {
             background: #151c33;
         }
 
-    .btn.danger:hover {
-        border-color: var(--accent-color);
-        color: var(--accent-color);
-    }
 
+/* Focus visibility */
 :focus-visible {
     outline: 2px solid var(--gold-color);
     outline-offset: 2px;
