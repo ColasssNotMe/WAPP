@@ -65,38 +65,17 @@ namespace Assignment
                     {
                         if (reader.Read())
                         {
-                            txtFirstName.Text =
-                                reader["firstName"].ToString();
-
-                            txtLastName.Text =
-                                reader["lastName"].ToString();
-
-                            txtUsername.Text =
-                                reader["username"].ToString();
-
-                            txtEmail.Text =
-                                reader["email"].ToString();
-
-                            txtRole.Text =
-                                reader["role"].ToString();
-
-                            txtGrade.Text =
-                                reader["gradeLevel"].ToString();
-
-                            txtSchool.Text =
-                                reader["school"].ToString();
-
-                            accountUserId.InnerText =
-                                reader["userId"].ToString();
-
-                            accountUsername.InnerText =
-                                reader["username"].ToString();
-
-                            accountRole.InnerText =
-                                reader["role"].ToString();
-
-                            accountSchool.InnerText =
-                                reader["school"].ToString();
+                            txtFirstName.Text = reader["firstName"].ToString();
+                            txtLastName.Text = reader["lastName"].ToString();
+                            txtUsername.Text = reader["username"].ToString();
+                            txtEmail.Text = reader["email"].ToString();
+                            txtRole.Text = reader["role"].ToString();
+                            txtGrade.Text = reader["gradeLevel"].ToString();
+                            txtSchool.Text = reader["school"].ToString();
+                            accountUserId.InnerText = reader["userId"].ToString();
+                            accountUsername.InnerText = reader["username"].ToString();
+                            accountRole.InnerText = reader["role"].ToString();
+                            accountSchool.InnerText = reader["school"].ToString();
 
                             if (reader["dateRegistered"] != DBNull.Value)
                             {
