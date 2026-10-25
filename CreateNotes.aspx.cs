@@ -43,7 +43,6 @@ namespace Assignment
         {
             if (string.IsNullOrEmpty(ddlClassroom.SelectedValue))
             {
-                // Basic validation: user must select a classroom
                 return;
             }
 
@@ -55,8 +54,8 @@ namespace Assignment
 
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = @"INSERT INTO Material (classID, title, fileURL, durationMins, uploadDate, status) 
-                                VALUES (@classID, @title, @fileURL, @durationMins, GETDATE(), @status)";
+                string query = @"INSERT INTO Material (classID, title, fileURL, durationMins, uploadDate, status, contentType) 
+                        VALUES (@classID, @title, @fileURL, @durationMins, GETDATE(), @status, 'Note')";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -71,7 +70,6 @@ namespace Assignment
                 }
             }
 
-            // Redirect back to ManageNotes page so the newly added note is displayed
             Response.Redirect("ManageNotes.aspx");
         }
     }

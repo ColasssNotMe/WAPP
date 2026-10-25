@@ -24,7 +24,7 @@
                     </a>
                     <div class="title-group">
                         <h1 class="page-title">Edit Note</h1>
-                        <p class="page-subtitle">Update material details and classroom assignments.</p>
+                        <p class="page-subtitle">Update material details and status settings.</p>
                     </div>
                 </div>
             </header>
@@ -39,11 +39,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtChapter">Chapter</label>
-                            <asp:TextBox ID="txtChapter" runat="server" CssClass="form-control" />
-                        </div>
-
-                        <div class="form-group">
                             <label for="ddlClassroom">Classroom</label>
                             <asp:DropDownList ID="ddlClassroom" runat="server" CssClass="form-control" />
                         </div>
@@ -51,6 +46,14 @@
                         <div class="form-group">
                             <label for="txtFileURL">File URL / Document Path</label>
                             <asp:TextBox ID="txtFileURL" runat="server" CssClass="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ddlStatus">Status</label>
+                            <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control">
+                                <asp:ListItem Text="Published" Value="Published" />
+                                <asp:ListItem Text="Draft" Value="Draft" />
+                            </asp:DropDownList>
                         </div>
 
                         <div class="form-actions">

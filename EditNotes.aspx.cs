@@ -50,7 +50,7 @@ namespace Assignment
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = "SELECT title, chapter, classID, fileURL FROM Material WHERE materialID = @materialID";
+                string query = "SELECT title, classID, fileURL, ISNULL(status, 'Published') AS status FROM Material WHERE materialID = @materialID";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@materialID", materialId);
@@ -59,9 +59,15 @@ namespace Assignment
                     if (reader.Read())
                     {
                         txtTitle.Text = reader["title"].ToString();
-                        txtChapter.Text = reader["chapter"].ToString();
                         ddlClassroom.SelectedValue = reader["classID"].ToString();
                         txtFileURL.Text = reader["fileURL"].ToString();
+
+                        // Set the selected value for ddlStatus
+                        string currentStatus = reader["status"].ToString();
+                        if (ddlStatus.Items.FindByValue(currentStatus) != null)
+                        {
+                            ddlStatus.SelectedValue = currentStatus;
+                        }
                     }
                 }
             }
@@ -73,22 +79,22 @@ namespace Assignment
             {
                 int materialId = Convert.ToInt32(Request.QueryString["materialID"]);
                 string title = txtTitle.Text.Trim();
-                string chapter = txtChapter.Text.Trim();
                 int classId = Convert.ToInt32(ddlClassroom.SelectedValue);
                 string fileUrl = txtFileURL.Text.Trim();
+                string status = ddlStatus.SelectedValue;
 
                 using (SqlConnection conn = new SqlConnection(GetConnectionString()))
                 {
                     string query = @"UPDATE Material 
-                                    SET title = @title, chapter = @chapter, classID = @classID, fileURL = @fileURL 
+                                    SET title = @title, classID = @classID, fileURL = @fileUrl, status = @status 
                                     WHERE materialID = @materialID";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@title", title);
-                        cmd.Parameters.AddWithValue("@chapter", chapter);
                         cmd.Parameters.AddWithValue("@classID", classId);
-                        cmd.Parameters.AddWithValue("@fileURL", fileUrl);
+                        cmd.Parameters.AddWithValue("@fileUrl", fileUrl);
+                        cmd.Parameters.AddWithValue("@status", status);
                         cmd.Parameters.AddWithValue("@materialID", materialId);
 
                         conn.Open();

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateNotes.aspx.cs" Inherits="Assignment.CreateNotes" %>
+﻿﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateNotes.aspx.cs" Inherits="Assignment.CreateNotes" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- External Stylesheet -->
-    <link rel="stylesheet" href="ManageQuiz.css">
+    <link rel="stylesheet" href="CreateNotes.css">
 </head>
 <body>
     <form id="form1" runat="server">
