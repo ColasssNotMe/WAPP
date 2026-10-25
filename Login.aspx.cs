@@ -23,13 +23,13 @@ namespace Assignment
             u.username,
             u.role,
             u.email,
+            u.password,
             u.profilePic,
             t.approved
         FROM [User] u
         LEFT JOIN Teacher t
             ON u.userID = t.userID
-        WHERE u.email = @email
-        AND u.password = @password";
+        WHERE u.email = @email";
 
             PasswordManager passwordManager = new PasswordManager();
 
@@ -38,7 +38,6 @@ namespace Assignment
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@email", EmailTextBox.Text.Trim());
-                    cmd.Parameters.AddWithValue("@password", passwordManager.HashPassword(PasswordTextBox.Text));
 
                     conn.Open();
 
@@ -46,6 +45,15 @@ namespace Assignment
                     {
                         if (reader.Read())
                         {
+                            bool passwordCorrect = passwordManager.VerifyPassword(PasswordTextBox.Text, reader["password"].ToString());
+
+                            if (!passwordCorrect)
+                            {
+                                LoginMessage.Text = "Invalid email or password.";
+                                LoginMessage.Visible = true;
+                                return;
+                            }
+
                             string role = reader["role"].ToString().Trim().ToLower();
 
                             Session["email"] = reader["email"].ToString().Trim();
@@ -68,7 +76,6 @@ namespace Assignment
                             {
                                 Response.Redirect("AdminDashboard.aspx");
                             }
-
                             else if (role == "teacher")
                             {
                                 if (reader["approved"] == DBNull.Value ||
@@ -83,12 +90,10 @@ namespace Assignment
                                     Response.Redirect("TeacherDashboard.aspx");
                                 }
                             }
-
                             else if (role == "student")
                             {
                                 Response.Redirect("StudentDashboard.aspx");
                             }
-
                             else
                             {
                                 Response.Redirect("Homepage.aspx");

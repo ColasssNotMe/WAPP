@@ -9,9 +9,10 @@
 <head runat="server">
     <title>Ncient</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" > 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link href="~/index.css" rel="stylesheet" />
     <link href="~/Homepage.css" rel="stylesheet" />
 
@@ -22,62 +23,62 @@
 
     <div class="bg-container-color-only">
 
-    <div class="hero">
+        <div class="hero">
 
-        <div class="hero-content">
+            <div class="hero-content">
 
-            <h1 class="hero-title">Learn History.<br />
-                Test your Knowledge
-            </h1>
+                <h1 class="hero-title">Learn History.<br />
+                    Test your Knowledge
+                </h1>
 
-            <h2 class="hero-subtitle">Discover the Past
-            </h2>
+                <h2 class="hero-subtitle">Discover the Past
+                </h2>
 
-            <p class="hero-description">
-                Explore Sejarah through interactive visual folios, bite-sized
+                <p class="hero-description">
+                    Explore Sejarah through interactive visual folios, bite-sized
                 chronological breakdowns, gamified exam drills, and live
                 teacher-led masterclasses crafted specifically for SPM excellence.
-            </p>
+                </p>
 
-            <div class="button-container">
-                <button class="hero-button" type="button">
-                    Start Learning
-                </button>
+                <div class="button-container">
+                    <button class="hero-button" type="button">
+                        Start Learning
+                    </button>
 
-                <button class="hero-button" type="button">
-                    Take A Quiz
-                </button>
+                    <button class="hero-button" type="button">
+                        Take A Quiz
+                    </button>
+                </div>
+
             </div>
 
+
+            <div>
+                <img class="hero-image"
+                    src="img/hero.png"
+                    alt="History Image" />
+            </div>
+
+
+
         </div>
+        <div class="stats-container">
 
+            <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Learning Material</div>
+            </div>
 
-        <div>
-            <img class="hero-image"
-                src="img/hero.png"
-                alt="History Image" />
+            <div class="stat-item">
+                <div class="stat-number">120+</div>
+                <div class="stat-label">Quiz Question</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-number">98.4%</div>
+                <div class="stat-label">Grade Pass Student</div>
+            </div>
         </div>
-
-
-
-    </div>
-    <div class="stats-container">
-
-        <div class="stat-item">
-            <div class="stat-number">10+</div>
-            <div class="stat-label">Learning Material</div>
-        </div>
-
-        <div class="stat-item">
-            <div class="stat-number">120+</div>
-            <div class="stat-label">Quiz Question</div>
-        </div>
-
-        <div class="stat-item">
-            <div class="stat-number">98.4%</div>
-            <div class="stat-label">Grade Pass Student</div>
-        </div>
-    </div>
 
     </div>
 
@@ -99,8 +100,9 @@
             <!-- Card 1 -->
             <div class="learning-card">
 
-                <div class="card-icon"></div>
-
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">menu_book</span>
+                </div>
                 <h4 class="card-title">Learning Materials
                 </h4>
 
@@ -120,8 +122,9 @@
             <!-- Card 2 -->
             <div class="learning-card">
 
-                <div class="card-icon"></div>
-
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">quiz</span>
+                </div>
                 <h4 class="card-title">Interactive Quizzes
                 </h4>
 
@@ -141,8 +144,9 @@
             <!-- Card 3 -->
             <div class="learning-card">
 
-                <div class="card-icon"></div>
-
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">co_present</span>
+                </div>
                 <h4 class="card-title">Live Session
                 </h4>
 
@@ -163,8 +167,9 @@
             <!-- Card 4 -->
             <div class="learning-card">
 
-                <div class="card-icon"></div>
-
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">monitoring</span>
+                </div>
                 <h4 class="card-title">Learning Progress
                 </h4>
 

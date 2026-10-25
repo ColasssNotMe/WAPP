@@ -188,28 +188,20 @@
     border: 1px solid rgb(200 41 9 / 25%);
     border-radius: 0.75rem;
     background-color: var(--bg-light);
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-    .card-icon::before,
-    .card-icon::after {
-        content: "";
-        position: absolute;
-        width: 1.5rem;
-        height: 2px;
-        background-color: var(--accent-color);
-        top: calc(50% - 1px);
-        left: calc(50% - 0.75rem);
+    .card-icon .material-symbols-outlined {
+        display: block;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: var(--accent-color);
+        /* Makes the glyph's visual position more balanced */
+        position: relative;
+        top: 0;
     }
-
-    .card-icon::before {
-        transform: rotate(45deg);
-    }
-
-    .card-icon::after {
-        transform: rotate(-45deg);
-    }
-
 .card-title {
     margin: 0 0 0.65rem;
     font-size: 1.2rem;
