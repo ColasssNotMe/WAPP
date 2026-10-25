@@ -160,6 +160,8 @@
     <Content Include="Default.aspx" />
     <Content Include="EditClassroom.aspx" />
     <Content Include="EditClassroom.css" />
+    <Content Include="EditQuiz.aspx" />
+    <Content Include="EditQuiz.css" />
     <Content Include="favicon.ico" />
     <Content Include="Footer.css" />
     <Content Include="Global.asax" />
@@ -381,6 +383,13 @@
     </Compile>
     <Compile Include="EditClassroom.aspx.designer.cs">
       <DependentUpon>EditClassroom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditQuiz.aspx.cs">
+      <DependentUpon>EditQuiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditQuiz.aspx.designer.cs">
+      <DependentUpon>EditQuiz.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
