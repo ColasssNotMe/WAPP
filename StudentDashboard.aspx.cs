@@ -157,7 +157,10 @@ namespace Assignment
                 return;
             }
 
-            string query = @"INSERT INTO Enrolment (studentID, classID) SELECT s.studentID, c.classID FROM Student s INNER JOIN Class c ON c.inviteCode = @inviteCode WHERE s.userID = @userID";
+            string query = @"INSERT INTO Enrolment (studentID, classID,enrollDate)
+SELECT s.studentID, c.classID ,GETDATE() FROM Student s 
+INNER JOIN Class c ON c.inviteCode = @inviteCode 
+WHERE s.userID = @userID";
 
             using (SqlConnection conn = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
