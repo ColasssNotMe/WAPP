@@ -46,6 +46,8 @@
             </span>
         </asp:Panel>
 
+        <div class="content-grid">
+
         <section class="panel">
 
             <div class="section-heading">
@@ -122,34 +124,37 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Account Status</th>
+                            <th id="thStatus" runat="server">Account Status</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <asp:Repeater ID="UserRepeater" runat="server">
+                        <asp:Repeater ID="UserRepeater" runat="server"
+                            OnItemCommand="UserRepeater_ItemCommand">
                             <ItemTemplate>
-                                <tr>
+                                <tr class='<%# GetRowClass(Eval("userID")) %>'>
+
                                     <td class="user-name">
-                                        <%#: Eval("firstName") %>
+                                        <asp:LinkButton ID="btnSelectUser"
+                                            runat="server"
+                                            CssClass="row-select-link"
+                                            CommandName="SelectUser"
+                                            CommandArgument='<%# Eval("userID") %>'
+                                            Text='<%# Server.HtmlEncode(
+                                                Eval("firstName") + " " + Eval("lastName")) %>' />
                                     </td>
 
-                                    <td>
-                                        <%#: Eval("username") %>
-                                    </td>
+                                    <td><%#: Eval("username") %></td>
+                                    <td class="user-email"><%#: Eval("email") %></td>
+                                    <td><%#: Eval("role") %></td>
 
-                                    <td class="user-email">
-                                        <%#: Eval("email") %>
-                                    </td>
+                                    <asp:PlaceHolder runat="server"
+                                        Visible='<%# ShowStatus %>'>
+                                        <td>
+                                            <%# GetStatusText(Eval("approved")) %>
+                                        </td>
+                                    </asp:PlaceHolder>
 
-                                    <td>
-                                        <%#: Eval("role") %>
-                                    </td>
-
-                                    <td class='<%# GetStatusText(Eval("approved")) %>'>
-                                        <%# GetStatusText(Eval("approved")) %>
-
-                                    </td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
@@ -173,6 +178,99 @@
             </div>
 
         </section>
+
+        <!-- Details panel on the right -->
+        <aside class="panel detail-panel">
+            <h2 class="panel-heading">User Details</h2>
+
+            <!-- Success / error message -->
+            <asp:Panel ID="pnlMessage" runat="server" Visible="false">
+                <asp:Label ID="lblMessage" runat="server" />
+            </asp:Panel>
+
+            <asp:Panel ID="pnlDetails" runat="server">
+
+                <!-- Read-only view -->
+                <asp:Panel ID="pnlView" runat="server">
+                    <dl class="detail-list">
+                        <dt>Name</dt><dd><asp:Label ID="lblDetName" runat="server" /></dd>
+                        <dt>Username</dt><dd><asp:Label ID="lblDetUsername" runat="server" /></dd>
+                        <dt>Email</dt><dd class="detail-email"><asp:Label ID="lblDetEmail" runat="server" /></dd>
+                        <dt>Role</dt><dd><asp:Label ID="lblDetRole" runat="server" /></dd>
+                        <dt>School</dt><dd><asp:Label ID="lblDetSchool" runat="server" /></dd>
+                        <dt id="dtGrade" runat="server">Grade Level</dt><dd id="ddGrade" runat="server"><asp:Label ID="lblDetGrade" runat="server" /></dd>
+                        <dt>Joined</dt><dd><asp:Label ID="lblDetJoined" runat="server" /></dd>
+                        <dt id="dtApproval" runat="server">Approval</dt><dd id="ddApproval" runat="server"><asp:Label ID="lblDetApproval" runat="server" /></dd>
+                    </dl>
+                </asp:Panel>
+
+                <!-- Edit form -->
+                <asp:Panel ID="pnlEdit" runat="server" Visible="false" CssClass="edit-form">
+                    <div class="field">
+                        <label for="<%= txtFirstName.ClientID %>">First name</label>
+                        <asp:TextBox ID="txtFirstName" runat="server" />
+                    </div>
+                    <div class="field">
+                        <label for="<%= txtLastName.ClientID %>">Last name</label>
+                        <asp:TextBox ID="txtLastName" runat="server" />
+                    </div>
+                    <div class="field">
+                        <label for="<%= txtUsername.ClientID %>">Username</label>
+                        <asp:TextBox ID="txtUsername" runat="server" />
+                    </div>
+                    <div class="field">
+                        <label for="<%= txtEmail.ClientID %>">Email</label>
+                        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" />
+                    </div>
+                    <div class="field" id="fieldSchool" runat="server">
+                        <label for="<%= txtSchool.ClientID %>">School</label>
+                        <asp:TextBox ID="txtSchool" runat="server" />
+                    </div>
+                    <div class="field" id="fieldGrade" runat="server">
+                        <label for="<%= txtGrade.ClientID %>">Grade level</label>
+                        <asp:TextBox ID="txtGrade" runat="server" />
+                    </div>
+
+                    <div class="action-row">
+                        <asp:Button ID="btnSave" runat="server" Text="Save"
+                            CssClass="btn btn-primary"
+                            OnClick="btnSave_Click" />
+                        <asp:Button ID="btnCancel" runat="server" Text="Cancel"
+                            CssClass="btn btn-secondary"
+                            CausesValidation="false"
+                            OnClick="btnCancel_Click" />
+                    </div>
+                </asp:Panel>
+
+                <!-- Edit / Delete -->
+                <asp:Panel ID="pnlActions" runat="server" CssClass="action-row">
+                    <asp:Button ID="btnEdit" runat="server" Text="Edit"
+                        CssClass="btn btn-secondary"
+                        OnClick="btnEdit_Click" />
+                    <asp:Button ID="btnDelete" runat="server" Text="Delete"
+                        CssClass="btn btn-danger"
+                        OnClientClick="return confirm('Delete this account? This cannot be undone.');"
+                        OnClick="btnDelete_Click" />
+                </asp:Panel>
+
+                <!-- Approve / Reject (pending teachers only) -->
+                <asp:Panel ID="pnlApprovalActions" runat="server" CssClass="action-row" Visible="false">
+                    <asp:Button ID="btnApprove" runat="server" Text="Approve"
+                        CssClass="btn btn-success"
+                        OnClick="btnApprove_Click" />
+                    <asp:Button ID="btnReject" runat="server" Text="Reject"
+                        CssClass="btn btn-danger"
+                        OnClientClick="return confirm('Reject this teacher?');"
+                        OnClick="btnReject_Click" />
+                </asp:Panel>
+            </asp:Panel>
+
+            <asp:Panel ID="pnlNoSelection" runat="server" Visible="false">
+                <p class="panel-description">No user selected.</p>
+            </asp:Panel>
+        </aside>
+
+        </div>
 
     </main>
 
