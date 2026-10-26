@@ -146,10 +146,9 @@
                                         <%#: Eval("role") %>
                                     </td>
 
-                                    <td>
-                                        <span class='<%# GetStatusClass(Eval("status")) %>'>
-                                            <%#: Eval("status") %>
-                                        </span>
+                                    <td class='<%# GetStatusText(Eval("approved")) %>'>
+                                        <%# GetStatusText(Eval("approved")) %>
+
                                     </td>
                                 </tr>
                             </ItemTemplate>

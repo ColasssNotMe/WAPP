@@ -69,19 +69,22 @@ namespace Assignment
 
             string userType = ViewState["UserType"].ToString();
 
-            string query = "SELECT * FROM [User]";
+            string query = @"
+        SELECT U.*, T.approved
+        FROM [User] U
+        LEFT JOIN Teacher T ON U.UserID = T.UserID";
 
             if (userType == "Student")
             {
-                query = "SELECT * FROM [User] WHERE [role] = @role";
+                query += " WHERE U.[role] = @role";
             }
             else if (userType == "Teacher")
             {
-                query = "SELECT * FROM [User] WHERE [role] = @role AND [status] <> 'Pending'";
+                query += " WHERE U.[role] = @role AND T.[approved] = @approved";
             }
             else if (userType == "Pending")
             {
-                query = "SELECT * FROM [User] WHERE [role] = @role AND [status] = @status";
+                query += " WHERE U.[role] = @role AND T.[approved] = @approved";
             }
 
             string search = txtSearch.Text.Trim();
@@ -97,10 +100,14 @@ namespace Assignment
                     query += " WHERE ";
                 }
 
-                query += "((firstName + ' ' + lastName) LIKE @search OR username LIKE @search OR email LIKE @search)";
+                query += @"(
+            (U.firstName + ' ' + U.lastName) LIKE @search
+            OR U.username LIKE @search
+            OR U.email LIKE @search
+        )";
             }
 
-            query += " ORDER BY firstName, lastName";
+            query += " ORDER BY U.firstName, U.lastName";
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -110,14 +117,11 @@ namespace Assignment
                 {
                     cmd.Parameters.AddWithValue("@role", "Student");
                 }
-                else if (userType == "Teacher")
+                else if (userType == "Teacher" || userType == "Pending")
                 {
                     cmd.Parameters.AddWithValue("@role", "Teacher");
-                }
-                else if (userType == "Pending")
-                {
-                    cmd.Parameters.AddWithValue("@role", "Teacher");
-                    cmd.Parameters.AddWithValue("@status", "Pending");
+                    cmd.Parameters.AddWithValue(
+                        "@approved", userType == "Teacher");
                 }
 
                 if (search != "")
@@ -147,29 +151,26 @@ namespace Assignment
                 }
             }
 
-            // Update the selected tab
-            btnAllUsers.CssClass = userType == "All" ? "tab active" : "tab";
-            btnStudents.CssClass = userType == "Student" ? "tab active" : "tab";
-            btnTeachers.CssClass = userType == "Teacher" ? "tab active" : "tab";
-            btnPendingTeachers.CssClass = userType == "Pending" ? "tab active" : "tab";
+            btnAllUsers.CssClass =
+                userType == "All" ? "tab active" : "tab";
 
-            // Update the section title
+            btnStudents.CssClass =
+                userType == "Student" ? "tab active" : "tab";
+
+            btnTeachers.CssClass =
+                userType == "Teacher" ? "tab active" : "tab";
+
+            btnPendingTeachers.CssClass =
+                userType == "Pending" ? "tab active" : "tab";
+
             if (userType == "Student")
-            {
                 lblSectionTitle.Text = "Students";
-            }
             else if (userType == "Teacher")
-            {
                 lblSectionTitle.Text = "Teachers";
-            }
             else if (userType == "Pending")
-            {
                 lblSectionTitle.Text = "Pending Teachers";
-            }
             else
-            {
                 lblSectionTitle.Text = "All Users";
-            }
 
             loadCounts();
         }
@@ -188,32 +189,35 @@ namespace Assignment
 
                 lblTotalUsers.Text = totalCmd.ExecuteScalar().ToString();
 
-                SqlCommand pendingCmd = new SqlCommand(
-                    "SELECT COUNT(*) FROM [User] WHERE [role] = @role AND [status] = @status",
-                    conn);
+                SqlCommand pendingCmd = new SqlCommand(@"
+                    SELECT COUNT(*)
+                    FROM [User] U
+                    INNER JOIN Teacher T ON U.UserID = T.UserID
+                    WHERE U.[role] = @role
+                    AND T.[approved] = @approved", conn);
 
-                pendingCmd.Parameters.AddWithValue("@role", "Teacher ");
-                pendingCmd.Parameters.AddWithValue("@status", "Pending");
+                pendingCmd.Parameters.AddWithValue("@role", "Teacher");
+                pendingCmd.Parameters.AddWithValue("@approved", false);
 
-                lblPendingCount.Text = pendingCmd.ExecuteScalar().ToString();
+                lblPendingCount.Text =
+                    pendingCmd.ExecuteScalar().ToString();
             }
         }
 
-        protected string GetStatusClass(object status)
+        protected string GetStatusText(object approved)
         {
-            string value = Convert.ToString(status);
-
-            if (value == "Active")
+            if (approved == null || approved == DBNull.Value)
             {
-                return "status status--active";
+                return "Active";
             }
-            else if (value == "Pending")
+
+            if (Convert.ToBoolean(approved))
             {
-                return "status status--pending";
+                return "Approved";
             }
             else
             {
-                return "status status--disabled";
+                return "Pending";
             }
         }
     }
