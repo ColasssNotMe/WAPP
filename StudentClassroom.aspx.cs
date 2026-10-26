@@ -90,10 +90,7 @@ namespace Assignment
 
 
             classroomCount.InnerText =
-                dt.Rows.Count +
-                (dt.Rows.Count == 1
-                    ? " joined classroom"
-                    : " joined classrooms");
+                dt.Rows.Count + " joined classrooms";
 
             if (dt.Rows.Count == 0)
             {
@@ -107,7 +104,7 @@ namespace Assignment
             string query = @"
                 SELECT COUNT(*)
                 FROM Enrolment
-                WHERE classID = @classID";
+                WHERE studentID = @studentID";
 
 
             using (SqlConnection conn = new SqlConnection(
@@ -116,8 +113,8 @@ namespace Assignment
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue(
-                        "@classID",
-                        classID);
+                        "@studentID",
+                        Session["studentID"]);
 
                     conn.Open();
 
