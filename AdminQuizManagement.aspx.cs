@@ -62,12 +62,13 @@ namespace Assignment
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AdminQuizEdit.aspx");
+            // create quiz page need to do the role validation
+            Response.Redirect("CreateQuiz.aspx");
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AdminQuizEdit.aspx?id=" + ViewState["QuizID"]);
+            //Response.Redirect("AdminQuizEdit.aspx?id=" + ViewState["QuizID"]);
         }
 
         private void loadData()
