@@ -157,35 +157,76 @@ namespace Assignment
                 return;
             }
 
-            string query = @"INSERT INTO Enrolment (studentID, classID,enrollDate)
-SELECT s.studentID, c.classID ,GETDATE() FROM Student s 
-INNER JOIN Class c ON c.inviteCode = @inviteCode 
-WHERE s.userID = @userID";
+            string connectionString =
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
-            using (SqlConnection conn = new SqlConnection(
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                conn.Open();
+
+                string classQuery = @"
+            SELECT classID
+            FROM Class
+            WHERE inviteCode = @inviteCode";
+
+                int classID;
+
+                using (SqlCommand cmd = new SqlCommand(classQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@inviteCode", classCode);
-                    cmd.Parameters.AddWithValue("@userID", userID);
 
-                    conn.Open();
+                    object result = cmd.ExecuteScalar();
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    if (rowsAffected == 0)
+                    if (result == null)
                     {
-                        errInfo.InnerText = "Invalid class code or you are already enrolled in this class.";
+                        errInfo.InnerText = "Invalid class code.";
                         errInfo.Visible = true;
                         return;
                     }
 
-                    Response.Redirect("StudentDashboard.aspx");
+                    classID = Convert.ToInt32(result);
                 }
+
+                string checkQuery = @"
+            SELECT COUNT(*)
+            FROM Enrolment e
+            INNER JOIN Student s
+                ON e.studentID = s.studentID
+            WHERE s.userID = @userID
+              AND e.classID = @classID";
+
+                using (SqlCommand cmd = new SqlCommand(checkQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.AddWithValue("@classID", classID);
+
+                    int existingEnrollment = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    if (existingEnrollment > 0)
+                    {
+                        errInfo.InnerText = "You have already joined this class.";
+                        errInfo.Visible = true;
+                        return;
+                    }
+                }
+
+                string insertQuery = @"
+            INSERT INTO Enrolment (studentID, classID, enrollDate)
+            SELECT s.studentID, @classID, GETDATE()
+            FROM Student s
+            WHERE s.userID = @userID";
+
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.AddWithValue("@classID", classID);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                Response.Redirect("StudentDashboard.aspx");
             }
         }
-
 
         private void LoadQuizProgress()
         {
@@ -207,7 +248,10 @@ WHERE s.userID = @userID";
             {
                 conn.Open();
 
-                string totalQuizQuery = @"SELECT COUNT(DISTINCT q.quizID) FROM Quiz q INNER JOIN Enrolment e ON q.classID = e.classID INNER JOIN Student s ON e.studentID = s.studentID WHERE s.userID = @userID ";
+                string totalQuizQuery = @"SELECT COUNT(DISTINCT q.quizID) FROM Quiz q
+INNER JOIN Enrolment e ON q.classID = e.classID 
+INNER JOIN Student s ON e.studentID = s.studentID 
+WHERE s.userID = @userID ";
 
                 using (SqlCommand cmd = new SqlCommand(totalQuizQuery, conn))
                 {
@@ -242,5 +286,79 @@ WHERE s.userID = @userID";
             progressFill.Style["width"] = progressPercentage + "%";
         }
 
+        protected void JoinLiveSession_Click(object sender, EventArgs e)
+        {
+            string userID = Session["userID"]?.ToString();
+
+            if (string.IsNullOrEmpty(userID))
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
+            string sessionCode = liveSessionCode.Value.Trim();
+
+            liveSessionError.Visible = false;
+            liveSessionError.InnerText = "";
+
+            if (string.IsNullOrEmpty(sessionCode))
+            {
+                liveSessionError.InnerText = "Please enter a live session code.";
+                liveSessionError.Visible = true;
+                return;
+            }
+
+            string query = @"
+        SELECT TOP 1
+            ls.sessionID,
+            ls.classID,
+            ls.title,
+            ls.starttime,
+            ls.endtime
+        FROM LiveSession ls
+        INNER JOIN Enrolment e
+            ON ls.classID = e.classID
+        INNER JOIN Student s
+            ON e.studentID = s.studentID
+        WHERE s.userID = @userID
+          AND ls.sessionID = @sessionID
+          AND GETDATE() >= ls.starttime
+          AND GETDATE() <= ls.endtime";
+
+            string connectionString =
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@userID", userID);
+                cmd.Parameters.AddWithValue("@sessionID", sessionCode);
+
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                    {
+                        liveSessionError.InnerText =
+                            "Invalid or inactive live session code.";
+                        liveSessionError.Visible = true;
+                        return;
+                    }
+
+                    int sessionID = Convert.ToInt32(reader["sessionID"]);
+                    int classID = Convert.ToInt32(reader["classID"]);
+
+                    Session["sessionID"] = sessionID;
+                    Session["classID"] = classID;
+
+                    Response.Redirect("LiveSession.aspx");
+                }
+            }
+
+        }
     }
+
 }
+
+
