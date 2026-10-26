@@ -200,22 +200,3 @@
     outline: 2px solid var(--gold-color);
     outline-offset: 2px;
 }
-
-@media (max-width: 600px) {
-    .profile-page {
-        width: calc(100% - 28px);
-        padding: 22px 0;
-    }
-
-    .panel {
-        padding: 16px;
-    }
-
-    .page-header h1 {
-        font-size: 22px;
-    }
-
-    .profile-details {
-        grid-template-columns: minmax(0, 1fr) minmax(0, auto);
-    }
-}

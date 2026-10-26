@@ -36,6 +36,7 @@
         font-size: 14px;
     }
 
+/* Buttons */
 .primary-button,
 .secondary-button {
     display: inline-flex;
@@ -80,6 +81,7 @@
         outline: none;
     }
 
+/* Layout */
 .content-grid {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(280px, 0.96fr);
@@ -141,13 +143,14 @@
         outline: none;
     }
 
-    .tab[aria-selected="true"] {
+    /* Selected tab (set from C# with CssClass "tab active") */
+    .tab.active {
         background: var(--muted-surface);
         color: var(--primary-color);
         font-weight: 650;
     }
 
-/* Filters */
+/* Search */
 .filter-row {
     display: flex;
     flex-wrap: wrap;
@@ -170,20 +173,17 @@
         color: var(--secondary-color);
     }
 
-    .search-field input,
-    .select-button {
+    .search-field input {
+        width: 100%;
         height: 36px;
+        padding: 0 12px 0 34px;
         border: 1px solid var(--border-color);
         border-radius: 9px;
         background: var(--white);
         color: var(--primary-color);
         font: inherit;
         font-size: 12px;
-    }
-
-    .search-field input {
-        width: 100%;
-        padding: 0 12px 0 34px;
+        box-sizing: border-box;
     }
 
         .search-field input::placeholder {
@@ -191,20 +191,11 @@
             opacity: 0.8;
         }
 
-.select-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 22px;
-    padding: 0 13px;
-    cursor: pointer;
-}
-
-    .search-field input:focus-visible,
-    .select-button:focus-visible {
-        border-color: var(--gold-color);
-        outline: 2px solid var(--gold-color);
-        outline-offset: 2px;
-    }
+        .search-field input:focus-visible {
+            border-color: var(--gold-color);
+            outline: 2px solid var(--gold-color);
+            outline-offset: 2px;
+        }
 
 /* Table */
 .table-wrap {
@@ -243,7 +234,6 @@
     }
 
     .data-table tbody tr {
-        cursor: pointer;
         transition: background 160ms ease;
     }
 
@@ -265,25 +255,14 @@
     min-width: 130px;
 }
 
-.quiz-topic {
-    min-width: 100px;
-}
-
 .quiz-count {
     text-align: left;
 }
 
-.status {
-    font-weight: 650;
-}
-
-.status--published {
-    color: var(--success-color);
-}
-
-.status--draft {
-    color: var(--secondary-color);
-    font-weight: 500;
+/* Long question text in the Questions tab */
+.question-text {
+    min-width: 220px;
+    max-width: 360px;
 }
 
 .row-actions {
@@ -303,13 +282,12 @@
             outline: none;
         }
 
-    .row-actions .more {
-        margin-left: 4px;
-        color: var(--secondary-color);
-        letter-spacing: 1px;
-    }
+.empty-row {
+    text-align: center;
+    padding: 28px 9px;
+}
 
-/* Pagination */
+/* Footer text under the table */
 .pagination {
     display: flex;
     flex-wrap: wrap;
@@ -323,36 +301,6 @@
     color: var(--secondary-color);
     font-size: 11px;
 }
-
-.pagination-controls {
-    display: flex;
-    gap: 8px;
-}
-
-.page-button {
-    min-height: 34px;
-    padding: 8px 14px;
-    border: 1px solid var(--border-color);
-    border-radius: 9px;
-    background: var(--white);
-    color: var(--primary-color);
-    font: inherit;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background 160ms ease, border-color 160ms ease;
-}
-
-    .page-button:hover,
-    .page-button:focus-visible {
-        background: var(--bg-light);
-        border-color: var(--gold-color);
-        outline: none;
-    }
-
-    .page-button[aria-current="page"] {
-        background: var(--muted-surface);
-        border-color: var(--muted-surface);
-    }
 
 /* Details */
 .detail-list {
@@ -374,8 +322,9 @@
         text-align: right;
     }
 
-        .detail-list dd.status--published {
-            color: var(--success-color);
+        /* asp:Label renders a span inside the dd */
+        .detail-list dd span {
+            font-weight: 650;
         }
 
 .detail-note {
@@ -392,4 +341,5 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin-top: 16px;
 }

@@ -14,15 +14,37 @@
   
 </head>
 <body>
+  <form id="adminForm" runat="server">
   <uc:Header ID="HeaderControl" runat="server" />
   <main class="dashboard">
     <header class="page-header">
       <div>
         <h1>Admin Dashboard</h1>
-        <p>Welcome back, Farah. Here's what's happening across Ncient today.</p>
+        <p id="welcomeMessage" runat="server"></p>
       </div>
       <span class="overview-pill">Platform overview</span>
+      <button type="button" class="overview-pill" onclick="document.getElementById('addAdminModal').style.display='flex';">Add new admin</button>
     </header>
+    <a  href="AdminProfile.aspx" text="View Profile">
+
+    <div id="addAdminModal" class="admin-modal" style="display:none;">
+      <div class="admin-modal-content" role="dialog" aria-modal="true" aria-labelledby="addAdminTitle">
+        <button type="button" class="admin-modal-close" onclick="document.getElementById('addAdminModal').style.display='none';">&times;</button>
+        <h2 id="addAdminTitle">Add new admin</h2>
+        <asp:Label ID="adminMessage" runat="server" CssClass="admin-message" />
+        <label for="adminUsername">Username</label>
+        <asp:TextBox ID="adminUsername" runat="server" MaxLength="50" />
+        <asp:RequiredFieldValidator ID="adminUsernameRequired" runat="server" ControlToValidate="adminUsername" ErrorMessage="Username is required." CssClass="admin-message" />
+        <label for="adminEmail">Email</label>
+        <asp:TextBox ID="adminEmail" runat="server" TextMode="Email" MaxLength="255" />
+        <asp:RequiredFieldValidator ID="adminEmailRequired" runat="server" ControlToValidate="adminEmail" ErrorMessage="Email is required." CssClass="admin-message" />
+        <label for="adminPassword">Password</label>
+        <asp:TextBox ID="adminPassword" runat="server" TextMode="Password" MaxLength="255" />
+        <asp:RequiredFieldValidator ID="adminPasswordRequired" runat="server" ControlToValidate="adminPassword" ErrorMessage="Password is required." CssClass="admin-message" />
+        <asp:Button ID="addAdminButton" runat="server" Text="Create admin" CssClass="review-button" OnClick="AddAdminButton_Click" />
+      </div>
+    </div>
+
 
     <section class="stats-grid" aria-label="Platform statistics">
       <article class="stat-card">
@@ -37,16 +59,16 @@
       </article>
       <article class="stat-card">
         <p class="stat-label">Classrooms</p>
-        <p class="stat-value">142</p>
+        <p class="stat-value" id="classroom_num" runat="server">142</p>
         <p class="stat-note">128 active classrooms</p>
       </article>
       <article class="stat-card">
         <p class="stat-label">Quizzes</p>
-        <p class="stat-value">324</p>
+        <p class="stat-value" id="quiz_num" runat="server">324</p>
         <p class="stat-note">18 published this week</p>
       </article>
     </section>
-
+    
     <section class="content-grid" aria-label="Administration tools and attention items">
       <section class="panel quick-panel">
         <h2 class="panel-heading">Quick actions</h2>
@@ -63,7 +85,7 @@
             <span class="action-description">Review accounts and access.</span>
           </a>
 
-          <a class="action-card" href="AdminTeacherApprovals.aspx">
+          <a class="action-card" href="AdminUserManagement.aspx">
             <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="9" cy="7" r="4"/>
               <path d="M3 21v-2a6 6 0 0 1 11.5-2.5"/>
@@ -105,5 +127,6 @@
     </section>
   </main>
     <uc:Footer ID="FooterControl" runat="server" />
+  </form>
 </body>
 </html>
