@@ -189,33 +189,6 @@
                                 ErrorMessage="Please select your school." CssClass="validation-message" Display="Dynamic" />
                         </div>
 
-                        <asp:Panel ID="FormPanel" runat="server" CssClass="field-group">
-
-                            <asp:Label ID="FormLabel" runat="server"
-                                AssociatedControlID="FormDropDown"
-                                CssClass="field-label"
-                                Text="Form:" />
-
-                            <asp:DropDownList ID="FormDropDown" runat="server"
-                                CssClass="form-select">
-
-                                <asp:ListItem Value="" Text="Select your form" />
-                                <asp:ListItem Value="Form 1" Text="Form 1" />
-                                <asp:ListItem Value="Form 2" Text="Form 2" />
-                                <asp:ListItem Value="Form 3" Text="Form 3" />
-                                <asp:ListItem Value="Form 4" Text="Form 4" />
-                                <asp:ListItem Value="Form 5" Text="Form 5" />
-
-                            </asp:DropDownList>
-
-                            <asp:RequiredFieldValidator ID="FormRequired" runat="server"
-                                ControlToValidate="FormDropDown"
-                                InitialValue=""
-                                ErrorMessage="Please select your form."
-                                CssClass="validation-message"
-                                Display="Dynamic" />
-
-                        </asp:Panel>
                         <asp:Button ID="CreateAccountButton" runat="server" Text="Create Account  ⟶"
                             CssClass="create-account-button" OnClick="CreateAccountButton_Click" />
                         <asp:Label ID="SignupMessage" runat="server" CssClass="signup-message" EnableViewState="false" />
