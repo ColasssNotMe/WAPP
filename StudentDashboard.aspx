@@ -83,48 +83,24 @@
                  LIVE SESSION
             ========================== -->
 
-            <section class="live-session">
+            <div class="live-session">
+                <h3>Join Live Session</h3>
 
-                <div class="live-title">
+                <input type="text"
+                    id="liveSessionCode"
+                    runat="server"
+                    placeholder="Enter live session code" />
 
-                    <span class="live-icon">
+                <asp:Button ID="joinLiveSessionButton"
+                    runat="server"
+                    Text="Join Session"
+                    OnClick="JoinLiveSession_Click" />
 
-                        <svg viewBox="0 0 24 24"
-                            fill="currentColor">
-
-                            <circle cx="7"
-                                cy="12"
-                                r="3" />
-
-                            <circle cx="17"
-                                cy="12"
-                                r="3" />
-
-                            <path d="M10 10.5h4v3h-4z" />
-
-                        </svg>
-
-                    </span>
-
-                    Live Session
-
+                <div id="liveSessionError"
+                    runat="server"
+                    visible="false">
                 </div>
-
-
-                <div class="invite-row">
-
-                    <span class="invite-label">Invite Code:
-                    </span>
-
-                    <input
-                        type="text"
-                        class="invite-input"
-                        aria-label="Invite Code" />
-
-                </div>
-
-            </section>
-
+            </div>
 
             <!-- =========================
                  LEARNING MATERIALS
