@@ -10,15 +10,20 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserID"] == null)
-            {
-                Response.Redirect("Login.aspx");
-                return;
-            }
+            //if (Session["UserID"] == null)
+            //{
+            //    Response.Redirect("Login.aspx");
+            //    return;
+            //}
 
             if (!IsPostBack)
             {
                 ViewState["UserType"] = "All";
+
+                if (Request.QueryString["tab"] == "pending")
+                {
+                    ViewState["UserType"] = "Pending";
+                }
                 loadUsers();
             }
         }

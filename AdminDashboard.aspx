@@ -25,7 +25,6 @@
       <span class="overview-pill">Platform overview</span>
       <button type="button" class="overview-pill" onclick="document.getElementById('addAdminModal').style.display='flex';">Add new admin</button>
     </header>
-    <a  href="AdminProfile.aspx" text="View Profile">
 
     <div id="addAdminModal" class="admin-modal" style="display:none;">
       <div class="admin-modal-content" role="dialog" aria-modal="true" aria-labelledby="addAdminTitle">
@@ -55,7 +54,7 @@
       <article class="stat-card">
         <p class="stat-label">Teachers</p>
         <p class="stat-value" id="teacher_num" runat="server">86</p>
-        <p class="stat-note" id="teacher_approval" runat="server">8 awaiting approval</p>
+        <p class="stat-note" id="teacher_approval" runat="server"></p>
       </article>
       <article class="stat-card">
         <p class="stat-label">Classrooms</p>
@@ -85,14 +84,14 @@
             <span class="action-description">Review accounts and access.</span>
           </a>
 
-          <a class="action-card" href="AdminUserManagement.aspx">
+          <a class="action-card" href="AdminUserManagement.aspx?tab=pending">
             <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="9" cy="7" r="4"/>
               <path d="M3 21v-2a6 6 0 0 1 11.5-2.5"/>
               <path d="m16 11 2 2 4-4"/>
             </svg>
             <span class="action-title">Approve teachers <span class="arrow">→</span></span>
-            <span class="action-description">8 registrations need a decision.</span>
+            <span class="action-description" id="pendingTeacherNum" runat="server"></span>
           </a>
 
           <a class="action-card" href="AdminMaterialManagement.aspx">
@@ -111,18 +110,10 @@
         <div class="attention-list">
           <div class="attention-item">
             <span>Teacher approval</span>
-            <strong>8 requests</strong>
-          </div>
-          <div class="attention-item">
-            <span class="flagged-label">Flagged comments</span>
-            <strong>3 to review</strong>
-          </div>
-          <div class="attention-item">
-            <span>Material review</span>
-            <strong>5 pending</strong>
+            <strong id="teacherRequest" runat="server"></strong>
           </div>
         </div>
-        <a class="review-button" href="AdminUserManagement.aspx">Review teacher requests</a>
+        <a class="review-button" href="AdminUserManagement.aspx?tab=pending">Review teacher requests</a>
       </aside>
     </section>
   </main>

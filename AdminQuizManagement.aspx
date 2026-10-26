@@ -21,7 +21,7 @@
           <h1>Quiz Management</h1>
           <p>Review and manage Sejarah quizzes across all teachers and classrooms.</p>
         </div>
-        <asp:Button ID="btnCreate" runat="server" CssClass="primary-button" Text="Create Quiz +" OnClick="btnCreate_Click" />
+        <asp:Button ID="btnCreate" runat="server" CssClass="primary-button" Text="Create New Quiz +" OnClick="btnCreate_Click" />
       </header>
 
       <section class="content-grid" aria-label="Quiz library and details">

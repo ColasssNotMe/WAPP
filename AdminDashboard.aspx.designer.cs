@@ -159,6 +159,24 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl quiz_num;
 
         /// <summary>
+        /// pendingTeacherNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pendingTeacherNum;
+
+        /// <summary>
+        /// teacherRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl teacherRequest;
+
+        /// <summary>
         /// FooterControl control.
         /// </summary>
         /// <remarks>

@@ -11,16 +11,16 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserID"] == null)
-            {
-                Response.Redirect("Login.aspx");
-                return;
-            }
+            //if (Session["UserID"] == null)
+            //{
+            //    Response.Redirect("Login.aspx");
+            //    return;
+            //}
 
             if (!IsPostBack)
             {
                 loadData();
-                welcomeMessage.InnerText = "Welcome, " + Session["Username"].ToString() + "!";
+                //welcomeMessage.InnerText = "Welcome, " + Session["Username"].ToString() + "!";
             }
         }
 
@@ -77,6 +77,7 @@ namespace Assignment
             string teacher = "SELECT COUNT(*) FROM [User] WHERE [role] = 'Teacher'";
             string classroom = "SELECT COUNT(*) FROM [Class]";
             string quiz = "SELECT COUNT(*) FROM [Quiz]";
+            string pendingTeacher = "SELECT COUNT(*) FROM [Teacher] WHERE approved = 'false' OR approved IS NULL";
 
             string connString = ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
             try
@@ -96,6 +97,11 @@ namespace Assignment
 
                     cmd = new SqlCommand(quiz, conn);
                     quiz_num.InnerText = cmd.ExecuteScalar().ToString();
+
+                    cmd = new SqlCommand(pendingTeacher, conn);
+                    teacherRequest.InnerText = cmd.ExecuteScalar().ToString() + " Requests";
+                    pendingTeacherNum.InnerText = cmd.ExecuteScalar().ToString() + " registrations need a decision.";
+                    teacher_approval.InnerText = cmd.ExecuteScalar().ToString() + " awaiting approval";
                 }
             }
             catch (Exception ex)
