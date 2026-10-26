@@ -8,8 +8,6 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
         }
 
         protected void SignInButton_Click(object sender, EventArgs e)
@@ -55,6 +53,19 @@ namespace Assignment
                             }
 
                             string role = reader["role"].ToString().Trim().ToLower();
+                            if (role == "teacher")
+                            {
+                                bool approved = reader["approved"] != DBNull.Value && Convert.ToBoolean(reader["approved"]);
+
+                                if (!approved)
+                                {
+                                    LoginMessage.Text = "Your account is not yet approved.";
+                                    LoginMessage.Visible = true;
+                                    return;
+                                }
+
+                            }
+
 
                             Session["email"] = reader["email"].ToString().Trim();
                             Session["username"] = reader["username"].ToString().Trim();
@@ -78,17 +89,7 @@ namespace Assignment
                             }
                             else if (role == "teacher")
                             {
-                                if (reader["approved"] == DBNull.Value ||
-                                    reader["approved"].ToString().ToLower() != "true")
-                                {
-                                    LoginMessage.Text =
-                                        "Your account is not yet approved.";
-                                    LoginMessage.Visible = true;
-                                }
-                                else
-                                {
-                                    Response.Redirect("TeacherDashboard.aspx");
-                                }
+                                Response.Redirect("TeacherDashboard.aspx");
                             }
                             else if (role == "student")
                             {
