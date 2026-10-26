@@ -267,42 +267,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator SchoolRequired;
 
         /// <summary>
-        /// FormPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel FormPanel;
-
-        /// <summary>
-        /// FormLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label FormLabel;
-
-        /// <summary>
-        /// FormDropDown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList FormDropDown;
-
-        /// <summary>
-        /// FormRequired control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator FormRequired;
-
-        /// <summary>
         /// CreateAccountButton control.
         /// </summary>
         /// <remarks>

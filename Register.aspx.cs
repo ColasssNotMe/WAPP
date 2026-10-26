@@ -11,19 +11,6 @@ namespace Assignment
 
         }
 
-        protected void RoleRadioList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RoleRadioList.SelectedValue == "Teacher")
-            {
-                FormPanel.Style["visibility"] = "hidden";
-                FormRequired.Enabled = false;
-            }
-            else
-            {
-                FormPanel.Style["visibility"] = "visible";
-                FormRequired.Enabled = true;
-            }
-        }
         protected void CreateAccountButton_Click(object sender, EventArgs e)
         {
             string connectionString =
@@ -87,15 +74,14 @@ namespace Assignment
                 {
                     const string studentQuery = @"
                 INSERT INTO Student
-                    (userID, gradeLevel, school)
+                    (userID, school)
                 VALUES
-                    (@userID, @gradeLevel, @school)";
+                    (@userID, @school)";
 
                     using (SqlCommand studentCommand =
                            new SqlCommand(studentQuery, conn))
                     {
                         studentCommand.Parameters.AddWithValue("@userID", userId);
-                        studentCommand.Parameters.AddWithValue("@gradeLevel", FormDropDown.SelectedValue);
                         studentCommand.Parameters.AddWithValue("@school", SchoolDropDown.SelectedValue);
                         studentCommand.ExecuteNonQuery();
                     }
