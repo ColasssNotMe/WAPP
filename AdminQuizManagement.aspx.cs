@@ -7,16 +7,19 @@ using System.Web.UI.WebControls;
 
 namespace Assignment
 {
-    public partial class AdminQuizManagement : System.Web.UI.Page
+    public partial class AdminQuizManagement : Page
     {
+        private string ConnString =>
+            ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
+        private int? SelectedQuizID
+        {
+            get => ViewState["QuizID"] as int?;
+            set => ViewState["QuizID"] = value;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["UserID"] == null)
-            //{
-            //    Response.Redirect("Login.aspx");
-            //    return;
-            //}
-
             if (!IsPostBack)
             {
                 ViewState["Tab"] = "Quizzes";
@@ -25,19 +28,26 @@ namespace Assignment
             }
         }
 
+        // Tabs
+
         protected void btnTabQuizzes_Click(object sender, EventArgs e)
         {
-            ViewState["Tab"] = "Quizzes";
-            txtSearch.Text = "";
-            loadData();
+            ChangeTab("Quizzes");
         }
 
         protected void btnTabQuestions_Click(object sender, EventArgs e)
         {
-            ViewState["Tab"] = "Questions";
+            ChangeTab("Questions");
+        }
+
+        private void ChangeTab(string tab)
+        {
+            ViewState["Tab"] = tab;
             txtSearch.Text = "";
             loadData();
         }
+
+        // Search and reset
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
@@ -50,278 +60,314 @@ namespace Assignment
             loadData();
         }
 
-        // Click View on a row (used by both repeaters)
+        // Select quiz (from a quiz row or a question row)
+
         protected void Row_Command(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectQuiz")
             {
-                ViewState["QuizID"] = Convert.ToInt32(e.CommandArgument);
-                loadData();
+                int quizId;
+
+                if (int.TryParse(e.CommandArgument.ToString(), out quizId))
+                {
+                    SelectedQuizID = quizId;
+                    loadData();
+                }
             }
         }
 
+        // Detail panel buttons
+
         protected void btnCreate_Click(object sender, EventArgs e)
         {
-            // create quiz page need to do the role validation
             Response.Redirect("CreateQuiz.aspx");
+        }
+
+        protected void btnView_Click(object sender, EventArgs e)
+        {
+            if (SelectedQuizID != null)
+            {
+                Response.Redirect("ViewQuiz.aspx?quizID=" + SelectedQuizID.Value);
+            }
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("AdminQuizEdit.aspx?id=" + ViewState["QuizID"]);
+            if (SelectedQuizID != null)
+            {
+                Response.Redirect("AdminQuizEdit.aspx?quizID=" + SelectedQuizID.Value);
+            }
         }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (SelectedQuizID == null)
+                return;
+
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            {
+                conn.Open();
+                using (SqlTransaction tran = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand cmd = new SqlCommand("DELETE FROM Question WHERE quizID = @quizID", conn, tran))
+                        {
+                            cmd.Parameters.AddWithValue("@quizID", SelectedQuizID.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        using (SqlCommand cmd = new SqlCommand("DELETE FROM Quiz WHERE quizID = @quizID", conn, tran))
+                        {
+                            cmd.Parameters.AddWithValue("@quizID", SelectedQuizID.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                    }
+                    catch
+                    {
+                        tran.Rollback();
+                        throw;
+                    }
+                }
+            }
+
+            SelectedQuizID = null;
+            setDefaultQuiz();
+            loadData();
+        }
+
+        // Load the selected tab
 
         private void loadData()
         {
-            string tab = ViewState["Tab"].ToString();
+            string tab = Convert.ToString(ViewState["Tab"]);
 
-            if (tab == "Quizzes")
-            {
-                pnlQuizzes.Visible = true;
-                pnlQuestions.Visible = false;
-                txtSearch.Attributes["placeholder"] = "Search quiz title";
-                loadQuizzes();
-            }
-            else
-            {
-                pnlQuizzes.Visible = false;
-                pnlQuestions.Visible = true;
-                txtSearch.Attributes["placeholder"] = "Search question text";
+            pnlQuizzes.Visible = tab == "Quizzes";
+            pnlQuestions.Visible = tab == "Questions";
+
+            btnTabQuizzes.CssClass =
+                tab == "Quizzes" ? "tab active" : "tab";
+
+            btnTabQuestions.CssClass =
+                tab == "Questions" ? "tab active" : "tab";
+
+            txtSearch.Attributes["placeholder"] =
+                tab == "Quizzes" ? "Search quiz title" : "Search question text";
+
+            if (tab == "Questions")
                 loadQuestions();
-            }
-
-            // Update the selected tab
-            btnTabQuizzes.CssClass = tab == "Quizzes" ? "tab active" : "tab";
-            btnTabQuestions.CssClass = tab == "Questions" ? "tab active" : "tab";
+            else
+                loadQuizzes();
 
             loadCounts();
             loadDetails();
         }
 
+        // Load quizzes
+
         private void loadQuizzes()
         {
-            string connString =
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+            string sql = @"
+                SELECT Q.quizID, Q.title, Q.totalMarks, Q.createdDate,
+                       C.className, C.subject,
+                       U.firstName + ' ' + U.lastName AS teacherName,
+                       (SELECT COUNT(*)
+                        FROM Question
+                        WHERE quizID = Q.quizID) AS questionCount
+                FROM Quiz Q
+                LEFT JOIN Class C ON C.classID = Q.classID
+                LEFT JOIN Teacher T ON T.teacherID = C.teacherID
+                LEFT JOIN [User] U ON U.userID = T.userID
+                WHERE Q.title LIKE @search
+                ORDER BY Q.quizID DESC";
 
-            string query = "SELECT qz.quizID, qz.title, qz.totalMarks, qz.createdDate, " +
-                           "c.className, c.subject, " +
-                           "(u.firstName + ' ' + u.lastName) AS teacherName, " +
-                           "(SELECT COUNT(*) FROM Question WHERE Question.quizID = qz.quizID) AS questionCount " +
-                           "FROM Quiz qz " +
-                           "LEFT JOIN Class c ON c.classID = qz.classID " +
-                           "LEFT JOIN Teacher t ON t.teacherID = c.teacherID " +
-                           "LEFT JOIN [User] u ON u.userID = t.userID " +
-                           "WHERE 1 = 1";
+            DataTable dt = new DataTable();
 
-            string search = txtSearch.Text.Trim();
-
-            if (search != "")
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                query += " AND qz.title LIKE @search";
+                cmd.Parameters.AddWithValue(
+                    "@search", "%" + txtSearch.Text.Trim() + "%");
+
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    da.Fill(dt);
             }
 
-            query += " ORDER BY qz.quizID DESC";
+            QuizRepeater.DataSource = dt;
+            QuizRepeater.DataBind();
 
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                if (search != "")
-                {
-                    cmd.Parameters.AddWithValue("@search", "%" + search + "%");
-                }
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-
-                da.Fill(dt);
-
-                QuizRepeater.DataSource = dt;
-                QuizRepeater.DataBind();
-
-                lblShowing.Text = dt.Rows.Count.ToString();
-                lblItemName.Text = "quizzes";
-
-                emptyQuizzes.Visible = dt.Rows.Count == 0;
-            }
+            lblShowing.Text = dt.Rows.Count.ToString();
+            lblItemName.Text = "quizzes";
+            emptyQuizzes.Visible = dt.Rows.Count == 0;
         }
+
+        // Load questions
 
         private void loadQuestions()
         {
-            string connString =
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+            string sql = @"
+                SELECT Q.questionID, Q.quizID, Q.questionText,
+                       Q.questionType, Q.marks,
+                       A.answerText, Z.title AS quizTitle
+                FROM Question Q
+                LEFT JOIN Answer A ON A.answerID = Q.answerID
+                LEFT JOIN Quiz Z ON Z.quizID = Q.quizID
+                WHERE Q.questionText LIKE @search
+                ORDER BY Q.questionID DESC";
 
-            string query = "SELECT qs.questionID, qs.quizID, qs.questionText, qs.questionType, qs.marks, " +
-                           "a.answerText, qz.title AS quizTitle " +
-                           "FROM Question qs " +
-                           "LEFT JOIN Answer a ON a.answerID = qs.answerID " +
-                           "LEFT JOIN Quiz qz ON qz.quizID = qs.quizID " +
-                           "WHERE 1 = 1";
+            DataTable dt = new DataTable();
 
-            string search = txtSearch.Text.Trim();
-
-            if (search != "")
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                query += " AND qs.questionText LIKE @search";
+                cmd.Parameters.AddWithValue(
+                    "@search", "%" + txtSearch.Text.Trim() + "%");
+
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    da.Fill(dt);
             }
 
-            query += " ORDER BY qs.questionID DESC";
+            QuestionRepeater.DataSource = dt;
+            QuestionRepeater.DataBind();
 
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                if (search != "")
-                {
-                    cmd.Parameters.AddWithValue("@search", "%" + search + "%");
-                }
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-
-                da.Fill(dt);
-
-                QuestionRepeater.DataSource = dt;
-                QuestionRepeater.DataBind();
-
-                lblShowing.Text = dt.Rows.Count.ToString();
-                lblItemName.Text = "questions";
-
-                emptyQuestions.Visible = dt.Rows.Count == 0;
-            }
+            lblShowing.Text = dt.Rows.Count.ToString();
+            lblItemName.Text = "questions";
+            emptyQuestions.Visible = dt.Rows.Count == 0;
         }
+
+        // Counts
 
         private void loadCounts()
         {
-            string connString =
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
-
-            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlConnection conn = new SqlConnection(ConnString))
             {
                 conn.Open();
 
-                SqlCommand quizCmd = new SqlCommand(
-                    "SELECT COUNT(*) FROM Quiz", conn);
-
-                lblTotalQuizzes.Text = quizCmd.ExecuteScalar().ToString();
-
-                SqlCommand questionCmd = new SqlCommand(
-                    "SELECT COUNT(*) FROM Question", conn);
-
-                lblQuestionCount.Text = questionCmd.ExecuteScalar().ToString();
-
-                // Total shown at the bottom of the table
-                if (ViewState["Tab"].ToString() == "Quizzes")
+                using (SqlCommand cmd = new SqlCommand(
+                    "SELECT COUNT(*) FROM Quiz", conn))
                 {
-                    lblTotal.Text = lblTotalQuizzes.Text;
+                    lblTotalQuizzes.Text = cmd.ExecuteScalar().ToString();
                 }
-                else
+
+                using (SqlCommand cmd = new SqlCommand(
+                    "SELECT COUNT(*) FROM Question", conn))
                 {
-                    lblTotal.Text = lblQuestionCount.Text;
+                    lblQuestionCount.Text = cmd.ExecuteScalar().ToString();
                 }
             }
+
+            lblTotal.Text = ViewState["Tab"].ToString() == "Quizzes"
+                ? lblTotalQuizzes.Text
+                : lblQuestionCount.Text;
         }
 
-        // Select the newest quiz when the page first loads
+        // Default selection (newest quiz)
+
         private void setDefaultQuiz()
         {
-            string connString =
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+            SelectedQuizID = null;
 
-            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand(
+                "SELECT TOP 1 quizID FROM Quiz ORDER BY quizID DESC", conn))
             {
-                SqlCommand cmd = new SqlCommand(
-                    "SELECT TOP 1 quizID FROM Quiz ORDER BY quizID DESC", conn);
-
                 conn.Open();
 
                 object result = cmd.ExecuteScalar();
 
-                if (result != null)
+                if (result != null && result != DBNull.Value)
                 {
-                    ViewState["QuizID"] = Convert.ToInt32(result);
+                    SelectedQuizID = Convert.ToInt32(result);
                 }
             }
         }
 
-        // Fill the Quiz Details panel
+        // Quiz details panel
+
         private void loadDetails()
         {
-            // No quiz in the database yet
-            if (ViewState["QuizID"] == null)
+            if (SelectedQuizID == null)
             {
                 pnlDetails.Visible = false;
                 pnlNoSelection.Visible = true;
                 return;
             }
 
-            string connString =
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+            string sql = @"
+                SELECT Q.title,
+                       Q.totalMarks,
+                       Q.createdDate,
+                       C.className,
+                       C.subject,
+                       U.firstName + ' ' + U.lastName AS teacherName,
+                       (SELECT COUNT(*)
+                        FROM Question
+                        WHERE quizID = Q.quizID) AS questionCount
+                FROM Quiz Q
+                LEFT JOIN Class C ON C.classID = Q.classID
+                LEFT JOIN Teacher T ON T.teacherID = C.teacherID
+                LEFT JOIN [User] U ON U.userID = T.userID
+                WHERE Q.quizID = @quizID";
 
-            string query = "SELECT qz.title, qz.totalMarks, qz.createdDate, " +
-                           "c.className, c.subject, " +
-                           "(u.firstName + ' ' + u.lastName) AS teacherName, " +
-                           "(SELECT COUNT(*) FROM Question WHERE Question.quizID = qz.quizID) AS questionCount " +
-                           "FROM Quiz qz " +
-                           "LEFT JOIN Class c ON c.classID = qz.classID " +
-                           "LEFT JOIN Teacher t ON t.teacherID = c.teacherID " +
-                           "LEFT JOIN [User] u ON u.userID = t.userID " +
-                           "WHERE qz.quizID = @quizID";
-
-            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@quizID", ViewState["QuizID"]);
+                cmd.Parameters.AddWithValue("@quizID", SelectedQuizID.Value);
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
+                conn.Open();
 
-                da.Fill(dt);
-
-                if (dt.Rows.Count == 0)
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    pnlDetails.Visible = false;
-                    pnlNoSelection.Visible = true;
-                    return;
+                    if (reader.Read())
+                    {
+                        pnlDetails.Visible = true;
+                        pnlNoSelection.Visible = false;
+
+                        lblDetTitle.Text = GetText(reader["title"]);
+                        lblDetTeacher.Text = GetText(reader["teacherName"]);
+                        lblDetClass.Text = GetText(reader["className"]);
+                        lblDetSubject.Text = GetText(reader["subject"]);
+                        lblDetQuestions.Text = reader["questionCount"].ToString();
+                        lblDetMarks.Text = GetText(reader["totalMarks"]);
+                        lblDetDate.Text = GetDate(reader["createdDate"]);
+                    }
+                    else
+                    {
+                        SelectedQuizID = null;
+                        pnlDetails.Visible = false;
+                        pnlNoSelection.Visible = true;
+                    }
                 }
-
-                pnlDetails.Visible = true;
-                pnlNoSelection.Visible = false;
-
-                DataRow row = dt.Rows[0];
-
-                lblDetTitle.Text = GetText(row["title"]);
-                lblDetTeacher.Text = GetText(row["teacherName"]);
-                lblDetClass.Text = GetText(row["className"]);
-                lblDetSubject.Text = GetText(row["subject"]);
-                lblDetQuestions.Text = row["questionCount"].ToString();
-                lblDetMarks.Text = GetText(row["totalMarks"]);
-                lblDetDate.Text = Convert.ToDateTime(row["createdDate"]).ToString("dd MMM yyyy");
             }
         }
 
-        // Show a dash when the value is empty
+        // Display helpers
+
         protected string GetText(object value)
         {
             string text = Convert.ToString(value);
-
-            if (text.Trim() == "")
-            {
-                return "—";
-            }
-
-            return text;
+            return string.IsNullOrWhiteSpace(text) ? "—" : text;
         }
 
-        // Returns "true" for the row that is currently selected
-        protected string GetSelected(object quizID)
+        protected string GetDate(object value)
         {
-            if (Convert.ToString(quizID) == Convert.ToString(ViewState["QuizID"]))
-            {
-                return "true";
-            }
+            if (value == null || value == DBNull.Value)
+                return "—";
 
-            return "false";
+            return Convert.ToDateTime(value).ToString("dd MMM yyyy");
+        }
+
+        // CSS class for a table row (highlighted when it is the selected quiz)
+        protected string GetRowClass(object quizID)
+        {
+            bool isSelected = SelectedQuizID != null
+                              && quizID != null
+                              && quizID != DBNull.Value
+                              && Convert.ToInt32(quizID) == SelectedQuizID.Value;
+
+            return isSelected ? "selectable-row selected-row" : "selectable-row";
         }
     }
 }
