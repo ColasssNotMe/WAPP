@@ -8,84 +8,105 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Learning Materials Management | Ncient</title>
-      <link rel="stylesheet" href="AdminMaterialManagement.css">
+  <link rel="stylesheet" href="AdminMaterialManagement.css">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <uc:Header ID="HeaderControl" runat="server" />
-  <main class="dashboard">
-    <header class="page-header">
-      <div>
-        <h1>Learning Materials Management</h1>
-        <p>Manage learning notes, revision resources, and teacher uploads across the Sejarah syllabus.</p>
-      </div>
-      <span class="overview-pill">218 materials</span>
-    </header>
+  <form id="form1" runat="server">
+    <uc:Header ID="HeaderControl" runat="server" />
 
-    <section class="content-grid" aria-label="Material library and details">
-      <section class="panel">
-        <h2 class="panel-heading">Material library</h2>
-        <p class="panel-description">90 materials · 72 published · 18 drafts</p>
-
-
-        <div class="filter-row">
-          <label class="search-field">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input type="search" placeholder="Search material title" aria-label="Search material title" />
-          </label>
-          <button class="select-button" type="button">
-            Category: All
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
+    <main class="dashboard">
+      <header class="page-header">
+        <div>
+          <h1>Learning Materials Management</h1>
+          <p>Manage learning notes, revision resources, and teacher uploads across the Sejarah syllabus.</p>
         </div>
+        <span class="overview-pill"><asp:Label ID="lblPill" runat="server" /> materials</span>
+      </header>
 
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr><th>Title</th><th>Category</th><th>Optional Topic</th><th>Created By</th><th>Last Updated</th><th>Status</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-              <tr aria-selected="true"><td class="material-title">Nota Kebangkitan Nasionalisme</td><td>Tingkatan 4</td><td class="material-topic">Nasionalisme</td><td>Siti Hajar</td><td class="nowrap">14 Oct 2026</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="material-title">Asas Perlembagaan Persekutuan</td><td>Tingkatan 5</td><td class="material-topic">Perlembagaan</td><td>Ahmad Farid</td><td class="nowrap">13 Oct 2026</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="material-title">Pembentukan Malaysia: Garis Masa</td><td>Tingkatan 5</td><td class="material-topic">Pembentukan Malaysia</td><td>Siti Hajar</td><td class="nowrap">14 Oct 2026</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="material-title">Warisan Kesultanan Melayu Melaka</td><td>Tingkatan 4</td><td class="material-topic">Kesultanan Melayu Melaka</td><td>Ahmad Farid</td><td class="nowrap">11 Oct 2026</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="material-title">Sistem Demokrasi Berparlimen</td><td>Tingkatan 5</td><td class="material-topic">—</td><td>Ahmad Farid</td><td class="nowrap">14 Oct 2026</td><td class="status status--draft">Draft</td><td class="row-actions"><a href="#">Edit</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="material-title">Penentangan Dol Said di Naning</td><td>Tingkatan 3</td><td class="material-topic">Tokoh Pejuang Tempatan</td><td>Siti Hajar</td><td class="nowrap">10 Oct 2026</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="material-title">Ringkasan Malayan Union</td><td>Tingkatan 4</td><td class="material-topic">Malayan Union</td><td>Siti Hajar</td><td class="nowrap">09 Oct 2026</td><td class="status status--published">Published</td><td class="row-actions"><a href="#">View</a> · <span class="more">•••</span></td></tr>
-              <tr><td class="material-title">Latihan Kemerdekaan Negara</td><td>Tingkatan 4</td><td class="material-topic">Kemerdekaan</td><td>Ahmad Farid</td><td class="nowrap">08 Oct 2026</td><td class="status status--draft">Draft</td><td class="row-actions"><a href="#">Edit</a> · <span class="more">•••</span></td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section class="content-grid" aria-label="Material library and details">
+        <section class="panel">
+          <h2 class="panel-heading">Material library</h2>
+          <p class="panel-description">
+            <asp:Label ID="lblTotalMaterials" runat="server" /> materials ·
+            <asp:Label ID="lblPublishedCount" runat="server" /> published ·
+            <asp:Label ID="lblDraftCount" runat="server" /> drafts
+          </p>
 
-        <div class="pagination">
-          <span class="pagination-note">Showing 1–8 of 90 materials</span>
-          <div class="pagination-controls">
-            <button class="page-button" type="button">Previous</button>
-            <button class="page-button" type="button" aria-current="page">1</button>
-            <button class="page-button" type="button">Next</button>
+          <div class="filter-row">
+            <label class="search-field">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <asp:TextBox ID="txtSearch" runat="server" placeholder="Search material title" />
+            </label>
+            <asp:DropDownList ID="ddlClass" runat="server" CssClass="select-button" />
+            <asp:Button ID="btnSearch" runat="server" CssClass="primary-button" Text="Search" OnClick="btnSearch_Click" />
+            <asp:Button ID="btnReset" runat="server" CssClass="secondary-button" Text="Reset" OnClick="btnReset_Click" />
           </div>
-        </div>
-      </section>
 
-      <aside class="panel">
-        <h2 class="panel-heading">Material Details</h2>
-        <dl class="detail-list">
-          <dt>Material</dt><dd>Pendudukan Jepun</dd>
-          <dt>Teacher</dt><dd>Cikgu Nurul</dd>
-          <dt>Form / Chapter</dt><dd>Form 4 • Chapter 3</dd>
-          <dt>Format</dt><dd>PDF • 2.4 MB</dd>
-          <dt>Uploaded</dt><dd>2 Oct 2026</dd>
-          <dt>Status</dt><dd class="status--published">Published</dd>
-        </dl>
-        <p class="detail-note">Timeline of the Japanese occupation, key events, and revision notes. Available to students in 4 Amanah.</p>
-        <div class="detail-actions">
-          <button class="primary-button" type="button">View material</button>
-          <button class="secondary-button" type="button">Unpublish</button>
-        </div>
-      </aside>
-    </section>
-  </main>
-  <uc:Footer ID="FooterControl" runat="server" />
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Title</th><th>Class</th><th>Created By</th><th>Upload Date</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody>
+                <asp:Repeater ID="MaterialRepeater" runat="server" OnItemCommand="MaterialRepeater_ItemCommand">
+                  <ItemTemplate>
+                    <tr aria-selected='<%# GetSelected(Eval("materialID")) %>'>
+                      <td class="material-title"><%# Eval("title") %></td>
+                      <td><%# GetText(Eval("className")) %></td>
+                      <td><%# GetText(Eval("teacherName")) %></td>
+                      <td class="nowrap"><%# GetDate(Eval("uploadDate")) %></td>
+                      <td class='<%# GetStatusClass(Eval("status")) %>'><%# GetText(Eval("status")) %></td>
+                      <td class="row-actions">
+                        <asp:LinkButton runat="server" CssClass="row-link" CommandName="SelectMaterial"
+                            CommandArgument='<%# Eval("materialID") %>' Text="View" />
+                      </td>
+                    </tr>
+                  </ItemTemplate>
+                </asp:Repeater>
+                <asp:PlaceHolder ID="emptyMessage" runat="server" Visible="false">
+                  <tr><td colspan="6" class="empty-row">No materials found.</td></tr>
+                </asp:PlaceHolder>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <span class="pagination-note">
+              Showing <asp:Label ID="lblShowing" runat="server" /> of
+              <asp:Label ID="lblTotal" runat="server" /> materials
+            </span>
+          </div>
+        </section>
+
+        <aside class="panel">
+          <h2 class="panel-heading">Material Details</h2>
+
+          <asp:Panel ID="pnlDetails" runat="server">
+            <dl class="detail-list">
+              <dt>Material</dt><dd><asp:Label ID="lblDetTitle" runat="server" /></dd>
+              <dt>Teacher</dt><dd><asp:Label ID="lblDetTeacher" runat="server" /></dd>
+              <dt>Class</dt><dd><asp:Label ID="lblDetClass" runat="server" /></dd>
+              <dt>Duration</dt><dd><asp:Label ID="lblDetDuration" runat="server" /></dd>
+              <dt>Uploaded</dt><dd><asp:Label ID="lblDetDate" runat="server" /></dd>
+              <dt>Comments</dt><dd><asp:Label ID="lblDetComments" runat="server" /></dd>
+              <dt>Status</dt><dd><asp:Label ID="lblDetStatus" runat="server" /></dd>
+            </dl>
+            <div class="detail-actions">
+              <asp:HyperLink ID="hlView" runat="server" CssClass="primary-button" Target="_blank" Text="View material" />
+              <asp:Button ID="btnToggle" runat="server" CssClass="secondary-button" OnClick="btnToggle_Click"
+                  OnClientClick="return confirm('Change the status of this material?');" />
+            </div>
+          </asp:Panel>
+
+          <asp:Panel ID="pnlNoSelection" runat="server" Visible="false">
+            <p class="detail-note">No material selected.</p>
+          </asp:Panel>
+        </aside>
+      </section>
+    </main>
+
+    <uc:Footer ID="FooterControl" runat="server" />
+  </form>
 </body>
 </html>
-
