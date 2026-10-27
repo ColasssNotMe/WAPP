@@ -44,7 +44,7 @@ namespace Assignment
         INNER JOIN Student s
             ON e.studentID = s.studentID
         WHERE s.userID = @userID
-          AND m.status = 'Active'
+          AND m.status = 'Published'
         ORDER BY m.uploadDate DESC";
 
             using (SqlConnection conn = new SqlConnection(

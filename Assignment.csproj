@@ -340,6 +340,7 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ProgressCalculator.cs" />
     <Compile Include="ClassroomDetails.aspx.cs">
       <DependentUpon>ClassroomDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
