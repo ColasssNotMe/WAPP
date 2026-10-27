@@ -1,5 +1,4 @@
-﻿
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminClassroomManagement.aspx.cs" Inherits="Assignment.AdminClassroomManagement" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminClassroomManagement.aspx.cs" Inherits="Assignment.AdminClassroomManagement" %>
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
@@ -15,6 +14,7 @@
 <body>
 <form id="form1" runat="server">
 
+    <asp:HiddenField ID="hfSelectedClassID" runat="server" />
     <uc:Header ID="HeaderControl" runat="server" />
 
     <div class="container">
@@ -73,22 +73,23 @@
                             ID="txtClassroomSearch"
                             runat="server"
                             CssClass="search-input"
-                            placeholder="Search classroom or teacher"
-                            AutoPostBack="true"
-                            OnTextChanged="txtClassroomSearch_TextChanged" />
+                            placeholder="Search classroom or teacher..." />
 
-                        <asp:DropDownList
-                            ID="ddlClassroomStatus"
-                            runat="server"
-                            CssClass="select"
-                            AutoPostBack="true"
-                            OnSelectedIndexChanged="ddlClassroomStatus_SelectedIndexChanged">
+                        <asp:Button 
+                            ID="btnClassroomSearch" 
+                            runat="server" 
+                            Text="Search" 
+                            CssClass="btn primary" 
+                            OnClick="btnClassroomSearch_Click" 
+                            CausesValidation="false" />
 
-                            <asp:ListItem Text="Status: All" Value="" />
-                            <asp:ListItem Text="Active" Value="Active" />
-                            <asp:ListItem Text="Inactive" Value="Inactive" />
-
-                        </asp:DropDownList>
+                        <asp:Button 
+                            ID="btnClassroomReset" 
+                            runat="server" 
+                            Text="Reset" 
+                            CssClass="btn" 
+                            OnClick="btnClassroomReset_Click" 
+                            CausesValidation="false" />
 
                     </div>
 
@@ -97,11 +98,11 @@
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Select</th>
                                     <th>Classroom Name</th>
                                     <th>Teacher</th>
                                     <th>Student Count</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                    <th>Quiz Count</th>
                                 </tr>
                             </thead>
 
@@ -109,10 +110,22 @@
 
                                 <asp:Repeater
                                     ID="rptClassrooms"
-                                    runat="server">
+                                    runat="server"
+                                    OnItemCommand="rptClassrooms_ItemCommand">
 
                                     <ItemTemplate>
-                                        <tr>
+                                        <tr class='<%# Convert.ToString(Eval("ClassID")) == hfSelectedClassID.Value ? "selected-row" : "" %>'>
+                                            <td>
+                                                <asp:LinkButton 
+                                                    ID="btnSelect" 
+                                                    runat="server" 
+                                                    Text="Select" 
+                                                    CommandName="SelectClass" 
+                                                    CommandArgument='<%# Eval("ClassID") %>' 
+                                                    CssClass="btn-select" 
+                                                    CausesValidation="false" />
+                                            </td>
+
                                             <td class="name">
                                                 <%#: Eval("ClassName") %>
                                             </td>
@@ -125,14 +138,8 @@
                                                 <%#: Eval("StudentCount") %>
                                             </td>
 
-                                            <td class='status <%#: Convert.ToString(Eval("Status")).ToLowerInvariant() %>'>
-                                                <%#: Eval("Status") %>
-                                            </td>
-
-                                            <td class="actions">
-                                                <a href='AdminClassroomDetails.aspx?classID=<%# Eval("ClassID") %>'>
-                                                    View
-                                                </a>
+                                            <td>
+                                                <%#: Eval("QuizCount") %>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
@@ -175,24 +182,23 @@
                             ID="txtSessionSearch"
                             runat="server"
                             CssClass="search-input"
-                            placeholder="Search session, classroom or teacher"
-                            AutoPostBack="true"
-                            OnTextChanged="txtSessionSearch_TextChanged" />
+                            placeholder="Search session, classroom or teacher..." />
 
-                        <asp:DropDownList
-                            ID="ddlSessionStatus"
-                            runat="server"
-                            CssClass="select"
-                            AutoPostBack="true"
-                            OnSelectedIndexChanged="ddlSessionStatus_SelectedIndexChanged">
+                        <asp:Button 
+                            ID="btnSessionSearch" 
+                            runat="server" 
+                            Text="Search" 
+                            CssClass="btn primary" 
+                            OnClick="btnSessionSearch_Click" 
+                            CausesValidation="false" />
 
-                            <asp:ListItem Text="Status: All" Value="" />
-                            <asp:ListItem Text="Live" Value="Live" />
-                            <asp:ListItem Text="Scheduled" Value="Scheduled" />
-                            <asp:ListItem Text="Completed" Value="Completed" />
-                            <asp:ListItem Text="Cancelled" Value="Cancelled" />
-
-                        </asp:DropDownList>
+                        <asp:Button 
+                            ID="btnSessionReset" 
+                            runat="server" 
+                            Text="Reset" 
+                            CssClass="btn" 
+                            OnClick="btnSessionReset_Click" 
+                            CausesValidation="false" />
 
                     </div>
 
@@ -275,51 +281,67 @@
                 <dl>
                     <div class="row">
                         <dt>Classroom</dt>
-                        <dd>4 Amanah</dd>
+                        <dd><asp:Label ID="lblDetailClassName" runat="server" Text="-" /></dd>
                     </div>
 
                     <div class="row">
                         <dt>Teacher</dt>
-                        <dd>Cikgu Nurul</dd>
+                        <dd><asp:Label ID="lblDetailTeacher" runat="server" Text="-" /></dd>
                     </div>
 
                     <div class="row">
                         <dt>School</dt>
-                        <dd>SMK Taman Melawati</dd>
+                        <dd><asp:Label ID="lblDetailSchool" runat="server" Text="-" /></dd>
                     </div>
 
                     <div class="row">
                         <dt>Subject</dt>
-                        <dd>Form 4 • Sejarah KSSM</dd>
+                        <dd><asp:Label ID="lblDetailSubject" runat="server" Text="-" /></dd>
                     </div>
 
                     <div class="row">
                         <dt>Students</dt>
-                        <dd>30</dd>
+                        <dd><asp:Label ID="lblDetailStudents" runat="server" Text="0" /></dd>
                     </div>
 
                     <div class="row">
                         <dt>Invite code</dt>
-                        <dd>AMANAH26</dd>
+                        <dd><asp:Label ID="lblDetailInviteCode" runat="server" Text="-" /></dd>
                     </div>
 
                     <div class="row">
                         <dt>Status</dt>
-                        <dd class="ok">Active</dd>
+                        <dd class="ok"><asp:Label ID="lblDetailStatus" runat="server" Text="-" /></dd>
                     </div>
                 </dl>
 
                 <p class="note">
-                    Select View in the classroom table to open the classroom details.
-                    The information above is currently sample content.
+                    <asp:Label ID="lblNote" runat="server" Text="Select View in the classroom table to open details." />
                 </p>
 
                 <div class="btn-row">
                     <asp:Button
+                        ID="btnViewDetails"
+                        runat="server"
+                        Text="View"
+                        CssClass="btn primary"
+                        CausesValidation="false"
+                        OnClick="btnViewDetails_Click" />
+
+                    <asp:Button
+                        ID="btnDeleteClassroom"
+                        runat="server"
+                        Text="Delete"
+                        CssClass="btn btn-danger"
+                        CausesValidation="false"
+                        OnClientClick="return confirm('Are you sure you want to delete this classroom?');"
+                        OnClick="btnDeleteClassroom_Click" />
+
+                    <asp:Button
                         ID="btnRefresh"
                         runat="server"
                         Text="Refresh"
-                        CssClass="btn primary"
+                        CssClass="btn"
                         CausesValidation="false"
                         OnClick="btnRefresh_Click" />
                 </div>

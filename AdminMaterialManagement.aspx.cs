@@ -37,7 +37,7 @@ namespace Assignment
             loadMaterials();
         }
 
-        // Click View on a row
+        // Handle selection of a row from the table
         protected void MaterialRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectMaterial")
@@ -64,6 +64,52 @@ namespace Assignment
                 cmd.ExecuteNonQuery();
             }
 
+            loadMaterials();
+        }
+
+        // Delete material button
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (ViewState["MaterialID"] == null) return;
+
+            string connString =
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+
+                try
+                {
+                    // Delete dependent comments first to preserve foreign key constraints
+                    string deleteCommentsQuery = "DELETE FROM Comment WHERE materialID = @materialID";
+                    using (SqlCommand cmd1 = new SqlCommand(deleteCommentsQuery, conn, transaction))
+                    {
+                        cmd1.Parameters.AddWithValue("@materialID", ViewState["MaterialID"]);
+                        cmd1.ExecuteNonQuery();
+                    }
+
+                    // Delete the material record
+                    string deleteMaterialQuery = "DELETE FROM Material WHERE materialID = @materialID";
+                    using (SqlCommand cmd2 = new SqlCommand(deleteMaterialQuery, conn, transaction))
+                    {
+                        cmd2.Parameters.AddWithValue("@materialID", ViewState["MaterialID"]);
+                        cmd2.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+
+            // Reset selection state and refresh grid/counts
+            ViewState["MaterialID"] = null;
+            setDefaultMaterial();
             loadMaterials();
         }
 

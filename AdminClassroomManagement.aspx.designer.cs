@@ -24,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// hfSelectedClassID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfSelectedClassID;
+
+        /// <summary>
         /// HeaderControl control.
         /// </summary>
         /// <remarks>
@@ -87,13 +96,22 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtClassroomSearch;
 
         /// <summary>
-        /// ddlClassroomStatus control.
+        /// btnClassroomSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlClassroomStatus;
+        protected global::System.Web.UI.WebControls.Button btnClassroomSearch;
+
+        /// <summary>
+        /// btnClassroomReset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClassroomReset;
 
         /// <summary>
         /// rptClassrooms control.
@@ -132,13 +150,22 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtSessionSearch;
 
         /// <summary>
-        /// ddlSessionStatus control.
+        /// btnSessionSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSessionStatus;
+        protected global::System.Web.UI.WebControls.Button btnSessionSearch;
+
+        /// <summary>
+        /// btnSessionReset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSessionReset;
 
         /// <summary>
         /// rptSessions control.
@@ -157,6 +184,96 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSessionCount;
+
+        /// <summary>
+        /// lblDetailClassName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDetailClassName;
+
+        /// <summary>
+        /// lblDetailTeacher control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDetailTeacher;
+
+        /// <summary>
+        /// lblDetailSchool control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDetailSchool;
+
+        /// <summary>
+        /// lblDetailSubject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDetailSubject;
+
+        /// <summary>
+        /// lblDetailStudents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDetailStudents;
+
+        /// <summary>
+        /// lblDetailInviteCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDetailInviteCode;
+
+        /// <summary>
+        /// lblDetailStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDetailStatus;
+
+        /// <summary>
+        /// lblNote control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNote;
+
+        /// <summary>
+        /// btnViewDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewDetails;
+
+        /// <summary>
+        /// btnDeleteClassroom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeleteClassroom;
 
         /// <summary>
         /// btnRefresh control.

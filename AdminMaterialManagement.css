@@ -346,3 +346,55 @@
     gap: 10px;
     margin-top: 16px;
 }
+
+
+/* Make title act cleanly as row selection trigger */
+.row-select-link {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
+    .row-select-link:hover {
+        color: var(--accent-color);
+        text-decoration: underline;
+    }
+
+/* Active selected row state styling */
+.data-table tbody tr[aria-selected="true"] {
+    background: var(--bg-light);
+}
+
+    .data-table tbody tr[aria-selected="true"] td:first-child {
+        box-shadow: inset 3px 0 0 var(--gold-color);
+    }
+
+/* Danger / Delete button style */
+.danger-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 10px 16px;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid #d9534f;
+    background: #d9534f;
+    color: #ffffff;
+    transition: background 160ms ease, border-color 160ms ease;
+}
+
+    .danger-button:hover,
+    .danger-button:focus-visible {
+        background: #c9302c;
+        border-color: #ac2925;
+        outline: 2px solid var(--gold-color);
+        outline-offset: 2px;
+    }
