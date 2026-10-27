@@ -39,8 +39,7 @@
                                 RepeatDirection="Horizontal"
                                 RepeatLayout="Flow"
                                 CssClass="role-options"
-                                AutoPostBack="true"
-                                OnSelectedIndexChanged="RoleRadioList_SelectedIndexChanged">
+                                AutoPostBack="true">
 
                                 <asp:ListItem Value="Student" Selected="True">Student</asp:ListItem>
                                 <asp:ListItem Value="Teacher">Teacher</asp:ListItem>

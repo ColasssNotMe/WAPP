@@ -83,15 +83,15 @@ namespace Assignment
                                     reader["profilePic"].ToString().Trim();
                             }
 
-                            if (role == "admin")
+                            if (role.ToLower() == "admin")
                             {
                                 Response.Redirect("AdminDashboard.aspx");
                             }
-                            else if (role == "teacher")
+                            else if (role.ToLower() == "teacher")
                             {
                                 Response.Redirect("TeacherDashboard.aspx");
                             }
-                            else if (role == "student")
+                            else if (role.ToLower() == "student")
                             {
                                 Response.Redirect("StudentDashboard.aspx");
                             }
