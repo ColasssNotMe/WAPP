@@ -21,6 +21,7 @@ namespace Assignment
                 txtUsername.Text = Session["username"]?.ToString() ?? "";
                 usernameDisplay.InnerText = Session["username"]?.ToString() ?? "";
                 txtEmail.Text = Session["email"]?.ToString() ?? "";
+                txtOtpEmail.Text = Session["email"]?.ToString() ?? "";
                 txtRole.Text = Session["role"]?.ToString() ?? "Student";
 
                 string profilePicUrl =
@@ -236,48 +237,97 @@ namespace Assignment
             }
         }
 
-        protected void txtPassword_TextChanged(object sender, EventArgs e)
+        // =========================================================
+        // CHANGE PASSWORD (EMAIL OTP)
+        // The OTP generation / sending / verification lives in OtpService
+        // so the Login > Forgot Password page can reuse it.
+        // =========================================================
+
+        protected void btnChangePassword_Click(object sender, EventArgs e)
         {
-            string connectionString =
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+            lblOtpInfo.Text = "";
+            lblPasswordError.Text = "";
 
-            string query = @"
-                UPDATE [User]
-                SET
-                    password = @password
-                WHERE userId = @userId;
-            ";
+            // Start from the account's own registered email.
+            txtOtpEmail.Text = Session["email"]?.ToString() ?? txtEmail.Text.Trim();
+            txtOtp.Text = "";
+            txtNewPassword.Text = "";
+            txtConfirmPassword.Text = "";
 
-            PasswordManager passwordManager = new PasswordManager();
+            ShowPasswordModal();
+        }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+        protected void btnClosePasswordModal_Click(object sender, EventArgs e)
+        {
+            HidePasswordModal();
+        }
+
+        protected void btnGetCode_Click(object sender, EventArgs e)
+        {
+            ShowPasswordModal();
+
+            lblOtpInfo.Text = "";
+            lblPasswordError.Text = "";
+
+            string message;
+            OtpService.RequestCode(txtOtpEmail.Text, out message);
+            lblOtpInfo.Text = message;
+        }
+
+        protected void btnSubmitPasswordChange_Click(object sender, EventArgs e)
+        {
+            ShowPasswordModal();
+            lblPasswordError.Text = "";
+
+            string email = txtOtpEmail.Text.Trim();
+            string newPassword = txtNewPassword.Text;
+            string confirmPassword = txtConfirmPassword.Text;
+
+            // Check the password rules first so a valid code is not wasted.
+            if (newPassword.Length < 8)
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue(
-                        "@password",
-                        passwordManager.HashPassword(txtPassword.Text.Trim()));
-
-                    cmd.Parameters.AddWithValue(
-                        "@userId",
-                        Session["userId"]);
-
-                    conn.Open();
-
-                    cmd.ExecuteNonQuery();
-                }
+                lblPasswordError.Text =
+                    "The new password must be at least 8 characters long.";
+                return;
             }
 
+            if (newPassword != confirmPassword)
+            {
+                lblPasswordError.Text = "The two passwords do not match.";
+                return;
+            }
+
+            string error;
+
+            if (!OtpService.VerifyCode(email, txtOtp.Text, out error))
+            {
+                lblPasswordError.Text = error;
+                return;
+            }
+
+            OtpService.UpdatePassword(email, newPassword);
+
+            HidePasswordModal();
+
+            txtOtp.Text = "";
+            txtNewPassword.Text = "";
+            txtConfirmPassword.Text = "";
+
             saveResult.InnerText =
-                "Profile updated successfully.";
-
-            saveResult.Attributes["class"] =
-                "save-result success";
-
+                "Password changed successfully. Use the new password next time you sign in.";
+            saveResult.Attributes["class"] = "save-result success";
             saveResult.Visible = true;
-
-
-
         }
+
+        private void ShowPasswordModal()
+        {
+            pnlPasswordModal.Style["display"] = "flex";
+        }
+
+        private void HidePasswordModal()
+        {
+            pnlPasswordModal.Style["display"] = "none";
+        }
+
     }
 }

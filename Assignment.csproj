@@ -231,6 +231,8 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Header.ascx" />
     <Content Include="Footer.ascx" />
+    <Content Include="ForgotPassword.aspx" />
+    <Content Include="ForgotPassword.css" />
     <Content Include="Content\logo.webp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -341,6 +343,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ProgressCalculator.cs" />
+    <Compile Include="OtpService.cs" />
+    <Compile Include="ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClassroomDetails.aspx.cs">
       <DependentUpon>ClassroomDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -186,6 +186,56 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button btnChangePassword;
 
         /// <summary>
+        /// pnlPasswordModal control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Panel pnlPasswordModal;
+
+        /// <summary>
+        /// btnClosePasswordModal control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnClosePasswordModal;
+
+        /// <summary>
+        /// txtOtpEmail control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtOtpEmail;
+
+        /// <summary>
+        /// btnGetCode control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnGetCode;
+
+        /// <summary>
+        /// lblOtpInfo control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblOtpInfo;
+
+        /// <summary>
+        /// txtOtp control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtOtp;
+
+        /// <summary>
+        /// txtNewPassword control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtNewPassword;
+
+        /// <summary>
+        /// txtConfirmPassword control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
+
+        /// <summary>
+        /// lblPasswordError control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblPasswordError;
+
+        /// <summary>
+        /// btnSubmitPasswordChange control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnSubmitPasswordChange;
+
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
