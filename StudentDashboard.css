@@ -95,6 +95,39 @@
     border-bottom: 1px solid rgb(28 37 65 / 10%);
 }
 
+/* Section headers that link to their full list page */
+.section-title-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .section-title-link:hover {
+        background-color: rgb(197 160 89 / 10%);
+        color: var(--accent-color);
+    }
+
+    .section-title-link:focus-visible {
+        outline: 3px solid var(--gold-color);
+        outline-offset: -3px;
+    }
+
+.section-arrow {
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    color: var(--secondary-color);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+    .section-title-link:hover .section-arrow {
+        color: var(--accent-color);
+        transform: translateX(3px);
+    }
+
 .learning-item {
     display: flex;
     align-items: center;
@@ -152,9 +185,8 @@
 
 /* Live session */
 .live-session {
-    width:fit-content;
-    margin: 1.5rem auto 1.5rem  3.2rem;
-    padding: 0.9rem 1.25rem;
+    margin: 0 0 1.25rem;
+    padding: 1.25rem;
     background-color: var(--bg-surface);
     border: 2px solid var(--gold-color);
     border-radius: 0.875rem;
@@ -164,7 +196,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem;
     font-size: 1.15rem;
     font-weight: 800;
     color: var(--primary-color);
@@ -365,4 +397,16 @@
     background-color: #FBEAEA;
     border: 1px solid rgb(136 0 0 / 18%);
     border-radius: 0.5rem;
+}
+
+/* Stack the code + button rows on narrow screens */
+@media (max-width: 600px) {
+    .join-form {
+        flex-direction: column;
+    }
+
+    .join-button {
+        width: 100%;
+        min-width: 0;
+    }
 }

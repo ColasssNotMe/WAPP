@@ -51,8 +51,7 @@ namespace Assignment
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
             {
 
-                using (
-               SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@userID", userID);
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
@@ -104,32 +103,23 @@ namespace Assignment
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@userID", userID);
-
                     conn.Open();
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
                         DataTable dt = new DataTable();
 
-                        dt.Columns.Add("Title");
-                        dt.Columns.Add("Info");
+                        da.Fill(dt);
 
-                        while (reader.Read())
-                        {
-                            string title = reader["title"].ToString();
-                            string className = reader["className"].ToString();
-
-                            dt.Rows.Add(
-                                title,
-                                className
-                            );
-                        }
 
                         RecentQuizRepeater.DataSource = dt;
                         RecentQuizRepeater.DataBind();
 
                         quizPlaceholder.Visible = dt.Rows.Count == 0;
+
                     }
+
                 }
             }
         }
@@ -238,9 +228,6 @@ namespace Assignment
                 return;
             }
 
-            // Recalculate from the quiz/result data, then read the cached value.
-            // NOTE: the session stores User.userID, while the Student table is
-            // keyed by studentID, so resolve the student row first.
             ProgressCalculator.RecalculateForUser(Convert.ToInt32(userID));
 
             string connectionString =

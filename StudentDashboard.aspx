@@ -84,20 +84,25 @@
             ========================== -->
 
             <div class="live-session">
-                <h3>Join Live Session</h3>
+                <h3 class="live-title">Join Live Session</h3>
 
-                <input type="text"
-                    id="liveSessionCode"
-                    runat="server"
-                    placeholder="Enter live session code" />
+                <div class="join-form">
+                    <input type="text"
+                        id="liveSessionCode"
+                        class="classroom-input"
+                        runat="server"
+                        placeholder="Enter live session code" />
 
-                <asp:Button ID="joinLiveSessionButton"
-                    runat="server"
-                    Text="Join Session"
-                    OnClick="JoinLiveSession_Click" />
+                    <asp:Button ID="joinLiveSessionButton"
+                        runat="server"
+                        Text="Join Session"
+                        CssClass="join-button"
+                        OnClick="JoinLiveSession_Click" />
+                </div>
 
                 <div id="liveSessionError"
                     runat="server"
+                    class="error-info"
                     visible="false">
                 </div>
             </div>
@@ -108,9 +113,22 @@
 
             <section class="section-card">
 
-                <div class="section-title">
-                    Learning Materials
-                </div>
+                <a class="section-title section-title-link" href="StudentLearningMaterial.aspx">
+                    <span>Learning Materials</span>
+
+                    <svg class="section-arrow"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
 
 
                 <asp:Repeater
@@ -120,7 +138,6 @@
                     <ItemTemplate>
 
                         <div class="learning-item">
-
 
                             <!-- Material Icon -->
 
@@ -149,11 +166,7 @@
                             <div class="item-content">
 
                                 <p class="item-title">
-                                    <%# Eval("Title") %>
-                                </p>
-
-                                <p class="item-info">
-                                    <%# Eval("Info") %>
+                                    <%# Eval("title") %>
                                 </p>
 
                             </div>
@@ -184,15 +197,24 @@
             </section>
 
 
-            <!-- =========================
-                 RECENT QUIZ
-            ========================== -->
-
             <section class="section-card">
 
-                <div class="section-title">
-                    Recent Quiz
-                </div>
+                <a class="section-title section-title-link" href="StudentQuizList.aspx">
+                    <span>Recent Quiz</span>
+
+                    <svg class="section-arrow"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
 
 
                 <asp:Repeater
@@ -230,7 +252,6 @@
                             </div>
 
 
-                            <!-- Quiz Information -->
 
                             <div class="item-content">
 
@@ -250,7 +271,6 @@
 
                 </asp:Repeater>
 
-                <!-- Empty placeholder -->
                 <div id="quizPlaceholder"
                     runat="server"
                     class="empty-placeholder"
@@ -272,9 +292,6 @@
             </section>
 
 
-            <!-- =========================
-                 JOIN NEW CLASSROOM
-            ========================== -->
 
             <section class="join-card">
 

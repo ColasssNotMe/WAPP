@@ -18,15 +18,11 @@
 
 <body>
 
-    <uc:Header runat="server" />
 
     <form id="form1" runat="server">
 
+        <uc:Header runat="server" />
         <main class="classroom-page">
-
-            <!-- ==========================================
-                 PAGE INTRODUCTION
-            =========================================== -->
 
             <section class="classroom-intro">
 
@@ -46,16 +42,11 @@
                 <span
                     class="classroom-count"
                     id="classroomCount"
-                    runat="server">
-                    0 joined classrooms
+                    runat="server">0 joined classrooms
                 </span>
 
             </section>
 
-
-            <!-- ==========================================
-                 JOINED CLASSROOMS
-            =========================================== -->
 
             <section class="joined-classrooms">
 
@@ -69,11 +60,6 @@
 
                 </div>
 
-
-                <!-- ==========================================
-                     CLASSROOM GRID
-                =========================================== -->
-
                 <div class="classroom-grid">
 
                     <asp:Repeater
@@ -82,15 +68,7 @@
                         OnItemCommand="ClassroomRepeater_ItemCommand">
 
                         <ItemTemplate>
-
-                            <!-- ==========================================
-                                 CLASSROOM CARD
-                            =========================================== -->
-
                             <article class="classroom-card">
-
-
-                                <!-- Card Top -->
 
                                 <div class="card-top">
 
@@ -100,33 +78,19 @@
 
                                 </div>
 
-
-                                <!-- Card Content -->
-
                                 <div class="card-content">
-
-                                    <!-- Classroom Name -->
 
                                     <h3>
                                         <%# Eval("className") %>
                                     </h3>
 
-
-                                    <!-- Classroom Description -->
-
                                     <p class="classroom-info">
                                         <%# Eval("description") %>
                                     </p>
 
-
-                                    <!-- Subject -->
-
                                     <p class="classroom-info">
                                         <%# Eval("subject") %>
                                     </p>
-
-
-                                    <!-- Teacher -->
 
                                     <div class="teacher">
 
@@ -140,9 +104,7 @@
 
                                         </div>
 
-
                                         <div>
-
                                             <span>Teacher</span>
 
                                             <strong>
@@ -150,85 +112,47 @@
                                             </strong>
 
                                         </div>
-
                                     </div>
-
                                 </div>
 
-
-                                <!-- Card Footer -->
-
                                 <div class="card-footer">
-
-
-                                    <!-- Classroom Statistics -->
-
                                     <div class="classroom-stats">
-
                                         <span>
                                             <%# Eval("studentCount") %> students
                                         </span>
-
-                                        <span>
-                                            Joined
+                                        <span>Joined
                                             <%# Eval("enrollDate", "{0:MMMM yyyy}") %>
                                         </span>
-
                                     </div>
-
-
-                                    <!-- View Classroom -->
-
                                     <asp:LinkButton
                                         ID="ViewClassroomButton"
                                         runat="server"
                                         CssClass="view-classroom"
                                         CommandName="ViewClassroom"
                                         CommandArgument='<%# Eval("classID") %>'>
-
                                         View classroom
                                         <span>→</span>
-
                                     </asp:LinkButton>
-
-
                                 </div>
-
                             </article>
-
                         </ItemTemplate>
-
                     </asp:Repeater>
-
-
-                    <!-- ==========================================
-                         EMPTY CLASSROOM MESSAGE
-                    =========================================== -->
 
                     <asp:Panel
                         ID="emptyClassroomPanel"
                         runat="server"
                         CssClass="empty-classroom"
                         Visible="false">
-
                         <h3>No classrooms joined</h3>
-
                         <p>
                             You have not joined any classrooms yet.
                             Ask your teacher for an invite code.
                         </p>
-
-
                     </asp:Panel>
-
                 </div>
-
             </section>
 
 
-            <!-- ==========================================
-                 FIND ANOTHER CLASSROOM
-            =========================================== -->
 
             <section class="find-classroom">
 
@@ -239,8 +163,7 @@
 
                 <div class="find-content">
 
-                    <h3>
-                        Looking for another classroom?
+                    <h3>Looking for another classroom?
                     </h3>
 
                     <p>
@@ -253,9 +176,7 @@
 
                 <a
                     href="StudentDashboard.aspx"
-                    class="dashboard-button">
-
-                    Go to dashboard
+                    class="dashboard-button">Go to dashboard
                     <span>→</span>
 
                 </a>
@@ -264,10 +185,10 @@
 
         </main>
 
+        <uc:Footer runat="server" />
     </form>
 
 
-    <uc:Footer runat="server" />
 
 </body>
 

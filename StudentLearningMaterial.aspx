@@ -76,7 +76,7 @@
                             <div class="card-footer">
 
                                 <p>
-                                    <%# Eval("duratinoMins") %>
+                                    <%# Eval("durationMins") %>
                                 </p>
                                 <a href='LearningMaterialDetails.aspx?id=<%# Eval("materialID") %>'
                                     class="view-materials">View Materials
