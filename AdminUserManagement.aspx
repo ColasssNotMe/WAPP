@@ -31,7 +31,6 @@
                 </p>
             </div>
 
-            <!-- Top right: user count + Add New User button -->
             <div class="header-actions">
                 <span class="overview-pill">
                     <asp:Label ID="lblTotalUsers" runat="server" Text="0" />
@@ -68,7 +67,6 @@
                 </div>
             </div>
 
-            <!-- Four sections -->
             <div class="tab-list">
 
                 <asp:LinkButton ID="btnAllUsers" runat="server"
@@ -106,7 +104,6 @@
                 </span>
             </div>
 
-            <!-- Search -->
             <div class="filter-row">
                 <asp:TextBox ID="txtSearch" runat="server"
                     CssClass="search-input"
@@ -124,7 +121,6 @@
                     OnClick="btnReset_Click" />
             </div>
 
-            <!-- User table -->
             <div class="table-wrap">
                 <table class="data-table">
                     <thead>
@@ -188,16 +184,13 @@
 
         </section>
 
-        <!-- Details panel on the right -->
         <aside class="panel detail-panel">
             <h2 class="panel-heading">User Details</h2>
 
-            <!-- Success / error message -->
             <asp:Panel ID="pnlMessage" runat="server" Visible="false">
                 <asp:Label ID="lblMessage" runat="server" />
             </asp:Panel>
 
-            <!-- Add new user form -->
             <asp:Panel ID="pnlAdd" runat="server" Visible="false" CssClass="edit-form">
                 <div class="field">
                     <label for="<%= txtNewFirstName.ClientID %>">First name</label>
@@ -242,7 +235,6 @@
 
             <asp:Panel ID="pnlDetails" runat="server">
 
-                <!-- Read-only view -->
                 <asp:Panel ID="pnlView" runat="server">
                     <dl class="detail-list">
                         <dt>Name</dt><dd><asp:Label ID="lblDetName" runat="server" /></dd>
@@ -256,7 +248,6 @@
                     </dl>
                 </asp:Panel>
 
-                <!-- Edit form -->
                 <asp:Panel ID="pnlEdit" runat="server" Visible="false" CssClass="edit-form">
                     <div class="field">
                         <label for="<%= txtFirstName.ClientID %>">First name</label>
@@ -294,7 +285,6 @@
                     </div>
                 </asp:Panel>
 
-                <!-- Edit / Delete -->
                 <asp:Panel ID="pnlActions" runat="server" CssClass="action-row">
                     <asp:Button ID="btnEdit" runat="server" Text="Edit"
                         CssClass="btn btn-secondary"
@@ -305,7 +295,6 @@
                         OnClick="btnDelete_Click" />
                 </asp:Panel>
 
-                <!-- Approve / Reject (pending teachers only) -->
                 <asp:Panel ID="pnlApprovalActions" runat="server" CssClass="action-row" Visible="false">
                     <asp:Button ID="btnApprove" runat="server" Text="Approve"
                         CssClass="btn btn-success"

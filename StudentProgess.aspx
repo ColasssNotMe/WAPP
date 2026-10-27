@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Progress</title>
-    <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- External Stylesheet -->
+
     <link rel="stylesheet" href="StudentProgess.css">
 </head>
 <body>
 
     <div class="progress-container">
-        
-        <!-- Header Section with Left Back Arrow -->
+
         <header class="page-header">
             <div class="header-left">
                 <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
@@ -31,16 +30,13 @@
             </div>
         </header>
 
-        <!-- Main Grid Layout -->
         <div class="progress-content-grid">
-            
-            <!-- Left Column: Student Overview Card -->
+
             <main class="card student-overview-card">
                 <h2 class="card-title">Student Overview</h2>
 
                 <div class="student-items-wrapper">
-                    
-                    <!-- Student 1 -->
+
                     <div class="student-row">
                         <div class="student-info">
                             <h3 class="student-name">Aiman bin Abdullah</h3>
@@ -49,7 +45,6 @@
                         <span class="percentage-badge">92%</span>
                     </div>
 
-                    <!-- Student 2 -->
                     <div class="student-row">
                         <div class="student-info">
                             <h3 class="student-name">Nurul Izzati</h3>
@@ -58,7 +53,6 @@
                         <span class="percentage-badge">88%</span>
                     </div>
 
-                    <!-- Student 3 -->
                     <div class="student-row">
                         <div class="student-info">
                             <h3 class="student-name">Farhan bin Ahmad</h3>
@@ -67,7 +61,6 @@
                         <span class="percentage-badge">76%</span>
                     </div>
 
-                    <!-- Student 4 -->
                     <div class="student-row">
                         <div class="student-info">
                             <h3 class="student-name">Siti Nurhaliza</h3>
@@ -78,11 +71,9 @@
 
                 </div>
 
-                <!-- Export Report Button -->
                 <button type="button" class="btn btn-export-report">Export report</button>
             </main>
 
-            <!-- Right Column: Progress Details Card -->
             <aside class="card progress-details-card">
                 <h2 class="card-title">Progress Details</h2>
 
@@ -105,12 +96,10 @@
                     </div>
                 </div>
 
-                <!-- Info Callout -->
                 <div class="info-callout">
                     Aiman is on track with notes and quizzes, but needs extra review on Chapter 4 topics.
                 </div>
 
-                <!-- Action Buttons -->
                 <div class="details-actions">
                     <button type="button" class="btn btn-primary">View report</button>
                     <button type="button" class="btn btn-secondary">Message student</button>

@@ -13,7 +13,6 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Optional Session Check:
             // if (Session["UserID"] == null)
             // {
             //     Response.Redirect("Login.aspx");
@@ -90,10 +89,10 @@ namespace Assignment
                 LEFT JOIN Quiz q
                     ON q.classID = c.classID
                 WHERE
-                    (@Search = '' 
-                     OR c.className LIKE @Search 
-                     OR u.firstName LIKE @Search 
-                     OR u.lastName LIKE @Search 
+                    (@Search = ''
+                     OR c.className LIKE @Search
+                     OR u.firstName LIKE @Search
+                     OR u.lastName LIKE @Search
                      OR CONCAT(u.firstName, ' ', u.lastName) LIKE @Search)
                 GROUP BY
                     c.classID,
@@ -155,11 +154,11 @@ namespace Assignment
                 LEFT JOIN [User] u
                     ON u.userID = c.teacherID
                 WHERE
-                    (@Search = '' 
-                     OR ls.SessionTitle LIKE @Search 
-                     OR c.className LIKE @Search 
-                     OR u.firstName LIKE @Search 
-                     OR u.lastName LIKE @Search 
+                    (@Search = ''
+                     OR ls.SessionTitle LIKE @Search
+                     OR c.className LIKE @Search
+                     OR u.firstName LIKE @Search
+                     OR u.lastName LIKE @Search
                      OR CONCAT(u.firstName, ' ', u.lastName) LIKE @Search)
                 ORDER BY ls.StartTime DESC";
 
@@ -317,7 +316,6 @@ namespace Assignment
                             cmd1.ExecuteNonQuery();
                         }
 
-                        // Delete classroom
                         string deleteClass = "DELETE FROM [Class] WHERE classID = @ClassID";
                         using (SqlCommand cmd2 = new SqlCommand(deleteClass, conn, transaction))
                         {

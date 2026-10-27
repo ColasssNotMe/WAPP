@@ -23,7 +23,6 @@ namespace Assignment
             {
                 string sessionID = Session["sessionID"]?.ToString();
 
-                // No session ID found
                 if (string.IsNullOrEmpty(sessionID))
                 {
                     Response.Redirect("LiveSessionManagement.aspx");
@@ -34,11 +33,6 @@ namespace Assignment
                 LoadSession(sessionID);
             }
         }
-
-
-        // =========================================================
-        // LOAD CLASS LIST
-        // =========================================================
 
         private void LoadClasses()
         {
@@ -66,11 +60,6 @@ namespace Assignment
                 ddlClass.DataBind();
             }
         }
-
-
-        // =========================================================
-        // LOAD EXISTING LIVE SESSION
-        // =========================================================
 
         private void LoadSession(string sessionID)
         {
@@ -100,17 +89,12 @@ namespace Assignment
                 {
                     if (reader.Read())
                     {
-                        // Session title
                         txtTitle.Text =
                             reader["title"].ToString();
 
-
-                        // Classroom
                         ddlClass.SelectedValue =
                             reader["classID"].ToString();
 
-
-                        // Start time
                         DateTime startTime =
                             Convert.ToDateTime(
                                 reader["starttime"]);
@@ -119,8 +103,6 @@ namespace Assignment
                             startTime.ToString(
                                 "yyyy-MM-ddTHH:mm");
 
-
-                        // End time
                         DateTime endTime =
                             Convert.ToDateTime(
                                 reader["endtime"]);
@@ -131,7 +113,6 @@ namespace Assignment
                     }
                     else
                     {
-                        // Session no longer exists
                         Session.Remove("sessionID");
 
                         Response.Redirect(
@@ -141,20 +122,13 @@ namespace Assignment
             }
         }
 
-
-        // =========================================================
-        // SAVE CHANGES
-        // =========================================================
-
         protected void btnSave_Click(
             object sender,
             EventArgs e)
         {
-            // Get session ID from Session
             string sessionID =
                 Session["sessionID"]?.ToString();
 
-            // Make sure session ID exists
             if (string.IsNullOrEmpty(sessionID))
             {
                 Response.Redirect(
@@ -162,11 +136,6 @@ namespace Assignment
 
                 return;
             }
-
-
-            // =====================================================
-            // VALIDATE TITLE
-            // =====================================================
 
             if (string.IsNullOrWhiteSpace(txtTitle.Text))
             {
@@ -176,11 +145,6 @@ namespace Assignment
                 return;
             }
 
-
-            // =====================================================
-            // VALIDATE CLASS
-            // =====================================================
-
             if (string.IsNullOrEmpty(
                 ddlClass.SelectedValue))
             {
@@ -189,11 +153,6 @@ namespace Assignment
 
                 return;
             }
-
-
-            // =====================================================
-            // VALIDATE START TIME
-            // =====================================================
 
             DateTime startTime;
 
@@ -207,11 +166,6 @@ namespace Assignment
                 return;
             }
 
-
-            // =====================================================
-            // VALIDATE END TIME
-            // =====================================================
-
             DateTime endTime;
 
             if (!DateTime.TryParse(
@@ -224,7 +178,6 @@ namespace Assignment
                 return;
             }
 
-
             // End time must be after start time
             if (endTime <= startTime)
             {
@@ -234,11 +187,6 @@ namespace Assignment
                 return;
             }
 
-
-            // =====================================================
-            // UPDATE DATABASE
-            // =====================================================
-
             string query = @"
                 UPDATE LiveSession
                 SET
@@ -247,7 +195,6 @@ namespace Assignment
                     starttime = @starttime,
                     endtime = @endtime
                 WHERE sessionID = @sessionID";
-
 
             using (SqlConnection conn =
                 new SqlConnection(ConnectionString))
@@ -279,20 +226,11 @@ namespace Assignment
                 cmd.ExecuteNonQuery();
             }
 
-
-            // =====================================================
-            // CLEAR SELECTED SESSION
-            // =====================================================
-
             Session.Remove("sessionID");
 
-
-            // Return to management page
             Response.Redirect(
                 "LiveSessionManagement.aspx");
         }
-
-
 
         protected void btnCancel_Click(
             object sender,
@@ -303,7 +241,6 @@ namespace Assignment
             Response.Redirect(
                 "LiveSessionManagement.aspx");
         }
-
 
         private void ShowMessage(string message)
         {

@@ -1,11 +1,8 @@
 ﻿
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-/* ==========================================
-   1. CSS Variables (Design Tokens)
-   ========================================== */
 :root {
-    /* Classical Archive & Heritage palette */
+
     --primary-color: #1C2541;
     --secondary-color: #555B6E;
     --accent-color: #880000;
@@ -20,9 +17,6 @@
     --shadow: 0 8px 24px rgba(28, 37, 65, 0.045);
 }
 
-/* ==========================================
-   2. Global Resets & Base Elements
-   ========================================== */
 *,
 *::before,
 *::after {
@@ -39,9 +33,6 @@ body {
     font-family: 'Plus Jakarta Sans'
 }
 
-/* ==========================================
-   3. Global Typography
-   ========================================== */
 h1, h2, h3, h4, h5, h6 {
     margin: 0 0 0.5em 0;
     font-weight: bold;
@@ -78,9 +69,6 @@ a {
         text-decoration: underline;
     }
 
-/* ==========================================
-   4. Global Layout & Containers
-   ========================================== */
 /* Automatically centers main wrapper sections across pages */
 main > section,
 .container {
@@ -90,7 +78,6 @@ main > section,
     margin-right: auto;
 }
 
-/* Global Button Defaults */
 button,
 .button {
     border: none;

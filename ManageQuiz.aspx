@@ -30,7 +30,7 @@
             </header>
 
             <div class="quizzes-content-grid">
-                <!-- Left Column: Quiz Library Card -->
+
                 <main class="card quiz-library-card">
                     <h2 class="card-title">Quiz Library</h2>
 
@@ -40,10 +40,10 @@
                                 <div class="quiz-row">
                                     <div class="quiz-info">
                                         <h3 class="quiz-name">
-                                            <asp:LinkButton ID="lblQuizSelect" runat="server" 
-                                                CommandName="SelectQuiz" 
-                                                CommandArgument='<%# Eval("quizID") %>' 
-                                                Text='<%# Eval("title") %>' 
+                                            <asp:LinkButton ID="lblQuizSelect" runat="server"
+                                                CommandName="SelectQuiz"
+                                                CommandArgument='<%# Eval("quizID") %>'
+                                                Text='<%# Eval("title") %>'
                                                 CssClass="quiz-link" />
                                         </h3>
                                         <p class="quiz-meta"><%# Eval("className") %> • <%# Eval("totalMarks") %> marks</p>
@@ -57,7 +57,6 @@
                     <asp:Button ID="btnCreateQuiz" runat="server" Text="Create quiz" CssClass="btn btn-create-quiz" OnClick="btnCreateQuiz_Click" />
                 </main>
 
-                <!-- Right Column: Quiz Details Card -->
                 <aside class="card quiz-details-card">
                     <h2 class="card-title">Quiz Details</h2>
 
@@ -80,7 +79,6 @@
                         </div>
                     </div>
 
-                    <!-- Action Buttons Panel -->
                     <asp:Panel ID="pnlActions" runat="server" Visible="false" Style="margin-top:20px;">
                         <div class="details-actions" style="display: flex; gap: 10px;">
                             <asp:Button ID="btnEditQuiz" runat="server" Text="Edit quiz" CssClass="btn btn-primary" OnClick="btnEditQuiz_Click" />

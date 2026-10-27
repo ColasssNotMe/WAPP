@@ -35,7 +35,6 @@
     color: var(--secondary-color);
 }
 
-/* Overall progress */
 .progress-card {
     flex: 0 0 230px;
     padding: 1.1rem;
@@ -78,7 +77,7 @@
     border-radius: inherit;
     transition: width 0.3s ease;
 }
-/* Learning and quiz sections */
+
 .section-card {
     margin-bottom: 1.25rem;
     overflow: hidden;
@@ -183,7 +182,6 @@
     color: var(--secondary-color);
 }
 
-/* Live session */
 .live-session {
     margin: 0 0 1.25rem;
     padding: 1.25rem;
@@ -244,7 +242,6 @@
         box-shadow: 0 0 0 3px rgb(136 0 0 / 10%);
     }
 
-/* Join classroom */
 .join-card {
     padding: 1.25rem;
     background-color: var(--bg-surface);
@@ -355,7 +352,6 @@
     line-height: 1.5;
     color: var(--secondary-color);
 }
-
 
 .empty-placeholder {
     display: flex;

@@ -1,4 +1,4 @@
-﻿/* ===== Main layout ===== */
+﻿
 * {
     box-sizing: border-box;
 }
@@ -34,7 +34,6 @@
         line-height: 1.6;
     }
 
-/* ===== Two-column content ===== */
 .content-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(280px, 320px);
@@ -70,7 +69,6 @@
     font-size: 13px;
 }
 
-/* ===== Buttons ===== */
 .primary-button,
 .secondary-button,
 .danger-button {
@@ -116,7 +114,6 @@
         border-color: #dc3545;
     }
 
-/* ===== Tabs ===== */
 .tab-list {
     display: flex;
     gap: 8px;
@@ -144,7 +141,6 @@
         border-bottom-color: #d4a72c;
     }
 
-/* ===== Search ===== */
 .filter-row {
     display: flex;
     align-items: center;
@@ -183,7 +179,6 @@
             box-shadow: 0 0 0 3px rgba(28, 37, 65, 0.08);
         }
 
-/* ===== Table ===== */
 .table-wrap {
     width: 100%;
     overflow-x: auto;
@@ -221,7 +216,6 @@
         border-bottom: none;
     }
 
-/* ===== Row selection ===== */
 .selectable-row {
     cursor: pointer;
 }
@@ -272,7 +266,6 @@
     text-align: center;
 }
 
-/* ===== Pagination text ===== */
 .pagination {
     display: flex;
     justify-content: flex-end;
@@ -284,7 +277,6 @@
     font-size: 12px;
 }
 
-/* ===== Details panel ===== */
 .detail-list {
     display: grid;
     grid-template-columns: minmax(85px, 0.8fr) minmax(0, 1.2fr);

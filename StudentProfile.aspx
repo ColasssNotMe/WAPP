@@ -5,7 +5,6 @@
 
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Profile</title>
@@ -22,10 +21,6 @@
         <main class="profile-page">
 
             <div class="profile-layout">
-
-                <!-- ============================= -->
-                <!-- LEFT PROFILE CARD -->
-                <!-- ============================= -->
 
                 <aside class="profile-sidebar">
 
@@ -47,8 +42,6 @@
                     </div>
 
                     <div class="profile-divider"></div>
-
-                    <!-- Account Information -->
 
                     <div class="account-section">
 
@@ -79,11 +72,8 @@
                             <span id="accountSchool" runat="server" class="account-value">—</span>
                         </div>
 
-
                     </div>
                     <div class="profile-divider"></div>
-
-                    <!-- Profile Picture -->
 
                     <div class="photo-section">
 
@@ -108,11 +98,6 @@
 
                 </aside>
 
-
-                <!-- ============================= -->
-                <!-- RIGHT PROFILE FORM -->
-                <!-- ============================= -->
-
                 <section class="profile-content">
 
                     <h2 class="profile-title">Student Profile
@@ -121,13 +106,7 @@
                     <div id="saveResult" runat="server" class="save-result" visible="false">
                     </div>
 
-                    <!-- ============================= -->
-                    <!-- BASIC INFORMATION -->
-                    <!-- ============================= -->
-
                     <div class="form-grid">
-
-                        <!-- First Name -->
 
                         <div class="form-group">
 
@@ -143,9 +122,6 @@
                             </asp:TextBox>
 
                         </div>
-
-
-                        <!-- Last Name -->
 
                         <div class="form-group">
 
@@ -164,9 +140,6 @@
 
                     </div>
 
-
-                    <!-- Username -->
-
                     <div class="form-group">
 
                         <label for="txtUsername">
@@ -181,9 +154,6 @@
                         </asp:TextBox>
 
                     </div>
-
-
-                    <!-- Email -->
 
                     <div class="form-group">
 
@@ -201,9 +171,6 @@
 
                     </div>
 
-
-                    <!-- Role -->
-
                     <div class="form-group">
 
                         <label for="txtRole">
@@ -220,11 +187,6 @@
 
                     </div>
 
-
-                    <!-- ============================= -->
-                    <!-- STUDENT INFORMATION -->
-                    <!-- ============================= -->
-
                     <div class="form-section">
 
                         <div class="form-section-header">
@@ -233,12 +195,7 @@
 
                         <div class="section-line"></div>
 
-
                         <div class="form-grid">
-
-
-
-                            <!-- Grade Level -->
 
                             <div class="form-group">
 
@@ -257,9 +214,6 @@
 
                         </div>
 
-
-                        <!-- School -->
-
                         <div class="form-group">
 
                             <label for="txtSchool">
@@ -277,11 +231,6 @@
 
                     </div>
 
-
-                    <!-- ============================= -->
-                    <!-- SECURITY -->
-                    <!-- ============================= -->
-
                     <div class="form-section">
 
                         <div class="form-section-header">
@@ -289,9 +238,6 @@
                         </div>
 
                         <div class="section-line"></div>
-
-
-                        <!-- Password -->
 
                         <div class="form-group">
 
@@ -322,11 +268,6 @@
                                                </div>
 
                     </div>
-
-
-                    <!-- ============================= -->
-                    <!-- ACTION BUTTONS -->
-                    <!-- ============================= -->
 
                     <div class="profile-actions">
 

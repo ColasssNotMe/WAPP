@@ -62,7 +62,6 @@ namespace Assignment
                         ddlClassroom.SelectedValue = reader["classID"].ToString();
                         txtFileURL.Text = reader["fileURL"].ToString();
 
-                        // Set the selected value for ddlStatus
                         string currentStatus = reader["status"].ToString();
                         if (ddlStatus.Items.FindByValue(currentStatus) != null)
                         {
@@ -85,8 +84,8 @@ namespace Assignment
 
                 using (SqlConnection conn = new SqlConnection(GetConnectionString()))
                 {
-                    string query = @"UPDATE Material 
-                                    SET title = @title, classID = @classID, fileURL = @fileUrl, status = @status 
+                    string query = @"UPDATE Material
+                                    SET title = @title, classID = @classID, fileURL = @fileUrl, status = @status
                                     WHERE materialID = @materialID";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))

@@ -52,14 +52,11 @@
 
             </div>
 
-
             <div>
                 <img class="hero-image"
                     src="img/hero.png"
                     alt="History Image" />
             </div>
-
-
 
         </div>
         <div class="stats-container">
@@ -94,10 +91,8 @@
         storytelling, active recall drills, and direct educator guidance.
         </p>
 
-
         <div class="learning-cards">
 
-            <!-- Card 1 -->
             <div class="learning-card">
 
                 <div class="card-icon">
@@ -118,8 +113,6 @@
 
             </div>
 
-
-            <!-- Card 2 -->
             <div class="learning-card">
 
                 <div class="card-icon">
@@ -140,8 +133,6 @@
 
             </div>
 
-
-            <!-- Card 3 -->
             <div class="learning-card">
 
                 <div class="card-icon">
@@ -163,8 +154,6 @@
 
             </div>
 
-
-            <!-- Card 4 -->
             <div class="learning-card">
 
                 <div class="card-icon">
@@ -190,7 +179,6 @@
 
     <hr style="margin: 0 20px 0 0; border: none; height: 2px; background-color: black" />
 
-    <!-- How Ncient Works Section -->
     <section class="how-it-works">
 
         <div class="how-it-works-container">
@@ -208,10 +196,8 @@
             exam formats effortlessly.
             </p>
 
-
             <div class="how-cards">
 
-                <!-- Step 01 -->
                 <div class="how-card">
 
                     <div class="how-card-top">
@@ -219,7 +205,6 @@
                         <div class="how-number">
                             01
                         </div>
-
 
                     </div>
 
@@ -234,8 +219,6 @@
 
                 </div>
 
-
-                <!-- Step 02 -->
                 <div class="how-card">
 
                     <div class="how-card-top">
@@ -243,7 +226,6 @@
                         <div class="how-number">
                             02
                         </div>
-
 
                     </div>
 
@@ -258,8 +240,6 @@
 
                 </div>
 
-
-                <!-- Step 03 -->
                 <div class="how-card">
 
                     <div class="how-card-top">
@@ -267,7 +247,6 @@
                         <div class="how-number">
                             03
                         </div>
-
 
                     </div>
 
@@ -287,8 +266,6 @@
         </div>
 
     </section>
-
-
 
     <uc:Footer ID="FooterControl" runat="server" />
 

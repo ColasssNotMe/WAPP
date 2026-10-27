@@ -32,7 +32,6 @@
 
         <main class="layout">
 
-            <!-- LEFT: CLASSROOM DIRECTORY -->
             <section class="card" aria-labelledby="dir-title">
 
                 <h2 id="dir-title">Classroom directory</h2>
@@ -41,7 +40,6 @@
                     Loading classrooms...
                 </p>
 
-                <!-- C# TAB NAVIGATION -->
                 <div class="tabs">
 
                     <asp:LinkButton
@@ -64,7 +62,6 @@
 
                 </div>
 
-                <!-- CLASSROOM SECTION -->
                 <asp:Panel ID="pnlClassrooms" runat="server">
 
                     <div class="toolbar">
@@ -75,20 +72,20 @@
                             CssClass="search-input"
                             placeholder="Search classroom or teacher..." />
 
-                        <asp:Button 
-                            ID="btnClassroomSearch" 
-                            runat="server" 
-                            Text="Search" 
-                            CssClass="btn primary" 
-                            OnClick="btnClassroomSearch_Click" 
+                        <asp:Button
+                            ID="btnClassroomSearch"
+                            runat="server"
+                            Text="Search"
+                            CssClass="btn primary"
+                            OnClick="btnClassroomSearch_Click"
                             CausesValidation="false" />
 
-                        <asp:Button 
-                            ID="btnClassroomReset" 
-                            runat="server" 
-                            Text="Reset" 
-                            CssClass="btn" 
-                            OnClick="btnClassroomReset_Click" 
+                        <asp:Button
+                            ID="btnClassroomReset"
+                            runat="server"
+                            Text="Reset"
+                            CssClass="btn"
+                            OnClick="btnClassroomReset_Click"
                             CausesValidation="false" />
 
                     </div>
@@ -116,13 +113,13 @@
                                     <ItemTemplate>
                                         <tr class='<%# Convert.ToString(Eval("ClassID")) == hfSelectedClassID.Value ? "selected-row" : "" %>'>
                                             <td>
-                                                <asp:LinkButton 
-                                                    ID="btnSelect" 
-                                                    runat="server" 
-                                                    Text="Select" 
-                                                    CommandName="SelectClass" 
-                                                    CommandArgument='<%# Eval("ClassID") %>' 
-                                                    CssClass="btn-select" 
+                                                <asp:LinkButton
+                                                    ID="btnSelect"
+                                                    runat="server"
+                                                    Text="Select"
+                                                    CommandName="SelectClass"
+                                                    CommandArgument='<%# Eval("ClassID") %>'
+                                                    CssClass="btn-select"
                                                     CausesValidation="false" />
                                             </td>
 
@@ -170,7 +167,6 @@
 
                 </asp:Panel>
 
-                <!-- LIVE SESSION SECTION -->
                 <asp:Panel
                     ID="pnlLiveSessions"
                     runat="server"
@@ -184,20 +180,20 @@
                             CssClass="search-input"
                             placeholder="Search session, classroom or teacher..." />
 
-                        <asp:Button 
-                            ID="btnSessionSearch" 
-                            runat="server" 
-                            Text="Search" 
-                            CssClass="btn primary" 
-                            OnClick="btnSessionSearch_Click" 
+                        <asp:Button
+                            ID="btnSessionSearch"
+                            runat="server"
+                            Text="Search"
+                            CssClass="btn primary"
+                            OnClick="btnSessionSearch_Click"
                             CausesValidation="false" />
 
-                        <asp:Button 
-                            ID="btnSessionReset" 
-                            runat="server" 
-                            Text="Reset" 
-                            CssClass="btn" 
-                            OnClick="btnSessionReset_Click" 
+                        <asp:Button
+                            ID="btnSessionReset"
+                            runat="server"
+                            Text="Reset"
+                            CssClass="btn"
+                            OnClick="btnSessionReset_Click"
                             CausesValidation="false" />
 
                     </div>
@@ -273,7 +269,6 @@
 
             </section>
 
-            <!-- RIGHT: DETAILS PANEL -->
             <aside class="card details">
 
                 <h2>Classroom Details</h2>

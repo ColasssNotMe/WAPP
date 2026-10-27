@@ -27,7 +27,7 @@ namespace Assignment
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 string query = @"
-                    SELECT 
+                    SELECT
                         s.studentID,
                         u.username,
                         (u.firstName + ' ' + u.lastName) AS FullName,
@@ -76,9 +76,9 @@ namespace Assignment
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = @"SELECT (u.firstName + ' ' + u.lastName) AS FullName 
-                                FROM Student s 
-                                INNER JOIN [User] u ON s.userID = u.userID 
+                string query = @"SELECT (u.firstName + ' ' + u.lastName) AS FullName
+                                FROM Student s
+                                INNER JOIN [User] u ON s.userID = u.userID
                                 WHERE s.studentID = @studentID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -122,7 +122,6 @@ namespace Assignment
                 {
                     conn.Open();
 
-                    // Check if an enrolment entry exists for this student
                     string checkQuery = "SELECT COUNT(*) FROM Enrolment WHERE studentID = @studentID";
                     using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
                     {
@@ -131,7 +130,6 @@ namespace Assignment
 
                         if (count > 0)
                         {
-                            // Update existing enrolment class
                             string updateQuery = "UPDATE Enrolment SET classID = @classID, status = 'Active' WHERE studentID = @studentID";
                             using (SqlCommand updateCmd = new SqlCommand(updateQuery, conn))
                             {
@@ -142,7 +140,6 @@ namespace Assignment
                         }
                         else
                         {
-                            // Insert new enrolment record
                             string insertQuery = "INSERT INTO Enrolment (studentID, classID, enrollDate, status) VALUES (@studentID, @classID, GETDATE(), 'Active')";
                             using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
                             {

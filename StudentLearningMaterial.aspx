@@ -20,7 +20,6 @@
 
         <main class="learning-page">
 
-            <!-- Page Header -->
             <section class="learning-header">
 
                 <h1>Learning Materials</h1>
@@ -33,8 +32,6 @@
 
             </section>
 
-
-            <!-- Search -->
             <section class="search-container">
                 <div class="search-box">
                     <img src="svg/search.svg" height="50" width="50" />
@@ -48,11 +45,6 @@
                 </div>
             </section>
 
-
-
-
-
-            <!-- Learning Materials -->
             <section class="materials-grid" id="materialsGrid">
 
                 <asp:Repeater ID="rptMaterials" runat="server">
@@ -71,7 +63,6 @@
                             <h2>
                                 <%# Eval("title") %>
                             </h2>
-
 
                             <div class="card-footer">
 
@@ -100,7 +91,6 @@
         </main>
 
     </form>
-
 
     <uc:Footer runat="server" />
 

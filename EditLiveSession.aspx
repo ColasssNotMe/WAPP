@@ -27,7 +27,6 @@
 
     <div class="sessions-container">
 
-        <!-- Header -->
         <header class="page-header">
 
             <div class="header-left">
@@ -69,8 +68,6 @@
 
         </header>
 
-
-        <!-- Form -->
         <main class="form-container">
 
             <div class="card">
@@ -79,8 +76,6 @@
                     Session Information
                 </h2>
 
-
-                <!-- Session Title -->
                 <div class="form-group">
 
                     <label for="txtTitle">
@@ -96,8 +91,6 @@
 
                 </div>
 
-
-                <!-- Classroom -->
                 <div class="form-group">
 
                     <label for="ddlClass">
@@ -112,8 +105,6 @@
 
                 </div>
 
-
-                <!-- Start Time -->
                 <div class="form-group">
 
                     <label for="txtStartTime">
@@ -129,8 +120,6 @@
 
                 </div>
 
-
-                <!-- End Time -->
                 <div class="form-group">
 
                     <label for="txtEndTime">
@@ -146,8 +135,6 @@
 
                 </div>
 
-
-                <!-- Message -->
                 <asp:Label
                     ID="lblMessage"
                     runat="server"
@@ -155,8 +142,6 @@
                     Visible="false">
                 </asp:Label>
 
-
-                <!-- Actions -->
                 <div class="form-actions">
 
                     <asp:Button

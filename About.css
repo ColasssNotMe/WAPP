@@ -1,11 +1,4 @@
-﻿/* ==========================================
-   ABOUT NCIENT PAGE
-   ========================================== */
-
-
-/* ==========================================
-   ABOUT SECTION
-   ========================================== */
+﻿
 
 .about-section {
     background-color: var(--white);
@@ -35,11 +28,6 @@
     margin-bottom: 0.8rem;
 }
 
-
-/* ==========================================
-   TAGS
-   ========================================== */
-
 .about-tags {
     display: flex;
     gap: 0.6rem;
@@ -55,11 +43,6 @@
     color: var(--secondary-color);
     font-weight: 600;
 }
-
-
-/* ==========================================
-   MINI CARDS
-   ========================================== */
 
 .about-mini-cards {
     display: flex;
@@ -97,10 +80,6 @@
         line-height: 1.2;
     }
 
-/* ==========================================
-   PLACEHOLDER
-   ========================================== */
-
 .placeholder {
     position: relative;
     overflow: hidden;
@@ -127,22 +106,12 @@
         transform: rotate(-45deg);
     }
 
-
-/* ==========================================
-   ABOUT IMAGE
-   ========================================== */
-
 .about-image {
     width: 15rem;
     height: 13rem;
     flex-shrink: 0;
     border: 1px solid #777;
 }
-
-
-/* ==========================================
-   STORY SECTION
-   ========================================== */
 
 .story-section {
     background-color: var(--muted-surface);
@@ -155,9 +124,6 @@
     margin: 0 auto;
 }
 
-
-/* Section label */
-
 .section-label {
     display: inline-block;
     padding: 0.2rem 0.65rem;
@@ -167,9 +133,6 @@
     color: var(--secondary-color);
     font-weight: 700;
 }
-
-
-/* Story content */
 
 .story-content {
     display: flex;
@@ -197,20 +160,12 @@
     font-weight: 600;
 }
 
-
-/* Story image */
-
 .story-image {
     width: 15rem;
     height: 15.5rem;
     flex-shrink: 0;
     border: 1px solid #777;
 }
-
-
-/* ==========================================
-   MATERIAL CARDS
-   ========================================== */
 
 .material-list {
     display: flex;
@@ -245,11 +200,6 @@
     margin: 0;
 }
 
-
-/* ==========================================
-   PURPOSE SECTION
-   ========================================== */
-
 .purpose-section {
     background-color: var(--white);
     padding: 1rem 0 2rem;
@@ -273,11 +223,6 @@
     text-align: center;
     margin-bottom: 1rem;
 }
-
-
-/* ==========================================
-   FEATURE CARDS
-   ========================================== */
 
 .feature-grid {
     display: grid;
@@ -311,11 +256,6 @@
 .feature-link {
     font-weight: 700;
 }
-
-
-/* ==========================================
-   CTA SECTION
-   ========================================== */
 
 .cta-section {
     background-color: var(--white);
@@ -360,9 +300,6 @@
     border-radius: 0.3rem;
     color: var(--primary-color);
 }
-
-
-/* CTA image */
 
 .cta-image {
     width: 8rem;

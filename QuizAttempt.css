@@ -1,12 +1,4 @@
-﻿/* ==========================================
-   QUIZ ATTEMPT PAGE
-   Uses the design tokens from index.css
-   ========================================== */
-
-
-/* ==========================================
-   1. PAGE HEADER
-   ========================================== */
+﻿
 
 .quiz-header {
     width: 100%;
@@ -17,9 +9,6 @@
     background-color: var(--bg-surface);
     border-bottom: 1px solid var(--border-color);
 }
-
-
-/* Logo */
 
 .quiz-logo {
     width: 10rem;
@@ -53,9 +42,6 @@
         transform: rotate(-45deg);
     }
 
-
-/* Navigation */
-
 .quiz-nav {
     flex: 1;
     display: flex;
@@ -75,9 +61,6 @@
             color: var(--accent-color);
             text-decoration: none;
         }
-
-
-/* User section */
 
 .quiz-user {
     width: 10rem;
@@ -107,22 +90,12 @@
         background-color: var(--bg-light);
     }
 
-
-/* ==========================================
-   2. MAIN PAGE
-   ========================================== */
-
 .quiz-page {
     width: 90%;
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 2.25rem 0 3rem;
 }
-
-
-/* ==========================================
-   3. PAGE HEADING
-   ========================================== */
 
 .quiz-heading {
     display: flex;
@@ -147,9 +120,6 @@
         color: var(--secondary-color);
     }
 
-
-/* Back to quizzes */
-
 .back-button {
     display: inline-flex;
     align-items: center;
@@ -170,21 +140,11 @@
         text-decoration: none;
     }
 
-
-/* ==========================================
-   4. CLASSROOM LABEL
-   ========================================== */
-
 .classroom-label {
     margin-bottom: 0.75rem;
     font-size: 0.7rem;
     color: var(--secondary-color);
 }
-
-
-/* ==========================================
-   5. QUIZ INFORMATION CARD
-   ========================================== */
 
 .quiz-info-card {
     min-height: 4.5rem;
@@ -200,17 +160,11 @@
     box-shadow: var(--shadow);
 }
 
-
-/* Quiz title */
-
 .quiz-title {
     font-size: 0.9rem;
     font-weight: 700;
     color: var(--primary-color);
 }
-
-
-/* Time */
 
 .time-section {
     display: flex;
@@ -230,22 +184,12 @@
     color: var(--primary-color);
 }
 
-
-/* ==========================================
-   6. MAIN QUIZ GRID
-   ========================================== */
-
 .quiz-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 17rem;
     gap: 1.5rem;
     align-items: start;
 }
-
-
-/* ==========================================
-   7. QUESTION CARD
-   ========================================== */
 
 .question-card {
     padding: 1.25rem;
@@ -254,9 +198,6 @@
     border-radius: 0.55rem;
     box-shadow: var(--shadow);
 }
-
-
-/* Question header */
 
 .question-top {
     display: flex;
@@ -281,9 +222,6 @@
     color: var(--secondary-color);
 }
 
-
-/* Question */
-
 .question-title {
     margin: 0 0 0.5rem;
     font-size: 1rem;
@@ -292,19 +230,11 @@
     color: var(--primary-color);
 }
 
-
-/* Instruction */
-
 .question-instruction {
     margin: 0 0 1rem;
     font-size: 0.7rem;
     color: var(--secondary-color);
 }
-
-
-/* ==========================================
-   8. ANSWER OPTIONS
-   ========================================== */
 
 .answer-option {
     min-height: 3rem;
@@ -320,15 +250,11 @@
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-
     /* Hide native radio */
 
     .answer-option input {
         display: none;
     }
-
-
-/* Answer letter */
 
 .answer-letter {
     width: 1.5rem;
@@ -344,18 +270,12 @@
     font-weight: 700;
 }
 
-
-/* Answer text */
-
 .answer-text {
     flex: 1;
     font-size: 0.75rem;
     line-height: 1.45;
     color: var(--primary-color);
 }
-
-
-/* Radio circle */
 
 .answer-radio {
     width: 0.8rem;
@@ -366,16 +286,10 @@
     background-color: var(--white);
 }
 
-
-/* Hover */
-
 .answer-option:hover {
     border-color: var(--secondary-color);
     background-color: var(--bg-surface);
 }
-
-
-/* Selected */
 
 .answer-option.selected {
     border-color: var(--primary-color);
@@ -393,11 +307,6 @@
         box-shadow: inset 0 0 0 2px var(--white);
     }
 
-
-/* ==========================================
-   9. ANSWER STATUS
-   ========================================== */
-
 .answer-status {
     display: flex;
     align-items: center;
@@ -405,11 +314,6 @@
     font-size: 0.65rem;
     color: var(--secondary-color);
 }
-
-
-/* ==========================================
-   10. QUESTION NAVIGATION
-   ========================================== */
 
 .question-navigation {
     display: flex;
@@ -426,9 +330,6 @@
     font-weight: 600;
 }
 
-
-/* Previous */
-
 .previous-button {
     border: 1px solid var(--border-color);
     background-color: var(--white);
@@ -438,9 +339,6 @@
     .previous-button:hover {
         background-color: var(--bg-light);
     }
-
-
-/* Next */
 
 .next-button {
     border: 1px solid var(--primary-color);
@@ -453,11 +351,6 @@
         background-color: var(--accent-color);
         color: var(--white);
     }
-
-
-/* ==========================================
-   11. QUESTION NAVIGATOR
-   ========================================== */
 
 .navigator-card {
     padding: 1.1rem;
@@ -473,11 +366,6 @@
         font-weight: 700;
         color: var(--primary-color);
     }
-
-
-/* ==========================================
-   12. PROGRESS
-   ========================================== */
 
 .navigator-progress {
     margin-bottom: 1rem;
@@ -497,9 +385,6 @@
         font-weight: 700;
     }
 
-
-/* Progress bar */
-
 .progress-bar {
     width: 100%;
     height: 0.25rem;
@@ -514,11 +399,6 @@
     border-radius: 1rem;
     background-color: var(--primary-color);
 }
-
-
-/* ==========================================
-   13. QUESTION NUMBER GRID
-   ========================================== */
 
 .question-grid {
     display: grid;
@@ -542,16 +422,10 @@
     font-weight: 500;
 }
 
-
-    /* Hover */
-
     .nav-question:hover {
         border-color: var(--secondary-color);
         background-color: var(--bg-light);
     }
-
-
-    /* Answered */
 
     .nav-question.answered {
         border-color: var(--secondary-color);
@@ -559,19 +433,11 @@
         color: var(--white);
     }
 
-
-    /* Current */
-
     .nav-question.current {
         border-color: var(--primary-color);
         background-color: var(--primary-color);
         color: var(--white);
     }
-
-
-/* ==========================================
-   14. NAVIGATOR LEGEND
-   ========================================== */
 
 .navigator-legend {
     padding-top: 0.75rem;
@@ -590,11 +456,6 @@
         color: var(--primary-color);
     }
 
-
-/* ==========================================
-   15. SUBMIT QUIZ
-   ========================================== */
-
 .submit-quiz-button {
     width: 100%;
     padding: 0.55rem 0.75rem;
@@ -610,22 +471,12 @@
         background-color: var(--bg-light);
     }
 
-
-/* ==========================================
-   16. REMAINING QUESTIONS
-   ========================================== */
-
 .remaining-text {
     margin: 0.7rem 0 0;
     font-size: 0.6rem;
     line-height: 1.5;
     color: var(--secondary-color);
 }
-
-
-/* ==========================================
-   17. FOOTER
-   ========================================== */
 
 .quiz-footer {
     min-height: 8.5rem;
@@ -637,9 +488,6 @@
     border-top: 1px solid var(--border-color);
 }
 
-
-/* Footer logo */
-
 .footer-logo-placeholder {
     width: 7.5rem;
     height: 2.3rem;
@@ -647,9 +495,6 @@
     margin-bottom: 0.65rem;
     border: 1px solid var(--secondary-color);
 }
-
-
-    /* X */
 
     .footer-logo-placeholder::before,
     .footer-logo-placeholder::after {
@@ -670,9 +515,6 @@
         transform: rotate(-17deg);
     }
 
-
-/* Footer description */
-
 .footer-logo p {
     max-width: 20rem;
     margin: 0;
@@ -680,9 +522,6 @@
     line-height: 1.55;
     color: var(--secondary-color);
 }
-
-
-/* Footer columns */
 
 .footer-column {
     display: flex;
@@ -709,5 +548,4 @@
             color: var(--accent-color);
             text-decoration: none;
         }
-
 

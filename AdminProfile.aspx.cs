@@ -29,7 +29,6 @@ namespace Assignment
             }
         }
 
-        // Enable or disable profile editing
         private void SetEditMode(bool editing)
         {
             usernameInput.Attributes["readonly"] = editing ? null : "readonly";
@@ -43,7 +42,6 @@ namespace Assignment
             lblEditing.Visible = editing;
         }
 
-        // Load profile information
         private void LoadUserData()
         {
             try
@@ -109,7 +107,6 @@ namespace Assignment
             }
         }
 
-        // Edit profile button
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             ClearMessages();
@@ -117,7 +114,6 @@ namespace Assignment
             SetEditMode(true);
         }
 
-        // Cancel profile editing
         protected void btnCancelEdit_Click(object sender, EventArgs e)
         {
             ClearMessages();
@@ -125,7 +121,6 @@ namespace Assignment
             SetEditMode(false);
         }
 
-        // Save profile
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string first = firstName.Value.Trim();
@@ -211,7 +206,6 @@ namespace Assignment
             }
         }
 
-        // Show the password form (and leave edit mode)
         protected void btnShowPassword_Click(object sender, EventArgs e)
         {
             ClearMessages();
@@ -222,14 +216,12 @@ namespace Assignment
             btnShowPassword.Visible = false;
         }
 
-        // Cancel password change
         protected void btnCancelPassword_Click(object sender, EventArgs e)
         {
             ClearMessages();
             CloseePasswordPanel();
         }
 
-        // Change password
         protected void btnChangePassword_Click(object sender, EventArgs e)
         {
             string current = txtCurrentPassword.Text;
@@ -329,7 +321,6 @@ namespace Assignment
             txtConfirmPassword.Text = "";
         }
 
-        // Profile card message
         private void ShowMessage(string message, bool success)
         {
             pageMessage.InnerText = message;
@@ -337,7 +328,6 @@ namespace Assignment
             pageMessage.Visible = true;
         }
 
-        // Security card message
         private void ShowPasswordMessage(string message, bool success)
         {
             passwordMessage.InnerText = message;

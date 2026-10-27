@@ -8,7 +8,6 @@ namespace Assignment
         {
 
             if (Session["username"] != null)
-            //logged in
             {
                 headerActions.Visible = false;
                 headerProfile.Visible = true;
@@ -21,7 +20,6 @@ namespace Assignment
                 }
 
                 profilePic.Src = ResolveUrl(profilePath);
-
 
                 if (Session["role"]?.ToString().ToLower().Trim() == "admin")
                 {
@@ -51,7 +49,6 @@ namespace Assignment
                 //roleDebug.Text = Session["role"]?.ToString();
             }
         }
-
 
         protected void DashboardButton_Click(object sender, EventArgs e)
         {
@@ -101,7 +98,6 @@ namespace Assignment
             Session.Clear();
             Response.Redirect("Login.aspx");
         }
-
 
     }
 }

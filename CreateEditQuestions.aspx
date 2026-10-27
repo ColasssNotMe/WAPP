@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create / Edit Question</title>
-    <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- External Stylesheet -->
+
     <link rel="stylesheet" href="CreateEditQuestions.css">
 </head>
 <body>
 
     <div class="question-container">
-        
-        <!-- Header Section with Left Back Arrow -->
+
         <header class="page-header">
             <div class="header-left">
                 <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
@@ -31,34 +30,28 @@
             </div>
         </header>
 
-        <!-- Main Grid Layout -->
         <div class="question-content-grid">
-            
-            <!-- Left Column: Question Settings Card -->
+
             <main class="card question-settings-card">
                 <h2 class="card-title">Question Settings</h2>
 
                 <form class="question-form" onsubmit="event.preventDefault();">
-                    
-                    <!-- Question Type -->
+
                     <div class="form-group">
                         <label for="questionType">Question type</label>
                         <input type="text" id="questionType" class="form-control" value="Multiple choice" placeholder="Select question type">
                     </div>
 
-                    <!-- Question Text -->
                     <div class="form-group">
                         <label for="questionText">Question text</label>
                         <textarea id="questionText" class="form-control text-area" rows="3" placeholder="Enter question text...">What was the main impact of British rule on the Malay states during the colonial era?</textarea>
                     </div>
 
-                    <!-- Points -->
                     <div class="form-group">
                         <label for="points">Points</label>
                         <input type="number" id="points" class="form-control" value="2" placeholder="Enter points">
                     </div>
 
-                    <!-- Action Buttons -->
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Save question</button>
                         <button type="button" class="btn btn-secondary" onclick="history.back()">Cancel</button>
@@ -67,7 +60,6 @@
                 </form>
             </main>
 
-            <!-- Right Column: Options Card -->
             <aside class="card options-card">
                 <h2 class="card-title">Options</h2>
 
@@ -90,12 +82,10 @@
                     </div>
                 </div>
 
-                <!-- Info Callout -->
                 <div class="info-callout">
                     Mark Option B as the correct answer for this multiple-choice question.
                 </div>
 
-                <!-- Add Option Button -->
                 <button type="button" class="btn btn-add-option">Add option</button>
             </aside>
 

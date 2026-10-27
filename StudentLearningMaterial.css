@@ -1,6 +1,4 @@
-﻿/* ==========================================
-           Learning Materials Page
-           ========================================== */
+﻿
 
 .learning-page {
     width: 90%;
@@ -8,8 +6,6 @@
     margin: 0 auto;
     padding: 2rem 0 4rem;
 }
-
-/* Page Header */
 
 .learning-header {
     text-align: center;
@@ -24,8 +20,6 @@
         max-width: 480px;
         margin: 0 auto;
     }
-
-/* Search */
 
 .search-container {
     width: 100%;
@@ -63,15 +57,11 @@
             color: #999;
         }
 
-/* Materials Grid */
-
 .materials-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem 4rem;
 }
-
-/* Material Card */
 
 .material-card {
     min-height: 143px;
@@ -83,8 +73,6 @@
     position: relative;
 }
 
-/* Chapter Badge */
-
 .chapter-badge {
     width: 70px;
     padding: 3px 8px;
@@ -95,8 +83,6 @@
     margin-bottom: 17px;
     font-size:0.75rem
 }
-
-/* Card Icon */
 
 .material-icon {
     position: absolute;
@@ -113,8 +99,6 @@
     .material-icon i {
     }
 
-/* Card Content */
-
 .material-card h2 {
     font-weight: 500;
     margin-bottom: 7px;
@@ -127,8 +111,6 @@
     color: var(--secondary-color);
 }
 
-/* Bottom Row */
-
 .card-footer {
     margin-top: auto;
     display: flex;
@@ -139,8 +121,6 @@
 .subtopic-count {
     color: var(--secondary-color);
 }
-
-/* View Materials Button */
 
 .view-materials {
     display: inline-flex;

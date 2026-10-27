@@ -18,10 +18,6 @@
 
     <main class="live-session-page">
 
-        <!-- ==========================
-             PAGE HEADER
-        =========================== -->
-
         <section class="session-header">
 
             <div class="session-heading">
@@ -41,11 +37,6 @@
 
         </section>
 
-
-        <!-- ==========================
-             SESSION USER INFORMATION
-        =========================== -->
-
         <div class="session-meta">
 
             <span>
@@ -58,23 +49,11 @@
 
         </div>
 
-
-        <!-- ==========================
-             MAIN SESSION AREA
-        =========================== -->
-
         <section class="session-layout">
-
-
-            <!-- ==========================
-                 PRESENTATION
-            =========================== -->
 
             <div class="presentation-section">
 
                 <div class="presentation-card">
-
-                    <!-- Presentation Area -->
 
                     <div class="presentation-screen">
 
@@ -89,9 +68,6 @@
 
                     </div>
 
-
-                    <!-- Presentation Controls -->
-
                     <div class="presentation-controls">
 
                         <button class="leave-button">
@@ -101,11 +77,6 @@
                     </div>
 
                 </div>
-
-
-                <!-- ==========================
-                     SESSION INFORMATION
-                =========================== -->
 
                 <div class="session-info-card">
 
@@ -129,15 +100,9 @@
 
                     </div>
 
-
                 </div>
 
             </div>
-
-
-            <!-- ==========================
-                 SESSION CHAT
-            =========================== -->
 
             <aside class="chat-panel">
 
@@ -157,11 +122,7 @@
                     Messages are visible to your teacher and classmates.
                 </p>
 
-
                 <div class="chat-messages">
-
-
-                    <!-- Message 1 -->
 
                     <div class="chat-message">
 
@@ -192,9 +153,6 @@
 
                     </div>
 
-
-                    <!-- Message 2 -->
-
                     <div class="chat-message">
 
                         <div class="message-avatar">
@@ -224,9 +182,6 @@
 
                     </div>
 
-
-                    <!-- Message 3 -->
-
                     <div class="chat-message">
 
                         <div class="message-avatar">
@@ -255,9 +210,6 @@
                         </div>
 
                     </div>
-
-
-                    <!-- Message 4 -->
 
                     <div class="chat-message">
 
@@ -289,11 +241,6 @@
                     </div>
 
                 </div>
-
-
-                <!-- ==========================
-                     CHAT INPUT
-                =========================== -->
 
                 <div class="chat-input-container">
 

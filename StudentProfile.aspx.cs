@@ -9,7 +9,6 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Check whether user is logged in
             if (Session["userId"] == null)
             {
                 Response.Redirect("Login.aspx");
@@ -38,7 +37,7 @@ namespace Assignment
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
             string query = @"
-                SELECT 
+                SELECT
                     u.userId,
                     u.username,
                     u.role,
@@ -275,8 +274,6 @@ namespace Assignment
                 "save-result success";
 
             saveResult.Visible = true;
-
-
 
         }
     }

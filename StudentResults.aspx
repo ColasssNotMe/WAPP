@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Results</title>
-    <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- External Stylesheet -->
+
     <link rel="stylesheet" href="StudentResults.css">
 </head>
 <body>
 
     <div class="results-container">
-        
-        <!-- Header Section with Left Back Arrow -->
+
         <header class="page-header">
             <div class="header-left">
                 <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
@@ -31,16 +30,13 @@
             </div>
         </header>
 
-        <!-- Main Grid Layout -->
         <div class="results-content-grid">
-            
-            <!-- Left Column: Quiz Results Card -->
+
             <main class="card quiz-results-card">
                 <h2 class="card-title">Quiz Results</h2>
 
                 <div class="quiz-items-wrapper">
-                    
-                    <!-- Result 1 -->
+
                     <div class="quiz-row">
                         <div class="quiz-info">
                             <h3 class="quiz-name">Quiz – Chapter 1</h3>
@@ -49,7 +45,6 @@
                         <span class="percentage-badge">92%</span>
                     </div>
 
-                    <!-- Result 2 -->
                     <div class="quiz-row">
                         <div class="quiz-info">
                             <h3 class="quiz-name">Quiz – Chapter 2</h3>
@@ -58,7 +53,6 @@
                         <span class="percentage-badge">88%</span>
                     </div>
 
-                    <!-- Result 3 -->
                     <div class="quiz-row">
                         <div class="quiz-info">
                             <h3 class="quiz-name">Quiz – Chapter 3</h3>
@@ -69,11 +63,9 @@
 
                 </div>
 
-                <!-- View Detailed Report Button -->
                 <button type="button" class="btn btn-detailed-report">View detailed report</button>
             </main>
 
-            <!-- Right Column: Result Details Card -->
             <aside class="card result-details-card">
                 <h2 class="card-title">Result Details</h2>
 
@@ -96,12 +88,10 @@
                     </div>
                 </div>
 
-                <!-- Info Callout -->
                 <div class="info-callout">
                     Aiman answered 14 of 15 questions correctly and needs review on the final short-answer question.
                 </div>
 
-                <!-- Action Buttons -->
                 <div class="details-actions">
                     <button type="button" class="btn btn-primary">View answers</button>
                     <button type="button" class="btn btn-secondary">Message student</button>

@@ -47,7 +47,6 @@
     white-space: nowrap;
 }
 
-/* Buttons */
 .primary-button,
 .secondary-button {
     display: inline-flex;
@@ -93,7 +92,6 @@
         outline: none;
     }
 
-/* Layout */
 .content-grid {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(280px, 0.96fr);
@@ -123,7 +121,6 @@
     font-size: 11px;
 }
 
-/* Filters */
 .filter-row {
     display: flex;
     flex-wrap: wrap;
@@ -181,7 +178,6 @@
         outline-offset: 2px;
     }
 
-/* Table */
 .table-wrap {
     overflow-x: auto;
 }
@@ -282,7 +278,6 @@
     padding: 28px 9px;
 }
 
-/* Text under the table */
 .pagination {
     display: flex;
     flex-wrap: wrap;
@@ -297,7 +292,6 @@
     font-size: 11px;
 }
 
-/* Details */
 .detail-list {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -347,7 +341,6 @@
     margin-top: 16px;
 }
 
-
 /* Make title act cleanly as row selection trigger */
 .row-select-link {
     color: inherit;
@@ -361,7 +354,6 @@
         text-decoration: underline;
     }
 
-/* Active selected row state styling */
 .data-table tbody tr[aria-selected="true"] {
     background: var(--bg-light);
 }
@@ -370,7 +362,6 @@
         box-shadow: inset 3px 0 0 var(--gold-color);
     }
 
-/* Danger / Delete button style */
 .danger-button {
     display: inline-flex;
     align-items: center;

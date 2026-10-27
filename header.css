@@ -10,21 +10,11 @@
     margin-bottom: 1rem;
 }
 
-
-/* ========================================
-   LEFT
-======================================== */
-
 .header-left {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
-
-
-/* ========================================
-   CENTER
-======================================== */
 
 .header-nav {
     display: flex;
@@ -32,24 +22,14 @@
     justify-content: center;
 }
 
-
-/* ========================================
-   RIGHT
-======================================== */
-
 .header-actions {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
-    /* IMPORTANT */
+
     justify-self: end;
 }
-
-
-/* ========================================
-   LOGO
-======================================== */
 
 .logo-button {
     padding: 0;
@@ -65,11 +45,6 @@
     object-fit: contain;
 }
 
-
-/* ========================================
-   NAVIGATION
-======================================== */
-
 .header-nav .nav-link {
     margin-right: 20px;
     font-weight: 600;
@@ -79,11 +54,6 @@
         margin-right: 0;
     }
 
-
-/* ========================================
-   ACTION BUTTONS
-======================================== */
-
 .header-actions .btn-primary {
     background-color: var(--accent-color);
     color: #ffffff;
@@ -92,11 +62,6 @@
     .header-actions .btn-primary:hover {
         background-color: #a72207;
     }
-
-
-/* ========================================
-   PROFILE
-======================================== */
 
 .header-profile {
     display: flex;
@@ -109,7 +74,6 @@
     display: inline-block;
 }
 
-/* Profile picture */
 .profile-button {
     padding: 1px 10px !important;
     border: none;
@@ -124,11 +88,6 @@
     border-radius: 50%;
     display: block;
 }
-
-
-/* ========================================
-   LOGOUT MENU
-======================================== */
 
 .logout-menu {
     position: fixed;

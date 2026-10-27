@@ -17,7 +17,6 @@ namespace Assignment
             }
         }
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -25,7 +24,6 @@ namespace Assignment
                 LoadDashboard();
             }
         }
-
 
         private void LoadDashboard()
         {
@@ -54,7 +52,6 @@ namespace Assignment
                     return;
                 }
 
-
                 int teacherID = GetTeacherID(userID);
 
                 if (teacherID == 0)
@@ -63,37 +60,22 @@ namespace Assignment
                     return;
                 }
 
-
-                // Load teacher name
                 LoadTeacherName(userID);
 
-                // Load dashboard numbers
                 LoadDashboardCounts(teacherID);
 
-                // Load classroom summary
                 LoadClassroomSummary(teacherID);
 
-                // Load recent materials
                 LoadRecentMaterials(teacherID);
 
-                // Load recent quizzes
                 LoadRecentQuizzes(teacherID);
             }
             catch (Exception ex)
             {
-                /*
-                 * You can replace this with your own error handling.
-                 * Do not display database errors to users in production.
-                 */
                 System.Diagnostics.Debug.WriteLine(
                     "TeacherDashboard Error: " + ex.Message);
             }
         }
-
-
-        // =========================================================
-        // GET TEACHER ID
-        // =========================================================
 
         private int GetTeacherID(int userID)
         {
@@ -102,7 +84,6 @@ namespace Assignment
                 FROM Teacher
                 WHERE userID = @userID
             ";
-
 
             using (SqlConnection connection =
                 new SqlConnection(ConnectionString))
@@ -129,11 +110,6 @@ namespace Assignment
             }
         }
 
-
-        // =========================================================
-        // LOAD TEACHER NAME
-        // =========================================================
-
         private void LoadTeacherName(int userID)
         {
             string query = @"
@@ -143,7 +119,6 @@ namespace Assignment
                 FROM [User]
                 WHERE userID = @userID
             ";
-
 
             using (SqlConnection connection =
                 new SqlConnection(ConnectionString))
@@ -187,11 +162,6 @@ namespace Assignment
             }
         }
 
-
-        // =========================================================
-        // LOAD DASHBOARD COUNTS
-        // =========================================================
-
         private void LoadDashboardCounts(int teacherID)
         {
             string query = @"
@@ -206,14 +176,12 @@ namespace Assignment
                         WHERE c.teacherID = @teacherID
                     ) AS studentCount,
 
-
                     -- Number of classrooms
                     (
                         SELECT COUNT(*)
                         FROM Class c
                         WHERE c.teacherID = @teacherID
                     ) AS classroomCount,
-
 
                     -- Live sessions scheduled this week
                     (
@@ -236,7 +204,6 @@ namespace Assignment
                               )
                     ) AS liveSessionCount,
 
-
                     -- Total quizzes belonging to this teacher's classes
                     (
                         SELECT COUNT(*)
@@ -245,7 +212,6 @@ namespace Assignment
                             ON q.classID = c.classID
                         WHERE c.teacherID = @teacherID
                     ) AS quizCount,
-
 
                     -- Materials added during the current month
                     (
@@ -272,7 +238,6 @@ namespace Assignment
                               )
                     ) AS noteCount
             ";
-
 
             using (SqlConnection connection =
                 new SqlConnection(ConnectionString))
@@ -311,11 +276,6 @@ namespace Assignment
             }
         }
 
-
-        // =========================================================
-        // LOAD CLASSROOM SUMMARY
-        // =========================================================
-
         private void LoadClassroomSummary(int teacherID)
         {
             string query = @"
@@ -339,9 +299,7 @@ namespace Assignment
                     c.className
             ";
 
-
             DataTable table = new DataTable();
-
 
             using (SqlConnection connection =
                 new SqlConnection(ConnectionString))
@@ -361,10 +319,8 @@ namespace Assignment
                 }
             }
 
-
             rptClassrooms.DataSource = table;
             rptClassrooms.DataBind();
-
 
             if (table.Rows.Count == 0)
             {
@@ -375,11 +331,6 @@ namespace Assignment
                 pnlNoClassrooms.Visible = false;
             }
         }
-
-
-        // =========================================================
-        // LOAD RECENT MATERIALS
-        // =========================================================
 
         private void LoadRecentMaterials(int teacherID)
         {
@@ -400,9 +351,7 @@ namespace Assignment
                     m.uploadDate DESC
             ";
 
-
             DataTable table = new DataTable();
-
 
             using (SqlConnection connection =
                 new SqlConnection(ConnectionString))
@@ -422,10 +371,8 @@ namespace Assignment
                 }
             }
 
-
             rptMaterials.DataSource = table;
             rptMaterials.DataBind();
-
 
             if (table.Rows.Count == 0)
             {
@@ -436,11 +383,6 @@ namespace Assignment
                 pnlNoMaterials.Visible = false;
             }
         }
-
-
-        // =========================================================
-        // LOAD RECENT QUIZZES
-        // =========================================================
 
         private void LoadRecentQuizzes(int teacherID)
         {
@@ -461,9 +403,7 @@ namespace Assignment
                     q.createdDate DESC
             ";
 
-
             DataTable table = new DataTable();
-
 
             using (SqlConnection connection =
                 new SqlConnection(ConnectionString))
@@ -483,10 +423,8 @@ namespace Assignment
                 }
             }
 
-
             rptQuizzes.DataSource = table;
             rptQuizzes.DataBind();
-
 
             if (table.Rows.Count == 0)
             {

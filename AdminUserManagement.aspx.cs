@@ -10,7 +10,6 @@ namespace Assignment
 {
     public partial class AdminUserManagement : Page
     {
-        // ---------- Basic properties ----------
 
         private string ConnString =>
             ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
@@ -46,8 +45,6 @@ namespace Assignment
             get { return CurrentTab == "Pending"; }
         }
 
-        // ---------- Page load ----------
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -58,8 +55,6 @@ namespace Assignment
                 loadUsers();
             }
         }
-
-        // ---------- Tabs and search ----------
 
         protected void btnAllUsers_Click(object sender, EventArgs e) { ChangeTab("All"); }
         protected void btnStudents_Click(object sender, EventArgs e) { ChangeTab("Student"); }
@@ -99,8 +94,6 @@ namespace Assignment
             loadUsers();
         }
 
-        // ---------- Add new user ----------
-
         protected void btnAddUser_Click(object sender, EventArgs e)
         {
             ViewState["AddMode"] = true;
@@ -124,7 +117,6 @@ namespace Assignment
             string password = txtNewPassword.Text;
             string role = ddlNewRole.SelectedValue;
 
-            // Validation
             if (firstName == "" || lastName == "" || username == "" ||
                 email == "" || password == "")
             {
@@ -146,7 +138,6 @@ namespace Assignment
                 {
                     conn.Open();
 
-                    // 1. Check duplicate username / email
                     using (SqlCommand cmd = new SqlCommand(
                         "SELECT COUNT(*) FROM [User] WHERE username = @username OR email = @email", conn))
                     {
@@ -160,7 +151,6 @@ namespace Assignment
                         }
                     }
 
-                    // 2. Insert User + Student/Teacher together
                     using (SqlTransaction tx = conn.BeginTransaction())
                     {
                         try
@@ -239,8 +229,6 @@ namespace Assignment
             ddlNewRole.SelectedIndex = 0;
         }
 
-        // ---------- Edit ----------
-
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             ViewState["EditMode"] = true;
@@ -284,7 +272,6 @@ namespace Assignment
                 {
                     conn.Open();
 
-                    // 1. Check duplicate username / email
                     using (SqlCommand cmd = new SqlCommand(
                         "SELECT COUNT(*) FROM [User] " +
                         "WHERE (username = @username OR email = @email) AND userID <> @userID", conn))
@@ -300,7 +287,6 @@ namespace Assignment
                         }
                     }
 
-                    // 2. Get the role
                     string role;
                     using (SqlCommand cmd = new SqlCommand(
                         "SELECT [role] FROM [User] WHERE userID = @userID", conn))
@@ -309,7 +295,6 @@ namespace Assignment
                         role = Convert.ToString(cmd.ExecuteScalar());
                     }
 
-                    // 3. Update User + Student/Teacher together
                     using (SqlTransaction tx = conn.BeginTransaction())
                     {
                         try
@@ -371,8 +356,6 @@ namespace Assignment
             }
         }
 
-        // ---------- Delete ----------
-
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             if (SelectedUserId == null)
@@ -427,7 +410,6 @@ namespace Assignment
             ShowMessage(name + "'s account has been deleted.", true);
         }
 
-        // ---------- Approve / Reject ----------
         // approved is stored as the TEXT "true" or "false" (VARCHAR column)
 
         protected void btnApprove_Click(object sender, EventArgs e)
@@ -463,8 +445,6 @@ namespace Assignment
             ShowMessage(name + " " + message, true);
         }
 
-        // ---------- Load the user list ----------
-
         private void loadUsers()
         {
             string type = CurrentTab;
@@ -475,7 +455,6 @@ namespace Assignment
                 "U.[role], T.approved " +
                 "FROM [User] U LEFT JOIN Teacher T ON U.userID = T.userID";
 
-            // Build the WHERE part
             string where = "";
 
             if (type == "Student")
@@ -548,8 +527,6 @@ namespace Assignment
             ViewState["EditMode"] = false;
         }
 
-        // ---------- Top counts ----------
-
         private void loadCounts()
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
@@ -571,13 +548,10 @@ namespace Assignment
             }
         }
 
-        // ---------- Details panel ----------
-
         private void loadDetails()
         {
             pnlMessage.Visible = false;
 
-            // Add mode: show only the "Add new user" form
             pnlAdd.Visible = IsAddMode;
             if (IsAddMode)
             {
@@ -644,19 +618,16 @@ namespace Assignment
             lblDetSchool.Text = GetText(school);
             lblDetGrade.Text = GetText(row["gradeLevel"]);
 
-            // Show / hide fields depending on role
             dtGrade.Visible = ddGrade.Visible = (role == "Student");
             fieldGrade.Visible = (role == "Student");
             fieldSchool.Visible = (role == "Student" || role == "Teacher");
             dtApproval.Visible = ddApproval.Visible = pendingTab;
 
-            // Show / hide panels
             pnlView.Visible = !editMode;
             pnlEdit.Visible = editMode;
             pnlActions.Visible = !editMode && !pendingTab;
             pnlApprovalActions.Visible = !editMode && pendingTab;
 
-            // Fill the edit textboxes only once, when Edit is clicked
             if (editMode && ViewState["FillEdit"] != null)
             {
                 txtFirstName.Text = Convert.ToString(row["firstName"]);
@@ -669,8 +640,6 @@ namespace Assignment
                 ViewState["FillEdit"] = null;
             }
         }
-
-        // ---------- Helpers ----------
 
         private void ShowMessage(string message, bool success)
         {

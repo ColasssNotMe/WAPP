@@ -11,14 +11,12 @@
 
     <title>Teacher Dashboard</title>
 
-    <!-- Google Fonts & Lucide Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Stylesheets -->
     <link href="index.css" rel="stylesheet" />
     <link rel="stylesheet" href="TeacherDashboard.css">
 </head>
@@ -31,7 +29,6 @@
 
         <div class="dashboard-container">
 
-            <!-- Header Section -->
             <header class="dashboard-header">
 
                 <div class="header-title-group">
@@ -69,11 +66,8 @@
 
             </header>
 
-
-            <!-- Metric Cards Grid -->
             <section class="metrics-grid">
 
-                <!-- Card 1: Students -->
                 <a href="ManageStudents.aspx"
                    style="text-decoration: none; color: inherit; display: block;">
 
@@ -110,8 +104,6 @@
 
                 </a>
 
-
-                <!-- Card 2: Live Sessions -->
                 <div class="metric-card gold-card">
 
                     <div class="metric-card-header">
@@ -146,8 +138,6 @@
 
                 </div>
 
-
-                <!-- Card 3: Quizzes -->
                 <a href="ManageQuiz.aspx"
                    style="text-decoration: none; color: inherit; display: block;">
 
@@ -184,8 +174,6 @@
 
                 </a>
 
-
-                <!-- Card 4: Notes -->
                 <a href="ManageNotes.aspx"
                    style="text-decoration: none; color: inherit; display: block;">
 
@@ -224,15 +212,10 @@
 
             </section>
 
-
-            <!-- Main Content Grid -->
             <div class="main-content-grid">
 
-                <!-- Left Column -->
                 <div class="left-column">
 
-
-                    <!-- Material Section -->
                     <div class="dashboard-section-card">
 
                         <div class="section-header">
@@ -297,7 +280,6 @@
 
                             </asp:Repeater>
 
-
                             <asp:Panel
                                 ID="pnlNoMaterials"
                                 runat="server"
@@ -325,8 +307,6 @@
 
                     </div>
 
-
-                    <!-- Quiz Section -->
                     <div class="dashboard-section-card">
 
                         <div class="section-header">
@@ -391,7 +371,6 @@
 
                             </asp:Repeater>
 
-
                             <asp:Panel
                                 ID="pnlNoQuizzes"
                                 runat="server"
@@ -421,8 +400,6 @@
 
                 </div>
 
-
-                <!-- Right Column -->
                 <div class="right-column">
 
                     <div class="dashboard-section-card sticky-card">
@@ -466,7 +443,6 @@
 
                             </asp:Repeater>
 
-
                             <asp:Panel
                                 ID="pnlNoClassrooms"
                                 runat="server"
@@ -498,7 +474,6 @@
             </div>
 
         </div>
-
 
         <script>
             lucide.createIcons();

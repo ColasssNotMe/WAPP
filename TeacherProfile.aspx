@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Profile</title>
-    <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Link to external stylesheet -->
+
     <link rel="stylesheet" href="TeacherProfile.css">
 </head>
 <body>
 
     <div class="profile-container">
-        
-        <!-- Header Section with Back Arrow Button -->
+
         <header class="profile-header">
             <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -27,10 +26,8 @@
             <div class="header-spacer"></div>
         </header>
 
-        <!-- Main Content Layout -->
         <div class="profile-content-grid">
-            
-            <!-- Left Column: Sidebar Card -->
+
             <aside class="card profile-summary-card">
                 <div class="avatar-header">
                     <div class="avatar-circle">CN</div>
@@ -69,7 +66,6 @@
                     </div>
                 </div>
 
-                <!-- Upload Photo Area -->
                 <div class="upload-photo-container">
                     <span class="upload-label">Profile picture</span>
                     <button type="button" class="btn btn-upload">
@@ -83,13 +79,11 @@
                 </div>
             </aside>
 
-            <!-- Right Column: Settings Form -->
             <main class="card account-settings-card">
                 <h2 class="settings-title">Teacher Profile</h2>
-                
+
                 <form class="settings-form" onsubmit="event.preventDefault();">
-                    
-                    <!-- Row 1: First Name & Last Name -->
+
                     <div class="form-row-two">
                         <div class="form-group">
                             <label for="firstName">First name</label>
@@ -101,31 +95,26 @@
                         </div>
                     </div>
 
-                    <!-- Row 2: Username -->
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" id="username" class="form-control" placeholder="Enter username">
                     </div>
 
-                    <!-- Row 3: Email -->
                     <div class="form-group">
                         <label for="email">Email address</label>
                         <input type="email" id="email" class="form-control" value="nurul@ncient.edu.my" placeholder="Enter email address">
                     </div>
 
-                    <!-- Row 4: Role -->
                     <div class="form-group">
                         <label for="role">Role</label>
                         <input type="text" id="role" class="form-control" value="Teacher" placeholder="Enter role">
                     </div>
 
-                    <!-- Row 5: School -->
                     <div class="form-group">
                         <label for="schoolInput">School</label>
                         <input type="text" id="schoolInput" class="form-control" value="SMK Taman Melawati" placeholder="Enter school name">
                     </div>
 
-                    <!-- Sub Section: Security -->
                     <div class="form-section-group">
                         <h3 class="group-subtitle">Security</h3>
                         <div class="form-group">
@@ -138,7 +127,6 @@
                         </div>
                     </div>
 
-                    <!-- Form Actions -->
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Save changes</button>
                         <button type="button" class="btn btn-secondary">Discard</button>

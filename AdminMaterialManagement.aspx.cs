@@ -37,7 +37,6 @@ namespace Assignment
             loadMaterials();
         }
 
-        // Handle selection of a row from the table
         protected void MaterialRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectMaterial")
@@ -47,7 +46,6 @@ namespace Assignment
             }
         }
 
-        // Publish / Unpublish button
         protected void btnToggle_Click(object sender, EventArgs e)
         {
             string connString =
@@ -67,7 +65,6 @@ namespace Assignment
             loadMaterials();
         }
 
-        // Delete material button
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             if (ViewState["MaterialID"] == null) return;
@@ -90,7 +87,6 @@ namespace Assignment
                         cmd1.ExecuteNonQuery();
                     }
 
-                    // Delete the material record
                     string deleteMaterialQuery = "DELETE FROM Material WHERE materialID = @materialID";
                     using (SqlCommand cmd2 = new SqlCommand(deleteMaterialQuery, conn, transaction))
                     {
@@ -107,13 +103,11 @@ namespace Assignment
                 }
             }
 
-            // Reset selection state and refresh grid/counts
             ViewState["MaterialID"] = null;
             setDefaultMaterial();
             loadMaterials();
         }
 
-        // Fill the class dropdown (only once)
         private void loadClasses()
         {
             string connString =
@@ -225,7 +219,6 @@ namespace Assignment
             }
         }
 
-        // Select the newest material when the page first loads
         private void setDefaultMaterial()
         {
             string connString =
@@ -247,10 +240,8 @@ namespace Assignment
             }
         }
 
-        // Fill the Material Details panel
         private void loadDetails()
         {
-            // No material in the database yet
             if (ViewState["MaterialID"] == null)
             {
                 pnlDetails.Visible = false;
@@ -298,7 +289,6 @@ namespace Assignment
                 lblDetDate.Text = GetDate(row["uploadDate"]);
                 lblDetComments.Text = row["commentCount"].ToString();
 
-                // Duration
                 if (Convert.ToString(row["durationMins"]) == "")
                 {
                     lblDetDuration.Text = "—";
@@ -308,7 +298,6 @@ namespace Assignment
                     lblDetDuration.Text = row["durationMins"] + " mins";
                 }
 
-                // Status
                 string status = Convert.ToString(row["status"]);
 
                 lblDetStatus.Text = GetText(status);
@@ -324,7 +313,6 @@ namespace Assignment
                     btnToggle.Text = "Publish";
                 }
 
-                // View material link (opens the uploaded file)
                 string fileURL = Convert.ToString(row["fileURL"]);
 
                 hlView.NavigateUrl = fileURL;
@@ -346,7 +334,6 @@ namespace Assignment
             }
         }
 
-        // Show a dash when the value is empty
         protected string GetText(object value)
         {
             string text = Convert.ToString(value);
@@ -359,7 +346,6 @@ namespace Assignment
             return text;
         }
 
-        // Show the date like 14 Oct 2026
         protected string GetDate(object value)
         {
             if (value == null || value == DBNull.Value)
@@ -370,7 +356,6 @@ namespace Assignment
             return Convert.ToDateTime(value).ToString("dd MMM yyyy");
         }
 
-        // Returns "true" for the row that is currently selected
         protected string GetSelected(object materialID)
         {
             if (Convert.ToString(materialID) == Convert.ToString(ViewState["MaterialID"]))

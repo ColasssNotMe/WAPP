@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Classes</title>
-    <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Link to external stylesheet -->
+
     <link rel="stylesheet" href="MyClasses.css">
 </head>
 <body>
 
     <div class="classes-container">
-        
-        <!-- Header Section: Left Back Arrow, Centered Title, Right Create Action -->
+
         <header class="classes-header">
             <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
-                <!-- Pure SVG Arrow Icon -->
+
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 19 5 12 12 5"></polyline>
@@ -30,10 +29,8 @@
             <button type="button" class="btn btn-create">Create Classroom</button>
         </header>
 
-        <!-- Classroom Cards Grid -->
         <div class="classes-grid">
-            
-            <!-- Classroom Card 1 -->
+
             <article class="card classroom-card">
                 <div class="card-header">
                     <div class="card-icon-box">
@@ -73,7 +70,6 @@
                 </div>
             </article>
 
-            <!-- Classroom Card 2 -->
             <article class="card classroom-card">
                 <div class="card-header">
                     <div class="card-icon-box">
@@ -113,7 +109,6 @@
                 </div>
             </article>
 
-            <!-- Classroom Card 3 -->
             <article class="card classroom-card">
                 <div class="card-header">
                     <div class="card-icon-box">

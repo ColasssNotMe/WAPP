@@ -18,15 +18,10 @@
     <uc:Header runat="server" />
     <form id="form1" runat="server">
 
-        <!-- ==============================
-         ABOUT SECTION
-         ============================== -->
-
         <section class="about-section">
 
             <div class="about-container">
 
-                <!-- Left Content -->
                 <div class="about-content">
 
                     <h1>About Ncient</h1>
@@ -37,13 +32,11 @@
                     all 14 states of Malaysia.
                     </p>
 
-                    <!-- Tags -->
                     <div class="about-tags">
                         <span class="tag">F1 - F5</span>
                         <span class="tag">Teacher-curated Content</span>
                     </div>
 
-                    <!-- Small cards -->
                     <div class="about-mini-cards">
 
                         <div class="mini-card">
@@ -64,8 +57,6 @@
                     </div>
                 </div>
 
-
-                <!-- Right Image -->
                 <div class="about-image placeholder">
                     <span></span>
                 </div>
@@ -74,24 +65,16 @@
 
         </section>
 
-
-        <!-- ==============================
-         MISSION & STORY
-         ============================== -->
-
         <section class="story-section">
 
             <div class="story-container">
 
-                <!-- Section Label -->
                 <div class="section-label">
                     OUR MISSION &amp; STORY
                 </div>
 
-
                 <div class="story-content">
 
-                    <!-- Left -->
                     <div class="story-text">
 
                         <h2>What is Ncient?</h2>
@@ -113,9 +96,6 @@
                         1957, we dismantle cognitive anxiety and cultivate
                         genuine historical curiosity.
                         </p>
-
-
-                        <!-- Learning Material Items -->
 
                         <div class="material-list">
 
@@ -141,7 +121,6 @@
 
                             </div>
 
-
                             <div class="material-card">
 
                                 <div class="material-icon placeholder">
@@ -163,7 +142,6 @@
                                 </div>
 
                             </div>
-
 
                             <div class="material-card">
 
@@ -191,8 +169,6 @@
 
                     </div>
 
-
-                    <!-- Right Image -->
                     <div class="story-image placeholder">
                         <span></span>
                     </div>
@@ -202,11 +178,6 @@
             </div>
 
         </section>
-
-
-        <!-- ==============================
-         OUR PURPOSE
-         ============================== -->
 
         <section class="purpose-section">
 
@@ -221,12 +192,8 @@
                 empower every Malaysian student.
                 </p>
 
-
-                <!-- Feature Cards -->
-
                 <div class="feature-grid">
 
-                    <!-- Learning Materials -->
                     <div class="feature-card">
 
                         <div class="feature-image placeholder">
@@ -247,8 +214,6 @@
 
                     </div>
 
-
-                    <!-- Interactive Quizzes -->
                     <div class="feature-card">
 
                         <div class="feature-image placeholder">
@@ -268,8 +233,6 @@
 
                     </div>
 
-
-                    <!-- Live Session -->
                     <div class="feature-card">
 
                         <div class="feature-image placeholder">
@@ -289,8 +252,6 @@
 
                     </div>
 
-
-                    <!-- Learning Progress -->
                     <div class="feature-card">
 
                         <div class="feature-image placeholder">
@@ -316,11 +277,6 @@
 
         </section>
 
-
-        <!-- ==============================
-         CTA
-         ============================== -->
-
         <section class="cta-section">
 
             <div class="cta-container">
@@ -341,7 +297,6 @@
 
                 </div>
 
-
                 <div class="cta-image placeholder">
                     <span></span>
                 </div>
@@ -349,7 +304,6 @@
             </div>
 
         </section>
-
 
     </form>
 

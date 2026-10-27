@@ -26,9 +26,9 @@ namespace Assignment
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = @"SELECT m.materialID, m.title, m.chapter, ISNULL(m.status, 'Published') AS status, c.className 
-                                FROM Material m 
-                                INNER JOIN Class c ON m.classID = c.classID 
+                string query = @"SELECT m.materialID, m.title, m.chapter, ISNULL(m.status, 'Published') AS status, c.className
+                                FROM Material m
+                                INNER JOIN Class c ON m.classID = c.classID
                                 ORDER BY m.uploadDate DESC";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -58,9 +58,9 @@ namespace Assignment
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = @"SELECT m.materialID, m.title, m.chapter, m.uploadDate, ISNULL(m.status, 'Published') AS status, c.className 
-                                FROM Material m 
-                                INNER JOIN Class c ON m.classID = c.classID 
+                string query = @"SELECT m.materialID, m.title, m.chapter, m.uploadDate, ISNULL(m.status, 'Published') AS status, c.className
+                                FROM Material m
+                                INNER JOIN Class c ON m.classID = c.classID
                                 WHERE m.materialID = @materialID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -143,7 +143,6 @@ namespace Assignment
                     }
                 }
 
-                // Reset selection UI
                 ViewState["SelectedMaterialID"] = null;
                 pnlActions.Visible = false;
                 lblDetailTitle.Text = "Select a note";
@@ -152,7 +151,6 @@ namespace Assignment
                 lblDetailDate.Text = "-";
                 lblDetailStatus.Text = "-";
 
-                // Refresh library list
                 BindNotesList();
             }
         }

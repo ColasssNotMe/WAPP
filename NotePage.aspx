@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NotePage.aspx.cs" Inherits="Assignment.MaterialPage" %>
 
-
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
@@ -18,17 +17,14 @@
 
     <form id="form1" runat="server">
 
-        <!-- Breadcrumb -->
         <div class="breadcrumb">
             Learning Material
             <span id="titleLabel" runat="server">/</span>
             <span id="chapterLabel" runat="server">/</span>
         </div>
 
-        <!-- Main Content -->
         <main class="learning-container">
 
-            <!-- Chapter Navigation -->
             <div class="chapter-navigation">
 
                 <a href="StudentLearningMaterial.aspx" class="topic-navigation previous-topic">
@@ -41,8 +37,6 @@
 
             </div>
 
-
-            <!-- PDF Viewer -->
             <div class="pdf-container">
 
                 <iframe

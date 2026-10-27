@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom Details</title>
-    <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Link to external stylesheet -->
+
     <link rel="stylesheet" href="ClassroomDetails.css">
 </head>
 <body>
 
     <div class="details-container">
-        
-        <!-- Header Section -->
+
         <header class="details-header">
             <div class="header-left">
                 <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
@@ -26,7 +25,7 @@
                 </a>
                 <div class="title-group">
                     <h1 class="page-title">Classroom Details</h1>
-   
+
                 </div>
             </div>
 
@@ -35,13 +34,10 @@
             </div>
         </header>
 
-        <!-- Main Layout Grid -->
         <div class="details-content-grid">
-            
-            <!-- Left Column: Main Classroom Card -->
+
             <main class="card main-details-card">
-                
-                <!-- Card Header -->
+
                 <div class="card-header">
                     <div class="header-info">
                         <div class="card-icon-box">
@@ -58,7 +54,6 @@
                     <span class="status-tag">Active</span>
                 </div>
 
-                <!-- Details Key-Value List -->
                 <div class="meta-details-list">
                     <div class="meta-row">
                         <span class="meta-label">Teacher</span>
@@ -78,12 +73,10 @@
                     </div>
                 </div>
 
-                <!-- Description Callout -->
                 <div class="description-callout">
                     This classroom is used for daily lessons, live review sessions, and quiz assignments for Form 4 students.
                 </div>
 
-                <!-- Action Buttons -->
                 <div class="card-actions">
                     <button type="button" class="btn btn-primary">Edit classroom</button>
                     <button type="button" class="btn btn-secondary">Copy invite code</button>
@@ -91,7 +84,6 @@
 
             </main>
 
-            <!-- Right Column: Quick Actions Card -->
             <aside class="card quick-actions-card">
                 <h2 class="card-title">Quick Actions</h2>
 

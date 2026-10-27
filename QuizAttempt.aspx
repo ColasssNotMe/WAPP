@@ -21,10 +21,6 @@
 
         <main class="quiz-page">
 
-            <!-- =========================
-                 PAGE HEADING
-            ========================== -->
-
             <div class="quiz-heading">
 
                 <div>
@@ -45,19 +41,9 @@
 
             </div>
 
-
-            <!-- =========================
-                 CLASSROOM
-            ========================== -->
-
             <div class="classroom-label">
                 &lt;Classroom Name&gt;
             </div>
-
-
-            <!-- =========================
-                 QUIZ INFORMATION
-            ========================== -->
 
             <section class="quiz-info-card">
 
@@ -80,17 +66,7 @@
 
             </section>
 
-
-            <!-- =========================
-                 QUIZ AREA
-            ========================== -->
-
             <div class="quiz-layout">
-
-
-                <!-- =========================
-                     QUESTION
-                ========================== -->
 
                 <section class="question-card">
 
@@ -108,49 +84,22 @@
 
                     </div>
 
-
                     <h2
                         class="question-title"
                         id="questionTitle"
                         runat="server"></h2>
 
-
                     <p class="question-instruction">
                         Choose one answer.
                     </p>
 
-
-                    <!-- =========================
-                         ANSWER AREA
-
-                         Keep your existing answer
-                         controls here for now.
-                    ========================== -->
-
                     <div id="answerArea" runat="server">
 
-                        <!--
-                            Your answer options can be
-                            dynamically loaded here later
-                            once the Answer table structure
-                            is available.
-                        -->
-
                     </div>
-
-
-                    <!-- =========================
-                         AUTO SAVE
-                    ========================== -->
 
                     <div class="answer-status">
                         ✓&nbsp; Answer saved automatically · Just now
                     </div>
-
-
-                    <!-- =========================
-                         NAVIGATION
-                    ========================== -->
 
                     <div class="question-navigation">
 
@@ -172,16 +121,10 @@
 
                 </section>
 
-
-                <!-- =========================
-                     QUESTION NAVIGATOR
-                ========================== -->
-
                 <aside class="navigator-card">
 
                     <h3>Question Navigator
                     </h3>
-
 
                     <div class="navigator-progress">
 
@@ -207,11 +150,6 @@
 
                     </div>
 
-
-                    <!-- =========================
-                         DYNAMIC QUESTION BUTTONS
-                    ========================== -->
-
                     <div class="question-grid">
 
                         <asp:Repeater
@@ -235,11 +173,6 @@
                         </asp:Repeater>
                     </div>
 
-
-                    <!-- =========================
-                         LEGEND
-                    ========================== -->
-
                     <div class="navigator-legend">
 
                         <p>
@@ -258,17 +191,11 @@
 
                     </div>
 
-
-                    <!-- =========================
-                         SUBMIT
-                    ========================== -->
-
                     <asp:Button
                         ID="SubmitQuizButton"
                         runat="server"
                         Text="Submit quiz"
                         CssClass="submit-quiz-button" />
-
 
                     <p
                         class="remaining-text"

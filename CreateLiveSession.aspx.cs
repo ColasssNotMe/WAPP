@@ -18,7 +18,6 @@ namespace Assignment
             }
         }
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -27,18 +26,12 @@ namespace Assignment
             }
         }
 
-
-        // =========================================================
-        // LOAD CLASSROOMS
-        // =========================================================
-
         private void LoadClasses()
         {
             string query = @"
                 SELECT classID
                 FROM Class
                 ORDER BY classID ASC";
-
 
             using (SqlConnection conn =
                 new SqlConnection(ConnectionString))
@@ -80,7 +73,6 @@ namespace Assignment
                 return;
             }
 
-
             if (string.IsNullOrEmpty(ddlClass.SelectedValue))
             {
                 ShowMessage(
@@ -88,7 +80,6 @@ namespace Assignment
 
                 return;
             }
-
 
             DateTime startTime;
 
@@ -102,7 +93,6 @@ namespace Assignment
                 return;
             }
 
-
             DateTime endTime;
 
             if (!DateTime.TryParse(
@@ -115,7 +105,6 @@ namespace Assignment
                 return;
             }
 
-
             if (endTime <= startTime)
             {
                 ShowMessage(
@@ -123,7 +112,6 @@ namespace Assignment
 
                 return;
             }
-
 
             string query = @"
                 INSERT INTO LiveSession
@@ -141,7 +129,6 @@ namespace Assignment
                     @endtime
                 )";
 
-
             using (SqlConnection conn =
                 new SqlConnection(ConnectionString))
 
@@ -158,12 +145,9 @@ namespace Assignment
                 cmd.ExecuteNonQuery();
             }
 
-
             Response.Redirect(
                 "LiveSessionManagement.aspx");
         }
-
-
 
         protected void btnCancel_Click(
             object sender,
@@ -172,7 +156,6 @@ namespace Assignment
             Response.Redirect(
                 "LiveSessionManagement.aspx");
         }
-
 
         private void ShowMessage(string message)
         {

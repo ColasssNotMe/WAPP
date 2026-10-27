@@ -87,7 +87,6 @@
                             OnClick="btnReset_Click" />
                     </div>
 
-                    <!-- Quizzes tab -->
                     <asp:Panel ID="pnlQuizzes" runat="server">
                         <div class="table-wrap">
                             <table class="data-table">
@@ -150,7 +149,6 @@
                         </div>
                     </asp:Panel>
 
-                    <!-- Questions tab -->
                     <asp:Panel
                         ID="pnlQuestions"
                         runat="server"
@@ -224,7 +222,6 @@
                     </div>
                 </section>
 
-                <!-- Quiz details panel -->
                 <aside class="panel">
                     <h2 class="panel-heading">Quiz Details</h2>
 

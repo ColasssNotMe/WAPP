@@ -15,7 +15,6 @@ body {
     margin: 0 auto;
 }
 
-/* Page header */
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -47,7 +46,6 @@ body {
     white-space: nowrap;
 }
 
-/* Main layout */
 .layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 306px;
@@ -76,7 +74,6 @@ body {
         color: var(--secondary-color);
     }
 
-/* C# tab navigation */
 .tabs {
     display: flex;
     gap: 4px;
@@ -114,7 +111,6 @@ body {
         font-weight: 600;
     }
 
-/* Section toolbar */
 .toolbar {
     display: flex;
     gap: 8px;
@@ -159,7 +155,6 @@ body {
     cursor: pointer;
 }
 
-/* Tables */
 .table-wrap {
     width: 100%;
     overflow-x: auto;
@@ -230,7 +225,6 @@ td.teacher {
             text-decoration: underline;
         }
 
-/* Status text */
 .status {
     font-weight: 600;
 }
@@ -261,7 +255,6 @@ td.teacher {
     color: var(--secondary-color);
 }
 
-/* Table footer */
 .table-footer {
     display: flex;
     justify-content: space-between;
@@ -272,7 +265,6 @@ td.teacher {
     color: var(--secondary-color);
 }
 
-/* Details panel */
 .details h2 {
     margin-bottom: 14px;
 }
@@ -313,7 +305,6 @@ td.teacher {
     line-height: 1.55;
 }
 
-/* Buttons */
 .btn-row {
     display: flex;
     gap: 8px;
@@ -342,14 +333,11 @@ td.teacher {
             background: #151c33;
         }
 
-
-/* Focus visibility */
 :focus-visible {
     outline: 2px solid var(--gold-color);
     outline-offset: 2px;
 }
 
-/* Select button styling */
 .btn-select {
     display: inline-block;
     padding: 3px 8px;
@@ -369,12 +357,10 @@ td.teacher {
         border-color: var(--gold-color);
     }
 
-/* Row selection highlight */
 tr.selected-row td {
     background-color: rgba(197, 160, 89, 0.15) !important;
 }
 
-/* Danger / Delete button */
 .btn.btn-danger {
     background: #d9534f;
     border-color: #d9534f;

@@ -28,8 +28,6 @@ namespace Assignment
             }
         }
 
-        // Tabs
-
         protected void btnTabQuizzes_Click(object sender, EventArgs e)
         {
             ChangeTab("Quizzes");
@@ -47,8 +45,6 @@ namespace Assignment
             loadData();
         }
 
-        // Search and reset
-
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             loadData();
@@ -59,8 +55,6 @@ namespace Assignment
             txtSearch.Text = "";
             loadData();
         }
-
-        // Select quiz (from a quiz row or a question row)
 
         protected void Row_Command(object source, RepeaterCommandEventArgs e)
         {
@@ -75,8 +69,6 @@ namespace Assignment
                 }
             }
         }
-
-        // Detail panel buttons
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {
@@ -138,8 +130,6 @@ namespace Assignment
             loadData();
         }
 
-        // Load the selected tab
-
         private void loadData()
         {
             string tab = Convert.ToString(ViewState["Tab"]);
@@ -164,8 +154,6 @@ namespace Assignment
             loadCounts();
             loadDetails();
         }
-
-        // Load quizzes
 
         private void loadQuizzes()
         {
@@ -203,8 +191,6 @@ namespace Assignment
             emptyQuizzes.Visible = dt.Rows.Count == 0;
         }
 
-        // Load questions
-
         private void loadQuestions()
         {
             string sql = @"
@@ -237,8 +223,6 @@ namespace Assignment
             emptyQuestions.Visible = dt.Rows.Count == 0;
         }
 
-        // Counts
-
         private void loadCounts()
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
@@ -263,8 +247,6 @@ namespace Assignment
                 : lblQuestionCount.Text;
         }
 
-        // Default selection (newest quiz)
-
         private void setDefaultQuiz()
         {
             SelectedQuizID = null;
@@ -283,8 +265,6 @@ namespace Assignment
                 }
             }
         }
-
-        // Quiz details panel
 
         private void loadDetails()
         {
@@ -343,8 +323,6 @@ namespace Assignment
             }
         }
 
-        // Display helpers
-
         protected string GetText(object value)
         {
             string text = Convert.ToString(value);
@@ -359,7 +337,6 @@ namespace Assignment
             return Convert.ToDateTime(value).ToString("dd MMM yyyy");
         }
 
-        // CSS class for a table row (highlighted when it is the selected quiz)
         protected string GetRowClass(object quizID)
         {
             bool isSelected = SelectedQuizID != null

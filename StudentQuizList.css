@@ -1,6 +1,4 @@
-﻿/* ==========================================
-    QUIZ HISTORY PAGE
-    ========================================== */
+﻿
 
 .quiz-page {
     width: 100%;
@@ -8,11 +6,6 @@
     margin: 0 auto;
     padding: 3rem 0 4rem;
 }
-
-
-/* ==========================================
-   PAGE HEADER
-   ========================================== */
 
 .quiz-header {
     text-align: center;
@@ -32,11 +25,6 @@
         color: var(--secondary-color);
         margin-bottom: 1.25rem;
     }
-
-
-/* ==========================================
-   SEARCH
-   ========================================== */
 
 .quiz-search {
     width: 370px;
@@ -75,11 +63,6 @@
         opacity: 0.65;
     }
 
-
-/* ==========================================
-   SECTION
-   ========================================== */
-
 .quiz-section {
     margin-bottom: 2.5rem;
 }
@@ -91,22 +74,12 @@
     color: var(--primary-color);
 }
 
-
-/* ==========================================
-   QUIZ GRID
-   ========================================== */
-
 .quiz-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 2rem;
     row-gap: 1.5rem;
 }
-
-
-/* ==========================================
-   AVAILABLE QUIZ CARD
-   ========================================== */
 
 .quiz-card {
     min-height: 150px;
@@ -117,11 +90,6 @@
     display: flex;
     flex-direction: column;
 }
-
-
-/* ==========================================
-   QUIZ CARD TOP
-   ========================================== */
 
 .quiz-card-top {
     display: flex;
@@ -146,11 +114,6 @@
     color: var(--secondary-color);
 }
 
-
-/* ==========================================
-   QUIZ CARD CONTENT
-========================================== */
-
 .quiz-card h3 {
     font-size: 1rem;
     font-weight: 600;
@@ -166,22 +129,12 @@
     max-width: 90%;
 }
 
-
-/* ==========================================
-   QUIZ CARD ACTION
-========================================== */
-
 .quiz-card-action {
     display: flex;
     justify-content: flex-end;
     margin-top: auto;
     padding-top: 1rem;
 }
-
-
-/* ==========================================
-   QUIZ BUTTON
-========================================== */
 
 .quiz-button {
     padding: 0.45rem 0.9rem !important;
@@ -198,19 +151,9 @@
         background-color: var(--secondary-color) !important;
     }
 
-
-/* ==========================================
-   COMPLETED SECTION
-========================================== */
-
 .completed-section {
     margin-top: 0.5rem;
 }
-
-
-/* ==========================================
-   COMPLETED CARD
-========================================== */
 
 .completed-card {
     min-height: 145px;
@@ -246,22 +189,12 @@
     color: var(--primary-color);
 }
 
-
-/* ==========================================
-   COMPLETED INFO
-========================================== */
-
 .completed-info {
     font-size: 0.7rem;
     line-height: 1.4;
     margin: 0.75rem 0 0.7rem;
     color: var(--secondary-color);
 }
-
-
-/* ==========================================
-   PROGRESS BAR
-========================================== */
 
 .progress-container {
     width: 100%;
@@ -278,16 +211,10 @@
     transition: width 0.3s ease;
 }
 
-
-/* ==========================================
-   COMPLETED ACTION
-========================================== */
-
 .completed-action {
     display: flex;
     justify-content: flex-end;
     margin-top: auto;
     padding-top: 1rem;
 }
-
 

@@ -20,23 +20,9 @@
 
     <form id="form1" runat="server">
 
-        <!-- =========================
-             HEADER
-        ========================== -->
-
         <uc:Header ID="HeaderControl" runat="server" />
 
-
-        <!-- =========================
-             MAIN DASHBOARD
-        ========================== -->
-
         <main class="dashboard">
-
-
-            <!-- =========================
-                 DASHBOARD HEADER
-            ========================== -->
 
             <header class="dashboard-header">
 
@@ -51,9 +37,6 @@
                     </p>
 
                 </div>
-
-
-                <!-- Overall Progress -->
 
                 <div class="progress-card">
                     <div class="progress-label">
@@ -77,11 +60,6 @@
                     </div>
                 </div>
             </header>
-
-
-            <!-- =========================
-                 LIVE SESSION
-            ========================== -->
 
             <div class="live-session">
                 <h3 class="live-title">Join Live Session</h3>
@@ -107,10 +85,6 @@
                 </div>
             </div>
 
-            <!-- =========================
-                 LEARNING MATERIALS
-            ========================== -->
-
             <section class="section-card">
 
                 <a class="section-title section-title-link" href="StudentLearningMaterial.aspx">
@@ -130,7 +104,6 @@
                     </svg>
                 </a>
 
-
                 <asp:Repeater
                     ID="LearningMaterialsRepeater"
                     runat="server">
@@ -138,8 +111,6 @@
                     <ItemTemplate>
 
                         <div class="learning-item">
-
-                            <!-- Material Icon -->
 
                             <div class="item-icon" runat="server" id="itemIcon">
 
@@ -160,9 +131,6 @@
 
                             </div>
 
-
-                            <!-- Material Information -->
-
                             <div class="item-content">
 
                                 <p class="item-title">
@@ -177,25 +145,21 @@
 
                 </asp:Repeater>
 
-                <!-- Empty placeholder -->
                 <div id="materialPlaceholder"
                     runat="server"
                     class="empty-placeholder"
                     visible="false">
 
-
                     <p class="empty-title">No Learning Materials</p>
 
                     <p class="empty-info">
                         There are currently no learning materials available.
-   
+
                     </p>
 
                 </div>
 
-
             </section>
-
 
             <section class="section-card">
 
@@ -216,7 +180,6 @@
                     </svg>
                 </a>
 
-
                 <asp:Repeater
                     ID="RecentQuizRepeater"
                     runat="server">
@@ -224,9 +187,6 @@
                     <ItemTemplate>
 
                         <div class="learning-item">
-
-
-                            <!-- Quiz Icon -->
 
                             <div class="item-icon" id="itemIcon" runat="server">
 
@@ -250,8 +210,6 @@
                                 </svg>
 
                             </div>
-
-
 
                             <div class="item-content">
 
@@ -283,20 +241,14 @@
 
                     <p class="empty-info">
                         You have not completed any quizzes yet.
-   
+
                     </p>
 
                 </div>
 
-
             </section>
 
-
-
             <section class="join-card">
-
-
-                <!-- Join Header -->
 
                 <div class="join-header">
 
@@ -310,23 +262,16 @@
 
                     </div>
 
-
                     <span class="invite-code-badge">Enter invite code
                     </span>
 
                 </div>
-
-
-                <!-- Description -->
 
                 <p class="join-description">
                     Join another classroom by entering the invite
                     code shared by your teacher.
 
                 </p>
-
-
-                <!-- Join Form -->
 
                 <div class="join-form">
 
@@ -354,18 +299,11 @@
                 </p>
             </section>
 
-
         </main>
-
-
-        <!-- =========================
-             FOOTER
-        ========================== -->
 
         <uc:Footer
             ID="FooterControl"
             runat="server" />
-
 
     </form>
 

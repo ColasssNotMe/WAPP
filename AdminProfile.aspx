@@ -20,7 +20,7 @@
             </header>
 
             <div class="profile-grid">
-                <!-- Left: identity card -->
+
                 <section class="panel identity-panel">
                     <div class="identity">
                         <div class="avatar" id="avatar" runat="server"></div>
@@ -46,10 +46,8 @@
                     </div>
                 </section>
 
-                <!-- Right: settings + security -->
                 <div class="settings-column">
 
-                    <!-- Account settings -->
                     <section class="panel">
                         <div class="panel-heading-row">
                             <div>
@@ -109,7 +107,6 @@
                         </asp:Panel>
                     </section>
 
-                    <!-- Security -->
                     <section class="panel">
                         <div class="panel-heading-row">
                             <div>

@@ -1,4 +1,4 @@
-﻿/* CSS Variables for "Classical Archive & Heritage" Palette */
+﻿
 :root {
     --bg-main: #F0EAE1;
     --bg-surface: #FAF6EE;
@@ -18,7 +18,6 @@
     --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Base Resets & Global Styles */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -41,7 +40,6 @@ body {
     gap: 28px;
 }
 
-/* Header Section */
 .dashboard-header {
     display: flex;
     flex-direction: column;
@@ -105,7 +103,6 @@ body {
     box-shadow: 0 0 0 3px rgba(59, 88, 50, 0.2);
 }
 
-/* Metric Cards Grid */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -214,7 +211,6 @@ body {
     display: inline-block;
 }
 
-/* Main Content Grid */
 .main-content-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -234,7 +230,6 @@ body {
     gap: 24px;
 }
 
-/* Card Section Styles */
 .dashboard-section-card {
     background-color: var(--bg-surface);
     border: 1px solid var(--border-color);
@@ -269,7 +264,6 @@ body {
     border: 1px solid var(--border-color);
 }
 
-/* Activity Items List */
 .activity-list {
     display: flex;
     flex-direction: column;
@@ -343,7 +337,6 @@ body {
     color: var(--accent-gold);
 }
 
-/* Right Column: Classroom Summary */
 .summary-list {
     display: flex;
     flex-direction: column;

@@ -26,9 +26,9 @@ namespace Assignment
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = @"SELECT q.quizID, q.title, q.totalMarks, c.className 
-                                FROM Quiz q 
-                                INNER JOIN Class c ON q.classID = c.classID 
+                string query = @"SELECT q.quizID, q.title, q.totalMarks, c.className
+                                FROM Quiz q
+                                INNER JOIN Class c ON q.classID = c.classID
                                 ORDER BY q.createdDate DESC";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -58,9 +58,9 @@ namespace Assignment
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = @"SELECT q.quizID, q.title, q.totalMarks, q.createdDate, c.className 
-                                FROM Quiz q 
-                                INNER JOIN Class c ON q.classID = c.classID 
+                string query = @"SELECT q.quizID, q.title, q.totalMarks, q.createdDate, c.className
+                                FROM Quiz q
+                                INNER JOIN Class c ON q.classID = c.classID
                                 WHERE q.quizID = @quizID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -142,7 +142,6 @@ namespace Assignment
                     }
                 }
 
-                // Reset view state & UI details panel
                 ViewState["SelectedQuizID"] = null;
                 pnlActions.Visible = false;
                 lblDetailTitle.Text = "Select a quiz";
@@ -150,7 +149,6 @@ namespace Assignment
                 lblDetailMarks.Text = "-";
                 lblDetailDate.Text = "-";
 
-                // Refresh the quiz list
                 BindQuizList();
             }
         }

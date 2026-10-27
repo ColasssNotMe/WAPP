@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student List</title>
-    <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -66,7 +66,7 @@
             min-width: 40px;
             text-align: right;
         }
-        /* Action Modal */
+
         .modal-backdrop {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -86,8 +86,7 @@
 <body>
     <form id="form1" runat="server">
         <div class="quizzes-container">
-            
-            <!-- Header Section -->
+
             <header class="page-header">
                 <div class="header-left">
                     <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
@@ -108,7 +107,6 @@
                 </div>
             </header>
 
-            <!-- Main Content Card -->
             <main class="card" style="padding: 12px 24px;">
                 <asp:Repeater ID="rptStudents" runat="server" OnItemCommand="rptStudents_ItemCommand">
                     <ItemTemplate>
@@ -127,8 +125,8 @@
                                     <%# Eval("status") %>
                                 </span>
                                 <span class="progress-val"><%# Eval("AvgProgress") %>%</span>
-                                <asp:Button ID="btnAssign" runat="server" Text="Assign Class" 
-                                    CssClass="btn btn-secondary" style="padding: 6px 12px; font-size:12px;" 
+                                <asp:Button ID="btnAssign" runat="server" Text="Assign Class"
+                                    CssClass="btn btn-secondary" style="padding: 6px 12px; font-size:12px;"
                                     CommandName="OpenAssign" CommandArgument='<%# Eval("studentID") %>' />
                             </div>
                         </div>
@@ -136,12 +134,11 @@
                 </asp:Repeater>
             </main>
 
-            <!-- Assign Class Modal Panel -->
             <asp:Panel ID="pnlModal" runat="server" Visible="false" CssClass="modal-backdrop">
                 <div class="modal-card">
                     <h2 class="card-title" style="margin-bottom:12px;">Assign Classroom</h2>
                     <p class="page-subtitle" style="margin-bottom:20px;">Select a new classroom for <asp:Label ID="lblModalStudentName" runat="server" Font-Bold="true" />:</p>
-                    
+
                     <div class="form-group" style="margin-bottom:20px;">
                         <label for="ddlClassrooms">Classroom</label>
                         <asp:DropDownList ID="ddlClassrooms" runat="server" CssClass="form-control" style="width:100%; padding:10px; border-radius:10px;" />

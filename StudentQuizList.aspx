@@ -24,7 +24,6 @@
 
     <main class="quiz-page">
 
-        <!-- PAGE HEADER -->
         <section class="quiz-header">
 
             <h1>Quiz History</h1>
@@ -33,7 +32,6 @@
                 Complete quizzes from your enrolled classes and review your previous attempts.
             </p>
 
-            <!-- SEARCH -->
             <div class="quiz-search">
 
                 <span class="search-icon">⌕</span>
@@ -48,11 +46,6 @@
             </div>
 
         </section>
-
-
-        <!-- ==========================================
-             AVAILABLE QUIZZES
-             ========================================== -->
 
         <section class="quiz-section">
 
@@ -69,7 +62,6 @@
                 <p>No quizzes are currently available.</p>
 
             </asp:Panel>
-
 
             <div class="quiz-grid">
 
@@ -94,16 +86,13 @@
 
                             </div>
 
-
                             <h3>
                                 <%# Eval("Title") %>
                             </h3>
 
-
                             <p class="quiz-description">
                                 <%# Eval("Description") %>
                             </p>
-
 
                             <div class="quiz-card-action">
 
@@ -127,17 +116,11 @@
 
         </section>
 
-
-        <!-- ==========================================
-             COMPLETED QUIZZES
-             ========================================== -->
-
         <section class="quiz-section completed-section">
 
             <h2 class="section-title">
                 Completed Quizzes
             </h2>
-
 
             <asp:Panel
                 ID="completedEmptyPanel"
@@ -148,7 +131,6 @@
                 <p>You have not completed any quizzes yet.</p>
 
             </asp:Panel>
-
 
             <div class="quiz-grid">
 
@@ -173,7 +155,6 @@
 
                             </div>
 
-
                             <p class="completed-info">
 
                                 <%# Eval("QuestionCount") %> Questions
@@ -184,7 +165,6 @@
 
                             </p>
 
-
                             <div class="progress-container">
 
                                 <div
@@ -193,7 +173,6 @@
                                 </div>
 
                             </div>
-
 
                             <div class="completed-action">
 

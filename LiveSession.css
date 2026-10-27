@@ -1,6 +1,4 @@
-﻿/* ==========================================
-   LIVE SESSION PAGE
-   ========================================== */
+﻿
 
 .live-session-page {
     width: 90%;
@@ -8,11 +6,6 @@
     margin: 0 auto;
     padding: 25px 0 40px;
 }
-
-
-/* ==========================================
-   HEADER
-   ========================================== */
 
 .session-header {
     display: flex;
@@ -31,11 +24,6 @@
     font-size: 0.48rem;
     color: var(--secondary-color);
 }
-
-
-/* ==========================================
-   LIVE INDICATOR
-   ========================================== */
 
 .live-indicator {
     display: flex;
@@ -56,11 +44,6 @@
     border-radius: 50%;
 }
 
-
-/* ==========================================
-   SESSION META
-   ========================================== */
-
 .session-meta {
     display: flex;
     justify-content: space-between;
@@ -69,11 +52,6 @@
     color: var(--secondary-color);
 }
 
-
-/* ==========================================
-   MAIN LAYOUT
-   ========================================== */
-
 .session-layout {
     display: grid;
     grid-template-columns: minmax(0, 2.35fr) minmax(230px, 1fr);
@@ -81,22 +59,12 @@
     align-items: start;
 }
 
-
-/* ==========================================
-   PRESENTATION CARD
-   ========================================== */
-
 .presentation-card {
     overflow: hidden;
     background-color: var(--white);
     border: 1px solid var(--border-color);
     border-radius: 9px;
 }
-
-
-/* ==========================================
-   PRESENTATION HEADER
-   ========================================== */
 
 .presentation-header {
     height: 34px;
@@ -127,11 +95,6 @@
     font-size: 0.43rem;
 }
 
-
-/* ==========================================
-   PRESENTATION SCREEN
-   ========================================== */
-
 .presentation-screen {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -144,7 +107,6 @@
     position: absolute;
     inset: 0;
 }
-
 
 /* diagonal X */
 
@@ -164,11 +126,6 @@
 .cross-two {
     transform: rotate(-31deg);
 }
-
-
-/* ==========================================
-   PRESENTATION CONTROLS
-   ========================================== */
 
 .presentation-controls {
     min-height: 46px;
@@ -203,11 +160,6 @@
     margin-left: auto;
 }
 
-
-/* ==========================================
-   CHAT PANEL
-   ========================================== */
-
 .chat-panel {
     height: 310px;
     display: flex;
@@ -217,11 +169,6 @@
     border: 1px solid var(--border-color);
     border-radius: 9px;
 }
-
-
-/* ==========================================
-   CHAT HEADER
-   ========================================== */
 
 .chat-header {
     display: flex;
@@ -242,21 +189,11 @@
     color: var(--primary-color);
 }
 
-
-/* ==========================================
-   CHAT DESCRIPTION
-   ========================================== */
-
 .chat-description {
     margin: 9px 0;
     font-size: 0.42rem;
     color: var(--secondary-color);
 }
-
-
-/* ==========================================
-   CHAT MESSAGES
-   ========================================== */
 
 .chat-messages {
     flex: 1;
@@ -313,11 +250,6 @@
     color: var(--primary-color);
 }
 
-
-/* ==========================================
-   CHAT INPUT
-   ========================================== */
-
 .chat-input-container {
     display: flex;
     align-items: center;
@@ -351,11 +283,6 @@
     font-size: 0.65rem;
     color: var(--primary-color);
 }
-
-
-/* ==========================================
-   SESSION INFORMATION
-   ========================================== */
 
 .session-info-card {
     min-height: 68px;
@@ -412,5 +339,4 @@
     font-size: 0.4rem;
     color: var(--primary-color);
 }
-
 
