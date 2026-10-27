@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Assignment.Login" %>
+
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
@@ -26,7 +27,8 @@
                                 Text="Work or Academic Email:" />
                             <div class="input-wrap">
                                 <span class="input-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"></rect><path d="m4 6 8 7 8-7"></path></svg>
+                                    <svg viewBox="0 0 24 24">
+                                        <rect x="4" y="5" width="16" height="14" rx="1"></rect><path d="m4 6 8 7 8-7"></path></svg>
                                 </span>
                                 <asp:TextBox ID="EmailTextBox" runat="server" CssClass="form-input" TextMode="Email"
                                     autocomplete="username" />
@@ -38,63 +40,61 @@
                                 CssClass="validation-message" Display="Dynamic" />
                         </div>
 
-<div class="field-group password-group">
-    <div class="label-row">
-        <asp:Label 
-            ID="PasswordLabel" 
-            runat="server" 
-            AssociatedControlID="PasswordTextBox" 
-            CssClass="field-label"
-            Text="Password:" />
+                        <div class="field-group password-group">
+                            <div class="label-row">
+                                <asp:Label
+                                    ID="PasswordLabel"
+                                    runat="server"
+                                    AssociatedControlID="PasswordTextBox"
+                                    CssClass="field-label"
+                                    Text="Password:" />
 
-        <a href="ForgotPassword.aspx" class="forgot-link">
-            Forgot Password?
-        </a>
-    </div>
+                                <a href="ForgotPassword.aspx" class="forgot-link">Forgot Password?
+                                </a>
+                            </div>
 
-    <div class="input-wrap">
+                            <div class="input-wrap">
 
-        <span class="input-icon password-icon" aria-hidden="true">
-            <img src="svg/password.svg" width="20" height="20" />
-        </span>
+                                <span class="input-icon password-icon" aria-hidden="true">
+                                    <img src="svg/password.svg" width="20" height="20" />
+                                </span>
 
-        <asp:TextBox 
-            ID="PasswordTextBox" 
-            runat="server" 
-            CssClass="form-input password-input"
-            TextMode="Password" 
-            autocomplete="current-password" />
+                                <asp:TextBox
+                                    ID="PasswordTextBox"
+                                    runat="server"
+                                    CssClass="form-input password-input"
+                                    TextMode="Password"
+                                    autocomplete="current-password" />
 
-        <button 
-            type="button" 
-            class="toggle-password"
-            data-target="<%= PasswordTextBox.ClientID %>"
-            aria-label="Show password"
-            aria-pressed="false"
-            onclick="togglePassword('<%= PasswordTextBox.ClientID %>', this)"
-            >
+                                <button
+                                    type="button"
+                                    class="toggle-password"
+                                    data-target="<%= PasswordTextBox.ClientID %>"
+                                    aria-label="Show password"
+                                    aria-pressed="false"
+                                    onclick="togglePassword('<%= PasswordTextBox.ClientID %>', this)">
 
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path>
-                <circle cx="12" cy="12" r="2.5"></circle>
-            </svg>
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path>
+                                        <circle cx="12" cy="12" r="2.5"></circle>
+                                    </svg>
 
-        </button>
+                                </button>
 
-    </div>
+                            </div>
 
-    <asp:RequiredFieldValidator 
-        ID="PasswordRequired" 
-        runat="server" 
-        ControlToValidate="PasswordTextBox"
-        ErrorMessage="Please enter your password." 
-        CssClass="validation-message" 
-        Display="Dynamic" />
+                            <asp:RequiredFieldValidator
+                                ID="PasswordRequired"
+                                runat="server"
+                                ControlToValidate="PasswordTextBox"
+                                ErrorMessage="Please enter your password."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
 
-</div>
+                        </div>
 
                         <asp:Button ID="SignInButton" runat="server" Text="Sign In to Ncient  →"
-                            CssClass="sign-in-button" OnClick="SignInButton_Click"  />
+                            CssClass="sign-in-button" OnClick="SignInButton_Click" />
                         <asp:Label ID="LoginMessage" runat="server" CssClass="login-message" EnableViewState="false" />
                     </div>
                 </div>
@@ -108,7 +108,7 @@
         </main>
     </form>
 
-    <uc:Footer  runat="server" />
+    <uc:Footer runat="server" />
 </body>
 </html>
 

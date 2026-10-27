@@ -104,12 +104,48 @@
     justify-content: flex-end;
 }
 
-    .header-profile button {
-        padding: 1px 10px;
-    }
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
 
-    .header-profile img {
-        width: 35px;
-        height: 35px;
-        object-fit: cover;
-    }
+/* Profile picture */
+.profile-button {
+    padding: 1px 10px !important;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.profile-pic {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+
+/* ========================================
+   LOGOUT MENU
+======================================== */
+
+.logout-menu {
+    position: fixed;
+    /* Keep it directly below the header */
+    top: 60px;
+    right: 100px;
+    display: none;
+    min-width: 120px;
+    padding: 6px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+}
+
+/* Show when hovering the profile area */
+.profile-container:hover .logout-menu {
+    display: block;
+}
