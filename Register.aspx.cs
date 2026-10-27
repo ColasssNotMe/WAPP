@@ -11,6 +11,18 @@ namespace Assignment
 
         }
 
+        protected void togglePasswordView(object sender, EventArgs e)
+        {
+            if (PasswordTextBox.TextMode == System.Web.UI.WebControls.TextBoxMode.Password)
+            {
+                PasswordTextBox.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
+            }
+            else
+            {
+                PasswordTextBox.TextMode = System.Web.UI.WebControls.TextBoxMode.Password;
+            }
+        }
+
 
         protected void CreateAccountButton_Click(object sender, EventArgs e)
         {
