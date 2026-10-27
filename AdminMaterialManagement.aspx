@@ -46,26 +46,30 @@
           <div class="table-wrap">
             <table class="data-table">
               <thead>
-                <tr><th>Title</th><th>Class</th><th>Created By</th><th>Upload Date</th><th>Status</th><th>Actions</th></tr>
+                <tr>
+                  <th>Title</th>
+                  <th>Class</th>
+                  <th>Created By</th>
+                  <th>Upload Date</th>
+                  <th>Status</th>
+                </tr>
               </thead>
               <tbody>
                 <asp:Repeater ID="MaterialRepeater" runat="server" OnItemCommand="MaterialRepeater_ItemCommand">
                   <ItemTemplate>
                     <tr aria-selected='<%# GetSelected(Eval("materialID")) %>'>
-                      <td class="material-title"><%# Eval("title") %></td>
+                      <td class="material-title">
+                        <asp:LinkButton runat="server" CssClass="row-select-link" CommandName="SelectMaterial" CommandArgument='<%# Eval("materialID") %>' Text='<%# Eval("title") %>' CausesValidation="false" />
+                      </td>
                       <td><%# GetText(Eval("className")) %></td>
                       <td><%# GetText(Eval("teacherName")) %></td>
                       <td class="nowrap"><%# GetDate(Eval("uploadDate")) %></td>
                       <td class='<%# GetStatusClass(Eval("status")) %>'><%# GetText(Eval("status")) %></td>
-                      <td class="row-actions">
-                        <asp:LinkButton runat="server" CssClass="row-link" CommandName="SelectMaterial"
-                            CommandArgument='<%# Eval("materialID") %>' Text="View" />
-                      </td>
                     </tr>
                   </ItemTemplate>
                 </asp:Repeater>
                 <asp:PlaceHolder ID="emptyMessage" runat="server" Visible="false">
-                  <tr><td colspan="6" class="empty-row">No materials found.</td></tr>
+                  <tr><td colspan="5" class="empty-row">No materials found.</td></tr>
                 </asp:PlaceHolder>
               </tbody>
             </table>
@@ -96,6 +100,8 @@
               <asp:HyperLink ID="hlView" runat="server" CssClass="primary-button" Target="_blank" Text="View material" />
               <asp:Button ID="btnToggle" runat="server" CssClass="secondary-button" OnClick="btnToggle_Click"
                   OnClientClick="return confirm('Change the status of this material?');" />
+              <asp:Button ID="btnDelete" runat="server" CssClass="danger-button" Text="Delete" OnClick="btnDelete_Click"
+                  OnClientClick="return confirm('Are you sure you want to delete this learning material? This action cannot be undone.');" />
             </div>
           </asp:Panel>
 

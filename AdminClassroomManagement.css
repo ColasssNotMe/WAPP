@@ -348,3 +348,40 @@ td.teacher {
     outline: 2px solid var(--gold-color);
     outline-offset: 2px;
 }
+
+/* Select button styling */
+.btn-select {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--primary-color);
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .btn-select:hover {
+        background: var(--gold-color);
+        color: var(--white);
+        border-color: var(--gold-color);
+    }
+
+/* Row selection highlight */
+tr.selected-row td {
+    background-color: rgba(197, 160, 89, 0.15) !important;
+}
+
+/* Danger / Delete button */
+.btn.btn-danger {
+    background: #d9534f;
+    border-color: #d9534f;
+    color: var(--white);
+}
+
+    .btn.btn-danger:hover {
+        background: #c9302c;
+        border-color: #ac2925;
+    }
