@@ -74,39 +74,18 @@
 
                 <div class="presentation-card">
 
-                    <!-- Presentation Header -->
-
-                    <div class="presentation-header">
-
-                        <div class="presenter-info">
-
-                            <span class="monitor-icon">
-                                ▣
-                            </span>
-
-                            <strong>
-                                Cikgu Nurul is presenting
-                            </strong>
-
-                        </div>
-
-                        <span class="slide-number">
-                            Slide 5 of 12
-                        </span>
-
-                    </div>
-
-
                     <!-- Presentation Area -->
 
                     <div class="presentation-screen">
 
-                        <div class="presentation-placeholder">
-
-                            <div class="placeholder-cross cross-one"></div>
-                            <div class="placeholder-cross cross-two"></div>
-
-                        </div>
+                        <iframe
+                            runat="server"
+                            id="presentationFrame"
+                            src="https://docs.google.com/presentation/d/e/2PACX-1vQ8k0J6Z3g5F7G9K8J9L4H5N2P3R4S5T6U7V8W9X0Y1Z2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8/embed?start=false&loop=false&delayms=3000"
+                            frameborder="0"
+                            allowfullscreen="true"
+                            mozallowfullscreen="true"
+                            webkitallowfullscreen="true"   />
 
                     </div>
 
@@ -114,22 +93,6 @@
                     <!-- Presentation Controls -->
 
                     <div class="presentation-controls">
-
-                        <div class="left-controls">
-
-                            <button class="session-button">
-                                ♩&nbsp; Muted
-                            </button>
-
-                            <button class="session-button">
-                                ♧&nbsp; Raise hand
-                            </button>
-
-                            <button class="session-button">
-                                ⛶&nbsp; Full screen
-                            </button>
-
-                        </div>
 
                         <button class="leave-button">
                             Leave session
@@ -166,9 +129,6 @@
 
                     </div>
 
-                    <div class="connection-status">
-                        Connected • 18:24
-                    </div>
 
                 </div>
 

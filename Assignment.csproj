@@ -155,6 +155,7 @@
     <Content Include="CreateClassrooom.aspx" />
     <Content Include="CreateEditQuestions.aspx" />
     <Content Include="CreateEditQuestions.css" />
+    <Content Include="CreateLiveSession.aspx" />
     <Content Include="CreateNotes.aspx" />
     <Content Include="CreateNotes.css" />
     <Content Include="CreateQuiz.aspx" />
@@ -162,6 +163,7 @@
     <Content Include="Default.aspx" />
     <Content Include="EditClassroom.aspx" />
     <Content Include="EditClassroom.css" />
+    <Content Include="EditLiveSession.aspx" />
     <Content Include="EditNotes.aspx" />
     <Content Include="EditQuiz.aspx" />
     <Content Include="EditQuiz.css" />
@@ -366,6 +368,13 @@
     <Compile Include="CreateEditQuestions.aspx.designer.cs">
       <DependentUpon>CreateEditQuestions.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CreateLiveSession.aspx.cs">
+      <DependentUpon>CreateLiveSession.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateLiveSession.aspx.designer.cs">
+      <DependentUpon>CreateLiveSession.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CreateNotes.aspx.cs">
       <DependentUpon>CreateNotes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -393,6 +402,13 @@
     </Compile>
     <Compile Include="EditClassroom.aspx.designer.cs">
       <DependentUpon>EditClassroom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditLiveSession.aspx.cs">
+      <DependentUpon>EditLiveSession.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditLiveSession.aspx.designer.cs">
+      <DependentUpon>EditLiveSession.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditNotes.aspx.cs">
       <DependentUpon>EditNotes.aspx</DependentUpon>
