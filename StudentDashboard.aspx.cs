@@ -238,52 +238,32 @@ namespace Assignment
                 return;
             }
 
-            int totalQuizzes = 0;
-            int completedQuizzes = 0;
+            // Recalculate from the quiz/result data, then read the cached value.
+            // NOTE: the session stores User.userID, while the Student table is
+            // keyed by studentID, so resolve the student row first.
+            ProgressCalculator.RecalculateForUser(Convert.ToInt32(userID));
 
             string connectionString =
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(
+                "SELECT ISNULL(progressPercentage, 0) FROM Student WHERE userID = @userID",
+                conn))
             {
+                cmd.Parameters.AddWithValue("@userID", userID);
+
                 conn.Open();
 
-                string totalQuizQuery = @"SELECT COUNT(DISTINCT q.quizID) FROM Quiz q
-INNER JOIN Enrolment e ON q.classID = e.classID 
-INNER JOIN Student s ON e.studentID = s.studentID 
-WHERE s.userID = @userID ";
+                object result = cmd.ExecuteScalar();
 
-                using (SqlCommand cmd = new SqlCommand(totalQuizQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@userID", userID);
+                int progressPercentage =
+                    (result == null || result == DBNull.Value)
+                        ? 0
+                        : Convert.ToInt32(result);
 
-                    totalQuizzes = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-
-
-                string completedQuizQuery = @" SELECT COUNT(DISTINCT r.quizID) FROM Result r INNER JOIN Student s ON r.studentID = s.studentID WHERE s.userID = @userID";
-
-                using (SqlCommand cmd = new SqlCommand(completedQuizQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@userID", userID);
-
-                    completedQuizzes = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-
-                // Recalculate progress percentage and update the Student table
-                ProgressCalculator.Recalculate(Convert.ToInt32(userID));
-
-                string progressQuery = @"SELECT progressPercentage FROM Student WHERE userID = @userID";
-
-                using (SqlCommand cmd = new SqlCommand(progressQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@userID", userID);
-
-                    int progressPercentage = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    progressNumber.InnerText = progressPercentage + "%";
-                    progressFill.Style["width"] = progressPercentage + "%";
-                }
+                progressNumber.InnerText = progressPercentage + "%";
+                progressFill.Style["width"] = progressPercentage + "%";
             }
 
 

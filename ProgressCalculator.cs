@@ -6,6 +6,38 @@ namespace Assignment
 {
     public static class ProgressCalculator
     {
+        /// <summary>
+        /// Resolves the student row for a User.userID and recalculates progress.
+        /// Use this when you only have Session["userID"].
+        /// </summary>
+        public static void RecalculateForUser(int userID)
+        {
+            string connectionString =
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
+            int? studentID = null;
+
+            using (var conn = new SqlConnection(connectionString))
+            using (var cmd = new SqlCommand(
+                "SELECT studentID FROM Student WHERE userID = @userID", conn))
+            {
+                cmd.Parameters.AddWithValue("@userID", userID);
+                conn.Open();
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                {
+                    studentID = Convert.ToInt32(result);
+                }
+            }
+
+            if (studentID.HasValue)
+            {
+                Recalculate(studentID.Value);
+            }
+        }
+
         public static void Recalculate(int studentID)
         {
             string connectionString =
