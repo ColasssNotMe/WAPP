@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,6 +9,22 @@ namespace Assignment
 {
     public partial class QuizAttempt : System.Web.UI.Page
     {
+        private Dictionary<int, int> Answers
+        {
+            get
+            {
+                Dictionary<int, int> answers = Session["QuizAnswers"] as Dictionary<int, int>;
+
+                if (answers == null)
+                {
+                    answers = new Dictionary<int, int>();
+                    Session["QuizAnswers"] = answers;
+                }
+
+                return answers;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["quizID"] == null)
@@ -19,11 +36,20 @@ namespace Assignment
             if (!IsPostBack)
             {
                 Session["currentQuestionIndex"] = 0;
+                Session["QuizAnswers"] = new Dictionary<int, int>();
+                Session["quizStartTime"] = DateTime.Now;
+            }
+            else
+            {
+                SaveCurrentAnswer();
             }
 
+            int elapsedSeconds = GetTimeTakenSeconds();
+
+            quizElapsedSeconds.Value = elapsedSeconds.ToString();
+            timeSpentValue.InnerText = "⏱ " + FormatClock(elapsedSeconds);
+
             LoadQuestions();
-
-
         }
 
         private void LoadQuestions()
@@ -31,10 +57,9 @@ namespace Assignment
             string quizID = Session["quizID"].ToString();
 
             string query = @"
-                SELECT 
+                SELECT
                     q.questionID,
                     q.quizID,
-                    q.answerID,
                     q.questionText,
                     q.questionType,
                     q.marks,
@@ -45,7 +70,6 @@ namespace Assignment
                     ON q.quizID = qz.quizID
                 WHERE q.quizID = @quizID
                 ORDER BY q.questionID";
-
 
             DataTable dt = new DataTable();
 
@@ -63,6 +87,7 @@ namespace Assignment
                 }
             }
 
+            Session["QuizQuestions"] = dt;
 
             if (dt.Rows.Count == 0)
             {
@@ -71,16 +96,21 @@ namespace Assignment
                 questionTitle.InnerText = "No questions were found.";
                 questionMark.InnerText = "0 marks";
 
+                AnswerRepeater.DataSource = null;
+                AnswerRepeater.DataBind();
+                NoAnswersMessage.Visible = false;
+
+                QuestionNavigatorRepeater.DataSource = null;
+                QuestionNavigatorRepeater.DataBind();
+
                 PreviousButton.Enabled = false;
                 NextButton.Enabled = false;
 
                 return;
             }
 
-
             int currentIndex = Convert.ToInt32(
                 Session["currentQuestionIndex"]);
-
 
             if (currentIndex < 0)
             {
@@ -94,34 +124,38 @@ namespace Assignment
                 Session["currentQuestionIndex"] = currentIndex;
             }
 
-
             DataRow question = dt.Rows[currentIndex];
+            int questionID = Convert.ToInt32(question["questionID"]);
+
+            Session["currentQuestionID"] = questionID;
 
             quizTitle.InnerText =
                 question["title"].ToString();
             questionNumber.InnerText = "Question " + (currentIndex + 1) + " of " + dt.Rows.Count;
             questionTitle.InnerText = question["questionText"].ToString();
-            questionMark.InnerText = question["marks"].ToString() + " mark";
+
+            int marks = Convert.ToInt32(question["marks"]);
+            questionMark.InnerText = marks + (marks == 1 ? " mark" : " marks");
             currentQuestionLegend.InnerText = (currentIndex + 1).ToString();
+
+            RenderAnswerOptions(questionID);
 
             QuestionNavigatorRepeater.DataSource = dt;
             QuestionNavigatorRepeater.DataBind();
-
 
             PreviousButton.Enabled =
                 currentIndex > 0;
             NextButton.Enabled =
                 currentIndex < dt.Rows.Count - 1;
 
-            int percentage =
-                (int)(((currentIndex + 1) /
-                (double)dt.Rows.Count) * 100);
+            int answered = CountAnswered(dt);
 
             answeredText.InnerText =
-                (currentIndex + 1) +
-                " of " +
-                dt.Rows.Count +
-                " questions";
+                answered + " of " + dt.Rows.Count + " answered";
+
+            int percentage = dt.Rows.Count == 0
+                ? 0
+                : (int)Math.Round(100.0 * answered / dt.Rows.Count);
 
             progressPercentage.InnerText =
                 percentage + "%";
@@ -129,72 +163,400 @@ namespace Assignment
             progressValue.Style["width"] =
                 percentage + "%";
 
+            int remaining = dt.Rows.Count - answered;
+
             remainingText.InnerText =
-                (dt.Rows.Count - 1 - currentIndex) +
-                " questions are still unanswered.";
+                remaining + " question" + (remaining == 1 ? " is" : "s are") +
+                " still unanswered. You can review them before submitting.";
         }
 
+        private void RenderAnswerOptions(int questionID)
+        {
+            DataTable dt = LoadAnswerOptions(questionID);
 
+            if (dt.Rows.Count == 0)
+            {
+                AnswerRepeater.DataSource = null;
+                AnswerRepeater.DataBind();
+                NoAnswersMessage.Visible = true;
+                return;
+            }
+
+            NoAnswersMessage.Visible = false;
+            AnswerRepeater.DataSource = dt;
+            AnswerRepeater.DataBind();
+        }
+
+        private DataTable LoadAnswerOptions(int questionID)
+        {
+            string query = @"
+                SELECT answerID, answerText, isCorrect, questionID
+                FROM Answer
+                WHERE questionID = @questionID
+                ORDER BY answerID";
+
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@questionID", questionID);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+        protected bool IsAnswerSelected(int questionID, int answerID)
+        {
+            int selectedAnswerID;
+
+            return Answers.TryGetValue(questionID, out selectedAnswerID) &&
+                   selectedAnswerID == answerID;
+        }
+
+        protected string GetCheckedAttribute(int questionID, int answerID)
+        {
+            return IsAnswerSelected(questionID, answerID)
+                ? "checked=\"checked\""
+                : string.Empty;
+        }
+
+        protected string GetAnswerLetter(int index)
+        {
+            return ((char)('A' + index)).ToString();
+        }
+
+        protected string GetAnswerText(object dataItem)
+        {
+            DataRowView row = dataItem as DataRowView;
+
+            return row == null
+                ? string.Empty
+                : Convert.ToString(row["answerText"]).Trim();
+        }
+
+        private void SaveCurrentAnswer()
+        {
+            if (Session["currentQuestionID"] == null)
+            {
+                return;
+            }
+
+            int questionID = Convert.ToInt32(Session["currentQuestionID"]);
+            string value = Request.Form["answer_" + questionID];
+
+            int answerID;
+
+            if (int.TryParse(value, out answerID))
+            {
+                Answers[questionID] = answerID;
+            }
+        }
+
+        private int CountAnswered(DataTable questions)
+        {
+            int count = 0;
+
+            foreach (DataRow row in questions.Rows)
+            {
+                int questionID = Convert.ToInt32(row["questionID"]);
+
+                if (Answers.ContainsKey(questionID))
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
 
         protected void PreviousButton_Click(object sender, EventArgs e)
         {
-            int currentIndex =
-                Convert.ToInt32(
-                    Session["currentQuestionIndex"]);
+            int currentIndex = Convert.ToInt32(Session["currentQuestionIndex"]);
 
             if (currentIndex > 0)
             {
-                Session["currentQuestionIndex"] =
-                    currentIndex - 1;
+                Session["currentQuestionIndex"] = currentIndex - 1;
             }
 
             LoadQuestions();
         }
 
-
-
         protected void QuestionNavigatorRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "GoToQuestion")
             {
-                int selectedIndex =
-                    Convert.ToInt32(e.CommandArgument);
-
-                Session["currentQuestionIndex"] =
-                    selectedIndex;
-
+                int selectedIndex = Convert.ToInt32(e.CommandArgument);
+                Session["currentQuestionIndex"] = selectedIndex;
                 LoadQuestions();
             }
         }
 
         protected string GetQuestionButtonClass(int index)
         {
-            int currentIndex =
-                Convert.ToInt32(
-                    Session["currentQuestionIndex"]);
-
+            int currentIndex = Convert.ToInt32(Session["currentQuestionIndex"]);
             if (index == currentIndex)
             {
                 return "nav-question current";
             }
 
+            DataTable questions = Session["QuizQuestions"] as DataTable;
+
+            if (questions != null && index >= 0 && index < questions.Rows.Count)
+            {
+                int questionID = Convert.ToInt32(questions.Rows[index]["questionID"]);
+
+                if (Answers.ContainsKey(questionID))
+                {
+                    return "nav-question answered";
+                }
+            }
+
             return "nav-question";
         }
 
-
         protected void NextButton_Click(object sender, EventArgs e)
         {
-            int currentIndex =
-                Convert.ToInt32(
-                    Session["currentQuestionIndex"]);
+            int currentIndex = Convert.ToInt32(Session["currentQuestionIndex"]);
 
-            Session["currentQuestionIndex"] =
-                    currentIndex + 1;
+            Session["currentQuestionIndex"] = currentIndex + 1;
 
             LoadQuestions();
         }
 
+        protected void SubmitQuizButton_Click(object sender, EventArgs e)
+        {
+            DataTable questions = Session["QuizQuestions"] as DataTable;
 
+            if (questions == null || questions.Rows.Count == 0)
+            {
+                return;
+            }
 
+            List<QuizResultQuestion> results = new List<QuizResultQuestion>();
+
+            int correctCount = 0;
+            int answeredCount = 0;
+            decimal earnedMarks = 0;
+            decimal totalMarks = 0;
+
+            foreach (DataRow question in questions.Rows)
+            {
+                int questionID = Convert.ToInt32(question["questionID"]);
+                decimal marks = Convert.ToDecimal(question["marks"]);
+
+                totalMarks += marks;
+
+                int selectedAnswerID;
+                bool isAnswered = Answers.TryGetValue(questionID, out selectedAnswerID);
+
+                DataTable options = LoadAnswerOptions(questionID);
+
+                bool isCorrect = false;
+                List<QuizResultOption> optionResults = new List<QuizResultOption>();
+                foreach (DataRow option in options.Rows)
+                {
+                    int answerID = Convert.ToInt32(option["answerID"]);
+                    bool optionIsCorrect = IsTrue(option["isCorrect"]);
+                    bool optionIsSelected = isAnswered && answerID == selectedAnswerID;
+
+                    if (optionIsSelected && optionIsCorrect)
+                    {
+                        isCorrect = true;
+                    }
+
+                    optionResults.Add(new QuizResultOption
+                    {
+                        AnswerText = Convert.ToString(option["answerText"]).Trim(),
+                        CssClass = optionIsCorrect
+                            ? "result-option correct"
+                            : optionIsSelected
+                                ? "result-option wrong"
+                                : "result-option",
+                        Tag = BuildOptionTag(optionIsCorrect, optionIsSelected)
+                    });
+                }
+
+                if (isAnswered)
+                {
+                    answeredCount++;
+                }
+
+                if (isCorrect)
+                {
+                    correctCount++;
+                    earnedMarks += marks;
+                }
+
+                results.Add(new QuizResultQuestion
+                {
+                    QuestionText = Convert.ToString(question["questionText"]),
+                    IsAnswered = isAnswered,
+                    StatusText = !isAnswered
+                        ? "Not answered"
+                        : isCorrect ? "Correct" : "Incorrect",
+                    StatusClass = !isAnswered
+                        ? "unanswered"
+                        : isCorrect ? "correct" : "wrong",
+                    Options = optionResults
+                });
+            }
+
+            int timeTaken = GetTimeTakenSeconds();
+
+            SaveResult(Convert.ToInt32(Math.Round(earnedMarks)), timeTaken);
+
+            ShowResults(results, correctCount, answeredCount,
+                earnedMarks, totalMarks, questions.Rows.Count, timeTaken);
+        }
+
+        private void SaveResult(int score, int timeTaken)
+        {
+            if (Session["userID"] == null || Session["quizID"] == null)
+            {
+                return;
+            }
+
+            string query = @"
+                INSERT INTO Result (studentID, quizID, score, timeTaken)
+                SELECT studentID, @quizID, @score, @timeTaken
+                FROM Student
+                WHERE userID = @userID";
+
+            using (SqlConnection conn = new SqlConnection(
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@userID", Session["userID"]);
+                    cmd.Parameters.AddWithValue("@quizID", Session["quizID"]);
+                    cmd.Parameters.AddWithValue("@score", score);
+                    cmd.Parameters.AddWithValue("@timeTaken", timeTaken);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private int GetTimeTakenSeconds()
+        {
+            DateTime startTime;
+
+            if (Session["quizStartTime"] is DateTime)
+            {
+                startTime = (DateTime)Session["quizStartTime"];
+            }
+            else
+            {
+                startTime = DateTime.Now;
+            }
+
+            int seconds = (int)(DateTime.Now - startTime).TotalSeconds;
+
+            return seconds < 0 ? 0 : seconds;
+        }
+
+        private static string FormatDuration(int seconds)
+        {
+            TimeSpan time = TimeSpan.FromSeconds(seconds);
+
+            if (time.TotalHours >= 1)
+            {
+                return string.Format("{0}h {1}m", (int)time.TotalHours, time.Minutes);
+            }
+
+            if (time.TotalMinutes >= 1)
+            {
+                return string.Format("{0}m {1}s", time.Minutes, time.Seconds);
+            }
+
+            return time.Seconds + "s";
+        }
+
+        private static string FormatClock(int seconds)
+        {
+            TimeSpan time = TimeSpan.FromSeconds(seconds);
+
+            return time.TotalHours >= 1
+                ? string.Format("{0}:{1:00}:{2:00}", (int)time.TotalHours, time.Minutes, time.Seconds)
+                : string.Format("{0:00}:{1:00}", time.Minutes, time.Seconds);
+        }
+
+        private void ShowResults(List<QuizResultQuestion> results,
+            int correctCount, int answeredCount,
+            decimal earnedMarks, decimal totalMarks, int questionCount,
+            int timeTaken)
+        {
+            ResultsSummary.Text = string.Format(
+                "You scored <strong>{0}</strong> out of <strong>{1}</strong> marks. " +
+                "{2} of {3} questions correct, {4} unanswered. " +
+                "Time taken: <strong>{5}</strong>.",
+                earnedMarks, totalMarks, correctCount, questionCount,
+                questionCount - answeredCount, FormatDuration(timeTaken));
+
+            ResultsRepeater.DataSource = results;
+            ResultsRepeater.DataBind();
+
+            ResultsModal.CssClass = "results-overlay";
+            ResultsModal.Visible = true;
+        }
+
+        private static string BuildOptionTag(bool isCorrect, bool isSelected)
+        {
+            if (isCorrect && isSelected)
+            {
+                return "Correct · Your answer";
+            }
+
+            if (isCorrect)
+            {
+                return "Correct answer";
+            }
+
+            return isSelected ? "Your answer" : string.Empty;
+        }
+
+        private static bool IsTrue(object value)
+        {
+            if (value == null || value == DBNull.Value)
+            {
+                return false;
+            }
+
+            bool result;
+
+            return bool.TryParse(Convert.ToString(value).Trim(), out result) && result;
+        }
+    }
+
+    public class QuizResultOption
+    {
+        public string AnswerText { get; set; }
+
+        public string CssClass { get; set; }
+
+        public string Tag { get; set; }
+    }
+
+    public class QuizResultQuestion
+    {
+        public string QuestionText { get; set; }
+
+        public string StatusText { get; set; }
+
+        public string StatusClass { get; set; }
+
+        public bool IsAnswered { get; set; }
+
+        public List<QuizResultOption> Options { get; set; }
     }
 }

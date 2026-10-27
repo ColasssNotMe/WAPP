@@ -15,8 +15,8 @@
 
 <body>
 
-    <uc:Header runat="server" />
     <form id="form1" runat="server">
+    <uc:Header runat="server" />
 
         <main class="profile-page">
 
@@ -165,8 +165,7 @@
                             ID="txtEmail"
                             runat="server"
                             CssClass="form-input"
-                            TextMode="Email"
-                            Text="nurul@ncient.edu.my">
+                            TextMode="Email">
                         </asp:TextBox>
 
                     </div>
@@ -181,7 +180,6 @@
                             ID="txtRole"
                             runat="server"
                             CssClass="form-input disabled-input"
-                            Text="Student"
                             ReadOnly="true">
                         </asp:TextBox>
 
@@ -233,11 +231,6 @@
 
                     <div class="form-section">
 
-                        <div class="form-section-header">
-                            Security
-                        </div>
-
-                        <div class="section-line"></div>
 
                         <div class="form-group">
 
@@ -251,8 +244,7 @@
                                     ID="txtPassword"
                                     runat="server"
                                     CssClass="form-input password-input"
-                                    TextMode="Password"
-                                    Text="password123" OnTextChanged="txtPassword_TextChanged">
+                                    TextMode="Password">
                                 </asp:TextBox>
 
                                 <asp:Button
@@ -260,11 +252,12 @@
                                     runat="server"
                                     Text="Change"
                                     CssClass="change-button"
-                                     />
+                                    OnClick="btnChangePassword_Click" />
+
 
                             </div>
 
-                            <span class="form-hint">Use a strong password of at least 8 characters.
+                            <span class="form-hint">Use a strong password of at least 8 characters.</span>
                                                </div>
 
                     </div>
@@ -291,9 +284,9 @@
             </div>
         </main>
 
+    <uc:Footer runat="server" />
     </form>
 
-    <uc:Footer runat="server" />
 
 </body>
 </html>

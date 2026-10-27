@@ -103,6 +103,13 @@ namespace Assignment
                 {
                     try
                     {
+                        using (SqlCommand cmd = new SqlCommand(
+                            "DELETE FROM Answer WHERE questionID IN (SELECT questionID FROM Question WHERE quizID = @quizID)", conn, tran))
+                        {
+                            cmd.Parameters.AddWithValue("@quizID", SelectedQuizID.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+
                         using (SqlCommand cmd = new SqlCommand("DELETE FROM Question WHERE quizID = @quizID", conn, tran))
                         {
                             cmd.Parameters.AddWithValue("@quizID", SelectedQuizID.Value);
@@ -198,7 +205,13 @@ namespace Assignment
                        Q.questionType, Q.marks,
                        A.answerText, Z.title AS quizTitle
                 FROM Question Q
-                LEFT JOIN Answer A ON A.answerID = Q.answerID
+                OUTER APPLY (
+                    SELECT TOP 1 answerText
+                    FROM Answer
+                    WHERE questionID = Q.questionID
+                      AND isCorrect = 'true'
+                    ORDER BY answerID
+                ) A
                 LEFT JOIN Quiz Z ON Z.quizID = Q.quizID
                 WHERE Q.questionText LIKE @search
                 ORDER BY Q.questionID DESC";

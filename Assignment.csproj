@@ -273,8 +273,6 @@
     <Content Include="StudentProfile.css" />
     <Content Include="StudentProgess.aspx" />
     <Content Include="StudentProgess.css" />
-    <Content Include="StudentQuiz.aspx" />
-    <Content Include="StudentQuiz.css" />
     <Content Include="StudentQuizList.aspx" />
     <Content Include="StudentQuizList.css" />
     <Content Include="StudentResults.aspx" />
@@ -582,13 +580,6 @@
     </Compile>
     <Compile Include="StudentProgess.aspx.designer.cs">
       <DependentUpon>StudentProgess.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="StudentQuiz.aspx.cs">
-      <DependentUpon>StudentQuiz.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="StudentQuiz.aspx.designer.cs">
-      <DependentUpon>StudentQuiz.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentQuizList.aspx.cs">
       <DependentUpon>StudentQuizList.aspx</DependentUpon>

@@ -15,9 +15,11 @@
 
 <body>
 
-    <uc:Header runat="server" />
 
     <form id="form1" runat="server">
+        <uc:Header runat="server" />
+
+        <asp:HiddenField ID="quizElapsedSeconds" runat="server" ClientIDMode="Static" />
 
         <main class="quiz-page">
 
@@ -59,8 +61,10 @@
                     <span class="time-label">Time Spent
                     </span>
 
-                    <span class="time-value">⏱&nbsp; 14:32
-                    </span>
+                    <span
+                        class="time-value"
+                        id="timeSpentValue"
+                        runat="server">⏱ 00:00</span>
 
                 </div>
 
@@ -94,6 +98,28 @@
                     </p>
 
                     <div id="answerArea" runat="server">
+
+                        <asp:Repeater ID="AnswerRepeater" runat="server">
+                            <ItemTemplate>
+                                <label class='answer-option<%# IsAnswerSelected((int)Eval("questionID"), (int)Eval("answerID")) ? " selected" : "" %>'>
+                                    <input type="radio"
+                                        name='<%# "answer_" + Eval("questionID") %>'
+                                        value='<%# Eval("answerID") %>'
+                                        <%# GetCheckedAttribute((int)Eval("questionID"), (int)Eval("answerID")) %>
+                                        onchange="selectAnswer(this)" />
+                                    <span class="answer-letter"><%# GetAnswerLetter(Container.ItemIndex) %></span>
+                                    <span class="answer-text"><%#: GetAnswerText(Container.DataItem) %></span>
+                                    <span class="answer-radio"></span>
+                                </label>
+                            </ItemTemplate>
+                        </asp:Repeater>
+
+                        <asp:Label
+                            ID="NoAnswersMessage"
+                            runat="server"
+                            CssClass="question-instruction"
+                            Text="No answer options are available for this question."
+                            Visible="false" />
 
                     </div>
 
@@ -195,7 +221,8 @@
                         ID="SubmitQuizButton"
                         runat="server"
                         Text="Submit quiz"
-                        CssClass="submit-quiz-button" />
+                        CssClass="submit-quiz-button"
+                        OnClick="SubmitQuizButton_Click" />
 
                     <p
                         class="remaining-text"
@@ -211,9 +238,138 @@
 
         </main>
 
+        <asp:Panel
+            ID="ResultsModal"
+            runat="server"
+            CssClass="results-overlay"
+            Visible="false"
+            EnableViewState="false">
+
+            <div class="results-dialog" role="dialog" aria-modal="true" aria-labelledby="resultsTitle">
+
+                <div class="results-header">
+
+                    <h2 id="resultsTitle">Quiz Results</h2>
+
+                    <p>
+                        <asp:Literal ID="ResultsSummary" runat="server" />
+                    </p>
+
+                </div>
+
+                <div class="results-body">
+
+                    <asp:Repeater ID="ResultsRepeater" runat="server">
+
+                        <ItemTemplate>
+
+                            <div class="result-question">
+
+                                <div class="result-question-title">
+
+                                    <span class="result-number"><%# Container.ItemIndex + 1 %>.</span>
+
+                                    <span class="result-question-text"><%#: Eval("QuestionText") %></span>
+
+                                    <span class='result-status <%# Eval("StatusClass") %>'><%#: Eval("StatusText") %></span>
+
+                                </div>
+
+                                <asp:Repeater
+                                    ID="ResultOptionsRepeater"
+                                    runat="server"
+                                    DataSource='<%# Eval("Options") %>'>
+
+                                    <ItemTemplate>
+
+                                        <div class='<%# Eval("CssClass") %>'>
+
+                                            <span class="result-option-text"><%#: Eval("AnswerText") %></span>
+
+                                            <span class="result-option-tag"><%#: Eval("Tag") %></span>
+
+                                        </div>
+
+                                    </ItemTemplate>
+
+                                </asp:Repeater>
+
+                                <asp:PlaceHolder
+                                    runat="server"
+                                    Visible='<%# !(bool)Eval("IsAnswered") %>'>
+
+                                    <p class="result-unanswered">Not answered</p>
+
+                                </asp:PlaceHolder>
+
+                            </div>
+
+                        </ItemTemplate>
+
+                    </asp:Repeater>
+
+                </div>
+
+                <div class="results-footer">
+
+                    <button type="button" class="results-close-button" onclick="closeResults()">
+                        Close
+                    </button>
+
+                </div>
+
+            </div>
+
+        </asp:Panel>
+
+        <uc:Footer runat="server" />
     </form>
 
-    <uc:Footer runat="server" />
+
+    <script>
+        function selectAnswer(input) {
+            var options = document.querySelectorAll('input[name="' + input.name + '"]');
+
+            for (var i = 0; i < options.length; i++) {
+                options[i].closest('.answer-option').classList.remove('selected');
+            }
+
+            input.closest('.answer-option').classList.add('selected');
+        }
+
+        function closeResults() {
+            var modal = document.querySelector('.results-overlay');
+
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        var quizStartTime = Date.now() -
+            (parseInt(document.getElementById('quizElapsedSeconds').value, 10) || 0) * 1000;
+
+        function padTime(value) {
+            return value < 10 ? '0' + value : '' + value;
+        }
+
+        function updateTimeSpent() {
+            var element = document.getElementById('timeSpentValue');
+
+            if (!element) {
+                return;
+            }
+
+            var totalSeconds = Math.max(0, Math.floor((Date.now() - quizStartTime) / 1000));
+            var hours = Math.floor(totalSeconds / 3600);
+            var minutes = Math.floor((totalSeconds % 3600) / 60);
+            var seconds = totalSeconds % 60;
+
+            element.textContent = (hours > 0 ? hours + ':' : '') + padTime(minutes) + ':' + padTime(seconds);
+        }
+
+        updateTimeSpent();
+        setInterval(updateTimeSpent, 1000);
+    </script>
 
 </body>
 </html>

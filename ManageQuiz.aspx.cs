@@ -116,7 +116,15 @@ namespace Assignment
                                 cmd.ExecuteNonQuery();
                             }
 
-                            // 2. Delete linked records from Question table
+                            // 2. Delete answer options linked to the quiz questions
+                            string deleteAnswers = "DELETE FROM Answer WHERE questionID IN (SELECT questionID FROM Question WHERE quizID = @quizID)";
+                            using (SqlCommand cmd = new SqlCommand(deleteAnswers, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@quizID", quizId);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 3. Delete linked records from Question table
                             string deleteQuestions = "DELETE FROM Question WHERE quizID = @quizID";
                             using (SqlCommand cmd = new SqlCommand(deleteQuestions, conn, transaction))
                             {
@@ -124,7 +132,7 @@ namespace Assignment
                                 cmd.ExecuteNonQuery();
                             }
 
-                            // 3. Delete record from Quiz table
+                            // 4. Delete record from Quiz table
                             string deleteQuiz = "DELETE FROM Quiz WHERE quizID = @quizID";
                             using (SqlCommand cmd = new SqlCommand(deleteQuiz, conn, transaction))
                             {

@@ -26,9 +26,10 @@ namespace Assignment
                     Session["profilePic"]?.ToString() ?? "~/svg/user.svg";
 
                 profilePic.ImageUrl = profilePicUrl;
+
+                LoadStudentProfile();
             }
 
-            LoadStudentProfile();
         }
 
         private void LoadStudentProfile()
@@ -119,39 +120,21 @@ namespace Assignment
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue(
-                        "@firstName",
-                        txtFirstName.Text.Trim());
-
-                    cmd.Parameters.AddWithValue(
-                        "@lastName",
-                        txtLastName.Text.Trim());
-
-                    cmd.Parameters.AddWithValue(
-                        "@username",
-                        txtUsername.Text.Trim());
-
-                    cmd.Parameters.AddWithValue(
-                        "@email",
-                        txtEmail.Text.Trim());
-
-                    cmd.Parameters.AddWithValue(
-                        "@gradeLevel",
-                        txtGrade.Text.Trim());
-
-                    cmd.Parameters.AddWithValue(
-                        "@school",
-                        txtSchool.Text.Trim());
-
-                    cmd.Parameters.AddWithValue(
-                        "@userId",
-                        Session["userId"]);
+                    cmd.Parameters.AddWithValue("@firstName", txtFirstName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@lastName", txtLastName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@username", txtUsername.Text.Trim());
+                    cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@gradeLevel", txtGrade.Text.Trim());
+                    cmd.Parameters.AddWithValue("@school", txtSchool.Text.Trim());
+                    cmd.Parameters.AddWithValue("@userId", Session["userId"]);
 
                     conn.Open();
 
                     cmd.ExecuteNonQuery();
                 }
             }
+
+
 
             Session["username"] = txtUsername.Text.Trim();
             Session["email"] = txtEmail.Text.Trim();
@@ -204,6 +187,30 @@ namespace Assignment
 
             profilePic.ImageUrl = imageUrl;
 
+
+            string connectionString =
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
+            string query = @"
+                UPDATE [User]
+                SET
+                    profilePic = @profilePic
+                WHERE userId = @userId; ";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@profilePic", imageUrl);
+                    cmd.Parameters.AddWithValue("@userId", Session["userId"]);
+
+                    conn.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+
             Session["profilePic"] = imageUrl;
         }
 
@@ -234,47 +241,64 @@ namespace Assignment
                 saveResult.Visible = true;
             }
         }
-
-        protected void txtPassword_TextChanged(object sender, EventArgs e)
+        protected void btnChangePassword_Click(object sender, EventArgs e)
         {
+            string newPassword = txtPassword.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(newPassword))
+            {
+                saveResult.InnerText =
+                    "Please enter a password.";
+
+                saveResult.Attributes["class"] =
+                    "save-result error";
+
+                saveResult.Visible = true;
+
+                return;
+            }
+
+            if (newPassword.Length < 8)
+            {
+                saveResult.InnerText =
+                    "Password must be at least 8 characters long.";
+
+                saveResult.Attributes["class"] =
+                    "save-result error";
+
+                saveResult.Visible = true;
+
+                return;
+            }
+
             string connectionString =
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
-
             string query = @"
                 UPDATE [User]
                 SET
                     password = @password
                 WHERE userId = @userId;
             ";
-
             PasswordManager passwordManager = new PasswordManager();
-
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue(
                         "@password",
-                        passwordManager.HashPassword(txtPassword.Text.Trim()));
-
+                        passwordManager.HashPassword(newPassword));
                     cmd.Parameters.AddWithValue(
                         "@userId",
                         Session["userId"]);
-
                     conn.Open();
-
                     cmd.ExecuteNonQuery();
                 }
             }
-
             saveResult.InnerText =
                 "Profile updated successfully.";
-
             saveResult.Attributes["class"] =
                 "save-result success";
-
             saveResult.Visible = true;
-
         }
     }
 }
