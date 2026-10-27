@@ -31,10 +31,19 @@
                 </p>
             </div>
 
-            <span class="overview-pill">
-                <asp:Label ID="lblTotalUsers" runat="server" Text="0" />
-                users
-            </span>
+            <!-- Top right: user count + Add New User button -->
+            <div class="header-actions">
+                <span class="overview-pill">
+                    <asp:Label ID="lblTotalUsers" runat="server" Text="0" />
+                    users
+                </span>
+
+                <asp:Button ID="btnAddUser" runat="server"
+                    Text="+ Add New User"
+                    CssClass="btn btn-primary"
+                    CausesValidation="false"
+                    OnClick="btnAddUser_Click" />
+            </div>
         </header>
 
         <asp:Panel ID="pendingNotice" runat="server" CssClass="notice-bar">
@@ -186,6 +195,49 @@
             <!-- Success / error message -->
             <asp:Panel ID="pnlMessage" runat="server" Visible="false">
                 <asp:Label ID="lblMessage" runat="server" />
+            </asp:Panel>
+
+            <!-- Add new user form -->
+            <asp:Panel ID="pnlAdd" runat="server" Visible="false" CssClass="edit-form">
+                <div class="field">
+                    <label for="<%= txtNewFirstName.ClientID %>">First name</label>
+                    <asp:TextBox ID="txtNewFirstName" runat="server" />
+                </div>
+                <div class="field">
+                    <label for="<%= txtNewLastName.ClientID %>">Last name</label>
+                    <asp:TextBox ID="txtNewLastName" runat="server" />
+                </div>
+                <div class="field">
+                    <label for="<%= txtNewUsername.ClientID %>">Username</label>
+                    <asp:TextBox ID="txtNewUsername" runat="server" />
+                </div>
+                <div class="field">
+                    <label for="<%= txtNewEmail.ClientID %>">Email</label>
+                    <asp:TextBox ID="txtNewEmail" runat="server" TextMode="Email" />
+                </div>
+                <div class="field">
+                    <label for="<%= txtNewPassword.ClientID %>">Password</label>
+                    <asp:TextBox ID="txtNewPassword" runat="server"
+                        TextMode="Password" autocomplete="new-password" />
+                </div>
+                <div class="field">
+                    <label for="<%= ddlNewRole.ClientID %>">Role</label>
+                    <asp:DropDownList ID="ddlNewRole" runat="server">
+                        <asp:ListItem Text="Student" Value="Student" />
+                        <asp:ListItem Text="Teacher" Value="Teacher" />
+                        <asp:ListItem Text="Admin" Value="Admin" />
+                    </asp:DropDownList>
+                </div>
+
+                <div class="action-row">
+                    <asp:Button ID="btnCreate" runat="server" Text="Create User"
+                        CssClass="btn btn-primary"
+                        OnClick="btnCreate_Click" />
+                    <asp:Button ID="btnCancelAdd" runat="server" Text="Cancel"
+                        CssClass="btn btn-secondary"
+                        CausesValidation="false"
+                        OnClick="btnCancelAdd_Click" />
+                </div>
             </asp:Panel>
 
             <asp:Panel ID="pnlDetails" runat="server">

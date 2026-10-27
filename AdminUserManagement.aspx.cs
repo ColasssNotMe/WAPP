@@ -26,6 +26,11 @@ namespace Assignment
             get { return Convert.ToBoolean(ViewState["EditMode"]); }
         }
 
+        private bool IsAddMode
+        {
+            get { return Convert.ToBoolean(ViewState["AddMode"]); }
+        }
+
         private string CurrentTab
         {
             get
@@ -65,6 +70,7 @@ namespace Assignment
         {
             ViewState["UserType"] = type;
             ViewState["EditMode"] = false;
+            ViewState["AddMode"] = false;
             txtSearch.Text = "";
             loadUsers();
         }
@@ -89,7 +95,148 @@ namespace Assignment
 
             SelectedUserId = Convert.ToInt32(e.CommandArgument);
             ViewState["EditMode"] = false;
+            ViewState["AddMode"] = false;
             loadUsers();
+        }
+
+        // ---------- Add new user ----------
+
+        protected void btnAddUser_Click(object sender, EventArgs e)
+        {
+            ViewState["AddMode"] = true;
+            ViewState["EditMode"] = false;
+            loadUsers();
+        }
+
+        protected void btnCancelAdd_Click(object sender, EventArgs e)
+        {
+            ClearAddForm();
+            ViewState["AddMode"] = false;
+            loadUsers();
+        }
+
+        protected void btnCreate_Click(object sender, EventArgs e)
+        {
+            string firstName = txtNewFirstName.Text.Trim();
+            string lastName = txtNewLastName.Text.Trim();
+            string username = txtNewUsername.Text.Trim();
+            string email = txtNewEmail.Text.Trim();
+            string password = txtNewPassword.Text;
+            string role = ddlNewRole.SelectedValue;
+
+            // Validation
+            if (firstName == "" || lastName == "" || username == "" ||
+                email == "" || password == "")
+            {
+                ShowMessage("Please fill in all fields.", false);
+                return;
+            }
+
+            if (!IsValidEmail(email))
+            {
+                ShowMessage("Please enter a valid email address.", false);
+                return;
+            }
+
+            int newUserId;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnString))
+                {
+                    conn.Open();
+
+                    // 1. Check duplicate username / email
+                    using (SqlCommand cmd = new SqlCommand(
+                        "SELECT COUNT(*) FROM [User] WHERE username = @username OR email = @email", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@email", email);
+
+                        if (Convert.ToInt32(cmd.ExecuteScalar()) > 0)
+                        {
+                            ShowMessage("That username or email is already in use.", false);
+                            return;
+                        }
+                    }
+
+                    // 2. Insert User + Student/Teacher together
+                    using (SqlTransaction tx = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand(
+                                "INSERT INTO [User] (firstName, lastName, username, email, password, [role], dateRegistered) " +
+                                "VALUES (@firstName, @lastName, @username, @email, @passwordHash, @role, GETDATE()); " +
+                                "SELECT CAST(SCOPE_IDENTITY() AS int);", conn, tx))
+                            {
+                                cmd.Parameters.AddWithValue("@firstName", firstName);
+                                cmd.Parameters.AddWithValue("@lastName", lastName);
+                                cmd.Parameters.AddWithValue("@username", username);
+                                cmd.Parameters.AddWithValue("@email", email);
+                                cmd.Parameters.AddWithValue("@passwordHash", new PasswordManager().HashPassword(password));
+                                cmd.Parameters.AddWithValue("@role", role);
+
+                                newUserId = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
+
+                            if (role == "Student")
+                            {
+                                using (SqlCommand cmd = new SqlCommand(
+                                    "INSERT INTO Student (userID) VALUES (@userID)", conn, tx))
+                                {
+                                    cmd.Parameters.AddWithValue("@userID", newUserId);
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                            else if (role == "Teacher")
+                            {
+                                // Created by an admin, so approved straight away
+                                using (SqlCommand cmd = new SqlCommand(
+                                    "INSERT INTO Teacher (userID, approved) VALUES (@userID, 'true')", conn, tx))
+                                {
+                                    cmd.Parameters.AddWithValue("@userID", newUserId);
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+
+                            tx.Commit();
+                        }
+                        catch
+                        {
+                            tx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // TEMPORARY: shows the real database error. Remove ex.Message when it works.
+                ShowMessage("Could not create the account: " + ex.Message, false);
+                return;
+            }
+
+            // Show the new user: go to the All Users tab and select them
+            ClearAddForm();
+            ViewState["AddMode"] = false;
+            ViewState["EditMode"] = false;
+            ViewState["UserType"] = "All";
+            txtSearch.Text = "";
+            SelectedUserId = newUserId;
+
+            loadUsers();
+            ShowMessage("User '" + username + "' has been created.", true);
+        }
+
+        private void ClearAddForm()
+        {
+            txtNewFirstName.Text = "";
+            txtNewLastName.Text = "";
+            txtNewUsername.Text = "";
+            txtNewEmail.Text = "";
+            txtNewPassword.Text = "";
+            ddlNewRole.SelectedIndex = 0;
         }
 
         // ---------- Edit ----------
@@ -429,6 +576,15 @@ namespace Assignment
         private void loadDetails()
         {
             pnlMessage.Visible = false;
+
+            // Add mode: show only the "Add new user" form
+            pnlAdd.Visible = IsAddMode;
+            if (IsAddMode)
+            {
+                pnlDetails.Visible = false;
+                pnlNoSelection.Visible = false;
+                return;
+            }
 
             if (SelectedUserId == null)
             {
