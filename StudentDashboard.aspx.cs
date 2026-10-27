@@ -269,21 +269,25 @@ WHERE s.userID = @userID ";
 
                     completedQuizzes = Convert.ToInt32(cmd.ExecuteScalar());
                 }
+
+                // Recalculate progress percentage and update the Student table
+                ProgressCalculator.Recalculate(Convert.ToInt32(userID));
+
+                string progressQuery = @"SELECT progressPercentage FROM Student WHERE userID = @userID";
+
+                using (SqlCommand cmd = new SqlCommand(progressQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@userID", userID);
+
+                    int progressPercentage = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    progressNumber.InnerText = progressPercentage + "%";
+                    progressFill.Style["width"] = progressPercentage + "%";
+                }
             }
 
 
-            int progressPercentage = 0;
 
-            if (totalQuizzes > 0)
-            {
-                progressPercentage = (int)Math.Round(
-                    (double)completedQuizzes / totalQuizzes * 100
-                );
-            }
-
-
-            progressNumber.InnerText = progressPercentage + "%";
-            progressFill.Style["width"] = progressPercentage + "%";
         }
 
         protected void JoinLiveSession_Click(object sender, EventArgs e)
