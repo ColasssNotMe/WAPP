@@ -38,26 +38,60 @@
                                 CssClass="validation-message" Display="Dynamic" />
                         </div>
 
-                        <div class="field-group password-group">
-                            <div class="label-row">
-                                <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="PasswordTextBox" CssClass="field-label"
-                                    Text="Password:" />
-                                <a href="ForgotPassword.aspx" class="forgot-link">Forgot Password?</a>
-                            </div>
-                            <div class="input-wrap">
-                                <span class="input-icon password-icon" aria-hidden="true">
-                                    <img src="svg/password.svg"  width="20" height="20"/>
-                                </span>
-                                <asp:TextBox ID="PasswordTextBox" runat="server" CssClass="form-input password-input"
-                                    TextMode="Password" autocomplete="current-password" />
-                                <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password" aria-pressed="false">
-                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
-                                </button>
-                            </div>
-                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="PasswordTextBox"
-                                ErrorMessage="Please enter your password." CssClass="validation-message" Display="Dynamic" />
-                        </div>
+<div class="field-group password-group">
+    <div class="label-row">
+        <asp:Label 
+            ID="PasswordLabel" 
+            runat="server" 
+            AssociatedControlID="PasswordTextBox" 
+            CssClass="field-label"
+            Text="Password:" />
 
+        <a href="ForgotPassword.aspx" class="forgot-link">
+            Forgot Password?
+        </a>
+    </div>
+
+    <div class="input-wrap">
+
+        <span class="input-icon password-icon" aria-hidden="true">
+            <img src="svg/password.svg" width="20" height="20" />
+        </span>
+
+        <asp:TextBox 
+            ID="PasswordTextBox" 
+            runat="server" 
+            CssClass="form-input password-input"
+            TextMode="Password" 
+            autocomplete="current-password" />
+
+        <button 
+            type="button" 
+            class="toggle-password"
+            data-target="<%= PasswordTextBox.ClientID %>"
+            aria-label="Show password"
+            aria-pressed="false"
+            onclick="togglePassword('<%= PasswordTextBox.ClientID %>', this)"
+            >
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path>
+                <circle cx="12" cy="12" r="2.5"></circle>
+            </svg>
+
+        </button>
+
+    </div>
+
+    <asp:RequiredFieldValidator 
+        ID="PasswordRequired" 
+        runat="server" 
+        ControlToValidate="PasswordTextBox"
+        ErrorMessage="Please enter your password." 
+        CssClass="validation-message" 
+        Display="Dynamic" />
+
+</div>
 
                         <asp:Button ID="SignInButton" runat="server" Text="Sign In to Ncient  →"
                             CssClass="sign-in-button" OnClick="SignInButton_Click"  />
@@ -77,3 +111,20 @@
     <uc:Footer  runat="server" />
 </body>
 </html>
+
+
+<script>
+function togglePassword(inputId, button) {
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        button.setAttribute("aria-label", "Hide password");
+        button.setAttribute("aria-pressed", "true");
+    } else {
+        input.type = "password";
+        button.setAttribute("aria-label", "Show password");
+        button.setAttribute("aria-pressed", "false");
+    }
+}
+</script>
