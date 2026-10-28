@@ -121,9 +121,6 @@
                                 </div>
                             </div>
                             <div class="student-right">
-                                <span class="status-badge <%# Eval("status").ToString().ToLower() == "active" ? "published" : "draft" %>">
-                                    <%# Eval("status") %>
-                                </span>
                                 <span class="progress-val"><%# Eval("AvgProgress") %>%</span>
                                 <asp:Button ID="btnAssign" runat="server" Text="Assign Class"
                                     CssClass="btn btn-secondary" style="padding: 6px 12px; font-size:12px;"
