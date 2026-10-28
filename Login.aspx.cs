@@ -23,7 +23,7 @@ namespace Assignment
             u.email,
             u.password,
             u.profilePic,
-            t.approved
+            t.approved,
             s.studentID
         FROM [User] u
         LEFT JOIN Student s
