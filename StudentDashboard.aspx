@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentDashboard.aspx.cs" Inherits="Assignment.StudentDashboard" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentDashboard.aspx.cs" Inherits="Assignment.StudentDashboard" %>
 
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
@@ -214,11 +214,19 @@
                             <div class="item-content">
 
                                 <p class="item-title">
-                                    <%# Eval("Title") %>
+                                    <%# Eval("title") %>
                                 </p>
 
-                                <p class="item-info">
-                                    <%# Eval("Info") %>
+                                <p class="item-info"
+                                    runat="server"
+                                    visible='<%# HasAttempt(Container.DataItem) %>'>
+                                    <%# GetScoreDisplay(Container.DataItem) %>
+                                </p>
+
+                                <p class="item-info no-attempt"
+                                    runat="server"
+                                    visible='<%# !HasAttempt(Container.DataItem) %>'>
+                                    No attempt
                                 </p>
 
                             </div>

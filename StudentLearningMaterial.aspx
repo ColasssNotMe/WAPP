@@ -47,7 +47,8 @@
 
             <section class="materials-grid" id="materialsGrid">
 
-                <asp:Repeater ID="rptMaterials" runat="server">
+                <asp:Repeater ID="rptMaterials" runat="server"
+                    OnItemCommand="rptMaterials_ItemCommand">
 
                     <ItemTemplate>
 
@@ -69,15 +70,19 @@
                                 <p>
                                     <%# Eval("durationMins") %>
                                 </p>
-                                <a href='LearningMaterialDetails.aspx?id=<%# Eval("materialID") %>'
-                                    class="view-materials">View Materials
+                                <asp:LinkButton
+                                    ID="lnkViewMaterial"
+                                    runat="server"
+                                    CommandName="OpenMaterial"
+                                    CommandArgument='<%# Eval("materialID") %>'
+                                    CssClass="view-materials">View Materials
 
                         <img src="svg/right-arrow.svg"
                             width="20"
                             height="20"
                             alt="View" />
 
-                                </a>
+                                </asp:LinkButton>
 
                             </div>
 

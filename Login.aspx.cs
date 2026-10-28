@@ -24,7 +24,10 @@ namespace Assignment
             u.password,
             u.profilePic,
             t.approved
+            s.studentID
         FROM [User] u
+        LEFT JOIN Student s
+            ON u.userID = s.userID
         LEFT JOIN Teacher t
             ON u.userID = t.userID
         WHERE u.email = @email";
@@ -71,6 +74,7 @@ namespace Assignment
                             Session["username"] = reader["username"].ToString().Trim();
                             Session["userId"] = reader["userID"];
                             Session["role"] = reader["role"].ToString().Trim();
+                            Session["studentId"] = reader["studentID"].ToString().Trim();
 
                             if (reader["profilePic"] == DBNull.Value ||
                                 string.IsNullOrWhiteSpace(reader["profilePic"].ToString()))

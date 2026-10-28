@@ -425,24 +425,87 @@ namespace Assignment
                 return;
             }
 
-            string query = @"
-                INSERT INTO Result (studentID, quizID, score, timeTaken)
-                SELECT studentID, @quizID, @score, @timeTaken
-                FROM Student
-                WHERE userID = @userID";
+            int studentID = 0;
 
             using (SqlConnection conn = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                conn.Open();
+
+                string studentQuery = @"
+                    SELECT studentID
+                    FROM Student
+                    WHERE userID = @userID";
+
+                using (SqlCommand cmd = new SqlCommand(studentQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@userID", Session["userID"]);
-                    cmd.Parameters.AddWithValue("@quizID", Session["quizID"]);
-                    cmd.Parameters.AddWithValue("@score", score);
-                    cmd.Parameters.AddWithValue("@timeTaken", timeTaken);
+                    object result = cmd.ExecuteScalar();
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
+                    if (result == null || result == DBNull.Value)
+                    {
+                        return;
+                    }
+
+                    studentID = Convert.ToInt32(result);
+                }
+
+                string checkQuery = @"
+                    SELECT score
+                    FROM Result
+                    WHERE studentID = @studentID
+                      AND quizID = @quizID";
+
+                int existingScore = -1;
+                bool hasExisting = false;
+
+                using (SqlCommand cmd = new SqlCommand(checkQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@studentID", studentID);
+                    cmd.Parameters.AddWithValue("@quizID", Session["quizID"]);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            hasExisting = true;
+                            existingScore = Convert.ToInt32(reader["score"]);
+                        }
+                    }
+                }
+
+                if (!hasExisting)
+                {
+                    string insertQuery = @"
+                        INSERT INTO Result (studentID, quizID, score, timeTaken)
+                        VALUES (@studentID, @quizID, @score, @timeTaken)";
+
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@studentID", studentID);
+                        cmd.Parameters.AddWithValue("@quizID", Session["quizID"]);
+                        cmd.Parameters.AddWithValue("@score", score);
+                        cmd.Parameters.AddWithValue("@timeTaken", timeTaken);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                else if (score > existingScore)
+                {
+                    string updateQuery = @"
+                        UPDATE Result
+                        SET score = @score,
+                            timeTaken = @timeTaken
+                        WHERE studentID = @studentID
+                          AND quizID = @quizID";
+
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@studentID", studentID);
+                        cmd.Parameters.AddWithValue("@quizID", Session["quizID"]);
+                        cmd.Parameters.AddWithValue("@score", score);
+                        cmd.Parameters.AddWithValue("@timeTaken", timeTaken);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
         }

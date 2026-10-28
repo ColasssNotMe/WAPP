@@ -182,6 +182,12 @@
     color: var(--secondary-color);
 }
 
+.item-info.no-attempt {
+    color: var(--gold-color);
+    font-style: italic;
+    font-weight: 600;
+}
+
 .live-session {
     margin: 0 0 1.25rem;
     padding: 1.25rem;

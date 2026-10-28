@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.UI.WebControls;
 
 namespace Assignment
 {
@@ -59,6 +60,20 @@ namespace Assignment
         protected void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadMaterials();
+        }
+
+        protected void rptMaterials_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "OpenMaterial")
+            {
+                int materialId;
+
+                if (int.TryParse(e.CommandArgument.ToString(), out materialId))
+                {
+                    Session["materialId"] = materialId.ToString();
+                    Response.Redirect("NotePage.aspx");
+                }
+            }
         }
     }
 }

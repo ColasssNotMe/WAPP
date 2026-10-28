@@ -9,127 +9,209 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            welcomeTitle.InnerText = "Welcome, " + Session["username"] + "!";
-            LoadLearningMaterials();
-            LoadRecentQuizzes();
-            LoadQuizProgress();
+            string userID = GetLoggedInUserID();
 
-        }
-
-        private void LoadLearningMaterials()
-        {
-            string userID = Session["userID"]?.ToString();
-
-            if (string.IsNullOrEmpty(userID))
+            if (userID == null)
             {
                 Response.Redirect("Login.aspx");
-                return;
             }
 
-            string query = @"
-        SELECT TOP 3
-            m.materialID,
-            m.title,
-            m.contentType,
-            m.fileURL,
-            m.durationMins,
-            m.uploadDate,
-            c.className,
-            m.status
-        FROM Material m
-        INNER JOIN Enrolment e
-            ON m.classID = e.classID
-        INNER JOIN Class c
-            ON m.classID = c.classID
-        INNER JOIN Student s
-            ON e.studentID = s.studentID
-        WHERE s.userID = @userID
-          AND m.status = 'Published'
-        ORDER BY m.uploadDate DESC";
+            string username = "";
 
-            using (SqlConnection conn = new SqlConnection(
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
+            if (Session["username"] != null)
             {
+                username = Session["username"].ToString();
+            }
 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+            welcomeTitle.InnerText = "Welcome, " + username + "!";
+
+            LoadLearningMaterials(userID);
+            LoadRecentQuizzes(userID);
+            LoadQuizProgress(userID);
+        }
+
+        private string GetLoggedInUserID()
+        {
+            if (Session["userID"] == null)
+            {
+                return null;
+            }
+
+            return Session["userID"].ToString();
+        }
+
+        private string GetConnectionString()
+        {
+            return ConfigurationManager
+                .ConnectionStrings["WAPP"]
+                .ConnectionString;
+        }
+
+        private int GetStudentID(SqlConnection conn, string userID)
+        {
+            string query = @"
+                SELECT studentID
+                FROM Student
+                WHERE userID = @userID";
+
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@userID", userID);
+
+                object result = cmd.ExecuteScalar();
+
+                if (result == null || result == DBNull.Value)
                 {
-                    cmd.Parameters.AddWithValue("@userID", userID);
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                    {
-                        DataTable dt = new DataTable();
-
-                        da.Fill(dt);
-
-                        LearningMaterialsRepeater.DataSource = dt;
-                        LearningMaterialsRepeater.DataBind();
-
-                        materialPlaceholder.Visible = dt.Rows.Count == 0;
-                    }
-
+                    return 0;
                 }
 
+                return Convert.ToInt32(result);
             }
         }
 
-        private void LoadRecentQuizzes()
+        private void LoadLearningMaterials(string userID)
         {
-            string userID = Session["userID"]?.ToString();
-
-            if (string.IsNullOrEmpty(userID))
-            {
-                Response.Redirect("Login.aspx");
-                return;
-            }
-
             string query = @"
-        SELECT TOP 3
-            q.quizID,
-            q.title,
-            q.totalMarks,
-            c.className
-        FROM Quiz q
-        INNER JOIN Class c
-            ON q.classID = c.classID
-        INNER JOIN Enrolment e
-            ON q.classID = e.classID
-        INNER JOIN Student s
-            ON e.studentID = s.studentID
-        WHERE s.userID = @userID
-        ORDER BY q.createdDate DESC";
+                SELECT TOP 3
+                    m.materialID,
+                    m.title,
+                    m.contentType,
+                    m.fileURL,
+                    m.durationMins,
+                    m.uploadDate,
+                    c.className,
+                    m.status
+                FROM Material m
+                INNER JOIN Enrolment e
+                    ON m.classID = e.classID
+                INNER JOIN Class c
+                    ON m.classID = c.classID
+                INNER JOIN Student s
+                    ON e.studentID = s.studentID
+                WHERE s.userID = @userID
+                  AND m.status = 'Published'
+                ORDER BY m.uploadDate DESC";
 
-            using (SqlConnection conn = new SqlConnection(
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
+            DataTable materials = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@userID", userID);
-                    conn.Open();
 
-
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                     {
-                        DataTable dt = new DataTable();
-
-                        da.Fill(dt);
-
-
-                        RecentQuizRepeater.DataSource = dt;
-                        RecentQuizRepeater.DataBind();
-
-                        quizPlaceholder.Visible = dt.Rows.Count == 0;
-
+                        adapter.Fill(materials);
                     }
-
                 }
+            }
+
+            LearningMaterialsRepeater.DataSource = materials;
+            LearningMaterialsRepeater.DataBind();
+
+            if (materials.Rows.Count == 0)
+            {
+                materialPlaceholder.Visible = true;
+            }
+            else
+            {
+                materialPlaceholder.Visible = false;
             }
         }
 
+        private void LoadRecentQuizzes(string userID)
+        {
+            string query = @"
+                SELECT TOP 3
+                    q.quizID,
+                    q.title,
+                    q.totalMarks,
+                    c.className,
+                    r.score
+                FROM Quiz q
+                INNER JOIN Class c
+                    ON q.classID = c.classID
+                INNER JOIN Enrolment e
+                    ON q.classID = e.classID
+                INNER JOIN Student s
+                    ON e.studentID = s.studentID
+                LEFT JOIN Result r
+                    ON r.quizID = q.quizID
+                    AND r.studentID = s.studentID
+                WHERE s.userID = @userID
+                ORDER BY q.createdDate DESC";
+
+            DataTable quizzes = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@userID", userID);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(quizzes);
+                    }
+                }
+            }
+
+            RecentQuizRepeater.DataSource = quizzes;
+            RecentQuizRepeater.DataBind();
+
+            if (quizzes.Rows.Count == 0)
+            {
+                quizPlaceholder.Visible = true;
+            }
+            else
+            {
+                quizPlaceholder.Visible = false;
+            }
+        }
+
+        protected bool HasAttempt(object dataItem)
+        {
+            DataRowView row = dataItem as DataRowView;
+
+            if (row == null)
+            {
+                return false;
+            }
+
+            if (row["score"] == DBNull.Value)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        protected string GetScoreDisplay(object dataItem)
+        {
+            DataRowView row = dataItem as DataRowView;
+
+            if (row == null)
+            {
+                return "";
+            }
+
+            if (row["score"] == DBNull.Value)
+            {
+                return "";
+            }
+
+            decimal score = Convert.ToDecimal(row["score"]);
+            decimal totalMarks = Convert.ToDecimal(row["totalMarks"]);
+
+            return "Score: " + score + " / " + totalMarks;
+        }
 
         protected void JoinClassroom_Click(object sender, EventArgs e)
         {
-            string userID = Session["userID"]?.ToString();
+            string userID = GetLoggedInUserID();
 
-            if (string.IsNullOrEmpty(userID))
+            if (userID == null)
             {
                 Response.Redirect("Login.aspx");
                 return;
@@ -140,139 +222,171 @@ namespace Assignment
 
             string classCode = classroomCodeInput.Value.Trim();
 
-            if (string.IsNullOrEmpty(classCode))
+            if (classCode == "")
             {
                 errInfo.InnerText = "Please enter a class code.";
                 errInfo.Visible = true;
                 return;
             }
 
-            string connectionString =
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+            string connectionString = GetConnectionString();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
-                string classQuery = @"
-            SELECT classID
-            FROM Class
-            WHERE inviteCode = @inviteCode";
+                int classID = FindClassID(conn, classCode);
 
-                int classID;
-
-                using (SqlCommand cmd = new SqlCommand(classQuery, conn))
+                if (classID == 0)
                 {
-                    cmd.Parameters.AddWithValue("@inviteCode", classCode);
-
-                    object result = cmd.ExecuteScalar();
-
-                    if (result == null)
-                    {
-                        errInfo.InnerText = "Invalid class code.";
-                        errInfo.Visible = true;
-                        return;
-                    }
-
-                    classID = Convert.ToInt32(result);
+                    errInfo.InnerText = "Invalid class code.";
+                    errInfo.Visible = true;
+                    return;
                 }
 
-                string checkQuery = @"
-            SELECT COUNT(*)
-            FROM Enrolment e
-            INNER JOIN Student s
-                ON e.studentID = s.studentID
-            WHERE s.userID = @userID
-              AND e.classID = @classID";
+                bool alreadyJoined = IsAlreadyEnrolled(conn, userID, classID);
 
-                using (SqlCommand cmd = new SqlCommand(checkQuery, conn))
+                if (alreadyJoined)
                 {
-                    cmd.Parameters.AddWithValue("@userID", userID);
-                    cmd.Parameters.AddWithValue("@classID", classID);
-
-                    int existingEnrollment = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    if (existingEnrollment > 0)
-                    {
-                        errInfo.InnerText = "You have already joined this class.";
-                        errInfo.Visible = true;
-                        return;
-                    }
+                    errInfo.InnerText = "You have already joined this class.";
+                    errInfo.Visible = true;
+                    return;
                 }
 
-                string insertQuery = @"
-            INSERT INTO Enrolment (studentID, classID, enrollDate)
-            SELECT s.studentID, @classID, GETDATE()
-            FROM Student s
-            WHERE s.userID = @userID";
-
-                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@userID", userID);
-                    cmd.Parameters.AddWithValue("@classID", classID);
-
-                    cmd.ExecuteNonQuery();
-                }
-
-                Response.Redirect("StudentDashboard.aspx");
+                EnrolStudent(conn, userID, classID);
             }
+
+            Response.Redirect("StudentDashboard.aspx");
         }
 
-        private void LoadQuizProgress()
+        private int FindClassID(SqlConnection conn, string classCode)
         {
-            string userID = Session["userID"]?.ToString();
+            string query = @"
+                SELECT classID
+                FROM Class
+                WHERE inviteCode = @inviteCode";
 
-            if (string.IsNullOrEmpty(userID))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                Response.Redirect("Login.aspx");
-                return;
-            }
-
-            ProgressCalculator.RecalculateForUser(Convert.ToInt32(userID));
-
-            string connectionString =
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(
-                "SELECT ISNULL(progressPercentage, 0) FROM Student WHERE userID = @userID",
-                conn))
-            {
-                cmd.Parameters.AddWithValue("@userID", userID);
-
-                conn.Open();
+                cmd.Parameters.AddWithValue("@inviteCode", classCode);
 
                 object result = cmd.ExecuteScalar();
 
-                int progressPercentage =
-                    (result == null || result == DBNull.Value)
-                        ? 0
-                        : Convert.ToInt32(result);
+                if (result == null || result == DBNull.Value)
+                {
+                    return 0;
+                }
+
+                return Convert.ToInt32(result);
+            }
+        }
+
+        private bool IsAlreadyEnrolled(SqlConnection conn, string userID, int classID)
+        {
+            string query = @"
+                SELECT COUNT(*)
+                FROM Enrolment e
+                INNER JOIN Student s
+                    ON e.studentID = s.studentID
+                WHERE s.userID = @userID
+                  AND e.classID = @classID";
+
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@userID", userID);
+                cmd.Parameters.AddWithValue("@classID", classID);
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                if (count > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        private void EnrolStudent(SqlConnection conn, string userID, int classID)
+        {
+            string query = @"
+                INSERT INTO Enrolment (studentID, classID, enrollDate)
+                SELECT s.studentID, @classID, GETDATE()
+                FROM Student s
+                WHERE s.userID = @userID";
+
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@userID", userID);
+                cmd.Parameters.AddWithValue("@classID", classID);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void LoadQuizProgress(string userID)
+        {
+            string connectionString = GetConnectionString();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                int studentID = GetStudentID(conn, userID);
+
+                if (studentID == 0)
+                {
+                    Response.Redirect("Login.aspx");
+                    return;
+                }
+
+                ProgressCalculator.RecalculateForUser(studentID);
+
+                int progressPercentage = GetProgressPercentage(conn, userID);
 
                 progressNumber.InnerText = progressPercentage + "%";
                 progressFill.Style["width"] = progressPercentage + "%";
             }
+        }
 
+        private int GetProgressPercentage(SqlConnection conn, string userID)
+        {
+            string query = @"
+                SELECT ISNULL(progressPercentage, 0)
+                FROM Student
+                WHERE userID = @userID";
 
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@userID", userID);
 
+                object result = cmd.ExecuteScalar();
+
+                if (result == null || result == DBNull.Value)
+                {
+                    return 0;
+                }
+
+                return Convert.ToInt32(result);
+            }
         }
 
         protected void JoinLiveSession_Click(object sender, EventArgs e)
         {
-            string userID = Session["userID"]?.ToString();
+            string userID = GetLoggedInUserID();
 
-            if (string.IsNullOrEmpty(userID))
+            if (userID == null)
             {
                 Response.Redirect("Login.aspx");
                 return;
             }
 
-            string sessionCode = liveSessionCode.Value.Trim();
-
             liveSessionError.Visible = false;
             liveSessionError.InnerText = "";
 
-            if (string.IsNullOrEmpty(sessionCode))
+            string sessionCode = liveSessionCode.Value.Trim();
+
+            if (sessionCode == "")
             {
                 liveSessionError.InnerText = "Please enter a live session code.";
                 liveSessionError.Visible = true;
@@ -280,56 +394,52 @@ namespace Assignment
             }
 
             string query = @"
-        SELECT TOP 1
-            ls.sessionID,
-            ls.classID,
-            ls.title,
-            ls.starttime,
-            ls.endtime
-        FROM LiveSession ls
-        INNER JOIN Enrolment e
-            ON ls.classID = e.classID
-        INNER JOIN Student s
-            ON e.studentID = s.studentID
-        WHERE s.userID = @userID
-          AND ls.sessionID = @sessionID
-          AND GETDATE() >= ls.starttime
-          AND GETDATE() <= ls.endtime";
+                SELECT TOP 1
+                    ls.sessionID,
+                    ls.classID
+                FROM LiveSession ls
+                INNER JOIN Enrolment e
+                    ON ls.classID = e.classID
+                INNER JOIN Student s
+                    ON e.studentID = s.studentID
+                WHERE s.userID = @userID
+                  AND ls.sessionID = @sessionID
+                  AND GETDATE() >= ls.starttime
+                  AND GETDATE() <= ls.endtime";
 
-            string connectionString =
-                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+            string connectionString = GetConnectionString();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.AddWithValue("@userID", userID);
-                cmd.Parameters.AddWithValue("@sessionID", sessionCode);
-
-                conn.Open();
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    if (!reader.Read())
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.AddWithValue("@sessionID", sessionCode);
+
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        liveSessionError.InnerText =
-                            "Invalid or inactive live session code.";
-                        liveSessionError.Visible = true;
-                        return;
+                        bool hasSession = reader.Read();
+
+                        if (hasSession == false)
+                        {
+                            liveSessionError.InnerText =
+                                "Invalid or inactive live session code.";
+                            liveSessionError.Visible = true;
+                            return;
+                        }
+
+                        int sessionID = Convert.ToInt32(reader["sessionID"]);
+                        int classID = Convert.ToInt32(reader["classID"]);
+
+                        Session["sessionID"] = sessionID;
+                        Session["classID"] = classID;
+
+                        Response.Redirect("LiveSession.aspx");
                     }
-
-                    int sessionID = Convert.ToInt32(reader["sessionID"]);
-                    int classID = Convert.ToInt32(reader["classID"]);
-
-                    Session["sessionID"] = sessionID;
-                    Session["classID"] = classID;
-
-                    Response.Redirect("LiveSession.aspx");
                 }
             }
-
         }
     }
-
 }
-
-
