@@ -14,6 +14,7 @@
 
     .learning-header h1 {
         margin-bottom: 0.5rem;
+        font-size: 2.5rem;
     }
 
     .learning-header p {
@@ -35,9 +36,12 @@
     border-radius: 10px;
     background-color: var(--white);
     overflow: hidden;
+    padding: 0 10px;
 }
 
-    .search-box i {
+    .search-box img {
+        width: 20px;
+        height: 20px;
         margin-left: 12px;
         color: var(--primary-color);
     }
@@ -102,6 +106,7 @@
 .material-card h2 {
     font-weight: 500;
     margin-bottom: 7px;
+    font-size: 1rem;
 }
 
 .material-card p {
@@ -118,6 +123,12 @@
     justify-content: space-between;
 }
 
+.duration-text {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--secondary-color);
+}
+
 .subtopic-count {
     color: var(--secondary-color);
 }
@@ -131,6 +142,7 @@
     background-color: var(--white);
     color: var(--primary-color);
     font-weight: 500;
+    font-size: 0.875rem;
     text-decoration: none;
 }
 

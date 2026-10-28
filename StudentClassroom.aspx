@@ -88,10 +88,6 @@
                                         <%# Eval("description") %>
                                     </p>
 
-                                    <p class="classroom-info">
-                                        <%# Eval("subject") %>
-                                    </p>
-
                                     <div class="teacher">
 
                                         <div class="teacher-avatar">
@@ -100,7 +96,8 @@
                                                 ID="TeacherProfilePic"
                                                 runat="server"
                                                 ImageUrl='<%# Eval("profilePic") %>'
-                                                AlternateText="Teacher profile picture" />
+                                                AlternateText="Teacher profile picture" 
+                                 />
 
                                         </div>
 
@@ -116,14 +113,6 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <div class="classroom-stats">
-                                        <span>
-                                            <%# Eval("studentCount") %> students
-                                        </span>
-                                        <span>Joined
-                                            <%# Eval("enrollDate", "{0:MMMM yyyy}") %>
-                                        </span>
-                                    </div>
                                     <asp:LinkButton
                                         ID="ViewClassroomButton"
                                         runat="server"

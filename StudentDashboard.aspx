@@ -106,7 +106,8 @@
 
                 <asp:Repeater
                     ID="LearningMaterialsRepeater"
-                    runat="server">
+                    runat="server"
+                    OnItemCommand="rptMaterials_ItemCommand">
 
                     <ItemTemplate>
 
@@ -136,6 +137,15 @@
                                 <p class="item-title">
                                     <%# Eval("title") %>
                                 </p>
+
+                                <asp:LinkButton
+                                    ID="lnkOpenMaterial"
+                                    runat="server"
+                                    CommandName="OpenMaterial"
+                                    CommandArgument='<%# Eval("materialID") %>'
+                                    CssClass="material-link">
+                                    View Material
+                                </asp:LinkButton>
 
                             </div>
 
@@ -182,7 +192,8 @@
 
                 <asp:Repeater
                     ID="RecentQuizRepeater"
-                    runat="server">
+                    runat="server"
+                    OnItemCommand="rptQuizzes_ItemCommand">
 
                     <ItemTemplate>
 
@@ -228,6 +239,15 @@
                                     visible='<%# !HasAttempt(Container.DataItem) %>'>
                                     No attempt
                                 </p>
+
+                                <asp:LinkButton
+                                    ID="lnkOpenQuiz"
+                                    runat="server"
+                                    CommandName="OpenQuiz"
+                                    CommandArgument='<%# Eval("quizID") %>'
+                                    CssClass="quiz-link">
+                                    Attempt Quiz
+                                </asp:LinkButton>
 
                             </div>
 

@@ -13,12 +13,12 @@
 </head>
 
 <body>
-    <uc:Header runat="server" />
 
     <form id="form1" runat="server">
 
+    <uc:Header runat="server" />
         <div class="breadcrumb">
-            Learning Material
+            Learning Material <span> </span>
             <span id="titleLabel" runat="server">/</span>
             <span id="chapterLabel" runat="server">/</span>
         </div>
@@ -28,7 +28,7 @@
             <div class="chapter-navigation">
 
                 <a href="StudentLearningMaterial.aspx" class="topic-navigation previous-topic">
-                    <span class="arrow">←</span>
+                    <img src="svg/left-arrow.svg" width="30" height="30" class="arrow"/>
 
                     <span class="topic-text">
                         <span class="topic-title">Back to Learning Material</span>
@@ -57,9 +57,9 @@
             </div>
 
         </main>
-    </form>
 
     <uc:Footer runat="server" />
+    </form>
 
 </body>
 </html>

@@ -75,14 +75,14 @@ namespace Assignment
             }
 
 
-            foreach (DataRow row in dt.Rows)
-            {
-                int classID =
-                    Convert.ToInt32(row["classID"]);
+            //foreach (DataRow row in dt.Rows)
+            //{
+            //    int classID =
+            //        Convert.ToInt32(row["classID"]);
 
-                row["studentCount"] =
-                    GetStudentCount(classID);
-            }
+            //    row["studentCount"] =
+            //        GetStudentCount(classID);
+            //}
 
 
             ClassroomRepeater.DataSource = dt;

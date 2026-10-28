@@ -17,10 +17,11 @@
     }
 
 .learning-container {
-    width: 100%;
-    max-width: 67rem;
+    width: 80%;
     margin: 0 auto;
     padding-top: 2.8rem;
+    height:100vh;
+    overflow:hidden;
 }
 
 .chapter-navigation {
@@ -34,10 +35,24 @@
 .topic-navigation {
     display: flex;
     align-items: center;
-    text-decoration: none;
-    color: #111;
-    gap: 0.7rem;
+    gap: 0.25rem;
 }
+
+.arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    line-height: 1;
+    transform: translateX(0);
+    transition: transform 0.2s ease;
+    margin-right:10px;
+}
+
+.previous-topic:hover .arrow {
+    transform: translateX(-0.3rem);
+}
+
 
 .previous-topic {
     margin-left: 0.5rem;
@@ -45,6 +60,18 @@
 
 .next-topic {
     margin-right: 0.5rem;
+}
+
+/*.previous-topic:hover .arrow {
+    display:flex;
+    color: var(--primary-color);
+    align-content:center;
+    text-align:center;
+    justify-content:center;
+}
+*/
+.previous-topic:hover .topic-title {
+    color: var(--primary-color);
 }
 
 .arrow {
@@ -56,6 +83,9 @@
 .topic-text {
     display: flex;
     flex-direction: column;
+    align-content:center;
+        justify-content:center;
+        text-align:center;
 }
 
 .topic-label {
@@ -77,8 +107,8 @@
 }
 
 .pdf-container {
-    width: 535px;
-    height: 510px;
+    width: 90%;
+    height: 100%;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -88,6 +118,7 @@
     height: 100%;
     display: block;
     border: none;
+    overflow:hidden;
 }
 
 .material-not-found {

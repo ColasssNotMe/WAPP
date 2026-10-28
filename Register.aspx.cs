@@ -77,7 +77,7 @@ namespace Assignment
                     command.Parameters.AddWithValue("@firstName", FirstNameTextBox.Text.Trim());
                     command.Parameters.AddWithValue("@lastName", LastNameTextBox.Text.Trim());
                     command.Parameters.AddWithValue("@role", RoleRadioList.SelectedValue);
-                    command.Parameters.AddWithValue("@profilePic", DBNull.Value);
+                    command.Parameters.AddWithValue("@profilePic", "svg/user.svg");
                     command.Parameters.AddWithValue("@dateRegistered", DateTime.Now);
 
                     userId = Convert.ToInt32(command.ExecuteScalar());

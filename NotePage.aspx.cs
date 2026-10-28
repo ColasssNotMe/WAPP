@@ -43,7 +43,7 @@ namespace Assignment
                 SELECT fileURL,title,chapter
                 FROM Material
                 WHERE materialID = @materialID
-                  AND status = 'Active'";
+                  AND status = 'Published'";
 
             using (SqlConnection conn =
                 new SqlConnection(connectionString))
@@ -63,8 +63,8 @@ namespace Assignment
                         string fileURL = reader["fileURL"].ToString();
                         string title = reader["title"].ToString();
                         string chapter = reader["chapter"].ToString();
-                        titleLabel.InnerText = title;
-                        chapterLabel.InnerText = chapter;
+                        titleLabel.InnerText = " / " + title;
+                        chapterLabel.InnerText = " / " + chapter;
                         if (fileURL.StartsWith("~/"))
                         {
                             fileURL = ResolveUrl(fileURL);

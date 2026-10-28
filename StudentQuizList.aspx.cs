@@ -164,7 +164,8 @@ namespace Assignment
                     q.title,
                     q.totalMarks,
                     r.score,
-                    r.timeTaken
+                    r.timeTaken,
+                    r.resultID
 
                 ORDER BY
                     r.resultID DESC;

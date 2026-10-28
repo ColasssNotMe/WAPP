@@ -401,6 +401,25 @@
     border-radius: 0.5rem;
 }
 
+.material-link,
+.quiz-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.material-link:hover,
+.quiz-link:hover {
+    background-color: var(--secondary-color);
+}
+
 /* Stack the code + button rows on narrow screens */
 @media (max-width: 600px) {
     .join-form {

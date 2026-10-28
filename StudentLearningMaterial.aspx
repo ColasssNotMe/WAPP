@@ -15,10 +15,14 @@
 
 <body>
 
-    <uc:Header runat="server" />
     <form id="form1" runat="server">
+    <uc:Header runat="server" />
 
         <main class="learning-page">
+
+            <div class="page-toolbar">
+                <a href="HomePage.aspx" class="home-link">Home</a>
+            </div>
 
             <section class="learning-header">
 
@@ -34,7 +38,7 @@
 
             <section class="search-container">
                 <div class="search-box">
-                    <img src="svg/search.svg" height="50" width="50" />
+                    <img src="svg/search.svg" height="30" width="30" />
                     <asp:TextBox
                         ID="txtSearch"
                         runat="server"
@@ -67,21 +71,20 @@
 
                             <div class="card-footer">
 
-                                <p>
-                                    <%# Eval("durationMins") %>
+                                <p class="duration-text">
+                                    Suggested reading duration: <%# Eval("durationMins") %> mins
                                 </p>
                                 <asp:LinkButton
                                     ID="lnkViewMaterial"
                                     runat="server"
                                     CommandName="OpenMaterial"
                                     CommandArgument='<%# Eval("materialID") %>'
-                                    CssClass="view-materials">View Materials
-
-                        <img src="svg/right-arrow.svg"
-                            width="20"
-                            height="20"
-                            alt="View" />
-
+                                    CssClass="view-materials">
+                                    View Material
+                                <img src="svg/right-arrow.svg"
+                                    width="20"
+                                    height="20"
+                                    alt="View" />
                                 </asp:LinkButton>
 
                             </div>
@@ -95,9 +98,9 @@
             </section>
         </main>
 
+    <uc:Footer runat="server" />
     </form>
 
-    <uc:Footer runat="server" />
 
 </body>
 </html>
