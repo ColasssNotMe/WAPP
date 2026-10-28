@@ -42,7 +42,7 @@
         <div class="logout-menu">
             <asp:LinkButton ID="logoutButton"
                 runat="server"
-                CssClass="logout-link"
+                CssClass="logout-button"
                 OnClick="LogoutButton_Click">
                 Logout
             </asp:LinkButton>

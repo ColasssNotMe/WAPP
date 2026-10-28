@@ -21,7 +21,14 @@
         <main class="learning-page">
 
             <div class="page-toolbar">
-                <a href="HomePage.aspx" class="home-link">Home</a>
+
+                <a href="StudentDashboard.aspx" class="topic-navigation return">
+                    <img src="svg/left-arrow.svg" width="30" height="30" class="arrow"/>
+
+                    <span class="topic-text">
+                        <span class="topic-title">Return To Dashboard</span>
+                    </span>
+                </a>
             </div>
 
             <section class="learning-header">
