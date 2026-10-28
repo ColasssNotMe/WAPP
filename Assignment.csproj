@@ -131,6 +131,8 @@
     <Content Include="App_Data\WAPP_log.ldf">
       <DependentUpon>WAPP.mdf</DependentUpon>
     </Content>
+    <Content Include="Class.aspx" />
+    <Content Include="Class.css" />
     <Content Include="ClassroomDetails.aspx" />
     <Content Include="ClassroomDetails.css" />
     <Content Include="Contact.aspx" />
@@ -338,6 +340,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Class.aspx.cs">
+      <DependentUpon>Class.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Class.aspx.designer.cs">
+      <DependentUpon>Class.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProgressCalculator.cs" />
     <Compile Include="ClassroomDetails.aspx.cs">
       <DependentUpon>ClassroomDetails.aspx</DependentUpon>
