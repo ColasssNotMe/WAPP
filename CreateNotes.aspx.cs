@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -35,7 +36,6 @@ namespace Assignment
                     ddlClassroom.DataBind();
                 }
             }
-
             ddlClassroom.Items.Insert(0, new ListItem("-- Select Classroom --", ""));
         }
 
@@ -48,14 +48,27 @@ namespace Assignment
 
             string title = txtTitle.Text.Trim();
             int classId = Convert.ToInt32(ddlClassroom.SelectedValue);
-            string fileUrl = txtFileURL.Text.Trim();
             int durationMins = string.IsNullOrEmpty(txtDurationMins.Text.Trim()) ? 15 : Convert.ToInt32(txtDurationMins.Text.Trim());
             string status = ddlStatus.SelectedValue;
+            string fileUrl = "";
+
+            // Handle PDF File Upload
+            if (fileUploadPdf.HasFile)
+            {
+                string extension = Path.GetExtension(fileUploadPdf.FileName).ToLower();
+                if (extension == ".pdf")
+                {
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(fileUploadPdf.FileName);
+                    string savePath = Server.MapPath("~/Uploads/" + uniqueFileName);
+                    fileUploadPdf.SaveAs(savePath);
+                    fileUrl = "~/Uploads/" + uniqueFileName;
+                }
+            }
 
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 string query = @"INSERT INTO Material (classID, title, fileURL, durationMins, uploadDate, status, contentType) 
-                        VALUES (@classID, @title, @fileURL, @durationMins, GETDATE(), @status, 'Note')";
+                                VALUES (@classID, @title, @fileURL, @durationMins, GETDATE(), @status, 'Note')";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {

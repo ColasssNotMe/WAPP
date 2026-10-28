@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Web.UI;
 
 namespace Assignment
@@ -60,7 +61,10 @@ namespace Assignment
                     {
                         txtTitle.Text = reader["title"].ToString();
                         ddlClassroom.SelectedValue = reader["classID"].ToString();
-                        txtFileURL.Text = reader["fileURL"].ToString();
+
+                        string currentPath = reader["fileURL"].ToString();
+                        ViewState["ExistingFileURL"] = currentPath;
+                        lblCurrentFile.Text = string.IsNullOrEmpty(currentPath) ? "None" : Path.GetFileName(currentPath);
 
                         string currentStatus = reader["status"].ToString();
                         if (ddlStatus.Items.FindByValue(currentStatus) != null)
@@ -79,13 +83,27 @@ namespace Assignment
                 int materialId = Convert.ToInt32(Request.QueryString["materialID"]);
                 string title = txtTitle.Text.Trim();
                 int classId = Convert.ToInt32(ddlClassroom.SelectedValue);
-                string fileUrl = txtFileURL.Text.Trim();
                 string status = ddlStatus.SelectedValue;
+
+                // Retain existing file URL unless a new file is uploaded
+                string fileUrl = ViewState["ExistingFileURL"] != null ? ViewState["ExistingFileURL"].ToString() : "";
+
+                if (fileUploadPdf.HasFile)
+                {
+                    string extension = Path.GetExtension(fileUploadPdf.FileName).ToLower();
+                    if (extension == ".pdf")
+                    {
+                        string uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(fileUploadPdf.FileName);
+                        string savePath = Server.MapPath("~/Uploads/" + uniqueFileName);
+                        fileUploadPdf.SaveAs(savePath);
+                        fileUrl = "~/Uploads/" + uniqueFileName;
+                    }
+                }
 
                 using (SqlConnection conn = new SqlConnection(GetConnectionString()))
                 {
-                    string query = @"UPDATE Material
-                                    SET title = @title, classID = @classID, fileURL = @fileUrl, status = @status
+                    string query = @"UPDATE Material 
+                                    SET title = @title, classID = @classID, fileURL = @fileUrl, status = @status 
                                     WHERE materialID = @materialID";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))

@@ -50,8 +50,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtFileURL">File URL / Resource Path</label>
-                            <asp:TextBox ID="txtFileURL" runat="server" CssClass="form-control" placeholder="https://example.com/notes/ch1.pdf" />
+                             <label for="fileUploadPdf">Upload PDF Note</label>
+                             <asp:FileUpload ID="fileUploadPdf" runat="server" CssClass="form-control" accept=".pdf" />
                         </div>
 
                         <div class="form-group">

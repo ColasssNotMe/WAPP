@@ -44,8 +44,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtFileURL">File URL / Document Path</label>
-                            <asp:TextBox ID="txtFileURL" runat="server" CssClass="form-control" />
+                            <label for="fileUploadPdf">Upload PDF Note (Leave empty to keep existing)</label>
+                            <asp:FileUpload ID="fileUploadPdf" runat="server" CssClass="form-control" accept=".pdf" />
+                            <small style="margin-top:4px; color:#64748b; font-size:12px;">
+                                Current File: <asp:Label ID="lblCurrentFile" runat="server" Text="None" Font-Bold="true" />
+                            </small>
                         </div>
 
                         <div class="form-group">
