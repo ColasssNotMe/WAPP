@@ -1,5 +1,59 @@
-﻿
+﻿/* =========================================================
+   About.css  -  same layout as before, no JavaScript needed
+   Palette fallbacks are used if index.css variables are missing
+   ========================================================= */
 
+.about-page {
+    overflow-x: hidden;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---------- Shared art / icon base (replaces grey X placeholders) ---------- */
+.art {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+}
+
+    .art svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.45s ease;
+    }
+
+    .art:hover svg {
+        transform: scale(1.04);
+    }
+
+/* Line icons (stroke based) */
+.tag-icon,
+.mini-icon,
+.material-icon svg,
+.feature-image svg,
+.material-chevron {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
 .about-section {
     background-color: var(--white);
     padding: 2.5rem 0 1.5rem;
@@ -37,11 +91,18 @@
 .tag {
     display: inline-flex;
     align-items: center;
+    gap: 0.4rem;
     padding: 0.25rem 0.8rem;
     border-radius: 0.4rem;
     background-color: var(--muted-surface);
     color: var(--secondary-color);
     font-weight: 600;
+}
+
+.tag-icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--gold-color, #C5A059);
 }
 
 .about-mini-cards {
@@ -50,16 +111,37 @@
 }
 
 .mini-card {
+    position: relative;
     width: 9rem;
     height: 5rem;
     padding: 0.7rem 0.8rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
     background-color: #FFF0E7;
     border-radius: 0.9rem;
     box-shadow: 0 2px 5px rgba(28, 37, 65, 0.08);
+    outline: none;
 }
+
+    .mini-card::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background-color: var(--gold-color, #C5A059);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s ease;
+    }
+
+    .mini-card:hover::after,
+    .mini-card:focus-visible::after {
+        transform: scaleX(1);
+    }
 
     .mini-card strong {
         display: block;
@@ -80,39 +162,115 @@
         line-height: 1.2;
     }
 
-.placeholder {
-    position: relative;
-    overflow: hidden;
-    background-color: #d9d9d9;
+.mini-icon {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.6rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    color: var(--primary-color, #1C2541);
+    opacity: 0.35;
+    transition: transform 0.35s ease, opacity 0.35s ease, color 0.35s ease;
 }
 
-    .placeholder::before,
-    .placeholder::after {
-        content: "";
-        position: absolute;
-        width: 140%;
-        height: 1px;
-        left: -20%;
-        background-color: #777;
+.mini-card:hover .mini-icon,
+.mini-card:focus-visible .mini-icon {
+    opacity: 1;
+    color: var(--gold-color, #C5A059);
+    transform: rotate(-10deg) scale(1.2);
+}
+
+/* ---------- Count-up numbers, CSS only ---------- */
+@property --num {
+    syntax: "<integer>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@keyframes countUp {
+    from {
+        --num: 0;
+    }
+}
+
+.count {
+    animation: countUp 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s backwards;
+}
+
+    .count::before {
+        counter-reset: n var(--num);
+        content: counter(n) var(--suffix, "");
     }
 
-    .placeholder::before {
-        top: 50%;
-        transform: rotate(45deg);
-    }
+.count-100 {
+    --num: 100;
+    --suffix: "%";
+}
 
-    .placeholder::after {
-        top: 50%;
-        transform: rotate(-45deg);
-    }
+.count-5000 {
+    --num: 5000;
+    --suffix: "+";
+}
 
+/* ---------- Hero illustration ---------- */
 .about-image {
     width: 15rem;
     height: 13rem;
     flex-shrink: 0;
-    border: 1px solid #777;
+    border-radius: 1rem;
+    box-shadow: 0 10px 26px rgba(28, 37, 65, 0.14);
 }
 
+@keyframes floaty {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes sunPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.2;
+    }
+}
+
+.art-float {
+    animation: floaty 4s ease-in-out infinite;
+}
+
+.art-float-slow {
+    animation-duration: 6s;
+    animation-delay: -2s;
+}
+
+.art-sun-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: sunPulse 3.5s ease-in-out infinite;
+}
+
+.art-book {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+    transition: transform 0.4s ease;
+}
+
+.art-hero:hover .art-book {
+    transform: translateY(-4px) scale(1.04);
+}
+
+/* =========================================================
+   STORY
+   ========================================================= */
 .story-section {
     background-color: var(--muted-surface);
     padding: 0.8rem 0 1.5rem;
@@ -164,9 +322,75 @@
     width: 15rem;
     height: 15.5rem;
     flex-shrink: 0;
-    border: 1px solid #777;
+    border-radius: 1rem;
+    background-color: var(--white);
+    box-shadow: 0 10px 26px rgba(28, 37, 65, 0.1);
 }
 
+/* Timeline illustration */
+.art-story text {
+    font-family: inherit;
+}
+
+.tl-line {
+    stroke: var(--gold-color, #C5A059);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 170;
+    stroke-dashoffset: 170;
+    animation: drawLine 1.6s ease-out 0.4s forwards;
+}
+
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.tl-node {
+    fill: var(--white, #fff);
+    stroke: var(--primary-color, #1C2541);
+    stroke-width: 3;
+    transition: fill 0.3s ease;
+}
+
+.tl-node-final {
+    fill: var(--gold-color, #C5A059);
+}
+
+.tl-pulse {
+    fill: var(--gold-color, #C5A059);
+    opacity: 0.3;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: sunPulse 2.4s ease-in-out infinite;
+}
+
+.tl-year {
+    font-size: 15px;
+    font-weight: 800;
+    fill: var(--gold-color, #C5A059);
+}
+
+.tl-text {
+    font-size: 11.5px;
+    font-weight: 600;
+    fill: var(--primary-color, #1C2541);
+}
+
+.art-story g {
+    transition: transform 0.3s ease;
+}
+
+    .art-story g:hover {
+        transform: translateX(5px);
+    }
+
+        .art-story g:hover .tl-node {
+            fill: var(--gold-color, #C5A059);
+        }
+
+/* ---------- Expandable material cards (no JS: hover / focus / tap) ---------- */
 .material-list {
     display: flex;
     flex-direction: column;
@@ -174,6 +398,7 @@
 }
 
 .material-card {
+    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
@@ -181,25 +406,100 @@
     padding: 0.45rem 0.6rem;
     background-color: var(--white);
     border-radius: 0.5rem;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid transparent;
 }
 
 .material-icon {
     width: 2.2rem;
     height: 2.2rem;
     flex-shrink: 0;
-    border: 1px solid #777;
+    border-radius: 0.55rem;
+    background-color: var(--muted-surface);
+    color: var(--primary-color, #1C2541);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
-.material-info h3 {
-    margin: 0 0 0.15rem;
-    font-size: 1.25rem
+    .material-icon svg {
+        width: 1.35rem;
+        height: 1.35rem;
+    }
+
+.material-info {
+    flex: 1;
 }
 
-.material-info p {
-    line-height: 1.3;
-    margin: 0;
+    .material-info h3 {
+        margin: 0 0 0.15rem;
+        font-size: 1.25rem;
+    }
+
+    .material-info p {
+        line-height: 1.3;
+        margin: 0;
+    }
+
+.material-more {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
 }
 
+    .material-more > span {
+        overflow: hidden;
+        min-height: 0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--secondary-color);
+        opacity: 0;
+        transition: opacity 0.3s ease 0.05s;
+    }
+
+.material-chevron {
+    width: 1.2rem;
+    height: 1.2rem;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 0.35rem;
+    color: var(--gold-color, #C5A059);
+    transition: transform 0.35s ease;
+}
+
+.material-card:hover,
+.material-card:focus,
+.material-card:focus-visible {
+    border-color: var(--gold-color);
+    box-shadow: 0 7px 18px rgba(28, 37, 65, 0.1);
+    transform: translateX(4px);
+}
+
+    .material-card:hover .material-icon,
+    .material-card:focus .material-icon {
+        background-color: var(--gold-color, #C5A059);
+        color: var(--white, #fff);
+        transform: rotate(-6deg) scale(1.08);
+    }
+
+    .material-card:hover .material-more,
+    .material-card:focus .material-more {
+        grid-template-rows: 1fr;
+    }
+
+        .material-card:hover .material-more > span,
+        .material-card:focus .material-more > span {
+            opacity: 1;
+            padding-top: 0.3rem;
+        }
+
+    .material-card:hover .material-chevron,
+    .material-card:focus .material-chevron {
+        transform: rotate(180deg);
+    }
+
+/* =========================================================
+   PURPOSE
+   ========================================================= */
 .purpose-section {
     background-color: var(--white);
     padding: 1rem 0 2rem;
@@ -231,17 +531,108 @@
 }
 
 .feature-card {
+    position: relative;
+    overflow: hidden;
     min-height: 12.5rem;
     padding: 0.7rem;
     background-color: var(--muted-surface);
     border-radius: 0.55rem;
+    border: 1px solid transparent;
 }
+
+    .feature-card::after {
+        content: "";
+        position: absolute;
+        right: -2.5rem;
+        bottom: -3rem;
+        width: 7rem;
+        height: 7rem;
+        border-radius: 50%;
+        background-color: rgba(197, 160, 89, 0.12);
+        transition: transform 0.35s ease;
+    }
 
 .feature-image {
     width: 100%;
     height: 4rem;
     margin-bottom: 0.6rem;
-    border: 1px solid #777;
+    border-radius: 0.45rem;
+    color: var(--white, #fff);
+    background: linear-gradient(135deg, var(--primary-color, #1C2541), #3A4A7A);
+}
+
+    /* soft dotted texture */
+    .feature-image::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1.5px);
+        background-size: 10px 10px;
+        pointer-events: none;
+    }
+
+    .feature-image svg {
+        position: relative;
+        width: 2.4rem;
+        height: 2.4rem;
+        padding: 0.35rem;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.14);
+        transition: transform 0.4s ease, background-color 0.3s ease;
+    }
+
+.art-quiz {
+    background: linear-gradient(135deg, #08749C, #0E9BC9);
+}
+
+.art-live {
+    background: linear-gradient(135deg, #B3412E, #E5694F);
+}
+
+.art-progress {
+    background: linear-gradient(135deg, #A57F32, var(--gold-color, #C5A059));
+}
+
+.feature-card:hover .feature-image svg,
+.feature-card:focus-within .feature-image svg {
+    transform: scale(1.18) rotate(-6deg);
+    background-color: rgba(255, 255, 255, 0.28);
+}
+
+/* tiny per-icon motion */
+.live-dot {
+    fill: #fff;
+    stroke: none;
+    animation: blink 1.2s ease-in-out infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.15;
+    }
+}
+
+.bar {
+    fill: currentColor;
+    stroke: none;
+    transform-box: fill-box;
+    transform-origin: bottom;
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover .bar-1,
+.feature-card:focus-within .bar-1 {
+    transform: scaleY(1.35);
+}
+
+.feature-card:hover .bar-2,
+.feature-card:focus-within .bar-2 {
+    transform: scaleY(0.7);
+}
+
+.feature-card:hover .bar-3,
+.feature-card:focus-within .bar-3 {
+    transform: scaleY(1.1);
 }
 
 .feature-card h3 {
@@ -254,15 +645,43 @@
 }
 
 .feature-link {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
     font-weight: 700;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
+.feature-card:hover,
+.feature-card:focus-within {
+    border-color: var(--gold-color);
+    box-shadow: 0 10px 24px rgba(28, 37, 65, 0.11);
+    transform: translateY(-6px);
+}
+
+    .feature-card:hover::after,
+    .feature-card:focus-within::after {
+        transform: scale(1.5);
+    }
+
+.feature-link:hover,
+.feature-link:focus-visible {
+    color: var(--accent-color);
+    transform: translateX(4px);
+    text-decoration: none;
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
 .cta-section {
     background-color: var(--white);
     padding: 0.5rem 0 2rem;
 }
 
 .cta-container {
+    position: relative;
+    overflow: hidden;
     width: 90%;
     max-width: var(--container-width);
     min-height: 7rem;
@@ -272,11 +691,37 @@
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
-    background-color: #a9a9a9;
+    background: linear-gradient(120deg, var(--primary-color, #1C2541), #34437A);
     border-radius: 0.6rem;
 }
 
+    /* decorative gold rings */
+    .cta-container::before,
+    .cta-container::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        border: 1.5px solid rgba(197, 160, 89, 0.35);
+        pointer-events: none;
+    }
+
+    .cta-container::before {
+        width: 12rem;
+        height: 12rem;
+        right: -3rem;
+        top: -6rem;
+    }
+
+    .cta-container::after {
+        width: 7rem;
+        height: 7rem;
+        left: 38%;
+        bottom: -4rem;
+    }
+
 .cta-content {
+    position: relative;
+    z-index: 1;
     flex: 1;
 }
 
@@ -284,26 +729,187 @@
         font-size: 1.25rem;
         font-style: italic;
         margin-bottom: 0.3rem;
+        color: var(--white, #fff);
     }
 
     .cta-content p {
         max-width: 38rem;
-        color: #333;
+        color: rgba(255, 255, 255, 0.82);
         line-height: 1.35;
         margin-bottom: 0.6rem;
     }
 
 .cta-button {
+    position: relative;
+    z-index: 1;
     display: inline-block;
     padding: 0.35rem 0.8rem;
-    background-color: var(--white);
+    background-color: var(--gold-color, #C5A059);
     border-radius: 0.3rem;
-    color: var(--primary-color);
+    color: var(--primary-color, #1C2541);
+    font-weight: 700;
 }
 
 .cta-image {
+    position: relative;
+    z-index: 1;
     width: 8rem;
     height: 5.5rem;
     flex-shrink: 0;
-    border: 1px solid #777;
+}
+
+.cta-cap {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.4s ease;
+}
+
+.cta-container:hover .cta-cap {
+    transform: translateY(-4px) rotate(-4deg);
+}
+
+.cta-spark {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: twinkle 2.2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(0.7);
+    }
+}
+
+/* =========================================================
+   Shared hover transitions
+   ========================================================= */
+.tag,
+.mini-card,
+.material-card,
+.feature-card,
+.cta-button {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+    .tag:hover {
+        background-color: var(--white);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(28, 37, 65, 0.08);
+    }
+
+    .mini-card:hover,
+    .mini-card:focus-within {
+        transform: translateY(-5px);
+        box-shadow: 0 9px 18px rgba(28, 37, 65, 0.14);
+    }
+
+    .cta-button:hover,
+    .cta-button:focus-visible {
+        background-color: var(--white);
+        color: var(--primary-color, #1C2541);
+        transform: translateY(-2px);
+        text-decoration: none;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+    }
+
+/* =========================================================
+   Scroll progress bar + reveal (CSS only)
+   ========================================================= */
+.page-progress {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    pointer-events: none;
+    background-color: transparent;
+}
+
+    .page-progress span {
+        display: block;
+        width: 0;
+        height: 100%;
+        background-color: var(--gold-color);
+    }
+
+/* Uses "translate" (not "transform") so hover transforms keep working */
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        translate: 0 1.25rem;
+    }
+
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+/* Fallback for browsers without scroll-driven animations: play once on load */
+.reveal-section,
+.reveal-item {
+    animation: revealUp 0.7s ease backwards;
+}
+
+    .reveal-item:nth-child(2) {
+        animation-delay: 0.08s;
+    }
+
+    .reveal-item:nth-child(3) {
+        animation-delay: 0.16s;
+    }
+
+    .reveal-item:nth-child(4) {
+        animation-delay: 0.24s;
+    }
+
+@supports (animation-timeline: view()) {
+    .reveal-section,
+    .reveal-item {
+        animation: revealUp linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+        animation-delay: 0s;
+    }
+
+    .page-progress span {
+        width: 100%;
+        transform-origin: left;
+        animation: grow linear both;
+        animation-timeline: scroll(root);
+    }
+}
+
+@keyframes grow {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .tl-line {
+        stroke-dashoffset: 0;
+    }
+
+    .page-progress span {
+        display: none;
+    }
 }
