@@ -72,8 +72,7 @@ a {
 /* Automatically centers main wrapper sections across pages */
 main > section,
 .container {
-/*    width: 90%;*/
-    max-width: var(--container-width);
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
