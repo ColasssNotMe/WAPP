@@ -116,7 +116,6 @@ namespace Assignment
                     q.quizID AS QuizID,
                     q.title AS Title,
                     q.totalMarks AS TotalMarks,
-                    q.durationMins AS DurationMins,
                     COUNT(DISTINCT qu.questionID) AS QuestionCount
                 FROM Quiz q
                 LEFT JOIN Question qu
@@ -136,7 +135,6 @@ namespace Assignment
                     q.quizID,
                     q.title,
                     q.totalMarks,
-                    q.durationMins,
                     q.createdDate
                 ORDER BY q.createdDate DESC";
 
@@ -158,19 +156,11 @@ namespace Assignment
                 }
             }
 
-            dt.Columns.Add("DurationText", typeof(string));
             dt.Columns.Add("Description", typeof(string));
 
             foreach (DataRow row in dt.Rows)
             {
-                int duration = Convert.ToInt32(row["DurationMins"]);
-
-                row["DurationText"] = duration > 0
-                    ? duration + " Minutes"
-                    : "No time limit";
-
-                row["Description"] =
-                    "Complete this quiz to test your knowledge.";
+                row["Description"] = "Complete this quiz to test your knowledge.";
             }
 
             availableQuizRepeater.DataSource = dt;

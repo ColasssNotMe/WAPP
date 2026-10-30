@@ -72,9 +72,6 @@
 
                                 <div class="card-top">
 
-                                    <div class="classroom-icon">
-                                        <span>▣</span>
-                                    </div>
 
                                 </div>
 
@@ -95,9 +92,8 @@
                                             <asp:Image
                                                 ID="TeacherProfilePic"
                                                 runat="server"
-                                                ImageUrl='<%# Eval("profilePic") %>'
-                                                AlternateText="Teacher profile picture" 
-                                 />
+                                                ImageUrl='<%# GetTeacherProfilePic(Eval("profilePic")) %>'
+                                                AlternateText="Teacher profile picture" />
 
                                         </div>
 
@@ -105,7 +101,7 @@
                                             <span>Teacher</span>
 
                                             <strong>
-                                                <%# Eval("lastName") %>
+                                                <%# GetTeacherName(Eval("firstName"), Eval("lastName")) %>
                                             </strong>
 
                                         </div>

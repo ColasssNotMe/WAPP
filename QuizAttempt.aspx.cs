@@ -261,6 +261,13 @@ namespace Assignment
             }
         }
 
+
+        protected void CloseResult(object sender, EventArgs e)
+        {
+            Session["quizID"] = "";
+            Response.Redirect("StudentClassQuizList");
+        }
+
         private int CountAnswered(DataTable questions)
         {
             int count = 0;

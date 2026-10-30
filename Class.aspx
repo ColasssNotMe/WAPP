@@ -12,7 +12,7 @@
 <head runat="server">
 
     <link href="index.css" rel="stylesheet" />
-    <link href="Class.css" rel="stylesheet" />
+    <link href="Class.css?v=2" rel="stylesheet" />
 
     <title>Class</title>
 
@@ -91,7 +91,9 @@
 
             <section class="section-card">
 
-                <div class="section-title">
+                <a
+                    class="section-title section-title-link"
+                    href='<%: "StudentClassLearningMaterial.aspx?classID=" + GetClassIDForLink() %>'>
 
                     <span>Learning Materials</span>
 
@@ -109,7 +111,7 @@
 
                     </svg>
 
-                </div>
+                </a>
 
                 <asp:Repeater
                     ID="LearningMaterialsRepeater"
@@ -118,12 +120,7 @@
 
                     <ItemTemplate>
 
-                        <asp:LinkButton
-                            ID="lnkOpenMaterial"
-                            runat="server"
-                            CommandName="OpenMaterial"
-                            CommandArgument='<%# Eval("materialID") %>'
-                            CssClass="class-item">
+                        <div class="learning-item">
 
                             <div class="item-icon">
 
@@ -157,7 +154,20 @@
 
                             </div>
 
-                        </asp:LinkButton>
+                            <div class="item-action">
+
+                                <asp:LinkButton
+                                    ID="lnkOpenMaterial"
+                                    runat="server"
+                                    CommandName="OpenMaterial"
+                                    CommandArgument='<%# Eval("materialID") %>'
+                                    CssClass="material-link">
+                                    View Material
+                                </asp:LinkButton>
+
+                            </div>
+
+                        </div>
 
                     </ItemTemplate>
 
@@ -183,7 +193,9 @@
 
             <section class="section-card">
 
-                <div class="section-title">
+                <a
+                    class="section-title section-title-link"
+                    href='<%: "StudentClassQuizList.aspx?classID=" + GetClassIDForLink() %>'>
 
                     <span>Quiz</span>
 
@@ -201,7 +213,7 @@
 
                     </svg>
 
-                </div>
+                </a>
 
                 <asp:Repeater
                     ID="QuizRepeater"
@@ -210,12 +222,7 @@
 
                     <ItemTemplate>
 
-                        <asp:LinkButton
-                            ID="lnkOpenQuiz"
-                            runat="server"
-                            CommandName="OpenQuiz"
-                            CommandArgument='<%# Eval("quizID") %>'
-                            CssClass="class-item">
+                        <div class="learning-item">
 
                             <div class="item-icon">
 
@@ -268,7 +275,20 @@
 
                             </div>
 
-                        </asp:LinkButton>
+                            <div class="item-action">
+
+                                <asp:LinkButton
+                                    ID="lnkOpenQuiz"
+                                    runat="server"
+                                    CommandName="OpenQuiz"
+                                    CommandArgument='<%# Eval("quizID") %>'
+                                    CssClass="quiz-link">
+                                    Attempt Quiz
+                                </asp:LinkButton>
+
+                            </div>
+
+                        </div>
 
                     </ItemTemplate>
 

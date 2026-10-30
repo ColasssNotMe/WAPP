@@ -34,6 +34,7 @@ namespace Assignment
                     c.className,
                     c.subject,
                     c.description,
+                    u.firstName,
                     u.lastName,
                     u.profilePic,
                     e.enrollDate
@@ -125,6 +126,39 @@ namespace Assignment
         }
 
 
+        protected string GetTeacherProfilePic(object profilePic)
+        {
+            string profilePath = profilePic == null || profilePic == DBNull.Value
+                ? ""
+                : profilePic.ToString().Trim();
+
+            if (string.IsNullOrEmpty(profilePath))
+            {
+                profilePath = "~/svg/user.svg";
+            }
+
+            return ResolveUrl(profilePath);
+        }
+
+
+        protected string GetTeacherName(object firstName, object lastName)
+        {
+            string first = firstName == null || firstName == DBNull.Value
+                ? ""
+                : firstName.ToString().Trim();
+
+            string last = lastName == null || lastName == DBNull.Value
+                ? ""
+                : lastName.ToString().Trim();
+
+            string fullName = (first + " " + last).Trim();
+
+            return string.IsNullOrEmpty(fullName)
+                ? "Teacher"
+                : fullName;
+        }
+
+
         protected void ClassroomRepeater_ItemCommand(
             object source,
             RepeaterCommandEventArgs e)
@@ -136,7 +170,7 @@ namespace Assignment
 
                 Session["classID"] = classID;
 
-                Response.Redirect("Classroom.aspx");
+                Response.Redirect("Class.aspx");
             }
         }
     }

@@ -77,10 +77,6 @@
                                         <%#: Eval("QuestionCount") %> Questions
                                     </span>
 
-                                    <span class="quiz-duration">
-                                        <span aria-hidden="true">&#9201;</span>
-                                        <%#: Eval("DurationText") %>
-                                    </span>
                                 </div>
 
                                 <h3><%#: Eval("Title") %></h3>

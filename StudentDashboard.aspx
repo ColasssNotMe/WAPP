@@ -138,6 +138,10 @@
                                     <%# Eval("title") %>
                                 </p>
 
+                            </div>
+
+                            <div class="item-action">
+
                                 <asp:LinkButton
                                     ID="lnkOpenMaterial"
                                     runat="server"
@@ -239,6 +243,10 @@
                                     visible='<%# !HasAttempt(Container.DataItem) %>'>
                                     No attempt
                                 </p>
+
+                            </div>
+
+                            <div class="item-action">
 
                                 <asp:LinkButton
                                     ID="lnkOpenQuiz"

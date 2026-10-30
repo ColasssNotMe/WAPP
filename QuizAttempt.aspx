@@ -312,8 +312,8 @@
 
                 <div class="results-footer">
 
-                    <button type="button" class="results-close-button" onclick="closeResults()">
-                        Close
+                    <button type="button" class="results-close-button" onserverclick="CloseResult" runat="server">
+                        Return to Class
                     </button>
 
                 </div>
@@ -337,13 +337,13 @@
             input.closest('.answer-option').classList.add('selected');
         }
 
-        function closeResults() {
-            var modal = document.querySelector('.results-overlay');
+        // function closeResults() {
+        //     var modal = document.querySelector('.results-overlay');
 
-            if (modal) {
-                modal.classList.add('hidden');
-            }
-        }
+        //     if (modal) {
+        //         modal.classList.add('hidden');
+        //     }
+        // }
 
         var quizStartTime = Date.now() -
             (parseInt(document.getElementById('quizElapsedSeconds').value, 10) || 0) * 1000;

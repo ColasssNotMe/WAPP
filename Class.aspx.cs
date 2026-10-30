@@ -67,6 +67,11 @@ namespace Assignment
             return 0;
         }
 
+        protected string GetClassIDForLink()
+        {
+            return GetClassID().ToString();
+        }
+
         private void LoadClass(string userID)
         {
             int classID = GetClassID();
