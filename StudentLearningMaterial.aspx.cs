@@ -10,6 +10,14 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Session["userId"] == null)
+                {
+                    Response.Redirect("Homepage");
+                    return;
+                }
+            }
             LoadMaterials();
 
         }

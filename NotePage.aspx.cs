@@ -12,6 +12,11 @@ namespace Assignment
         {
             if (!IsPostBack)
             {
+                if (Session["userId"] == null)
+                {
+                    Response.Redirect("Homepage");
+                    return;
+                }
                 LoadPDF();
             }
         }
