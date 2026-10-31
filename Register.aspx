@@ -131,85 +131,92 @@
                                 ErrorMessage="Enter a valid email address." CssClass="validation-message" Display="Dynamic" />
                         </div>
 
-<div class="field-group">
-    <asp:Label ID="PasswordLabel" runat="server"
-        AssociatedControlID="PasswordTextBox"
-        CssClass="field-label"
-        Text="Password:" />
+                        <div class="field-group">
+                            <asp:Label ID="PasswordLabel" runat="server"
+                                AssociatedControlID="PasswordTextBox"
+                                CssClass="field-label"
+                                Text="Password:" />
 
-    <div class="input-wrap">
-        <span class="input-icon" aria-hidden="true">
-            <img src="svg/password.svg" width="20" height="20" />
-        </span>
+                            <div class="input-wrap">
+                                <span class="input-icon" aria-hidden="true">
+                                    <img src="svg/password.svg" width="20" height="20" />
+                                </span>
 
-        <asp:TextBox ID="PasswordTextBox"
-            runat="server"
-            CssClass="form-input password-input"
-            TextMode="Password"
-            autocomplete="new-password" />
+                                <asp:TextBox ID="PasswordTextBox"
+                                    runat="server"
+                                    CssClass="form-input password-input"
+                                    TextMode="Password" />
+                                <button type="button"
+                                    class="toggle-password"
+                                    runat="server"
+                                    onserverclick="toggleConfirmPasswordView"
+                                    aria-label="Show password"
+                                    aria-pressed="false">
 
-        <button type="button"
-            class="toggle-password"
-            onclick="togglePassword('<%= PasswordTextBox.ClientID %>', this)"
-            aria-label="Show password"
-            aria-pressed="false">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path>
+                                        <circle cx="12" cy="12" r="2.5"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+<asp:RegularExpressionValidator
+    ID="PasswordStrengthValidator"
+    runat="server"
+    ControlToValidate="PasswordTextBox"
+    ValidationExpression="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$"
+    ErrorMessage="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 symbol."
+    CssClass="validation-message"
+    Display="Dynamic" />
+                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server"
+                                ControlToValidate="PasswordTextBox"
+                                ErrorMessage="Please enter a password."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
+                        </div>
+                        <div class="field-group">
+                            <asp:Label ID="ConfirmPasswordLabel" runat="server"
+                                AssociatedControlID="ConfirmPasswordTextBox"
+                                CssClass="field-label"
+                                Text="Confirm Password:" />
 
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path>
-                <circle cx="12" cy="12" r="2.5"></circle>
-            </svg>
-        </button>
-    </div>
+                            <div class="input-wrap">
+                                <span class="input-icon" aria-hidden="true">
+                                    <img src="svg/password.svg" width="20" height="20" />
+                                </span>
 
-    <asp:RequiredFieldValidator ID="PasswordRequired" runat="server"
-        ControlToValidate="PasswordTextBox"
-        ErrorMessage="Please enter a password."
-        CssClass="validation-message"
-        Display="Dynamic" />
-</div>
-<div class="field-group">
-    <asp:Label ID="ConfirmPasswordLabel" runat="server"
-        AssociatedControlID="ConfirmPasswordTextBox"
-        CssClass="field-label"
-        Text="Confirm Password:" />
+                                <asp:TextBox ID="ConfirmPasswordTextBox"
+                                    runat="server"
+                                    CssClass="form-input password-input"
+                                    TextMode="Password"
+                                    autocomplete="new-password" />
 
-    <div class="input-wrap">
-        <span class="input-icon" aria-hidden="true">
-            <img src="svg/password.svg" width="20" height="20" />
-        </span>
+                                <button type="button"
+                                    class="toggle-password"
+                                    aria-label="Show confirm password"
+                                    aria-pressed="false"
+                                    runat="server"
+                                    onserverclick="toggleConfirmPasswordView">
 
-        <asp:TextBox ID="ConfirmPasswordTextBox"
-            runat="server"
-            CssClass="form-input password-input"
-            TextMode="Password"
-            autocomplete="new-password" />
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path>
+                                        <circle cx="12" cy="12" r="2.5"></circle>
+                                    </svg>
+                                </button>
+                            </div>
 
-        <button type="button"
-            class="toggle-password"
-            onclick="togglePassword('<%= ConfirmPasswordTextBox.ClientID %>', this)"
-            aria-label="Show confirm password"
-            aria-pressed="false">
+                            <asp:RequiredFieldValidator ID="ConfirmPasswordRequired" runat="server"
+                                ControlToValidate="ConfirmPasswordTextBox"
+                                ErrorMessage="Please confirm your password."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
 
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path>
-                <circle cx="12" cy="12" r="2.5"></circle>
-            </svg>
-        </button>
-    </div>
-
-    <asp:RequiredFieldValidator ID="ConfirmPasswordRequired" runat="server"
-        ControlToValidate="ConfirmPasswordTextBox"
-        ErrorMessage="Please confirm your password."
-        CssClass="validation-message"
-        Display="Dynamic" />
-
-    <asp:CompareValidator ID="PasswordCompareValidator" runat="server"
-        ControlToCompare="PasswordTextBox"
-        ControlToValidate="ConfirmPasswordTextBox"
-        ErrorMessage="Passwords do not match."
-        CssClass="validation-message"
-        Display="Dynamic" />
-</div>
+                            <asp:CompareValidator ID="PasswordCompareValidator" runat="server"
+                                ControlToCompare="PasswordTextBox"
+                                ControlToValidate="ConfirmPasswordTextBox"
+                                ErrorMessage="Passwords do not match."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
+                        </div>
                         <div class="field-group">
                             <asp:Label ID="SchoolLabel" runat="server" AssociatedControlID="SchoolDropDown"
                                 CssClass="field-label" Text="School:" />

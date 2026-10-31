@@ -19,6 +19,10 @@ namespace Assignment
                     Response.Redirect("Homepage");
                     return;
                 }
+                if (Session["role"]?.ToString() != "student")
+                {
+                    Response.Redirect("Homepage");
+                }
                 LoadAvailableQuizzes();
                 LoadCompletedQuizzes();
             }

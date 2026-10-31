@@ -22,10 +22,10 @@
             <div class="footer-column">
                 <h4>NAVIGATION</h4>
                 <a href="HomePage.aspx">Home</a>
-                <a href="LearningMaterials.aspx">Learning Materials</a>
-                <a href="Quiz.aspx">Quiz</a>
+                <a href="StudentLearningMaterial.aspx">Learning Materials</a>
+                <a href="StudentQuizList.aspx">Quiz</a>
                 <a href="LiveSession.aspx">Live Session</a>
-                <a href="AboutUs.aspx">About Us</a>
+                <a href="About.aspx">About Us</a>
             </div>
 
             <div class="footer-column">
