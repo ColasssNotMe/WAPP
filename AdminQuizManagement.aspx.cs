@@ -20,6 +20,10 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userid"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
             if (!IsPostBack)
             {
                 ViewState["Tab"] = "Quizzes";
@@ -72,7 +76,7 @@ namespace Assignment
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CreateQuiz.aspx");
+            Response.Redirect("CreateQuiz.aspx?");
         }
 
         protected void btnView_Click(object sender, EventArgs e)
@@ -87,7 +91,7 @@ namespace Assignment
         {
             if (SelectedQuizID != null)
             {
-                Response.Redirect("AdminQuizEdit.aspx?quizID=" + SelectedQuizID.Value);
+                Response.Redirect("EditQuiz.aspx?quizID=" + SelectedQuizID.Value);
             }
         }
 

@@ -16,6 +16,18 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+           
+            if (Session["role"].ToString() == "Admin")
+            {
+                pageTitleText.InnerText = "Admin - Create Quiz";
+                backBtn.Visible = false;
+
+            }
+
             if (!IsPostBack)
             {
                 LoadClassrooms();
@@ -287,7 +299,10 @@ namespace Assignment
                 }
             }
 
-            Response.Redirect("ManageQuiz.aspx");
+            bool isAdmin = string.Equals(
+                 Convert.ToString(Session["Role"]), "Admin", StringComparison.OrdinalIgnoreCase);
+
+            Response.Redirect(isAdmin ? "AdminQuizManagement.aspx" : "ManageQuiz.aspx");
         }
 
         private void InsertAnswerRecord(SqlConnection conn, SqlTransaction trans, int questionId, string answerText, bool isCorrect)
@@ -302,7 +317,15 @@ namespace Assignment
                 cmdA.Parameters.AddWithValue("@isCorrect", isCorrect);
                 cmdA.ExecuteNonQuery();
             
+            }
         }
-    }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            bool isAdmin = string.Equals(
+                Convert.ToString(Session["Role"]), "Admin", StringComparison.OrdinalIgnoreCase);
+
+            Response.Redirect(isAdmin ? "AdminQuizManagement.aspx" : "ManageQuiz.aspx");
+        }
     }
 }

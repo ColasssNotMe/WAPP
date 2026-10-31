@@ -23,26 +23,7 @@
         <p id="welcomeMessage" runat="server"></p>
       </div>
       <span class="overview-pill">Platform overview</span>
-      <button type="button" class="overview-pill" onclick="document.getElementById('addAdminModal').style.display='flex';">Add new admin</button>
     </header>
-
-    <div id="addAdminModal" class="admin-modal" style="display:none;">
-      <div class="admin-modal-content" role="dialog" aria-modal="true" aria-labelledby="addAdminTitle">
-        <button type="button" class="admin-modal-close" onclick="document.getElementById('addAdminModal').style.display='none';">&times;</button>
-        <h2 id="addAdminTitle">Add new admin</h2>
-        <asp:Label ID="adminMessage" runat="server" CssClass="admin-message" />
-        <label for="adminUsername">Username</label>
-        <asp:TextBox ID="adminUsername" runat="server" MaxLength="50" />
-        <asp:RequiredFieldValidator ID="adminUsernameRequired" runat="server" ControlToValidate="adminUsername" ErrorMessage="Username is required." CssClass="admin-message" />
-        <label for="adminEmail">Email</label>
-        <asp:TextBox ID="adminEmail" runat="server" TextMode="Email" MaxLength="255" />
-        <asp:RequiredFieldValidator ID="adminEmailRequired" runat="server" ControlToValidate="adminEmail" ErrorMessage="Email is required." CssClass="admin-message" />
-        <label for="adminPassword">Password</label>
-        <asp:TextBox ID="adminPassword" runat="server" TextMode="Password" MaxLength="255" />
-        <asp:RequiredFieldValidator ID="adminPasswordRequired" runat="server" ControlToValidate="adminPassword" ErrorMessage="Password is required." CssClass="admin-message" />
-        <asp:Button ID="addAdminButton" runat="server" Text="Create admin" CssClass="review-button" OnClick="AddAdminButton_Click" />
-      </div>
-    </div>
 
 
     <section class="stats-grid" aria-label="Platform statistics">

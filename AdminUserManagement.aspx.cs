@@ -39,7 +39,6 @@ namespace Assignment
             }
         }
 
-        // Used by the .aspx (the "Account Status" column)
         protected bool ShowStatus
         {
             get { return CurrentTab == "Pending"; }
@@ -96,9 +95,18 @@ namespace Assignment
 
         protected void btnAddUser_Click(object sender, EventArgs e)
         {
+            ClearAddForm();
             ViewState["AddMode"] = true;
             ViewState["EditMode"] = false;
+            pnlNewSchool.Visible = true;
             loadUsers();
+        }
+
+        protected void ddlNewRole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pnlNewSchool.Visible =
+                ddlNewRole.SelectedValue == "Student" ||
+                ddlNewRole.SelectedValue == "Teacher";
         }
 
         protected void btnCancelAdd_Click(object sender, EventArgs e)
@@ -116,11 +124,18 @@ namespace Assignment
             string email = txtNewEmail.Text.Trim();
             string password = txtNewPassword.Text;
             string role = ddlNewRole.SelectedValue;
+            string school = txtNewSchool.Text.Trim();
 
             if (firstName == "" || lastName == "" || username == "" ||
                 email == "" || password == "")
             {
-                ShowMessage("Please fill in all fields.", false);
+                ShowMessage("Please fill in all required fields.", false);
+                return;
+            }
+
+            if ((role == "Student" || role == "Teacher") && school == "")
+            {
+                ShowMessage("Please enter the school name.", false);
                 return;
             }
 
@@ -173,9 +188,10 @@ namespace Assignment
                             if (role == "Student")
                             {
                                 using (SqlCommand cmd = new SqlCommand(
-                                    "INSERT INTO Student (userID) VALUES (@userID)", conn, tx))
+                                    "INSERT INTO Student (userID, school) VALUES (@userID, @school)", conn, tx))
                                 {
                                     cmd.Parameters.AddWithValue("@userID", newUserId);
+                                    cmd.Parameters.AddWithValue("@school", school);
                                     cmd.ExecuteNonQuery();
                                 }
                             }
@@ -183,9 +199,10 @@ namespace Assignment
                             {
                                 // Created by an admin, so approved straight away
                                 using (SqlCommand cmd = new SqlCommand(
-                                    "INSERT INTO Teacher (userID, approved) VALUES (@userID, 'true')", conn, tx))
+                                    "INSERT INTO Teacher (userID, school, approved) VALUES (@userID, @school, 'true')", conn, tx))
                                 {
                                     cmd.Parameters.AddWithValue("@userID", newUserId);
+                                    cmd.Parameters.AddWithValue("@school", school);
                                     cmd.ExecuteNonQuery();
                                 }
                             }
@@ -226,18 +243,22 @@ namespace Assignment
             txtNewUsername.Text = "";
             txtNewEmail.Text = "";
             txtNewPassword.Text = "";
+            txtNewSchool.Text = "";
             ddlNewRole.SelectedIndex = 0;
+            pnlNewSchool.Visible = true;
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             ViewState["EditMode"] = true;
             ViewState["FillEdit"] = true;   // fill the textboxes once
+            txtPassword.Text = "";
             loadUsers();
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
+            txtPassword.Text = "";
             ViewState["EditMode"] = false;
             loadUsers();
         }
@@ -251,6 +272,7 @@ namespace Assignment
             string lastName = txtLastName.Text.Trim();
             string username = txtUsername.Text.Trim();
             string email = txtEmail.Text.Trim();
+            string password = txtPassword.Text;
             string school = txtSchool.Text.Trim();
             string grade = txtGrade.Text.Trim();
 
@@ -301,13 +323,28 @@ namespace Assignment
                         {
                             using (SqlCommand cmd = new SqlCommand(
                                 "UPDATE [User] SET firstName = @firstName, lastName = @lastName, " +
-                                "username = @username, email = @email WHERE userID = @userID",
+                                "username = @username, email = @email, " +
+                                "password = CASE WHEN @password IS NULL THEN password ELSE @password END " +
+                                "WHERE userID = @userID",
                                 conn, tx))
                             {
                                 cmd.Parameters.AddWithValue("@firstName", firstName);
                                 cmd.Parameters.AddWithValue("@lastName", lastName);
                                 cmd.Parameters.AddWithValue("@username", username);
                                 cmd.Parameters.AddWithValue("@email", email);
+
+                                if (string.IsNullOrWhiteSpace(password))
+                                {
+                                    cmd.Parameters.AddWithValue("@password", DBNull.Value);
+                                }
+                                else
+                                {
+                                    string passwordHash =
+                                        new PasswordManager().HashPassword(password);
+
+                                    cmd.Parameters.AddWithValue("@password", passwordHash);
+                                }
+
                                 cmd.Parameters.AddWithValue("@userID", SelectedUserId.Value);
                                 cmd.ExecuteNonQuery();
                             }
@@ -346,6 +383,7 @@ namespace Assignment
                     }
                 }
 
+                txtPassword.Text = "";
                 ViewState["EditMode"] = false;
                 loadUsers();
                 ShowMessage("Account updated successfully.", true);
@@ -510,7 +548,6 @@ namespace Assignment
             loadDetails();
         }
 
-        // Make sure one row is always selected (or none if list is empty)
         private void EnsureRowSelected(DataTable dt)
         {
             if (dt.Rows.Count == 0)
@@ -621,6 +658,8 @@ namespace Assignment
             dtGrade.Visible = ddGrade.Visible = (role == "Student");
             fieldGrade.Visible = (role == "Student");
             fieldSchool.Visible = (role == "Student" || role == "Teacher");
+            dtSchool.Visible = ddSchool.Visible =
+                (role == "Student" || role == "Teacher");
             dtApproval.Visible = ddApproval.Visible = pendingTab;
 
             pnlView.Visible = !editMode;
@@ -634,6 +673,7 @@ namespace Assignment
                 txtLastName.Text = Convert.ToString(row["lastName"]);
                 txtUsername.Text = Convert.ToString(row["username"]);
                 txtEmail.Text = Convert.ToString(row["email"]);
+                txtPassword.Text = "";
                 txtSchool.Text = school;
                 txtGrade.Text = Convert.ToString(row["gradeLevel"]);
 

@@ -193,6 +193,23 @@
 
             <asp:Panel ID="pnlAdd" runat="server" Visible="false" CssClass="edit-form">
                 <div class="field">
+                    <label for="<%= ddlNewRole.ClientID %>">Role</label>
+                    <asp:DropDownList ID="ddlNewRole" runat="server"
+                        AutoPostBack="true"
+                        OnSelectedIndexChanged="ddlNewRole_SelectedIndexChanged">
+                        <asp:ListItem Text="Student" Value="Student" />
+                        <asp:ListItem Text="Teacher" Value="Teacher" />
+                        <asp:ListItem Text="Admin" Value="Admin" />
+                    </asp:DropDownList>
+                </div>
+
+                <asp:Panel ID="pnlNewSchool" runat="server" CssClass="field">
+                    <label for="<%= txtNewSchool.ClientID %>">School</label>
+                    <asp:TextBox ID="txtNewSchool" runat="server"
+                        placeholder="Enter school name" />
+                </asp:Panel>
+
+                <div class="field">
                     <label for="<%= txtNewFirstName.ClientID %>">First name</label>
                     <asp:TextBox ID="txtNewFirstName" runat="server" />
                 </div>
@@ -213,14 +230,6 @@
                     <asp:TextBox ID="txtNewPassword" runat="server"
                         TextMode="Password" autocomplete="new-password" />
                 </div>
-                <div class="field">
-                    <label for="<%= ddlNewRole.ClientID %>">Role</label>
-                    <asp:DropDownList ID="ddlNewRole" runat="server">
-                        <asp:ListItem Text="Student" Value="Student" />
-                        <asp:ListItem Text="Teacher" Value="Teacher" />
-                        <asp:ListItem Text="Admin" Value="Admin" />
-                    </asp:DropDownList>
-                </div>
 
                 <div class="action-row">
                     <asp:Button ID="btnCreate" runat="server" Text="Create User"
@@ -237,14 +246,35 @@
 
                 <asp:Panel ID="pnlView" runat="server">
                     <dl class="detail-list">
-                        <dt>Name</dt><dd><asp:Label ID="lblDetName" runat="server" /></dd>
-                        <dt>Username</dt><dd><asp:Label ID="lblDetUsername" runat="server" /></dd>
-                        <dt>Email</dt><dd class="detail-email"><asp:Label ID="lblDetEmail" runat="server" /></dd>
-                        <dt>Role</dt><dd><asp:Label ID="lblDetRole" runat="server" /></dd>
-                        <dt>School</dt><dd><asp:Label ID="lblDetSchool" runat="server" /></dd>
-                        <dt id="dtGrade" runat="server">Grade Level</dt><dd id="ddGrade" runat="server"><asp:Label ID="lblDetGrade" runat="server" /></dd>
-                        <dt>Joined</dt><dd><asp:Label ID="lblDetJoined" runat="server" /></dd>
-                        <dt id="dtApproval" runat="server">Approval</dt><dd id="ddApproval" runat="server"><asp:Label ID="lblDetApproval" runat="server" /></dd>
+                        <dt>Name</dt>
+                        <dd><asp:Label ID="lblDetName" runat="server" /></dd>
+
+                        <dt>Username</dt>
+                        <dd><asp:Label ID="lblDetUsername" runat="server" /></dd>
+
+                        <dt>Email</dt>
+                        <dd class="detail-email"><asp:Label ID="lblDetEmail" runat="server" /></dd>
+
+                        <dt>Role</dt>
+                        <dd><asp:Label ID="lblDetRole" runat="server" /></dd>
+
+                        <dt id="dtSchool" runat="server">School</dt>
+                        <dd id="ddSchool" runat="server">
+                            <asp:Label ID="lblDetSchool" runat="server" />
+                        </dd>
+
+                        <dt id="dtGrade" runat="server">Grade Level</dt>
+                        <dd id="ddGrade" runat="server">
+                            <asp:Label ID="lblDetGrade" runat="server" />
+                        </dd>
+
+                        <dt>Joined</dt>
+                        <dd><asp:Label ID="lblDetJoined" runat="server" /></dd>
+
+                        <dt id="dtApproval" runat="server">Approval</dt>
+                        <dd id="ddApproval" runat="server">
+                            <asp:Label ID="lblDetApproval" runat="server" />
+                        </dd>
                     </dl>
                 </asp:Panel>
 
@@ -264,6 +294,12 @@
                     <div class="field">
                         <label for="<%= txtEmail.ClientID %>">Email</label>
                         <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" />
+                    </div>
+                     <div class="field">
+                    <label for="<%= txtPassword.ClientID %>">New Password</label>
+                        <asp:TextBox ID="txtPassword" runat="server"
+                            TextMode="SingleLine"
+                            autocomplete="off" />
                     </div>
                     <div class="field" id="fieldSchool" runat="server">
                         <label for="<%= txtSchool.ClientID %>">School</label>
@@ -295,7 +331,8 @@
                         OnClick="btnDelete_Click" />
                 </asp:Panel>
 
-                <asp:Panel ID="pnlApprovalActions" runat="server" CssClass="action-row" Visible="false">
+                <asp:Panel ID="pnlApprovalActions" runat="server"
+                    CssClass="action-row" Visible="false">
                     <asp:Button ID="btnApprove" runat="server" Text="Approve"
                         CssClass="btn btn-success"
                         OnClick="btnApprove_Click" />

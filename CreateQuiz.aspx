@@ -50,14 +50,14 @@
             <!-- Header Section -->
             <header class="page-header">
                 <div class="header-left">
-                    <a href="ManageQuiz.aspx" class="back-btn" aria-label="Go Back">
+                    <a href="ManageQuiz.aspx" class="back-btn" aria-label="Go Back" id="backBtn" runat="server">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="19" y1="12" x2="5" y2="12"></line>
                             <polyline points="12 19 5 12 12 5"></polyline>
                         </svg>
                     </a>
                     <div class="title-group">
-                        <h1 class="page-title">Create Quiz</h1>
+                        <h1 class="page-title" id="pageTitleText" runat="server">Create Quiz</h1>
                         <p class="page-subtitle">Build your quiz sections, questions, and answers.</p>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
                 
                 <div style="display:flex; gap:12px;">
                     <asp:Button ID="btnSaveQuiz" runat="server" Text="Publish Quiz" CssClass="btn btn-primary" OnClick="btnSaveQuiz_Click" />
-                    <a href="ManageQuiz.aspx" class="btn btn-secondary">Cancel</a>
+                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-secondary" CausesValidation="false" OnClick="btnCancel_Click" />
                 </div>
             </div>
 
