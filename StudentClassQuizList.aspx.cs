@@ -45,6 +45,22 @@ namespace Assignment
             }
         }
 
+        protected string GetReturnUrl()
+        {
+            object classId = Session["classID"] ?? Session["classId"];
+
+            int parsedClassId;
+
+            if (classId != null
+                && int.TryParse(classId.ToString(), out parsedClassId)
+                && parsedClassId > 0)
+            {
+                return "Class.aspx?classID=" + parsedClassId;
+            }
+
+            return "StudentDashboard.aspx";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (UserID == null)

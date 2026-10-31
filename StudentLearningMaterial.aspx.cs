@@ -17,10 +17,10 @@ namespace Assignment
                     Response.Redirect("Homepage");
                     return;
                 }
-                if (Session["role"]?.ToString() != "student")
-                {
-                    Response.Redirect("Homepage");
-                }
+                //if (Session["role"]?.ToString() != "student")
+                //{
+                //    Response.Redirect("Homepage");
+                //}
             }
             LoadMaterials();
 

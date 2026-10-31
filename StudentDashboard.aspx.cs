@@ -341,7 +341,7 @@ namespace Assignment
                     return;
                 }
 
-                ProgressCalculator.RecalculateForUser(studentID);
+                ProgressCalculator.Recalculate(studentID);
 
                 int progressPercentage = GetProgressPercentage(conn, userID);
 

@@ -195,20 +195,6 @@
 
                         <div class="form-grid">
 
-                            <div class="form-group">
-
-                                <label for="txtGrade">
-                                    Grade Level
-                                </label>
-
-                                <asp:TextBox
-                                    ID="txtGrade"
-                                    runat="server"
-                                    CssClass="form-input"
-                                    placeholder="Enter grade level">
-                                </asp:TextBox>
-
-                            </div>
 
                         </div>
 

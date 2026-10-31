@@ -24,6 +24,18 @@
 
     <main class="quiz-page">
 
+        <div class="page-toolbar">
+
+            <a href="StudentDashboard.aspx" class="topic-navigation return">
+                <img src="svg/left-arrow.svg" width="30" height="30" class="arrow" />
+
+                <span class="topic-text">
+                    <span class="topic-title">Return To Dashboard</span>
+                </span>
+            </a>
+
+        </div>
+
         <section class="quiz-header">
 
             <h1>Quiz History</h1>

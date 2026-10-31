@@ -43,7 +43,8 @@
             <asp:LinkButton ID="logoutButton"
                 runat="server"
                 CssClass="logout-button"
-                OnClick="LogoutButton_Click">
+                OnClick="LogoutButton_Click"
+                CausesValidation="false">
                 Logout
             </asp:LinkButton>
         </div>

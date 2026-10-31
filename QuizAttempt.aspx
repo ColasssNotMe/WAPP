@@ -7,7 +7,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Quiz Attempt</title>
+    <title id="pageTitle" runat="server">Quiz Attempt</title>
 
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="QuizAttempt.css" />
@@ -26,7 +26,7 @@
             <div class="quiz-heading">
 
                 <div>
-                    <h1>Quiz Attempt</h1>
+                    <h1 id="quizHeading" runat="server">Quiz Attempt</h1>
 
                     <p>
                         Work at your own pace and review your answers before submitting.
@@ -43,7 +43,7 @@
 
             </div>
 
-            <div class="classroom-label">
+            <div class="classroom-label" id="classroomNameLabel" runat="server">
                 &lt;Classroom Name&gt;
             </div>
 
