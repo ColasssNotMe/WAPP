@@ -11,11 +11,11 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["UserID"] == null)
-            //{
-            //    Response.Redirect("Login.aspx");
-            //    return;
-            //}
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
 
             if (!IsPostBack)
             {

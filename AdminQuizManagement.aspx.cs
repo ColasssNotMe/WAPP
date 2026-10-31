@@ -83,7 +83,7 @@ namespace Assignment
         {
             if (SelectedQuizID != null)
             {
-                Response.Redirect("ViewQuiz.aspx?quizID=" + SelectedQuizID.Value);
+                Response.Redirect("AdminViewQuiz.aspx?quizID=" + SelectedQuizID.Value + "&source=quiz");
             }
         }
 

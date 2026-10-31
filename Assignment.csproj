@@ -127,6 +127,8 @@
     <Content Include="AdminQuizManagement.css" />
     <Content Include="AdminUserManagement.aspx" />
     <Content Include="AdminUserManagement.css" />
+    <Content Include="AdminViewQuiz.aspx" />
+    <Content Include="AdminViewQuiz.css" />
     <Content Include="App_Data\WAPP.mdf" />
     <Content Include="App_Data\WAPP_log.ldf">
       <DependentUpon>WAPP.mdf</DependentUpon>
@@ -343,6 +345,13 @@
     </Compile>
     <Compile Include="AdminUserManagement.aspx.designer.cs">
       <DependentUpon>AdminUserManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminViewQuiz.aspx.cs">
+      <DependentUpon>AdminViewQuiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminViewQuiz.aspx.designer.cs">
+      <DependentUpon>AdminViewQuiz.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

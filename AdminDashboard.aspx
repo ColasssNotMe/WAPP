@@ -30,7 +30,7 @@
       <article class="stat-card">
         <p class="stat-label">Students</p>
         <p class="stat-value" id="student_num" runat="server"></p>
-        <p class="stat-note">Across 24 schools</p>
+        <p class="stat-note">Across 3 schools</p>
       </article>
       <article class="stat-card">
         <p class="stat-label">Teachers</p>
@@ -80,8 +80,25 @@
               <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/>
               <path d="M4 5.5v13A2.5 2.5 0 0 1 6.5 16H20"/>
             </svg>
-            <span class="action-title">Manage content <span class="arrow">→</span></span>
-            <span class="action-description">Keep quizzes and materials current.</span>
+            <span class="action-title">Manage Materials <span class="arrow">→</span></span>
+            <span class="action-description">Keep materials current.</span>
+          </a>
+
+          <a class="action-card" href="AdminQuizManagement.aspx">
+              <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/>
+                <path d="M4 5.5v13A2.5 2.5 0 0 1 6.5 16H20"/>
+              </svg>
+              <span class="action-title">Manage Quizzes <span class="arrow">→</span></span>
+              <span class="action-description">Keep quizzes current.</span>
+          </a>
+          <a class="action-card" href="AdminClassroomManagement.aspx">
+              <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/>
+                <path d="M4 5.5v13A2.5 2.5 0 0 1 6.5 16H20"/>
+              </svg>
+              <span class="action-title">Manage Classes <span class="arrow">→</span></span>
+              <span class="action-description">Keep classes current.</span>
           </a>
         </div>
       </section>

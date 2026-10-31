@@ -22,329 +22,195 @@
         <div class="page-header">
             <div>
                 <h1>Classroom Management</h1>
-                <p>Oversee classrooms, teacher assignments, enrolment, and live sessions.</p>
+                <p>Oversee classrooms, teacher assignments, students and quizzes.</p>
             </div>
-
-            <span class="count-pill" id="totalClassrooms" runat="server">
-                0 classrooms
-            </span>
+            <span class="count-pill" id="totalClassrooms" runat="server">0 classrooms</span>
         </div>
 
         <main class="layout">
 
-            <section class="card" aria-labelledby="dir-title">
+            <!-- ======================== CLASSROOM LIST ======================== -->
+            <section class="card">
+                <h2>Classroom directory</h2>
+                <p class="meta" id="classroomMeta" runat="server">Loading...</p>
 
-                <h2 id="dir-title">Classroom directory</h2>
-
-                <p class="meta" id="classroomMeta" runat="server">
-                    Loading classrooms...
-                </p>
-
-                <div class="tabs">
-
-                    <asp:LinkButton
-                        ID="btnClassrooms"
-                        runat="server"
-                        CssClass="tab active"
-                        CausesValidation="false"
-                        OnClick="btnClassrooms_Click">
-                        Classrooms
-                    </asp:LinkButton>
-
-                    <asp:LinkButton
-                        ID="btnLiveSessions"
-                        runat="server"
-                        CssClass="tab"
-                        CausesValidation="false"
-                        OnClick="btnLiveSessions_Click">
-                        Live Sessions
-                    </asp:LinkButton>
-
+                <div class="toolbar">
+                    <asp:TextBox ID="txtClassroomSearch" runat="server" CssClass="search-input"
+                        placeholder="Search classroom or teacher..." />
+                    <asp:Button ID="btnClassroomSearch" runat="server" Text="Search"
+                        CssClass="btn primary" OnClick="btnClassroomSearch_Click" CausesValidation="false" />
+                    <asp:Button ID="btnClassroomReset" runat="server" Text="Reset"
+                        CssClass="btn" OnClick="btnClassroomReset_Click" CausesValidation="false" />
                 </div>
 
-                <asp:Panel ID="pnlClassrooms" runat="server">
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Open</th>
+                                <th>Classroom</th>
+                                <th>Teacher</th>
+                                <th>Students</th>
+                                <th>Quizzes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <asp:Repeater ID="rptClassrooms" runat="server" OnItemCommand="rptClassrooms_ItemCommand">
+                                <ItemTemplate>
+                                    <tr class='<%# Convert.ToString(Eval("ClassID")) == hfSelectedClassID.Value ? "selected-row" : "" %>'>
+                                        
+                                        <td class="name"><%#: Eval("ClassName") %></td>
+                                        <td class="teacher"><%#: Eval("TeacherName") %></td>
+                                        <td><%#: Eval("StudentCount") %></td>
+                                        <td><%#: Eval("QuizCount") %></td>
+                                        <td>
+                                            <asp:LinkButton ID="LinkButton1" runat="server" Text="View"
+                                                CommandName="SelectClass" CommandArgument='<%# Eval("ClassID") %>'
+                                                CssClass="btn-select" CausesValidation="false" />
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    <% if (rptClassrooms.Items.Count == 0) { %>
+                                        <tr><td colspan="5" class="empty">No classrooms found.</td></tr>
+                                    <% } %>
+                                </FooterTemplate>
+                            </asp:Repeater>
+                        </tbody>
+                    </table>
+                </div>
 
-                    <div class="toolbar">
-
-                        <asp:TextBox
-                            ID="txtClassroomSearch"
-                            runat="server"
-                            CssClass="search-input"
-                            placeholder="Search classroom or teacher..." />
-
-                        <asp:Button
-                            ID="btnClassroomSearch"
-                            runat="server"
-                            Text="Search"
-                            CssClass="btn primary"
-                            OnClick="btnClassroomSearch_Click"
-                            CausesValidation="false" />
-
-                        <asp:Button
-                            ID="btnClassroomReset"
-                            runat="server"
-                            Text="Reset"
-                            CssClass="btn"
-                            OnClick="btnClassroomReset_Click"
-                            CausesValidation="false" />
-
-                    </div>
-
-                    <div class="table-wrap">
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Select</th>
-                                    <th>Classroom Name</th>
-                                    <th>Teacher</th>
-                                    <th>Student Count</th>
-                                    <th>Quiz Count</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                                <asp:Repeater
-                                    ID="rptClassrooms"
-                                    runat="server"
-                                    OnItemCommand="rptClassrooms_ItemCommand">
-
-                                    <ItemTemplate>
-                                        <tr class='<%# Convert.ToString(Eval("ClassID")) == hfSelectedClassID.Value ? "selected-row" : "" %>'>
-                                            <td>
-                                                <asp:LinkButton
-                                                    ID="btnSelect"
-                                                    runat="server"
-                                                    Text="Select"
-                                                    CommandName="SelectClass"
-                                                    CommandArgument='<%# Eval("ClassID") %>'
-                                                    CssClass="btn-select"
-                                                    CausesValidation="false" />
-                                            </td>
-
-                                            <td class="name">
-                                                <%#: Eval("ClassName") %>
-                                            </td>
-
-                                            <td class="teacher">
-                                                <%#: Eval("TeacherName") %>
-                                            </td>
-
-                                            <td>
-                                                <%#: Eval("StudentCount") %>
-                                            </td>
-
-                                            <td>
-                                                <%#: Eval("QuizCount") %>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-
-                                    <FooterTemplate>
-                                        <% if (rptClassrooms.Items.Count == 0) { %>
-                                            <tr>
-                                                <td colspan="5" class="empty">
-                                                    No classrooms found.
-                                                </td>
-                                            </tr>
-                                        <% } %>
-                                    </FooterTemplate>
-
-                                </asp:Repeater>
-
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                    <div class="table-footer">
-                        <asp:Label
-                            ID="lblClassroomCount"
-                            runat="server"
-                            Text="Showing 0 classrooms" />
-                    </div>
-
-                </asp:Panel>
-
-                <asp:Panel
-                    ID="pnlLiveSessions"
-                    runat="server"
-                    Visible="false">
-
-                    <div class="toolbar">
-
-                        <asp:TextBox
-                            ID="txtSessionSearch"
-                            runat="server"
-                            CssClass="search-input"
-                            placeholder="Search session, classroom or teacher..." />
-
-                        <asp:Button
-                            ID="btnSessionSearch"
-                            runat="server"
-                            Text="Search"
-                            CssClass="btn primary"
-                            OnClick="btnSessionSearch_Click"
-                            CausesValidation="false" />
-
-                        <asp:Button
-                            ID="btnSessionReset"
-                            runat="server"
-                            Text="Reset"
-                            CssClass="btn"
-                            OnClick="btnSessionReset_Click"
-                            CausesValidation="false" />
-
-                    </div>
-
-                    <div class="table-wrap">
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Session</th>
-                                    <th>Classroom</th>
-                                    <th>Teacher</th>
-                                    <th>Start Time</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                                <asp:Repeater
-                                    ID="rptSessions"
-                                    runat="server">
-
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td class="name">
-                                                <%#: Eval("SessionTitle") %>
-                                            </td>
-
-                                            <td>
-                                                <%#: Eval("ClassName") %>
-                                            </td>
-
-                                            <td class="teacher">
-                                                <%#: Eval("TeacherName") %>
-                                            </td>
-
-                                            <td>
-                                                <%#: Eval("StartTime", "{0:dd MMM yyyy, hh:mm tt}") %>
-                                            </td>
-
-                                            <td class='status <%#: Convert.ToString(Eval("Status")).ToLowerInvariant() %>'>
-                                                <%#: Eval("Status") %>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-
-                                    <FooterTemplate>
-                                        <% if (rptSessions.Items.Count == 0) { %>
-                                            <tr>
-                                                <td colspan="5" class="empty">
-                                                    No live sessions found.
-                                                </td>
-                                            </tr>
-                                        <% } %>
-                                    </FooterTemplate>
-
-                                </asp:Repeater>
-
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                    <div class="table-footer">
-                        <asp:Label
-                            ID="lblSessionCount"
-                            runat="server"
-                            Text="Showing 0 sessions" />
-                    </div>
-
-                </asp:Panel>
-
+                <div class="table-footer">
+                    <asp:Label ID="lblClassroomCount" runat="server" Text="Showing 0 classrooms" />
+                </div>
             </section>
 
+            <!-- ======================== DETAILS PANEL ======================== -->
             <aside class="card details">
 
-                <h2>Classroom Details</h2>
+                <asp:Panel ID="pnlDetails" runat="server">
 
-                <dl>
-                    <div class="row">
-                        <dt>Classroom</dt>
-                        <dd><asp:Label ID="lblDetailClassName" runat="server" Text="-" /></dd>
+                    <asp:Label ID="lblMessage" runat="server" CssClass="msg" Visible="false" />
+
+                    <h2>Edit Classroom</h2>
+
+                    <div class="field">
+                        <label>Classroom name</label>
+                        <asp:TextBox ID="txtClassName" runat="server" CssClass="input" />
                     </div>
 
-                    <div class="row">
-                        <dt>Teacher</dt>
-                        <dd><asp:Label ID="lblDetailTeacher" runat="server" Text="-" /></dd>
+                    <div class="field">
+                        <label>Teacher</label>
+                        <asp:DropDownList ID="ddlTeacher" runat="server" CssClass="select" />
                     </div>
 
-                    <div class="row">
-                        <dt>School</dt>
-                        <dd><asp:Label ID="lblDetailSchool" runat="server" Text="-" /></dd>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label>School / Description</label>
+                            <asp:TextBox ID="txtSchool" runat="server" CssClass="input" />
+                        </div>
+                        <div class="field">
+                            <label>Subject</label>
+                            <asp:TextBox ID="txtSubject" runat="server" CssClass="input" />
+                        </div>
                     </div>
 
-                    <div class="row">
-                        <dt>Subject</dt>
-                        <dd><asp:Label ID="lblDetailSubject" runat="server" Text="-" /></dd>
+                    <div class="field">
+                        <label>Invite code</label>
+                        <asp:TextBox ID="txtInviteCode" runat="server" CssClass="input" />
                     </div>
 
-                    <div class="row">
-                        <dt>Students</dt>
-                        <dd><asp:Label ID="lblDetailStudents" runat="server" Text="0" /></dd>
+                    <div class="btn-row">
+                        <asp:Button ID="btnSave" runat="server" Text="Save Changes"
+                            CssClass="btn primary" OnClick="btnSave_Click" CausesValidation="false" />
+                        <asp:Button ID="btnDeleteClassroom" runat="server" Text="Delete Classroom"
+                            CssClass="btn btn-danger" OnClick="btnDeleteClassroom_Click" CausesValidation="false"
+                            OnClientClick="return confirm('Delete this classroom and all its students, quizzes and sessions?');" />
                     </div>
 
-                    <div class="row">
-                        <dt>Invite code</dt>
-                        <dd><asp:Label ID="lblDetailInviteCode" runat="server" Text="-" /></dd>
+                    <div class="section-title"><span>Overall</span></div>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label>Total students</label>
+                            <asp:Label ID="lblTotalStudents" runat="server" Text="0" />
+                        </div>
+                        <div class="field">
+                            <label>Total quizzes</label>
+                            <asp:Label ID="lblTotalQuizzes" runat="server" Text="0" />
+                        </div>
                     </div>
 
-                    <div class="row">
-                        <dt>Status</dt>
-                        <dd class="ok"><asp:Label ID="lblDetailStatus" runat="server" Text="-" /></dd>
-                    </div>
-                </dl>
+                    <!-- Students List -->
+                    <div class="section-title"><span>Students</span></div>
+                    <asp:Repeater ID="rptStudents" runat="server" OnItemCommand="rptStudents_ItemCommand">
+                        <HeaderTemplate>
+                            <table class="mini-table">
+                                <thead>
+                                    <tr><th>Student</th><th style="width: 80px;"></th></tr>
+                                </thead>
+                                <tbody>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td><%#: Eval("StudentName") %></td>
+                                <td>
+                                    <asp:LinkButton ID="btnRemoveStudent" runat="server" Text="Remove"
+                                        CommandName="RemoveStudent" CommandArgument='<%# Eval("StudentID") %>'
+                                        CssClass="btn-mini" CausesValidation="false"
+                                        OnClientClick="return confirm('Remove this student from the classroom?');" />
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                                </tbody>
+                            </table>
+                            <% if (rptStudents.Items.Count == 0) { %>
+                                <span class="empty-msg">No students enrolled.</span>
+                            <% } %>
+                        </FooterTemplate>
+                    </asp:Repeater>
 
-                <p class="note">
-                    <asp:Label ID="lblNote" runat="server" Text="Select View in the classroom table to open details." />
-                </p>
+                    <!-- Quizzes List (View Only) -->
+                    <div class="section-title"><span>Quizzes</span></div>
+                    <asp:Repeater ID="rptQuizzes" runat="server">
+                        <HeaderTemplate>
+                            <table class="mini-table">
+                                <thead>
+                                    <tr><th>Quiz</th><th style="width: 80px;"></th></tr>
+                                </thead>
+                                <tbody>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td><%#: Eval("QuizTitle") %></td>
+                                <td>
+                                    <asp:HyperLink ID="lnkViewQuiz" runat="server" Text="View"
+                                        NavigateUrl='<%# "AdminViewQuiz?quizID=" + Eval("QuizID") %>'
+                                        CssClass="btn-select" />
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                                </tbody>
+                            </table>
+                            <% if (rptQuizzes.Items.Count == 0) { %>
+                                <span class="empty-msg">No quizzes in this classroom.</span>
+                            <% } %>
+                        </FooterTemplate>
+                    </asp:Repeater>
 
-                <div class="btn-row">
-                    <asp:Button
-                        ID="btnViewDetails"
-                        runat="server"
-                        Text="View"
-                        CssClass="btn primary"
-                        CausesValidation="false"
-                        OnClick="btnViewDetails_Click" />
+                </asp:Panel>
 
-                    <asp:Button
-                        ID="btnDeleteClassroom"
-                        runat="server"
-                        Text="Delete"
-                        CssClass="btn btn-danger"
-                        CausesValidation="false"
-                        OnClientClick="return confirm('Are you sure you want to delete this classroom?');"
-                        OnClick="btnDeleteClassroom_Click" />
-
-                    <asp:Button
-                        ID="btnRefresh"
-                        runat="server"
-                        Text="Refresh"
-                        CssClass="btn"
-                        CausesValidation="false"
-                        OnClick="btnRefresh_Click" />
-                </div>
+                <asp:Panel ID="pnlNoSelection" runat="server">
+                    <h2>Classroom Details</h2>
+                    <p class="note">
+                        Select <strong>Open</strong> on a classroom to view and manage its details, students and quizzes.
+                    </p>
+                </asp:Panel>
 
             </aside>
 
         </main>
-
     </div>
 
     <uc:Footer ID="FooterControl" runat="server" />

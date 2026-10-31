@@ -250,13 +250,7 @@
                         </dl>
 
                         <div class="detail-actions">
-                            <asp:Button
-                                ID="btnView"
-                                runat="server"
-                                CssClass="secondary-button"
-                                Text="View quiz"
-                                OnClick="btnView_Click"
-                                CausesValidation="false" />
+                            <asp:button ID="btnView" runat="server" Text="View Quiz" CssClass="secondary-button" OnClick="btnView_Click"/>
 
                             <asp:Button
                                 ID="btnEdit"

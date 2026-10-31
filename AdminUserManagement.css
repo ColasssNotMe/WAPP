@@ -3,8 +3,8 @@
 }
 
 .dashboard {
-    width: 92%;
-    max-width: 1400px;
+    width: var(--container-width);
+/*    max-width: 1400px;*/
     margin: 2rem auto;
     color: #1c2541;
 }
