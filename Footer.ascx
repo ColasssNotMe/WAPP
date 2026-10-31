@@ -24,7 +24,6 @@
                 <a href="HomePage.aspx">Home</a>
                 <a href="StudentLearningMaterial.aspx">Learning Materials</a>
                 <a href="StudentQuizList.aspx">Quiz</a>
-                <a href="LiveSession.aspx">Live Session</a>
                 <a href="About.aspx">About Us</a>
             </div>
 
