@@ -8,6 +8,10 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userId"] != null)
+            {
+                Response.Redirect("Homepage");
+            }
         }
 
         protected void SignInButton_Click(object sender, EventArgs e)

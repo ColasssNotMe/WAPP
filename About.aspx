@@ -17,8 +17,8 @@
 
     <div class="page-progress" aria-hidden="true"><span></span></div>
 
-    <uc:Header runat="server" />
     <form id="form1" runat="server">
+    <uc:Header runat="server" />
         <section class="about-section reveal-section">
 
             <div class="about-container">
@@ -398,8 +398,8 @@
 
         </section>
 
+    <uc:Footer runat="server" />
     </form>
 
-    <uc:Footer runat="server" />
 </body>
 </html>

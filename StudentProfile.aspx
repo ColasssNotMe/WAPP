@@ -257,8 +257,14 @@
 
                             </div>
 
-                            <span class="form-hint">Use a strong password of at least 8 characters.</span>
-                                               </div>
+<asp:RegularExpressionValidator
+    ID="PasswordStrengthValidator"
+    runat="server"
+    ControlToValidate="txtPassword"
+    ValidationExpression="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$"
+    ErrorMessage="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 symbol."
+    CssClass="validation-message"
+    Display="Dynamic" />
 
                     </div>
 

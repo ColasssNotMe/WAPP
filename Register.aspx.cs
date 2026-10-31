@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Assignment
 {
@@ -8,6 +9,10 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userId"] != null)
+            {
+                Response.Redirect("Homepage");
+            }
 
         }
 
@@ -23,9 +28,46 @@ namespace Assignment
             }
         }
 
+        protected void toggleConfirmPasswordView(object sender, EventArgs e)
+        {
+            if (ConfirmPasswordTextBox.TextMode == System.Web.UI.WebControls.TextBoxMode.Password)
+            {
+                ConfirmPasswordTextBox.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
+            }
+            else
+            {
+                ConfirmPasswordTextBox.TextMode = System.Web.UI.WebControls.TextBoxMode.Password;
+            }
+        }
+
+
+        private bool IsPasswordStrong(string password)
+        {
+            bool hasUppercase = Regex.IsMatch(password, @"[A-Z]");
+            bool hasLowercase = Regex.IsMatch(password, @"[a-z]");
+            bool hasNumber = Regex.IsMatch(password, @"[0-9]");
+            bool hasSymbol = Regex.IsMatch(password, @"[^a-zA-Z0-9]");
+
+            return hasUppercase && hasLowercase && hasNumber && hasSymbol;
+        }
 
         protected void CreateAccountButton_Click(object sender, EventArgs e)
         {
+
+            if (!IsPasswordStrong(PasswordTextBox.Text))
+            {
+                SignupMessage.Text = "Password does not meet the requirements.";
+                SignupMessage.CssClass = "signup-message error";
+                return;
+            }
+
+            if (PasswordTextBox.Text != ConfirmPasswordTextBox.Text)
+            {
+                SignupMessage.Text = "Passwords do not match.";
+                SignupMessage.CssClass = "signup-message error";
+                return;
+            }
+
             string connectionString =
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
@@ -38,6 +80,11 @@ namespace Assignment
             FROM [User]
             WHERE email = @email";
 
+                const string checkUsernameQuery = @"
+            SELECT COUNT(*)
+            FROM [User]
+            WHERE username = @username";
+
                 using (SqlCommand checkCommand =
                        new SqlCommand(checkQuery, conn))
                 {
@@ -45,11 +92,28 @@ namespace Assignment
                         "@email",
                         EmailTextBox.Text.Trim());
 
-                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+                    int sameEmailCount = Convert.ToInt32(checkCommand.ExecuteScalar());
 
-                    if (count > 0)
+                    if (sameEmailCount > 0)
                     {
                         errMsg.Text = "This email is already registered.";
+                        errMsg.CssClass = "signup-message error";
+                        return;
+                    }
+                }
+
+                using (SqlCommand checkCommand =
+                       new SqlCommand(checkUsernameQuery, conn))
+                {
+                    checkCommand.Parameters.AddWithValue(
+                        "@username",
+                        UsernameTextBox.Text.Trim());
+
+                    int sameUsernameCount = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (sameUsernameCount > 0)
+                    {
+                        errMsg.Text = "This username is already been used.";
                         errMsg.CssClass = "signup-message error";
                         return;
                     }
