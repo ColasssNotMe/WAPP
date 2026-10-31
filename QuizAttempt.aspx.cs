@@ -49,7 +49,47 @@ namespace Assignment
             quizElapsedSeconds.Value = elapsedSeconds.ToString();
             timeSpentValue.InnerText = "⏱ " + FormatClock(elapsedSeconds);
 
+            LoadQuizHeader();
             LoadQuestions();
+        }
+
+        private void LoadQuizHeader()
+        {
+            string quizID = Session["quizID"].ToString();
+
+            string query = @"
+                SELECT q.title, c.className
+                FROM Quiz q
+                INNER JOIN Class c
+                    ON q.classID = c.classID
+                WHERE q.quizID = @quizID";
+
+            string quizTitleText = "Quiz not available";
+            string className = "";
+
+            using (SqlConnection conn = new SqlConnection(
+                ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@quizID", quizID);
+
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            quizTitleText = Convert.ToString(reader["title"]).Trim();
+                            className = Convert.ToString(reader["className"]).Trim();
+                        }
+                    }
+                }
+            }
+
+            quizHeading.InnerText = quizTitleText;
+            classroomNameLabel.InnerText = className;
+            pageTitle.Text = quizTitleText;
         }
 
         private void LoadQuestions()
@@ -515,6 +555,8 @@ namespace Assignment
                     }
                 }
             }
+
+            ProgressCalculator.Recalculate(studentID);
         }
 
         private int GetTimeTakenSeconds()
