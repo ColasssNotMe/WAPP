@@ -1,4 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageStudents.aspx.cs" Inherits="Assignment.ManageStudents" %>
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student List</title>
-
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -59,14 +61,7 @@
             align-items: center;
             gap: 20px;
         }
-        .progress-val {
-            font-weight: 700;
-            font-size: 14px;
-            color: #334155;
-            min-width: 40px;
-            text-align: right;
-        }
-
+        /* Action Modal */
         .modal-backdrop {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -84,12 +79,15 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+     <form id="form1" runat="server">
+        <uc:Header ID="HeaderControl" runat="server" />
+             <link href="index.css" rel="stylesheet" />
         <div class="quizzes-container">
-
+            
+            <!-- Header Section -->
             <header class="page-header">
                 <div class="header-left">
-                    <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
+<a href="TeacherDashboard.aspx" class="back-btn" aria-label="Go Back">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="19" y1="12" x2="5" y2="12"></line>
                             <polyline points="12 19 5 12 12 5"></polyline>
@@ -97,7 +95,7 @@
                     </a>
                     <div class="title-group">
                         <h1 class="page-title">Student List</h1>
-                        <p class="page-subtitle">Track student progress, attendance, and classroom participation.</p>
+                        <p class="page-subtitle">Assign Student to their Classes.</p>
                     </div>
                 </div>
                 <div class="header-right">
@@ -107,6 +105,7 @@
                 </div>
             </header>
 
+            <!-- Main Content Card -->
             <main class="card" style="padding: 12px 24px;">
                 <asp:Repeater ID="rptStudents" runat="server" OnItemCommand="rptStudents_ItemCommand">
                     <ItemTemplate>
@@ -121,9 +120,8 @@
                                 </div>
                             </div>
                             <div class="student-right">
-                                <span class="progress-val"><%# Eval("AvgProgress") %>%</span>
-                                <asp:Button ID="btnAssign" runat="server" Text="Assign Class"
-                                    CssClass="btn btn-secondary" style="padding: 6px 12px; font-size:12px;"
+                                <asp:Button ID="btnAssign" runat="server" Text="Assign Class" 
+                                    CssClass="btn btn-secondary" style="padding: 6px 12px; font-size:12px;" 
                                     CommandName="OpenAssign" CommandArgument='<%# Eval("studentID") %>' />
                             </div>
                         </div>
@@ -131,11 +129,12 @@
                 </asp:Repeater>
             </main>
 
+            <!-- Assign Class Modal Panel -->
             <asp:Panel ID="pnlModal" runat="server" Visible="false" CssClass="modal-backdrop">
                 <div class="modal-card">
                     <h2 class="card-title" style="margin-bottom:12px;">Assign Classroom</h2>
                     <p class="page-subtitle" style="margin-bottom:20px;">Select a new classroom for <asp:Label ID="lblModalStudentName" runat="server" Font-Bold="true" />:</p>
-
+                    
                     <div class="form-group" style="margin-bottom:20px;">
                         <label for="ddlClassrooms">Classroom</label>
                         <asp:DropDownList ID="ddlClassrooms" runat="server" CssClass="form-control" style="width:100%; padding:10px; border-radius:10px;" />
@@ -143,12 +142,12 @@
 
                     <div style="display:flex; gap:10px; justify-content:flex-end;">
                         <asp:Button ID="btnSaveAssignment" runat="server" Text="Save" CssClass="btn btn-primary" OnClick="btnSaveAssignment_Click" />
-                        <asp:Button ID="btnCancelModal" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancelModal_Click" />
                     </div>
                 </div>
             </asp:Panel>
 
         </div>
+               <uc:Footer ID="FooterControl" runat="server" />
     </form>
 </body>
 </html>

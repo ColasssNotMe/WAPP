@@ -29,13 +29,6 @@ namespace Assignment
         {
             try
             {
-                /*
-                 * The login system stores the logged-in user's ID
-                 * in Session["userID"].
-                 *
-                 * User -> Teacher is then used to obtain teacherID.
-                 */
-
                 if (Session["userID"] == null)
                 {
                     Response.Redirect("Login.aspx");
@@ -61,13 +54,9 @@ namespace Assignment
                 }
 
                 LoadTeacherName(userID);
-
                 LoadDashboardCounts(teacherID);
-
                 LoadClassroomSummary(teacherID);
-
                 LoadRecentMaterials(teacherID);
-
                 LoadRecentQuizzes(teacherID);
             }
             catch (Exception ex)
@@ -183,27 +172,6 @@ namespace Assignment
                         WHERE c.teacherID = @teacherID
                     ) AS classroomCount,
 
-                    -- Live sessions scheduled this week
-                    (
-                        SELECT COUNT(*)
-                        FROM LiveSession ls
-                        INNER JOIN Class c
-                            ON ls.classID = c.classID
-                        WHERE c.teacherID = @teacherID
-                          AND ls.startTime >=
-                              DATEADD(
-                                  WEEK,
-                                  DATEDIFF(WEEK, 0, GETDATE()),
-                                  0
-                              )
-                          AND ls.startTime <
-                              DATEADD(
-                                  WEEK,
-                                  DATEDIFF(WEEK, 0, GETDATE()) + 1,
-                                  0
-                              )
-                    ) AS liveSessionCount,
-
                     -- Total quizzes belonging to this teacher's classes
                     (
                         SELECT COUNT(*)
@@ -262,9 +230,6 @@ namespace Assignment
                             lblActiveClassrooms.Text =
                                 reader["classroomCount"].ToString();
 
-                            lblLiveSessionCount.Text =
-                                reader["liveSessionCount"].ToString();
-
                             lblQuizCount.Text =
                                 reader["quizCount"].ToString();
 
@@ -280,6 +245,7 @@ namespace Assignment
         {
             string query = @"
                 SELECT
+                    c.classID,
                     c.className,
 
                     COUNT(DISTINCT e.studentID) AS studentCount
@@ -322,20 +288,14 @@ namespace Assignment
             rptClassrooms.DataSource = table;
             rptClassrooms.DataBind();
 
-            if (table.Rows.Count == 0)
-            {
-                pnlNoClassrooms.Visible = true;
-            }
-            else
-            {
-                pnlNoClassrooms.Visible = false;
-            }
+            pnlNoClassrooms.Visible = table.Rows.Count == 0;
         }
 
         private void LoadRecentMaterials(int teacherID)
         {
             string query = @"
                 SELECT TOP 3
+                    m.materialID,
                     m.title,
                     c.className,
                     m.uploadDate
@@ -374,20 +334,14 @@ namespace Assignment
             rptMaterials.DataSource = table;
             rptMaterials.DataBind();
 
-            if (table.Rows.Count == 0)
-            {
-                pnlNoMaterials.Visible = true;
-            }
-            else
-            {
-                pnlNoMaterials.Visible = false;
-            }
+            pnlNoMaterials.Visible = table.Rows.Count == 0;
         }
 
         private void LoadRecentQuizzes(int teacherID)
         {
             string query = @"
                 SELECT TOP 2
+                    q.quizID,
                     q.title,
                     c.className,
                     q.createdDate
@@ -426,14 +380,7 @@ namespace Assignment
             rptQuizzes.DataSource = table;
             rptQuizzes.DataBind();
 
-            if (table.Rows.Count == 0)
-            {
-                pnlNoQuizzes.Visible = true;
-            }
-            else
-            {
-                pnlNoQuizzes.Visible = false;
-            }
+            pnlNoQuizzes.Visible = table.Rows.Count == 0;
         }
     }
 }
