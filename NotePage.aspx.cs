@@ -8,6 +8,23 @@ namespace Assignment
 {
     public partial class MaterialPage : System.Web.UI.Page
     {
+        protected string GetReturnUrl()
+        {
+            object classId = Session["classID"] ?? Session["classId"];
+
+            int parsedClassId;
+
+            if (classId != null
+                && int.TryParse(classId.ToString(), out parsedClassId)
+                && parsedClassId > 0)
+            {
+                return "StudentClassLearningMaterial.aspx?classID="
+                    + parsedClassId;
+            }
+
+            return "StudentLearningMaterial.aspx";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

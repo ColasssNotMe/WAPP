@@ -27,7 +27,7 @@
 
             <div class="chapter-navigation">
 
-                <a href="StudentLearningMaterial.aspx" class="topic-navigation previous-topic">
+                <a href="<%: GetReturnUrl() %>" class="topic-navigation previous-topic">
                     <img src="svg/left-arrow.svg" width="30" height="30" class="arrow"/>
 
                     <span class="topic-text">

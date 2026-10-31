@@ -20,8 +20,11 @@
         <main class="learning-page">
             <div class="page-toolbar">
                 <a href="StudentDashboard.aspx" class="topic-navigation return">
-                    <span class="arrow">&#8592;</span>
-                    <span class="topic-title">Return To Dashboard</span>
+                    <img src="svg/left-arrow.svg" width="30" height="30" class="arrow"/>
+
+                    <span class="topic-text">
+                        <span class="topic-title">Return To Class</span>
+                    </span>
                 </a>
             </div>
 

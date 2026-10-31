@@ -20,6 +20,16 @@
         <uc:Header runat="server" />
 
         <main class="quiz-page">
+            <div class="page-toolbar">
+                <a href="<%: GetReturnUrl() %>" class="topic-navigation return">
+                    <img src="svg/left-arrow.svg" width="30" height="30" class="arrow" />
+
+                    <span class="topic-text">
+                        <span class="topic-title">Return To Class</span>
+                    </span>
+                </a>
+            </div>
+
             <section class="quiz-header">
                 <h1>
                     <asp:Literal ID="litClassName" runat="server" />

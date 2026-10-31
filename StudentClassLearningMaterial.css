@@ -13,11 +13,9 @@
 }
 
 .topic-navigation {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--primary-color);
-    text-decoration: none;
+    gap: 0.25rem;
 }
 
 .arrow {
@@ -26,7 +24,9 @@
     justify-content: center;
     font-size: 1.5rem;
     line-height: 1;
+    transform: translateX(0);
     transition: transform 0.2s ease;
+    margin-right: 10px;
 }
 
 .return:hover .arrow {
