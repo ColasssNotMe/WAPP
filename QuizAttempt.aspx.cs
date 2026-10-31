@@ -372,7 +372,7 @@ namespace Assignment
                 foreach (DataRow option in options.Rows)
                 {
                     int answerID = Convert.ToInt32(option["answerID"]);
-                    bool optionIsCorrect = IsTrue(option["isCorrect"]);
+                    bool optionIsCorrect = Convert.ToInt32(option["isCorrect"]) == 1;
                     bool optionIsSelected = isAnswered && answerID == selectedAnswerID;
 
                     if (optionIsSelected && optionIsCorrect)

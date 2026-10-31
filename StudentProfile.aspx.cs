@@ -46,7 +46,6 @@ namespace Assignment
                     u.lastName,
                     u.email,
                     u.dateRegistered,
-                    s.gradeLevel,
                     s.school
                 FROM [User] u
                 INNER JOIN Student s
@@ -70,7 +69,6 @@ namespace Assignment
                             txtUsername.Text = reader["username"].ToString();
                             txtEmail.Text = reader["email"].ToString();
                             txtRole.Text = reader["role"].ToString();
-                            txtGrade.Text = reader["gradeLevel"].ToString();
                             txtSchool.Text = reader["school"].ToString();
                             accountUserId.InnerText = reader["userId"].ToString();
                             accountUsername.InnerText = reader["username"].ToString();
@@ -111,7 +109,6 @@ namespace Assignment
 
                 UPDATE Student
                 SET
-                    gradeLevel = @gradeLevel,
                     school = @school
                 WHERE userId = @userId;
             ";
@@ -124,7 +121,6 @@ namespace Assignment
                     cmd.Parameters.AddWithValue("@lastName", txtLastName.Text.Trim());
                     cmd.Parameters.AddWithValue("@username", txtUsername.Text.Trim());
                     cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@gradeLevel", txtGrade.Text.Trim());
                     cmd.Parameters.AddWithValue("@school", txtSchool.Text.Trim());
                     cmd.Parameters.AddWithValue("@userId", Session["userId"]);
 

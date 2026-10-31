@@ -150,15 +150,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtRole;
 
         /// <summary>
-        /// txtGrade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGrade;
-
-        /// <summary>
         /// txtSchool control.
         /// </summary>
         /// <remarks>
