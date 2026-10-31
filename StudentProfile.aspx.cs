@@ -214,10 +214,74 @@ namespace Assignment
             Session["profilePic"] = imageUrl;
         }
 
+        private void ShowSaveError(string message)
+        {
+            saveResult.InnerText = message;
+            saveResult.Attributes["class"] = "save-result error";
+            saveResult.Visible = true;
+        }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
+                int currentUserId = Convert.ToInt32(Session["userId"]);
+                string connectionString =
+                    ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
+                using (SqlConnection conn =
+                       new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    const string checkUsernameQuery = @"
+                        SELECT COUNT(*)
+                        FROM [User]
+                        WHERE username = @username
+                          AND userId != @userId";
+
+                    using (SqlCommand cmd =
+                           new SqlCommand(checkUsernameQuery, conn))
+                    {
+                        cmd.Parameters.Add("@username", System.Data.SqlDbType.NVarChar, 40).Value =
+                            txtUsername.Text.Trim();
+                        cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int).Value =
+                            currentUserId;
+
+                        int usernameCount =
+                            Convert.ToInt32(cmd.ExecuteScalar());
+
+                        if (usernameCount > 0)
+                        {
+                            ShowSaveError("This username is already taken.");
+                            return;
+                        }
+                    }
+
+                    const string checkEmailQuery = @"
+                        SELECT COUNT(*)
+                        FROM [User]
+                        WHERE email = @email
+                          AND userId != @userId";
+
+                    using (SqlCommand cmd =
+                           new SqlCommand(checkEmailQuery, conn))
+                    {
+                        cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar, 100).Value =
+                            txtEmail.Text.Trim();
+                        cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int).Value =
+                            currentUserId;
+
+                        int emailCount = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        if (emailCount > 0)
+                        {
+                            ShowSaveError("This email is already registered.");
+                            return;
+                        }
+                    }
+                }
+
                 SaveProfile();
 
                 SaveProfileImage();
@@ -232,13 +296,7 @@ namespace Assignment
             }
             catch (Exception ex)
             {
-                saveResult.InnerText =
-                    "Error updating profile: " + ex.Message;
-
-                saveResult.Attributes["class"] =
-                    "save-result error";
-
-                saveResult.Visible = true;
+                ShowSaveError("Error updating profile: " + ex.Message);
             }
         }
         protected void btnChangePassword_Click(object sender, EventArgs e)

@@ -109,8 +109,6 @@
                 chronologies designed for rapid revision.
                     </p>
 
-                    <a href="#" class="card-link">Explore Notes →
-                    </a>
 
                 </div>
 
@@ -129,8 +127,6 @@
                 timed trial paper simulations.
                     </p>
 
-                    <a href="#" class="card-link">Attempt Quizzes →
-                    </a>
 
                 </div>
 
@@ -150,8 +146,6 @@
                 exam topics.
                     </p>
 
-                    <a href="#" class="card-link">Join Schedule →
-                    </a>
 
                 </div>
 
@@ -171,8 +165,6 @@
                 recommendations.
                     </p>
 
-                    <a href="#" class="card-link">View Progress →
-                    </a>
 
                 </div>
             </div>
