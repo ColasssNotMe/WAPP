@@ -25,6 +25,7 @@ namespace Assignment
                 {
                     dashboardButton.Visible = true;
                     dashboardButton.HRef = "AdminDashboard.aspx";
+                    classroomButton.HRef = "AdminClassroomManagement.aspx";
                 }
                 else if (Session["role"]?.ToString().ToLower().Trim() == "teacher")
                 {
