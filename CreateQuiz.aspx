@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateQuiz.aspx.cs" Inherits="Assignment.CreateQuiz" %>
-
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +45,9 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+   <form id="form1" runat="server">
+        <uc:Header ID="HeaderControl" runat="server" />
+           <link href="index.css" rel="stylesheet" />
         <div class="create-quiz-container">
             
             <!-- Header Section -->
@@ -167,6 +170,7 @@
             </div>
 
         </div>
+          <uc:Footer ID="FooterControl" runat="server" />
     </form>
 </body>
 </html>

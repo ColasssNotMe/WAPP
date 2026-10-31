@@ -26,20 +26,18 @@ namespace Assignment
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 string query = @"
-                    SELECT
-                        s.studentID,
-                        u.username,
-                        (u.firstName + ' ' + u.lastName) AS FullName,
-                        LEFT(u.firstName, 1) AS Initial,
-                        ISNULL(c.className, 'Unassigned') AS className,
-                        ISNULL(CAST(AVG(p.progressPercent) AS INT), 0) AS AvgProgress
-                    FROM Student s
-                    INNER JOIN [User] u ON s.userID = u.userID
-                    LEFT JOIN Enrolment e ON s.studentID = e.studentID
-                    LEFT JOIN Class c ON e.classID = c.classID
-                    LEFT JOIN Progress p ON s.studentID = p.studentID
-                    GROUP BY s.studentID, u.username, u.firstName, u.lastName, c.className
-                    ORDER BY u.firstName ASC";
+            SELECT 
+                s.studentID,
+                u.username,
+                (u.firstName + ' ' + u.lastName) AS FullName,
+                LEFT(u.firstName, 1) AS Initial,
+                ISNULL(c.className, 'Unassigned') AS className,
+                ISNULL(s.progressPercentage, 0) AS AvgProgress
+            FROM Student s
+            INNER JOIN [User] u ON s.userID = u.userID
+            LEFT JOIN Enrolment e ON s.studentID = e.studentID
+            LEFT JOIN Class c ON e.classID = c.classID
+            ORDER BY u.firstName ASC";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -120,6 +118,7 @@ namespace Assignment
                 {
                     conn.Open();
 
+                    // Check if an enrolment entry exists for this student
                     string checkQuery = "SELECT COUNT(*) FROM Enrolment WHERE studentID = @studentID";
                     using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
                     {
@@ -128,7 +127,8 @@ namespace Assignment
 
                         if (count > 0)
                         {
-                            string updateQuery = "UPDATE Enrolment SET classID = @classID, status = 'Active' WHERE studentID = @studentID";
+                            // Update existing enrolment class
+                            string updateQuery = "UPDATE Enrolment SET classID = @classID WHERE studentID = @studentID";
                             using (SqlCommand updateCmd = new SqlCommand(updateQuery, conn))
                             {
                                 updateCmd.Parameters.AddWithValue("@classID", classId);
@@ -138,7 +138,8 @@ namespace Assignment
                         }
                         else
                         {
-                            string insertQuery = "INSERT INTO Enrolment (studentID, classID, enrollDate, status) VALUES (@studentID, @classID, GETDATE(), 'Active')";
+                            // Insert new enrolment record without status
+                            string insertQuery = "INSERT INTO Enrolment (studentID, classID, enrollDate) VALUES (@studentID, @classID, GETDATE())";
                             using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
                             {
                                 insertCmd.Parameters.AddWithValue("@studentID", studentId);
@@ -154,11 +155,6 @@ namespace Assignment
                 BindStudentList();
             }
         }
-
-        protected void btnCancelModal_Click(object sender, EventArgs e)
-        {
-            pnlModal.Visible = false;
-            ViewState["AssignStudentID"] = null;
-        }
     }
 }
+

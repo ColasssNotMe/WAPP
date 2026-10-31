@@ -24,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// HeaderControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Assignment.WebUserControl1 HeaderControl;
+
+        /// <summary>
         /// lblTotalStudents control.
         /// </summary>
         /// <remarks>
@@ -78,12 +87,12 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button btnSaveAssignment;
 
         /// <summary>
-        /// btnCancelModal control.
+        /// FooterControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelModal;
+        protected global::Assignment.Footer FooterControl;
     }
 }

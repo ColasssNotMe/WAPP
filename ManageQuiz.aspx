@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageQuiz.aspx.cs" Inherits="Assignment.ManageQuiz" %>
-
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +13,13 @@
     <link rel="stylesheet" href="ManageQuiz.css">
 </head>
 <body>
-    <form id="form1" runat="server">
+   <form id="form1" runat="server">
+        <uc:Header ID="HeaderControl" runat="server" />
+           <link href="index.css" rel="stylesheet" />
         <div class="quizzes-container">
             <header class="page-header">
                 <div class="header-left">
-                    <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
+                 <a href="TeacherDashboard.aspx" class="back-btn" aria-label="Go Back">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="19" y1="12" x2="5" y2="12"></line>
                             <polyline points="12 19 5 12 12 5"></polyline>
@@ -88,6 +91,7 @@
                 </aside>
             </div>
         </div>
+          <uc:Footer ID="FooterControl" runat="server" />
     </form>
 </body>
 </html>

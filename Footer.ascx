@@ -13,7 +13,7 @@
             <p>
                 Ncient empowers Malaysian secondary school students
                 to master Sejarah through structured notes, interactive
-                gamified quizzes, and live teacher-led sessions.
+                gamified quizzes.
             </p>
         </div>
 

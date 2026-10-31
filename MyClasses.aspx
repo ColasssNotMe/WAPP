@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MyClasses.aspx.cs" Inherits="Assignment.MyClasses" %>
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,145 +15,67 @@
     <link rel="stylesheet" href="MyClasses.css">
 </head>
 <body>
+    <form id="form1" runat="server">
+        <uc:Header ID="HeaderControl" runat="server" />
+            <link href="index.css" rel="stylesheet" />
+        <div class="classes-container">
 
-    <div class="classes-container">
+            <header class="classes-header">
+                <a href="TeacherDashboard.aspx" class="back-btn" aria-label="Go Back">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </a>
 
-        <header class="classes-header">
-            <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
+                <h1 class="page-title">My Classes</h1>
 
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-            </a>
+                <a href="CreateClassroom.aspx" class="btn btn-create" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">Create Classroom</a>
+            </header>
 
-            <h1 class="page-title">My Classes</h1>
+            <div class="classes-grid">
+                <asp:Repeater ID="rptClasses" runat="server">
+                    <ItemTemplate>
+                        <article class="card classroom-card">
+                            <div class="card-header">
+                                <div class="card-icon-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="card-title-group">
+                                    <h2 class="class-title"><%# Eval("className") %> • <%# Eval("subject") %></h2>
+                                    <p class="class-description"><%# string.IsNullOrEmpty(Eval("description").ToString()) ? "No description provided." : Eval("description") %></p>
+                                </div>
+                            </div>
 
-            <button type="button" class="btn btn-create">Create Classroom</button>
-        </header>
+                            <div class="class-stats-list">
+                                <div class="stat-row">
+                                    <span class="stat-label">Students</span>
+                                    <span class="stat-value"><%# Eval("StudentCount") %></span>
+                                </div>
+                                <div class="stat-row">
+                                    <span class="stat-label">Quizzes</span>
+                                    <span class="stat-value"><%# Eval("QuizCount") %></span>
+                                </div>
+                                <div class="stat-row">
+                                    <span class="stat-label">Notes</span>
+                                    <span class="stat-value"><%# Eval("MaterialCount") %></span>
+                                </div>
+                            </div>
 
-        <div class="classes-grid">
-
-            <article class="card classroom-card">
-                <div class="card-header">
-                    <div class="card-icon-box">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                        </svg>
-                    </div>
-                    <div class="card-title-group">
-                        <h2 class="class-title">4 Amanah • Sejarah</h2>
-                        <p class="class-description">Description</p>
-                    </div>
-                </div>
-
-                <div class="class-stats-list">
-                    <div class="stat-row">
-                        <span class="stat-label">Students</span>
-                        <span class="stat-value">30</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Live sessions</span>
-                        <span class="stat-value">2</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Quizzes</span>
-                        <span class="stat-value">4</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Notes</span>
-                        <span class="stat-value">6</span>
-                    </div>
-                </div>
-
-                <div class="card-actions-group">
-                    <a href="#" class="btn btn-card-primary">View classroom</a>
-                    <a href="#" class="btn btn-card-secondary">Edit classroom</a>
-                </div>
-            </article>
-
-            <article class="card classroom-card">
-                <div class="card-header">
-                    <div class="card-icon-box">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                        </svg>
-                    </div>
-                    <div class="card-title-group">
-                        <h2 class="class-title">Sejarah Revision</h2>
-                        <p class="class-description">Description</p>
-                    </div>
-                </div>
-
-                <div class="class-stats-list">
-                    <div class="stat-row">
-                        <span class="stat-label">Students</span>
-                        <span class="stat-value">48</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Live sessions</span>
-                        <span class="stat-value">1</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Quizzes</span>
-                        <span class="stat-value">3</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Notes</span>
-                        <span class="stat-value">5</span>
-                    </div>
-                </div>
-
-                <div class="card-actions-group">
-                    <a href="#" class="btn btn-card-primary">View classroom</a>
-                    <a href="#" class="btn btn-card-secondary">Edit classroom</a>
-                </div>
-            </article>
-
-            <article class="card classroom-card">
-                <div class="card-header">
-                    <div class="card-icon-box">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                        </svg>
-                    </div>
-                    <div class="card-title-group">
-                        <h2 class="class-title">Sejarah KBAT Workshop</h2>
-                        <p class="class-description">Description</p>
-                    </div>
-                </div>
-
-                <div class="class-stats-list">
-                    <div class="stat-row">
-                        <span class="stat-label">Students</span>
-                        <span class="stat-value">24</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Live sessions</span>
-                        <span class="stat-value">1</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Quizzes</span>
-                        <span class="stat-value">2</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Notes</span>
-                        <span class="stat-value">4</span>
-                    </div>
-                </div>
-
-                <div class="card-actions-group">
-                    <a href="#" class="btn btn-card-primary">View classroom</a>
-                    <a href="#" class="btn btn-card-secondary">Edit classroom</a>
-                </div>
-            </article>
+                            <div class="card-actions-group">
+                                <a href='ClassroomDetails.aspx?classID=<%# Eval("classID") %>' class="btn btn-card-primary">View classroom</a>
+                                <a href='EditClassroom.aspx?classID=<%# Eval("classID") %>' class="btn btn-card-secondary">Edit classroom</a>
+                            </div>
+                        </article>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
 
         </div>
-
-    </div>
-
+           <uc:Footer ID="FooterControl" runat="server" />
+    </form>
 </body>
 </html>

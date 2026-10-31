@@ -156,7 +156,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CreateClassroom.css" />
-    <Content Include="CreateClassrooom.aspx" />
+    <Content Include="CreateClassroom.aspx" />
     <Content Include="CreateEditQuestions.aspx" />
     <Content Include="CreateEditQuestions.css" />
     <Content Include="CreateLiveSession.aspx" />
@@ -384,12 +384,12 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CreateClassrooom.aspx.cs">
-      <DependentUpon>CreateClassrooom.aspx</DependentUpon>
+    <Compile Include="CreateClassroom.aspx.cs">
+      <DependentUpon>CreateClassroom.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CreateClassrooom.aspx.designer.cs">
-      <DependentUpon>CreateClassrooom.aspx</DependentUpon>
+    <Compile Include="CreateClassroom.aspx.designer.cs">
+      <DependentUpon>CreateClassroom.aspx</DependentUpon>
     </Compile>
     <Compile Include="CreateEditQuestions.aspx.cs">
       <DependentUpon>CreateEditQuestions.aspx</DependentUpon>

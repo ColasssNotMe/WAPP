@@ -1,5 +1,4 @@
-﻿
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TeacherDashboard.aspx.cs" Inherits="Assignment.TeacherDashboard" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TeacherDashboard.aspx.cs" Inherits="Assignment.TeacherDashboard" %>
 
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
@@ -13,13 +12,56 @@
     <title>Teacher Dashboard</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <link href="index.css" rel="stylesheet" />
     <link rel="stylesheet" href="TeacherDashboard.css">
+    <style>
+        .quick-action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            transition: opacity 0.2s;
+        }
+        .quick-action-btn:last-child {
+            margin-bottom: 0;
+        }
+        .quick-action-primary {
+            background-color: #1a2536;
+            color: #fff;
+        }
+        .quick-action-secondary {
+            background-color: #ffffff;
+            color: #1a2536;
+            border: 1px solid #e2e8f0;
+        }
+        .quick-action-btn:hover {
+            opacity: 0.9;
+        }
+        .item-link-row {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border-radius: 8px;
+            padding: 4px 8px;
+            margin: -4px -8px;
+        }
+        .item-link-row:hover {
+            background-color: #f8fafc;
+        }
+    </style>
 </head>
 
 <body>
@@ -104,40 +146,6 @@
                     </div>
 
                 </a>
-
-                <div class="metric-card gold-card">
-
-                    <div class="metric-card-header">
-
-                        <span class="metric-label">
-                            Live sessions
-                        </span>
-
-                        <div class="metric-icon-box">
-                            <i data-lucide="video"
-                               style="width: 18px; height: 18px;"></i>
-                        </div>
-
-                    </div>
-
-                    <div class="metric-value">
-
-                        <asp:Label
-                            ID="lblLiveSessionCount"
-                            runat="server"
-                            Text="0">
-                        </asp:Label>
-
-                    </div>
-
-                    <div class="metric-subtitle">
-
-                        <span class="metric-subtitle-dot"></span>
-                        Scheduled this week
-
-                    </div>
-
-                </div>
 
                 <a href="ManageQuiz.aspx"
                    style="text-decoration: none; color: inherit; display: block;">
@@ -239,43 +247,45 @@
 
                                 <ItemTemplate>
 
-                                    <div class="activity-item">
+                                    <a href="ManageNotes.aspx" class="item-link-row">
+                                        <div class="activity-item">
 
-                                        <div class="activity-icon-wrapper">
+                                            <div class="activity-icon-wrapper">
 
-                                            <i data-lucide="book-open"
-                                               style="width: 18px; height: 18px;">
-                                            </i>
-
-                                        </div>
-
-                                        <div class="activity-details">
-
-                                            <div class="activity-title">
-
-                                                <%# Eval("title") %>
+                                                <i data-lucide="book-open"
+                                                   style="width: 18px; height: 18px;">
+                                                </i>
 
                                             </div>
 
-                                            <div class="activity-meta">
+                                            <div class="activity-details">
 
-                                                <span>
-                                                    <%# Eval("className") %>
-                                                </span>
+                                                <div class="activity-title">
 
-                                                <span class="meta-divider">
-                                                    •
-                                                </span>
+                                                    <%# Eval("title") %>
 
-                                                <span>
-                                                    <%# Eval("uploadDate", "{0:hh:mm tt}") %>
-                                                </span>
+                                                </div>
+
+                                                <div class="activity-meta">
+
+                                                    <span>
+                                                        <%# Eval("className") %>
+                                                    </span>
+
+                                                    <span class="meta-divider">
+                                                        •
+                                                    </span>
+
+                                                    <span>
+                                                        <%# Eval("uploadDate", "{0:hh:mm tt}") %>
+                                                    </span>
+
+                                                </div>
 
                                             </div>
 
                                         </div>
-
-                                    </div>
+                                    </a>
 
                                 </ItemTemplate>
 
@@ -330,43 +340,45 @@
 
                                 <ItemTemplate>
 
-                                    <div class="activity-item">
+                                    <a href='<%# Eval("quizID") != DBNull.Value ? "EditQuiz.aspx?quizID=" + Eval("quizID") : "ManageQuiz.aspx" %>' class="item-link-row">
+                                        <div class="activity-item">
 
-                                        <div class="activity-icon-wrapper">
+                                            <div class="activity-icon-wrapper">
 
-                                            <i data-lucide="clipboard-check"
-                                               style="width: 18px; height: 18px;">
-                                            </i>
-
-                                        </div>
-
-                                        <div class="activity-details">
-
-                                            <div class="activity-title">
-
-                                                <%# Eval("title") %>
+                                                <i data-lucide="clipboard-check"
+                                                   style="width: 18px; height: 18px;">
+                                                </i>
 
                                             </div>
 
-                                            <div class="activity-meta">
+                                            <div class="activity-details">
 
-                                                <span>
-                                                    <%# Eval("className") %>
-                                                </span>
+                                                <div class="activity-title">
 
-                                                <span class="meta-divider">
-                                                    •
-                                                </span>
+                                                    <%# Eval("title") %>
 
-                                                <span>
-                                                    <%# Eval("createdDate", "{0:hh:mm tt}") %>
-                                                </span>
+                                                </div>
+
+                                                <div class="activity-meta">
+
+                                                    <span>
+                                                        <%# Eval("className") %>
+                                                    </span>
+
+                                                    <span class="meta-divider">
+                                                        •
+                                                    </span>
+
+                                                    <span>
+                                                        <%# Eval("createdDate", "{0:hh:mm tt}") %>
+                                                    </span>
+
+                                                </div>
 
                                             </div>
 
                                         </div>
-
-                                    </div>
+                                    </a>
 
                                 </ItemTemplate>
 
@@ -403,6 +415,36 @@
 
                 <div class="right-column">
 
+                    <!-- Quick Actions Card -->
+                    <div class="dashboard-section-card" style="margin-bottom: 24px;">
+
+                        <div class="section-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 16px;">
+
+                            <h2 class="section-title">
+                                Quick Actions
+                            </h2>
+
+                        </div>
+
+                        <div class="quick-actions-body">
+
+                            <a href="ManageStudents.aspx" class="quick-action-btn quick-action-primary">
+                                Manage students
+                            </a>
+
+                            <a href="ManageNotes.aspx" class="quick-action-btn quick-action-secondary">
+                                Manage topics
+                            </a>
+
+                            <a href="ManageQuiz.aspx" class="quick-action-btn quick-action-secondary">
+                                Manage quizzes
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Classroom Summary Card -->
                     <div class="dashboard-section-card sticky-card">
 
                         <div class="section-header"
@@ -422,23 +464,25 @@
 
                                 <ItemTemplate>
 
-                                    <div class="summary-row">
+                                    <a href='<%# "ClassroomDetails.aspx?classID=" + Eval("classID") %>' class="item-link-row">
+                                        <div class="summary-row">
 
-                                        <span class="class-name">
-                                            <%# Eval("className") %>
-                                        </span>
-
-                                        <span class="student-count">
-
-                                            <%# Eval("studentCount") %>
-
-                                            <span class="student-label">
-                                                students
+                                            <span class="class-name">
+                                                <%# Eval("className") %>
                                             </span>
 
-                                        </span>
+                                            <span class="student-count">
 
-                                    </div>
+                                                <%# Eval("studentCount") %>
+
+                                                <span class="student-label">
+                                                    students
+                                                </span>
+
+                                            </span>
+
+                                        </div>
+                                    </a>
 
                                 </ItemTemplate>
 
