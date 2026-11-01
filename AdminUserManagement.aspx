@@ -336,10 +336,7 @@
                     <asp:Button ID="btnApprove" runat="server" Text="Approve"
                         CssClass="btn btn-success"
                         OnClick="btnApprove_Click" />
-                    <asp:Button ID="btnReject" runat="server" Text="Reject"
-                        CssClass="btn btn-danger"
-                        OnClientClick="return confirm('Reject this teacher?');"
-                        OnClick="btnReject_Click" />
+      
                 </asp:Panel>
             </asp:Panel>
 

@@ -224,12 +224,10 @@ namespace Assignment
             }
             catch (SqlException ex)
             {
-                // TEMPORARY: shows the real database error. Remove ex.Message when it works.
-                ShowMessage("Could not create the account: " + ex.Message, false);
+                ShowMessage("Error: " + ex.Message, false);
                 return;
             }
 
-            // Show the new user: go to the All Users tab and select them
             ClearAddForm();
             ViewState["AddMode"] = false;
             ViewState["EditMode"] = false;
@@ -256,7 +254,7 @@ namespace Assignment
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             ViewState["EditMode"] = true;
-            ViewState["FillEdit"] = true;   // fill the textboxes once
+            ViewState["FillEdit"] = true;
             txtPassword.Text = "";
             loadUsers();
         }
@@ -453,17 +451,12 @@ namespace Assignment
             ShowMessage(name + "'s account has been deleted.", true);
         }
 
-        // approved is stored as the TEXT "true" or "false" (VARCHAR column)
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
             UpdateTeacherApproval("true", "has been approved.");
         }
 
-        protected void btnReject_Click(object sender, EventArgs e)
-        {
-            UpdateTeacherApproval("false", "has been rejected.");
-        }
 
         private void UpdateTeacherApproval(string approvedValue, string message)
         {
@@ -712,11 +705,10 @@ namespace Assignment
             }
         }
 
-        // Reads the text "true"/"false" safely (never crashes)
         protected string GetStatusText(object approved)
         {
             if (approved == null || approved == DBNull.Value)
-                return "Active";   // students / admins have no approval
+                return "Active"; 
 
             bool isApproved;
             bool.TryParse(Convert.ToString(approved), out isApproved);
