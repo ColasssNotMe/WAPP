@@ -34,6 +34,7 @@
         line-height: 1.6;
     }
 
+
 .content-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(280px, 320px);

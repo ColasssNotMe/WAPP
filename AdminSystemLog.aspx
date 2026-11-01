@@ -17,6 +17,8 @@
     <uc:Header ID="HeaderControl" runat="server" />
 
     <div class="container">
+        <asp:HyperLink ID="backLink" runat="server" NavigateUrl="~/AdminDashboard.aspx"
+        CssClass="back-btn" Text="← Back" />
 
         <div class="page-header">
             <div>

@@ -33,6 +33,15 @@ namespace Assignment
         protected global::Assignment.WebUserControl1 HeaderControl;
 
         /// <summary>
+        /// backLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink backLink;
+
+        /// <summary>
         /// btnCreate control.
         /// </summary>
         /// <remarks>

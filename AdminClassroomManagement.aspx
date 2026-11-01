@@ -10,15 +10,20 @@
     <title>Classroom Management</title>
     <link rel="stylesheet" href="AdminClassroomManagement.css">
     <link rel="stylesheet" href="index.css">
+    <style>
+        main > section, .container {
+            width: 100%
+        }
+    </style>
 </head>
 <body>
 <form id="form1" runat="server">
 
     <asp:HiddenField ID="hfSelectedClassID" runat="server" />
     <uc:Header ID="HeaderControl" runat="server" />
-
-    <div class="container">
-
+    <div class="dashboard">
+        <asp:HyperLink ID="backLink" runat="server" NavigateUrl="~/AdminDashboard.aspx"
+        CssClass="back-btn" Text="← Back" />
         <div class="page-header">
             <div>
                 <h1>Classroom Management</h1>

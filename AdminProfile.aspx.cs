@@ -2,8 +2,6 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web.UI;
 
 namespace Assignment
@@ -276,8 +274,9 @@ namespace Assignment
                         }
                         storedPassword = result.ToString();
                     }
+                    PasswordManager passwordManager = new PasswordManager();
 
-                    if (storedPassword != HashPassword(current))
+                    if (!passwordManager.VerifyPassword(current, storedPassword))
                     {
                         PasswordFailed("Your current password is incorrect.");
                         return;
@@ -286,7 +285,7 @@ namespace Assignment
                     using (SqlCommand cmd = new SqlCommand(
                         "UPDATE [User] SET [password] = @password WHERE userID = @userID", conn))
                     {
-                        cmd.Parameters.Add("@password", SqlDbType.NVarChar, 255).Value = HashPassword(newPassword);
+                        cmd.Parameters.Add("@password", SqlDbType.NVarChar, 255).Value = passwordManager.HashPassword(newPassword);
                         cmd.Parameters.Add("@userID", SqlDbType.Int).Value = UserId;
                         cmd.ExecuteNonQuery();
                     }
@@ -298,15 +297,6 @@ namespace Assignment
             catch (Exception)
             {
                 PasswordFailed("Could not update your password. Please try again.");
-            }
-        }
-
-        private static string HashPassword(string password)
-        {
-            using (SHA256 sha = SHA256.Create())
-            {
-                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return BitConverter.ToString(bytes).Replace("-", "").ToLowerInvariant();
             }
         }
 
@@ -346,14 +336,12 @@ namespace Assignment
             passwordMessage.Visible = false;
         }
 
-        // Profile save errors keep editing enabled
         private void SaveFailed(string message)
         {
             SetEditMode(true);
             ShowMessage(message, false);
         }
 
-        // Password errors keep the form open
         private void PasswordFailed(string message)
         {
             ShowPasswordMessage(message, false);

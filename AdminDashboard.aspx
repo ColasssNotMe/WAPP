@@ -10,6 +10,15 @@
   <title>Admin Dashboard | Ncient</title>
   <link rel="stylesheet" href="AdminDashboard.css">
   <link rel="stylesheet" href="index.css">
+    <style>
+        main > section,
+        .container {
+            width: 100%;
+
+           }
+    </style>
+
+
 </head>
 <body>
   <form id="adminForm" runat="server">

@@ -9,15 +9,44 @@
     <title>Admin Profile | Ncient</title>
     <link rel="stylesheet" href="AdminProfile.css" />
     <link rel="stylesheet" href="index.css" />
+    <style>
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.25rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5625rem;
+            background: var(--white);
+            color: var(--primary-color);
+            font: inherit;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 160ms ease, border-color 160ms ease;
+        }
+        .back-btn:hover {
+            background: var(--bg-light);
+            border-color: var(--gold-color);
+        }
+        .back-btn:focus-visible {
+            outline: 0.125rem solid var(--gold-color);
+            outline-offset: 0.125rem;
+        }
+
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <uc:Header ID="HeaderControl" runat="server" />
         <main class="profile-page">
-            <header class="page-header">
+            <asp:HyperLink ID="backLink" runat="server" NavigateUrl="~/AdminDashboard.aspx"
+            CssClass="back-btn" Text="← Back" />
+            <div class="page-header">
                 <h1>Admin Profile</h1>
                 <p>Manage your administrator account, contact details, and security settings.</p>
-            </header>
+            </div>
 
             <div class="profile-grid">
 

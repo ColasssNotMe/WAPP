@@ -21,6 +21,8 @@
     <uc:Header ID="HeaderControl" runat="server" />
 
     <main class="dashboard">
+        <asp:HyperLink ID="backLink" runat="server" NavigateUrl="~/AdminDashboard.aspx"
+        CssClass="back-btn" Text="← Back" />
       <header class="page-header">
         <div>
           <h1>Learning Materials Management</h1>
