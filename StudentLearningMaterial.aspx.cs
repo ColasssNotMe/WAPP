@@ -37,38 +37,50 @@ namespace Assignment
                     .ConnectionString;
 
             string query = @"
-                SELECT
-                    m.materialID,
-                    m.chapter,
-                    m.title,
-                    m.durationMins
-                FROM Material m
-                INNER JOIN Class c 
-                    ON m.classID = c.classID
+        SELECT
+            m.materialID,
+            m.chapter,
+            m.title,
+            m.durationMins
+        FROM Material m
+        WHERE
+            EXISTS
+            (
+                SELECT 1
+                FROM Enrolment e
+                INNER JOIN Student s
+                    ON e.studentID = s.studentID
                 WHERE
-                    m.title LIKE @Search
-                    OR CAST(m.chapter AS VARCHAR) LIKE @Search
-                ORDER BY m.chapter ASC";
+                    e.classID = m.classID
+                    AND s.userID = @UserID
+            )
+            AND
+            (
+                m.title LIKE @Search
+                OR CAST(m.chapter AS VARCHAR(20)) LIKE @Search
+            )
+        ORDER BY m.chapter ASC, m.materialID ASC";
 
             using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                cmd.Parameters.Add("@UserID", SqlDbType.VarChar, 255).Value =
+                    Session["userID"].ToString();
+
+                cmd.Parameters.Add("@Search", SqlDbType.NVarChar, 255).Value =
+                    "%" + search + "%";
+
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {
-                    cmd.Parameters.AddWithValue("@Search", "%" + search + "%");
+                    DataTable dt = new DataTable();
 
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                    {
-                        DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                        da.Fill(dt);
-
-                        rptMaterials.DataSource = dt;
-                        rptMaterials.DataBind();
-                    }
+                    rptMaterials.DataSource = dt;
+                    rptMaterials.DataBind();
                 }
             }
         }
-
         protected void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadMaterials();

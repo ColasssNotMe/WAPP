@@ -12,22 +12,21 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["userID"] == null)
             {
-                if (Session["userId"] == null)
-                {
-                    Response.Redirect("Homepage");
-                    return;
-                }
-                if (Session["role"]?.ToString().ToLower() != "student")
-                {
-                    Response.Redirect("Homepage");
-                }
-                LoadAvailableQuizzes();
-                LoadCompletedQuizzes();
+                Response.Redirect("Homepage");
+                return;
             }
-        }
 
+            if (Session["role"]?.ToString().ToLower() != "student")
+            {
+                Response.Redirect("Homepage");
+                return;
+            }
+
+            LoadAvailableQuizzes();
+            LoadCompletedQuizzes();
+        }
         private void LoadAvailableQuizzes()
         {
             if (Session["userID"] == null)
@@ -57,6 +56,7 @@ namespace Assignment
             ON q.quizID = qu.quizID
 
         WHERE s.userID = @userID
+            AND q.title LIKE @Search
             AND NOT EXISTS
             (
                 SELECT 1
@@ -82,7 +82,10 @@ namespace Assignment
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@userID", userID);
-
+                    cmd.Parameters.AddWithValue(
+                        "@Search",
+                        "%" + searchBox.Text.Trim() + "%"
+                    );
                     conn.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -139,6 +142,7 @@ namespace Assignment
                     ON q.quizID = qu.quizID
 
                 WHERE s.userID = @userID
+                    AND q.title LIKE @Search
 
                 GROUP BY
                     q.quizID,
@@ -161,8 +165,10 @@ namespace Assignment
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@userID", userID);
-
-                conn.Open();
+                cmd.Parameters.AddWithValue(
+                    "@Search",
+                    "%" + searchBox.Text.Trim() + "%"
+                ); conn.Open();
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -277,5 +283,14 @@ namespace Assignment
                 Response.Redirect("QuizResult.aspx");
             }
         }
+
+        protected void searchBox_TextChanged(object sender, EventArgs e)
+        {
+            LoadAvailableQuizzes();
+            LoadCompletedQuizzes();
+        }
+
     }
+
+
 }

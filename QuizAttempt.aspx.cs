@@ -183,11 +183,8 @@ namespace Assignment
             QuestionNavigatorRepeater.DataSource = dt;
             QuestionNavigatorRepeater.DataBind();
 
-            PreviousButton.Enabled =
-                currentIndex > 0;
-            NextButton.Enabled =
-                currentIndex < dt.Rows.Count - 1;
-
+            PreviousButton.Visible = currentIndex > 0;
+            NextButton.Visible = currentIndex < dt.Rows.Count - 1;
             int answered = CountAnswered(dt);
 
             answeredText.InnerText =

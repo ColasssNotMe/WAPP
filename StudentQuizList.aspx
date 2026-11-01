@@ -48,13 +48,14 @@
 
                 <span class="search-icon">⌕</span>
 
-                <asp:TextBox
-                    ID="searchBox"
-                    runat="server"
-                    CssClass="search-input"
-                    placeholder="Search quizzes...">
-                </asp:TextBox>
-
+<asp:TextBox
+    ID="searchBox"
+    runat="server"
+    CssClass="search-input"
+    placeholder="Search quizzes..."
+    AutoPostBack="true"
+    OnTextChanged="searchBox_TextChanged">
+</asp:TextBox>
             </div>
 
         </section>

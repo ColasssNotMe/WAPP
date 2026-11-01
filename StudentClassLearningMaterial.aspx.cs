@@ -9,24 +9,11 @@ namespace Assignment
 {
     public partial class StudentClassLearningMaterial : System.Web.UI.Page
     {
-        private int ClassID
-        {
-            get
-            {
-                int classId;
-
-                if (int.TryParse(Request.QueryString["classID"], out classId)
-                    && classId > 0)
-                {
-                    return classId;
-                }
-
-                return 0;
-            }
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            int ClassID = int.Parse(Session["classID"].ToString());
+
             if (Session["userId"] == null)
             {
                 Response.Redirect("Homepage");
@@ -56,14 +43,26 @@ namespace Assignment
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
             string query = @"
-                SELECT className
-                FROM Class
-                WHERE classID = @ClassID";
+        SELECT c.className
+        FROM Class c
+        WHERE c.classID = @ClassID
+        AND EXISTS
+        (
+            SELECT 1
+            FROM Enrolment e
+            INNER JOIN Student s
+                ON e.studentID = s.studentID
+            WHERE
+                e.classID = c.classID
+                AND s.userID = @UserID
+        )";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                cmd.Parameters.Add("@ClassID", SqlDbType.Int).Value = ClassID;
+                cmd.Parameters.AddWithValue("@ClassID", int.Parse(Session["classID"].ToString()));
+
+                cmd.Parameters.AddWithValue("@UserID", Session["userID"].ToString());
 
                 con.Open();
 
@@ -76,10 +75,10 @@ namespace Assignment
                 }
 
                 litClassName.Text = Server.HtmlEncode(result.ToString());
+
                 return true;
             }
         }
-
         private void LoadMaterials()
         {
             string search = txtSearch.Text.Trim();
@@ -88,31 +87,45 @@ namespace Assignment
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
             string query = @"
-                SELECT
-                    m.materialID,
-                    m.chapter,
-                    m.title,
-                    m.durationMins
-                FROM Material m
+        SELECT
+            m.materialID,
+            m.chapter,
+            m.title,
+            m.durationMins
+        FROM Material m
+        WHERE
+            m.classID = @ClassID
+            AND EXISTS
+            (
+                SELECT 1
+                FROM Enrolment e
+                INNER JOIN Student s
+                    ON e.studentID = s.studentID
                 WHERE
-                    m.classID = @ClassID
-                    AND
-                    (
-                        m.title LIKE @Search
-                        OR CAST(m.chapter AS VARCHAR(20)) LIKE @Search
-                    )
-                ORDER BY m.chapter ASC, m.materialID ASC";
+                    e.classID = m.classID
+                    AND s.userID = @UserID
+            )
+            AND
+            (
+                m.title LIKE @Search
+                OR CAST(m.chapter AS VARCHAR(20)) LIKE @Search
+            )
+        ORDER BY m.chapter ASC, m.materialID ASC";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                cmd.Parameters.Add("@ClassID", SqlDbType.Int).Value = ClassID;
-                cmd.Parameters.Add("@Search", SqlDbType.NVarChar, 255).Value =
-                    "%" + search + "%";
+                cmd.Parameters.AddWithValue("@ClassID", int.Parse(Session["classID"].ToString()));
+
+                cmd.Parameters.AddWithValue("@UserID", Session["userID"].ToString());
+
+                cmd.Parameters.AddWithValue("@Search",
+                    "%" + search + "%");
 
                 using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {
                     DataTable dt = new DataTable();
+
                     da.Fill(dt);
 
                     rptMaterials.DataSource = dt;
@@ -122,7 +135,6 @@ namespace Assignment
                 }
             }
         }
-
         protected void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadMaterials();
