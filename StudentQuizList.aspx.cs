@@ -251,10 +251,15 @@ namespace Assignment
         {
             if (e.CommandName == "StartQuiz")
             {
-                Session["quizID"] =
-                    e.CommandArgument.ToString();
+                int quizID;
 
-                Response.Redirect("StudentQuiz.aspx");
+                if (int.TryParse(
+                          Convert.ToString(e.CommandArgument),
+                          out quizID))
+                {
+                    Session["quizID"] = quizID.ToString();
+                    Response.Redirect("QuizAttempt.aspx");
+                }
             }
         }
 

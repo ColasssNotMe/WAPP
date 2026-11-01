@@ -303,7 +303,7 @@ namespace Assignment
                     out quizId))
                 {
                     Session["quizID"] = quizId.ToString();
-                    Response.Redirect("StudentQuiz.aspx");
+                    Response.Redirect("QuizAttempt.aspx");
                 }
             }
         }
