@@ -20,12 +20,11 @@ namespace Assignment
             {
                 Response.Redirect("Login.aspx");
             }
-           
-            if (Session["role"].ToString() == "Admin")
+
+            if (Session["role"] != null && Session["role"].ToString() == "Admin")
             {
                 pageTitleText.InnerText = "Admin - Create Quiz";
                 backBtn.Visible = false;
-
             }
 
             if (!IsPostBack)
@@ -115,7 +114,11 @@ namespace Assignment
                 dr["QuestionText"] = txtQuestionText != null ? txtQuestionText.Text : "";
                 dr["QuestionType"] = ddlQuestionType != null ? ddlQuestionType.SelectedValue : "MCQ";
 
-                int marks = (txtMarks != null && int.TryParse(txtMarks.Text, out marks)) ? marks : 1;
+                int marks = 1;
+                if (txtMarks != null && int.TryParse(txtMarks.Text, out int parsedMarks))
+                {
+                    marks = parsedMarks;
+                }
                 dr["Marks"] = marks;
                 totalCalculatedMarks += marks;
 
@@ -204,13 +207,32 @@ namespace Assignment
 
         protected void btnSaveQuiz_Click(object sender, EventArgs e)
         {
+            // 1. Validate Classroom Selection
             if (string.IsNullOrEmpty(ddlClassroom.SelectedValue))
             {
+                ScriptManager.RegisterStartupScript(this, GetType(), "alertClassroom", "alert('Please select a classroom before saving the quiz.');", true);
                 return;
             }
 
             SaveCurrentQuestionsState();
             DataTable dt = (DataTable)ViewState["QuestionsTable"];
+
+            // 2. Validate Question Content (Must have at least one question with text)
+            bool hasValidQuestion = false;
+            foreach (DataRow row in dt.Rows)
+            {
+                if (!string.IsNullOrWhiteSpace(row["QuestionText"].ToString()))
+                {
+                    hasValidQuestion = true;
+                    break;
+                }
+            }
+
+            if (!hasValidQuestion)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "alertQuestion", "alert('Please enter at least one question before saving.');", true);
+                return;
+            }
 
             string title = txtQuizTitle.Text.Trim();
             if (string.IsNullOrEmpty(title)) title = "Untitled Quiz";
@@ -243,6 +265,8 @@ namespace Assignment
                         foreach (DataRow row in dt.Rows)
                         {
                             string qText = row["QuestionText"].ToString();
+                            if (string.IsNullOrWhiteSpace(qText)) continue; // Skip empty rows
+
                             string qType = row["QuestionType"].ToString();
                             int qMarks = Convert.ToInt32(row["Marks"]);
 
@@ -308,7 +332,7 @@ namespace Assignment
         private void InsertAnswerRecord(SqlConnection conn, SqlTransaction trans, int questionId, string answerText, bool isCorrect)
         {
             string insertAns = @"INSERT INTO Answer (questionID, answerText, isCorrect) 
-                        VALUES (@questionID, @ansText, @isCorrect);";
+                                VALUES (@questionID, @ansText, @isCorrect);";
 
             using (SqlCommand cmdA = new SqlCommand(insertAns, conn, trans))
             {
@@ -316,7 +340,6 @@ namespace Assignment
                 cmdA.Parameters.AddWithValue("@ansText", answerText);
                 cmdA.Parameters.AddWithValue("@isCorrect", isCorrect);
                 cmdA.ExecuteNonQuery();
-            
             }
         }
 

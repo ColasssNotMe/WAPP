@@ -33,13 +33,13 @@ namespace Assignment
         protected global::Assignment.WebUserControl1 HeaderControl;
 
         /// <summary>
-        /// lblTotalStudents control.
+        /// lblStudentCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalStudents;
+        protected global::System.Web.UI.WebControls.Label lblStudentCount;
 
         /// <summary>
         /// rptStudents control.
@@ -51,13 +51,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Repeater rptStudents;
 
         /// <summary>
-        /// pnlModal control.
+        /// assignModal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlModal;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl assignModal;
 
         /// <summary>
         /// lblModalStudentName control.
@@ -69,6 +69,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblModalStudentName;
 
         /// <summary>
+        /// hfSelectedStudentID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfSelectedStudentID;
+
+        /// <summary>
         /// ddlClassrooms control.
         /// </summary>
         /// <remarks>
@@ -78,13 +87,22 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.DropDownList ddlClassrooms;
 
         /// <summary>
-        /// btnSaveAssignment control.
+        /// btnCancelAssign control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveAssignment;
+        protected global::System.Web.UI.WebControls.Button btnCancelAssign;
+
+        /// <summary>
+        /// btnSaveAssign control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveAssign;
 
         /// <summary>
         /// FooterControl control.
