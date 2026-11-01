@@ -17,6 +17,53 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
+        <asp:Panel
+            ID="ResultsModal"
+            runat="server"
+            CssClass="results-overlay"
+            Visible="false">
+
+            <div class="results-dialog" role="dialog" aria-modal="true" aria-labelledby="resultsTitle">
+                <div class="results-header">
+                    <h2 id="resultsTitle">Quiz Results</h2>
+                    <p><asp:Literal ID="ResultsSummary" runat="server" /></p>
+                </div>
+
+                <div class="results-body">
+                    <asp:Repeater ID="ResultsRepeater" runat="server">
+                        <ItemTemplate>
+                            <div class="result-question">
+                                <div class="result-question-title">
+                                    <span class="result-number"><%# Container.ItemIndex + 1 %>.</span>
+                                    <span class="result-question-text"><%#: Eval("QuestionText") %></span>
+                                    <span class='result-status <%# Eval("StatusClass") %>'><%#: Eval("StatusText") %></span>
+                                </div>
+
+                                <asp:Repeater ID="ResultOptionsRepeater" runat="server" DataSource='<%# Eval("Options") %>'>
+                                    <ItemTemplate>
+                                        <div class='<%# Eval("CssClass") %>'>
+                                            <span class="result-option-text"><%#: Eval("AnswerText") %></span>
+                                            <span class="result-option-tag"><%#: Eval("Tag") %></span>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+
+                                <p class="result-unanswered">Your selected answer was not stored for this attempt.</p>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+
+                <div class="results-footer">
+                    <asp:Button ID="CloseResultsButton" runat="server"
+                        CssClass="results-close-button" Text="Close"
+                        OnClick="CloseResultsButton_Click" />
+                </div>
+            </div>
+        </asp:Panel>
+
+
         <uc:Header runat="server" />
 
         <main class="quiz-page">
@@ -158,7 +205,7 @@
                                         runat="server"
                                         CssClass="quiz-button"
                                         CommandName="ViewResult"
-                                        CommandArgument='<%# Eval("QuizID") %>'>
+                                        CommandArgument='<%# Eval("ResultID") %>'>
                                         Review Quiz
                                         <span class="button-arrow">&#8594;</span>
                                     </asp:LinkButton>
@@ -170,7 +217,7 @@
             </section>
         </main>
 
-        <uc:Footer runat="server" />
+<uc:Footer runat="server" />
     </form>
 </body>
 </html>
