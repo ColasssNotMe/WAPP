@@ -10,6 +10,11 @@
   <title>Learning Materials Management | Ncient</title>
   <link rel="stylesheet" href="AdminMaterialManagement.css">
   <link rel="stylesheet" href="index.css">
+    <style>
+        main > section, .container {
+            width: 100%
+        }
+    </style> 
 </head>
 <body>
   <form id="form1" runat="server">
@@ -57,7 +62,7 @@
               <tbody>
                 <asp:Repeater ID="MaterialRepeater" runat="server" OnItemCommand="MaterialRepeater_ItemCommand">
                   <ItemTemplate>
-                    <tr aria-selected='<%# GetSelected(Eval("materialID")) %>'>
+                    <tr class="selectable-row" aria-selected='<%# GetSelected(Eval("materialID")) %>'>
                       <td class="material-title">
                         <asp:LinkButton runat="server" CssClass="row-select-link" CommandName="SelectMaterial" CommandArgument='<%# Eval("materialID") %>' Text='<%# Eval("title") %>' CausesValidation="false" />
                       </td>
@@ -98,8 +103,6 @@
             </dl>
             <div class="detail-actions">
               <asp:HyperLink ID="hlView" runat="server" CssClass="primary-button" Target="_blank" Text="View material" />
-              <asp:Button ID="btnToggle" runat="server" CssClass="secondary-button" OnClick="btnToggle_Click"
-                  OnClientClick="return confirm('Change the status of this material?');" />
               <asp:Button ID="btnDelete" runat="server" CssClass="danger-button" Text="Delete" OnClick="btnDelete_Click"
                   OnClientClick="return confirm('Are you sure you want to delete this learning material? This action cannot be undone.');" />
             </div>

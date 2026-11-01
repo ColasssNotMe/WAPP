@@ -79,7 +79,7 @@ namespace Assignment
 
                 try
                 {
-                   
+
                     string deleteCommentsQuery = "DELETE FROM Comment WHERE materialID = @materialID";
                     using (SqlCommand cmd1 = new SqlCommand(deleteCommentsQuery, conn, transaction))
                     {
@@ -302,16 +302,6 @@ namespace Assignment
 
                 lblDetStatus.Text = GetText(status);
 
-                if (status == "Published")
-                {
-                    lblDetStatus.CssClass = "status--published";
-                    btnToggle.Text = "Unpublish";
-                }
-                else
-                {
-                    lblDetStatus.CssClass = "status--draft";
-                    btnToggle.Text = "Publish";
-                }
 
                 string fileURL = Convert.ToString(row["fileURL"]);
 
