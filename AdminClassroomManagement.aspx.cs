@@ -237,7 +237,7 @@ namespace Assignment
             LoadClassroomList();
         }
 
-        // THIS IS THE btnOpen LOGIC
+
         protected void rptClassrooms_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectClass")
@@ -252,6 +252,7 @@ namespace Assignment
         protected void btnSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(hfSelectedClassID.Value)) return;
+
             int classID = Convert.ToInt32(hfSelectedClassID.Value);
 
             string sql = @"
@@ -354,6 +355,23 @@ namespace Assignment
             {
                 ShowMessage("Could not remove student: " + ex.Message, true);
             }
+        }
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            ClosePanel();
+        }
+
+        protected void btnClosePanel_Click(object sender, EventArgs e)
+        {
+            ClosePanel();
+        }
+
+        private void ClosePanel()
+        {
+            hfSelectedClassID.Value = "";
+            pnlDetails.Visible = false;
+            pnlNoSelection.Visible = true;
+            LoadClassroomList();
         }
     }
 }

@@ -70,6 +70,28 @@
                 </table>
             </div>
 
+            <div class="pagination">
+                <span class="pagination-note">
+                    Showing 
+                    <asp:Label ID="lblShowing" runat="server" Text="0" /> 
+                    to 
+                    <asp:Label ID="lblEndRecord" runat="server" Text="0" /> 
+                    of 
+                    <asp:Label ID="lblTotalRecords" runat="server" Text="0" /> 
+                    logs
+                </span>
+                
+                <div class="pagination-controls">
+                    <asp:Button ID="btnPrevPage" runat="server" Text="&larr; Prev" 
+                        CssClass="page-btn" OnClick="btnPrevPage_Click" CausesValidation="false" />
+                    
+                    <asp:Label ID="lblPageInfo" runat="server" CssClass="page-info" Text="Page 1 of 1" />
+                    
+                    <asp:Button ID="btnNextPage" runat="server" Text="Next &rarr;" 
+                        CssClass="page-btn" OnClick="btnNextPage_Click" CausesValidation="false" />
+                </div>
+            </div>
+
         </div>
     </div>
 

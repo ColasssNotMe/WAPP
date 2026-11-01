@@ -118,7 +118,6 @@ namespace Assignment
 
                 if (rptAnswers != null)
                 {
-                    // Let SQL compute the CSS class and the badge HTML directly!
                     string sql = @"
                         SELECT 
                             answerText,

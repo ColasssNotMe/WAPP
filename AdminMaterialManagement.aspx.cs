@@ -79,7 +79,7 @@ namespace Assignment
 
                 try
                 {
-                    // Delete dependent comments first to preserve foreign key constraints
+                   
                     string deleteCommentsQuery = "DELETE FROM Comment WHERE materialID = @materialID";
                     using (SqlCommand cmd1 = new SqlCommand(deleteCommentsQuery, conn, transaction))
                     {

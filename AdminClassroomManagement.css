@@ -382,3 +382,56 @@ tr.selected-row td {
     outline: 2px solid var(--gold-color);
     outline-offset: 2px;
 }
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+    .details-header h2 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+.btn-close {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-light);
+    color: var(--secondary-color);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border-color);
+    padding: 0;
+    box-shadow: none;
+}
+
+    .btn-close span {
+        display: block;
+        line-height: 1;
+        margin-top: -2px; /* optical centering */
+    }
+
+    .btn-close:hover {
+        background: #ffebee;
+        color: #c9302c;
+        border-color: #ffcdd2;
+        transform: rotate(90deg); /* little rotation on hover */
+    }
+
+    .btn-close:visited,
+    .btn-close:focus,
+    .btn-close:active {
+        color: var(--secondary-color);
+        text-decoration: none;
+    }

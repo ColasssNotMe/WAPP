@@ -92,7 +92,6 @@ namespace Assignment
                         }
                     }
 
-                    // Only show the school field if this user has a Teacher record
                     using (SqlCommand cmd = new SqlCommand(
                         "SELECT school FROM [Teacher] WHERE userID = @userID", conn))
                     {
@@ -302,7 +301,6 @@ namespace Assignment
             }
         }
 
-        // SHA-256 password hashing (kept compatible with the existing login)
         private static string HashPassword(string password)
         {
             using (SHA256 sha = SHA256.Create())

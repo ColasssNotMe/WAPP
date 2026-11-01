@@ -10,9 +10,22 @@ namespace Assignment
 {
     public partial class AdminUserManagement : Page
     {
-
         private string ConnString =>
             ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
+        private const int PageSize = 7;
+
+        private int CurrentPage
+        {
+            get { return ViewState["CurrentPage"] != null ? (int)ViewState["CurrentPage"] : 1; }
+            set { ViewState["CurrentPage"] = value; }
+        }
+
+        private int TotalPages
+        {
+            get { return ViewState["TotalPages"] != null ? (int)ViewState["TotalPages"] : 1; }
+            set { ViewState["TotalPages"] = value; }
+        }
 
         private int? SelectedUserId
         {
@@ -46,16 +59,11 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["userid"] == null)
-            //{
-            //    Response.Redirect("Login.aspx");
-            //}
-
             if (!IsPostBack)
             {
-                ViewState["UserType"] =
-                    Request.QueryString["tab"] == "pending" ? "Pending" : "All";
+                ViewState["UserType"] = Request.QueryString["tab"] == "pending" ? "Pending" : "All";
                 ViewState["EditMode"] = false;
+                CurrentPage = 1;
                 loadUsers();
             }
         }
@@ -70,6 +78,7 @@ namespace Assignment
             ViewState["UserType"] = type;
             ViewState["EditMode"] = false;
             ViewState["AddMode"] = false;
+            CurrentPage = 1; 
             txtSearch.Text = "";
             loadUsers();
         }
@@ -77,6 +86,7 @@ namespace Assignment
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             ViewState["EditMode"] = false;
+            CurrentPage = 1; 
             loadUsers();
         }
 
@@ -84,7 +94,26 @@ namespace Assignment
         {
             txtSearch.Text = "";
             ViewState["EditMode"] = false;
+            CurrentPage = 1;
             loadUsers();
+        }
+
+        protected void btnPrevPage_Click(object sender, EventArgs e)
+        {
+            if (CurrentPage > 1)
+            {
+                CurrentPage--;
+                loadUsers();
+            }
+        }
+
+        protected void btnNextPage_Click(object sender, EventArgs e)
+        {
+            if (CurrentPage < TotalPages)
+            {
+                CurrentPage++;
+                loadUsers();
+            }
         }
 
         protected void UserRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -131,8 +160,7 @@ namespace Assignment
             string role = ddlNewRole.SelectedValue;
             string school = txtNewSchool.Text.Trim();
 
-            if (firstName == "" || lastName == "" || username == "" ||
-                email == "" || password == "")
+            if (firstName == "" || lastName == "" || username == "" || email == "" || password == "")
             {
                 ShowMessage("Please fill in all required fields.", false);
                 return;
@@ -158,8 +186,7 @@ namespace Assignment
                 {
                     conn.Open();
 
-                    using (SqlCommand cmd = new SqlCommand(
-                        "SELECT COUNT(*) FROM [User] WHERE username = @username OR email = @email", conn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [User] WHERE username = @username OR email = @email", conn))
                     {
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@email", email);
@@ -192,8 +219,7 @@ namespace Assignment
 
                             if (role == "Student")
                             {
-                                using (SqlCommand cmd = new SqlCommand(
-                                    "INSERT INTO Student (userID, school) VALUES (@userID, @school)", conn, tx))
+                                using (SqlCommand cmd = new SqlCommand("INSERT INTO Student (userID, school) VALUES (@userID, @school)", conn, tx))
                                 {
                                     cmd.Parameters.AddWithValue("@userID", newUserId);
                                     cmd.Parameters.AddWithValue("@school", school);
@@ -202,9 +228,7 @@ namespace Assignment
                             }
                             else if (role == "Teacher")
                             {
-                                // Created by an admin, so approved straight away
-                                using (SqlCommand cmd = new SqlCommand(
-                                    "INSERT INTO Teacher (userID, school, approved) VALUES (@userID, @school, 'true')", conn, tx))
+                                using (SqlCommand cmd = new SqlCommand("INSERT INTO Teacher (userID, school, approved) VALUES (@userID, @school, 'true')", conn, tx))
                                 {
                                     cmd.Parameters.AddWithValue("@userID", newUserId);
                                     cmd.Parameters.AddWithValue("@school", school);
@@ -233,6 +257,7 @@ namespace Assignment
             ViewState["EditMode"] = false;
             ViewState["UserType"] = "All";
             txtSearch.Text = "";
+            CurrentPage = 1;
             SelectedUserId = newUserId;
 
             loadUsers();
@@ -298,8 +323,7 @@ namespace Assignment
                     conn.Open();
 
                     using (SqlCommand cmd = new SqlCommand(
-                        "SELECT COUNT(*) FROM [User] " +
-                        "WHERE (username = @username OR email = @email) AND userID <> @userID", conn))
+                        "SELECT COUNT(*) FROM [User] WHERE (username = @username OR email = @email) AND userID <> @userID", conn))
                     {
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@email", email);
@@ -313,8 +337,7 @@ namespace Assignment
                     }
 
                     string role;
-                    using (SqlCommand cmd = new SqlCommand(
-                        "SELECT [role] FROM [User] WHERE userID = @userID", conn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT [role] FROM [User] WHERE userID = @userID", conn))
                     {
                         cmd.Parameters.AddWithValue("@userID", SelectedUserId.Value);
                         role = Convert.ToString(cmd.ExecuteScalar());
@@ -328,8 +351,7 @@ namespace Assignment
                                 "UPDATE [User] SET firstName = @firstName, lastName = @lastName, " +
                                 "username = @username, email = @email, " +
                                 "password = CASE WHEN @password IS NULL THEN password ELSE @password END " +
-                                "WHERE userID = @userID",
-                                conn, tx))
+                                "WHERE userID = @userID", conn, tx))
                             {
                                 cmd.Parameters.AddWithValue("@firstName", firstName);
                                 cmd.Parameters.AddWithValue("@lastName", lastName);
@@ -337,16 +359,9 @@ namespace Assignment
                                 cmd.Parameters.AddWithValue("@email", email);
 
                                 if (string.IsNullOrWhiteSpace(password))
-                                {
                                     cmd.Parameters.AddWithValue("@password", DBNull.Value);
-                                }
                                 else
-                                {
-                                    string passwordHash =
-                                        new PasswordManager().HashPassword(password);
-
-                                    cmd.Parameters.AddWithValue("@password", passwordHash);
-                                }
+                                    cmd.Parameters.AddWithValue("@password", new PasswordManager().HashPassword(password));
 
                                 cmd.Parameters.AddWithValue("@userID", SelectedUserId.Value);
                                 cmd.ExecuteNonQuery();
@@ -355,8 +370,7 @@ namespace Assignment
                             if (role == "Student")
                             {
                                 using (SqlCommand cmd = new SqlCommand(
-                                    "UPDATE Student SET school = @school, gradeLevel = @grade " +
-                                    "WHERE userID = @userID", conn, tx))
+                                    "UPDATE Student SET school = @school, gradeLevel = @grade WHERE userID = @userID", conn, tx))
                                 {
                                     cmd.Parameters.AddWithValue("@school", ToDb(school));
                                     cmd.Parameters.AddWithValue("@grade", ToDb(grade));
@@ -367,8 +381,7 @@ namespace Assignment
                             else if (role == "Teacher")
                             {
                                 using (SqlCommand cmd = new SqlCommand(
-                                    "UPDATE Teacher SET school = @school WHERE userID = @userID",
-                                    conn, tx))
+                                    "UPDATE Teacher SET school = @school WHERE userID = @userID", conn, tx))
                                 {
                                     cmd.Parameters.AddWithValue("@school", ToDb(school));
                                     cmd.Parameters.AddWithValue("@userID", SelectedUserId.Value);
@@ -466,8 +479,7 @@ namespace Assignment
             string name = lblDetName.Text;
 
             using (SqlConnection conn = new SqlConnection(ConnString))
-            using (SqlCommand cmd = new SqlCommand(
-                "UPDATE Teacher SET approved = @approved WHERE userID = @userID", conn))
+            using (SqlCommand cmd = new SqlCommand("UPDATE Teacher SET approved = @approved WHERE userID = @userID", conn))
             {
                 cmd.Parameters.AddWithValue("@approved", approvedValue);
                 cmd.Parameters.AddWithValue("@userID", SelectedUserId.Value);
@@ -486,11 +498,7 @@ namespace Assignment
             string type = CurrentTab;
             string search = txtSearch.Text.Trim();
 
-            string sql =
-                "SELECT U.userID, U.firstName, U.lastName, U.username, U.email, " +
-                "U.[role], T.approved " +
-                "FROM [User] U LEFT JOIN Teacher T ON U.userID = T.userID";
-
+            string baseSql = "FROM [User] U LEFT JOIN Teacher T ON U.userID = T.userID";
             string where = "";
 
             if (type == "Student")
@@ -507,15 +515,34 @@ namespace Assignment
                          "OR U.username LIKE @search OR U.email LIKE @search)";
             }
 
-            sql += where + " ORDER BY U.firstName, U.lastName";
+  
+            string countSql = "SELECT COUNT(*) " + baseSql + where;
+            int totalRecords = 0;
+
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand(countSql, conn))
+            {
+                if (search != "") cmd.Parameters.AddWithValue("@search", "%" + search + "%");
+                conn.Open();
+                totalRecords = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+
+            TotalPages = (int)Math.Ceiling((double)totalRecords / PageSize);
+            if (TotalPages == 0) TotalPages = 1;
+            if (CurrentPage > TotalPages) CurrentPage = TotalPages;
+
+            string sql = "SELECT U.userID, U.firstName, U.lastName, U.username, U.email, U.[role], T.approved " +
+                         baseSql + where + " ORDER BY U.firstName, U.lastName " +
+                         "OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
 
             DataTable dt = new DataTable();
 
             using (SqlConnection conn = new SqlConnection(ConnString))
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                if (search != "")
-                    cmd.Parameters.AddWithValue("@search", "%" + search + "%");
+                if (search != "") cmd.Parameters.AddWithValue("@search", "%" + search + "%");
+                cmd.Parameters.AddWithValue("@Offset", (CurrentPage - 1) * PageSize);
+                cmd.Parameters.AddWithValue("@PageSize", PageSize);
 
                 using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     da.Fill(dt);
@@ -527,9 +554,19 @@ namespace Assignment
             UserRepeater.DataSource = dt;
             UserRepeater.DataBind();
 
-            lblSectionCount.Text = dt.Rows.Count.ToString();
-            lblShowing.Text = dt.Rows.Count.ToString();
-            lblTotal.Text = dt.Rows.Count.ToString();
+            int startRecord = ((CurrentPage - 1) * PageSize) + 1;
+            int endRecord = Math.Min(CurrentPage * PageSize, totalRecords);
+            if (totalRecords == 0) startRecord = 0;
+
+            lblSectionCount.Text = totalRecords.ToString();
+            lblShowing.Text = startRecord.ToString();
+            lblEndRecord.Text = endRecord.ToString();
+            lblTotal.Text = totalRecords.ToString();
+
+            lblPageInfo.Text = $"Page {CurrentPage} of {TotalPages}";
+            btnPrevPage.Enabled = CurrentPage > 1;
+            btnNextPage.Enabled = CurrentPage < TotalPages;
+
             emptyMessage.Visible = (dt.Rows.Count == 0);
 
             btnAllUsers.CssClass = type == "All" ? "tab active" : "tab";
@@ -554,8 +591,7 @@ namespace Assignment
                 return;
             }
 
-            if (SelectedUserId != null &&
-                dt.Select("userID = " + SelectedUserId.Value).Length > 0)
+            if (SelectedUserId != null && dt.Select("userID = " + SelectedUserId.Value).Length > 0)
                 return;
 
             SelectedUserId = Convert.ToInt32(dt.Rows[0]["userID"]);
@@ -573,8 +609,7 @@ namespace Assignment
                     lblTotalUsers.Text = cmd.ExecuteScalar().ToString();
                 }
 
-                using (SqlCommand cmd = new SqlCommand(
-                    "SELECT COUNT(*) FROM Teacher WHERE approved = 'false'", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Teacher WHERE approved = 'false'", conn))
                 {
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
                     lblPendingCount.Text = count.ToString();
@@ -656,8 +691,7 @@ namespace Assignment
             dtGrade.Visible = ddGrade.Visible = (role == "Student");
             fieldGrade.Visible = (role == "Student");
             fieldSchool.Visible = (role == "Student" || role == "Teacher");
-            dtSchool.Visible = ddSchool.Visible =
-                (role == "Student" || role == "Teacher");
+            dtSchool.Visible = ddSchool.Visible = (role == "Student" || role == "Teacher");
             dtApproval.Visible = ddApproval.Visible = pendingTab;
 
             pnlView.Visible = !editMode;
@@ -708,7 +742,7 @@ namespace Assignment
         protected string GetStatusText(object approved)
         {
             if (approved == null || approved == DBNull.Value)
-                return "Active"; 
+                return "Active";
 
             bool isApproved;
             bool.TryParse(Convert.ToString(approved), out isApproved);

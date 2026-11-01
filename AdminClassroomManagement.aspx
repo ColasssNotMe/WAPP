@@ -47,18 +47,17 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Open</th>
                                 <th>Classroom</th>
                                 <th>Teacher</th>
                                 <th>Students</th>
                                 <th>Quizzes</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <asp:Repeater ID="rptClassrooms" runat="server" OnItemCommand="rptClassrooms_ItemCommand">
                                 <ItemTemplate>
                                     <tr class='<%# Convert.ToString(Eval("ClassID")) == hfSelectedClassID.Value ? "selected-row" : "" %>'>
-                                        
                                         <td class="name"><%#: Eval("ClassName") %></td>
                                         <td class="teacher"><%#: Eval("TeacherName") %></td>
                                         <td><%#: Eval("StudentCount") %></td>
@@ -92,7 +91,14 @@
 
                     <asp:Label ID="lblMessage" runat="server" CssClass="msg" Visible="false" />
 
-                    <h2>Edit Classroom</h2>
+                    <!-- Header with Close Icon -->
+                    <div class="details-header">
+                        <h2>Edit Classroom</h2>
+                        <asp:LinkButton ID="btnClosePanel" runat="server" CssClass="btn-close" 
+                            OnClick="btnClosePanel_Click" CausesValidation="false" ToolTip="Close">
+                            <span aria-hidden="true">&#215;</span>
+                        </asp:LinkButton>
+                    </div>
 
                     <div class="field">
                         <label>Classroom name</label>
@@ -101,7 +107,7 @@
 
                     <div class="field">
                         <label>Teacher</label>
-                        <asp:DropDownList ID="ddlTeacher" runat="server" CssClass="select" />
+                        <asp:DropDownList ID="ddlTeacher" runat="server" CssClass="select" Enabled="false"/>
                     </div>
 
                     <div class="field-grid">
@@ -121,11 +127,16 @@
                     </div>
 
                     <div class="btn-row">
-                        <asp:Button ID="btnSave" runat="server" Text="Save Changes"
-                            CssClass="btn primary" OnClick="btnSave_Click" CausesValidation="false" />
-                        <asp:Button ID="btnDeleteClassroom" runat="server" Text="Delete Classroom"
+                        <asp:Button ID="btnDeleteClassroom" runat="server" Text="Delete"
                             CssClass="btn btn-danger" OnClick="btnDeleteClassroom_Click" CausesValidation="false"
                             OnClientClick="return confirm('Delete this classroom and all its students, quizzes and sessions?');" />
+                        
+                        <!-- Added Cancel Button next to Save -->
+                        <asp:Button ID="btnCancel" runat="server" Text="Cancel"
+                            CssClass="btn" OnClick="btnCancel_Click" CausesValidation="false" />
+                            
+                        <asp:Button ID="btnSave" runat="server" Text="Save Changes"
+                            CssClass="btn primary" OnClick="btnSave_Click" CausesValidation="false" />
                     </div>
 
                     <div class="section-title"><span>Overall</span></div>
@@ -204,7 +215,7 @@
                 <asp:Panel ID="pnlNoSelection" runat="server">
                     <h2>Classroom Details</h2>
                     <p class="note">
-                        Select <strong>Open</strong> on a classroom to view and manage its details, students and quizzes.
+                        Select <strong>View</strong> on a classroom to view and manage its details, students and quizzes.
                     </p>
                 </asp:Panel>
 
