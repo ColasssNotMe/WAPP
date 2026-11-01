@@ -183,6 +183,7 @@
 
                             </div>
 
+                            <!--
                             <div class="completed-action">
 
                                 <asp:Button
@@ -194,6 +195,7 @@
                                     CommandArgument='<%# Eval("QuizID") %>' />
 
                             </div>
+                                -->
 
                         </div>
 
