@@ -239,10 +239,8 @@ namespace Assignment
                     using (SqlCommand cmd =
                            new SqlCommand(checkUsernameQuery, conn))
                     {
-                        cmd.Parameters.Add("@username", System.Data.SqlDbType.NVarChar, 40).Value =
-                            txtUsername.Text.Trim();
-                        cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int).Value =
-                            currentUserId;
+                        cmd.Parameters.AddWithValue("@username", txtUsername.Text.Trim());
+                        cmd.Parameters.AddWithValue("@userId", currentUserId);
 
                         int usernameCount =
                             Convert.ToInt32(cmd.ExecuteScalar());
@@ -263,10 +261,8 @@ namespace Assignment
                     using (SqlCommand cmd =
                            new SqlCommand(checkEmailQuery, conn))
                     {
-                        cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar, 100).Value =
-                            txtEmail.Text.Trim();
-                        cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int).Value =
-                            currentUserId;
+                        cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@userId", currentUserId);
 
                         int emailCount = Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -282,6 +278,8 @@ namespace Assignment
 
                 SaveProfileImage();
 
+                ChangePassword();
+
                 saveResult.InnerText =
                     "Profile updated successfully.";
 
@@ -295,64 +293,35 @@ namespace Assignment
                 ShowSaveError("Error updating profile: " + ex.Message);
             }
         }
-        protected void btnChangePassword_Click(object sender, EventArgs e)
+        private void ChangePassword()
         {
             string newPassword = txtPassword.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(newPassword))
-            {
-                saveResult.InnerText =
-                    "Please enter a password.";
-
-                saveResult.Attributes["class"] =
-                    "save-result error";
-
-                saveResult.Visible = true;
-
                 return;
-            }
 
-            if (newPassword.Length < 8)
-            {
-                saveResult.InnerText =
-                    "Password must be at least 8 characters long.";
+            PasswordManager passwordManager = new PasswordManager();
 
-                saveResult.Attributes["class"] =
-                    "save-result error";
-
-                saveResult.Visible = true;
-
-                return;
-            }
+            string hashedPassword = passwordManager.HashPassword(newPassword);
 
             string connectionString =
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+
             string query = @"
-                UPDATE [User]
-                SET
-                    password = @password
-                WHERE userId = @userId;
-            ";
-            PasswordManager passwordManager = new PasswordManager();
+        UPDATE [User]
+        SET password = @password
+        WHERE userId = @userId";
+
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue(
-                        "@password",
-                        passwordManager.HashPassword(newPassword));
-                    cmd.Parameters.AddWithValue(
-                        "@userId",
-                        Session["userId"]);
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
+                cmd.Parameters.AddWithValue("@password", hashedPassword);
+
+                cmd.Parameters.AddWithValue("@userId", Session["userId"]);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
-            saveResult.InnerText =
-                "Profile updated successfully.";
-            saveResult.Attributes["class"] =
-                "save-result success";
-            saveResult.Visible = true;
         }
     }
 }

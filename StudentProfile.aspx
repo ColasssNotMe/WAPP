@@ -201,16 +201,13 @@
 
                         <div class="section-line"></div>
 
-                        <div class="form-grid">
-                        </div>
-
                         <div class="form-group">
 
-                            <label >
+                            <label>
                                 School
                             </label>
 
-                            <asp:DropDownList ID="txtSchool" runat="server" CssClass="form-input" >
+                            <asp:DropDownList ID="txtSchool" runat="server" CssClass="form-input">
                                 <asp:ListItem Value="" Text="Select your school" />
                                 <asp:ListItem Value="school-a" Text="School A" />
                                 <asp:ListItem Value="school-b" Text="School B" />
@@ -243,13 +240,19 @@
                                     TextMode="Password">
                                 </asp:TextBox>
 
-                                <asp:Button
-                                    ID="btnChangePassword"
-                                    runat="server"
-                                    Text="Change"
-                                    CssClass="change-button"
-                                    OnClick="btnChangePassword_Click" />
+                                <button
+                                    type="button"
+                                    class="toggle-password"
+                                    aria-label="Show password"
+                                    aria-pressed="false"
+                                    onclick="togglePassword(this)">
 
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5S18.2 17.5 12 17.5 2.5 12 2.5 12Z"></path>
+                                        <circle cx="12" cy="12" r="2.5"></circle>
+                                    </svg>
+
+                                </button>
 
                             </div>
 
@@ -263,7 +266,6 @@
                                 Display="Dynamic" />
 
                         </div>
-
                         <div class="profile-actions">
 
                             <asp:Button
@@ -281,6 +283,7 @@
                                 CausesValidation="false" />
 
                         </div>
+                    </div>
                 </section>
 
             </div>
@@ -289,6 +292,24 @@
         <uc:Footer runat="server" />
     </form>
 
+
+    <script>
+        function togglePassword(button) {
+            const input = button.previousElementSibling;
+
+            if (!input) return;
+
+            if (input.type === "password") {
+                input.type = "text";
+                button.setAttribute("aria-label", "Hide password");
+                button.setAttribute("aria-pressed", "true");
+            } else {
+                input.type = "password";
+                button.setAttribute("aria-label", "Show password");
+                button.setAttribute("aria-pressed", "false");
+            }
+        }
+    </script>
 
 </body>
 </html>

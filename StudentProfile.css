@@ -225,27 +225,37 @@
     padding-right: 5rem;
 }
 
-.change-button {
+.toggle-password {
     position: absolute;
-    right: 0.3rem;
+    right: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
-    height: 28px;
-    padding: 0 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 6px;
     border: none;
     border-radius: 5px;
-    background-color: var(--primary-color);
-    color: var(--white);
-    font-family: inherit;
-    /* No font-size */
-
+    background: transparent;
+    color: var(--primary-color);
     cursor: pointer;
 }
 
-    .change-button:hover {
-        background-color: var(--secondary-color);
+    .toggle-password svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
     }
 
+    .toggle-password:hover {
+        background-color: var(--bg-light);
+    }
 .form-hint {
     display: block;
     margin-top: 0.3rem;

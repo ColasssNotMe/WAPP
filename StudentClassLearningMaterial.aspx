@@ -19,7 +19,7 @@
 
         <main class="learning-page">
             <div class="page-toolbar">
-                <a href="StudentDashboard.aspx" class="topic-navigation return">
+                <a href="Class.aspx" class="topic-navigation return">
                     <img src="svg/left-arrow.svg" width="30" height="30" class="arrow"/>
 
                     <span class="topic-text">

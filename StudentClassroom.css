@@ -11,7 +11,7 @@
 .classroom-intro {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-evenly;
     gap: 2rem;
     margin-bottom: 2.5rem;
 }
