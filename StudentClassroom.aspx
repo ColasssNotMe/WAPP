@@ -54,10 +54,6 @@
 
                     <h2>Joined Classrooms</h2>
 
-                    <p>
-                        Your lessons and programs are organised by classroom.
-                    </p>
-
                 </div>
 
                 <div class="classroom-grid">
@@ -140,11 +136,6 @@
 
 
             <section class="find-classroom">
-
-                <div class="find-icon">
-                    +
-                </div>
-
 
                 <div class="find-content">
 

@@ -27,17 +27,29 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userId"] == null)
+            {
+                Response.Redirect("Homepage");
+                return;
+            }
+
             if (!IsPostBack)
             {
-                if (Session["userId"] == null)
-                {
-                    Response.Redirect("Homepage");
-                    return;
-                }
                 LoadPDF();
+
+                if (Session["classID"] != null ||
+                    Session["classId"] != null)
+                {
+                    learningMaterialBreadCrumb.HRef =
+                        "~/StudentClassLearningMaterial.aspx";
+                }
+                else
+                {
+                    learningMaterialBreadCrumb.HRef =
+                        "~/StudentLearningMaterial.aspx";
+                }
             }
         }
-
         private void LoadPDF()
         {
             if (Session["materialId"] == null)

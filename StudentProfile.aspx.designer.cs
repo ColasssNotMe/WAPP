@@ -156,7 +156,16 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSchool;
+        protected global::System.Web.UI.WebControls.DropDownList txtSchool;
+
+        /// <summary>
+        /// SchoolRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator SchoolRequired;
 
         /// <summary>
         /// txtPassword control.

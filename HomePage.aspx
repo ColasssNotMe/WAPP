@@ -42,13 +42,12 @@
                     </p>
 
                     <div class="button-container">
-                        <button class="hero-button" type="button">
+                        <a href="StudentLearningMaterial.aspx" class="hero-button">
                             Start Learning
-                        </button>
-
-                        <button class="hero-button" type="button">
+                        </a>
+                        <a href="StudentQuizList.aspx" class="hero-button" >
                             Take A Quiz
-                        </button>
+                        </a>
                     </div>
 
                 </div>

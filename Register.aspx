@@ -148,8 +148,7 @@
                                     TextMode="Password" />
                                 <button type="button"
                                     class="toggle-password"
-                                    runat="server"
-                                    onserverclick="toggleConfirmPasswordView"
+                                    onclick="togglePassword('<%= PasswordTextBox.ClientID %>',this)"
                                     aria-label="Show password"
                                     aria-pressed="false">
 
@@ -159,14 +158,14 @@
                                     </svg>
                                 </button>
                             </div>
-<asp:RegularExpressionValidator
-    ID="PasswordStrengthValidator"
-    runat="server"
-    ControlToValidate="PasswordTextBox"
-    ValidationExpression="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$"
-    ErrorMessage="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 symbol."
-    CssClass="validation-message"
-    Display="Dynamic" />
+                            <asp:RegularExpressionValidator
+                                ID="PasswordStrengthValidator"
+                                runat="server"
+                                ControlToValidate="PasswordTextBox"
+                                ValidationExpression="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$"
+                                ErrorMessage="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 symbol."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
                             <asp:RequiredFieldValidator ID="PasswordRequired" runat="server"
                                 ControlToValidate="PasswordTextBox"
                                 ErrorMessage="Please enter a password."
@@ -194,8 +193,7 @@
                                     class="toggle-password"
                                     aria-label="Show confirm password"
                                     aria-pressed="false"
-                                    runat="server"
-                                    onserverclick="toggleConfirmPasswordView">
+                                    onclick="togglePassword('<%= ConfirmPasswordTextBox.ClientID %>',this)">
 
                                     <svg viewBox="0 0 24 24" aria-hidden="true">
                                         <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.3 5.5-9.5 5.5S2.5 12 2.5 12Z"></path>
@@ -244,7 +242,7 @@
 </body>
 </html>
 <script>
-    function togglePassword(inputId, button) {
+    function togglePassword(inputId:any, button:any) {
         const input = document.getElementById(inputId);
 
         if (input.type === "password") {

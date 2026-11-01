@@ -16,7 +16,7 @@
 <body>
 
     <form id="form1" runat="server">
-    <uc:Header runat="server" />
+        <uc:Header runat="server" />
 
         <main class="profile-page">
 
@@ -47,10 +47,12 @@
 
                         <span class="section-label">ACCOUNT INFO</span>
 
+                        <!--
                         <div class="account-row">
                             <span>User ID</span>
                             <span id="accountUserId" runat="server" class="account-value">—</span>
                         </div>
+                        -->
 
                         <div class="account-row">
                             <span>Username</span>
@@ -68,6 +70,12 @@
                         </div>
 
                         <div class="account-row">
+
+
+
+
+
+
                             <span>School</span>
                             <span id="accountSchool" runat="server" class="account-value">—</span>
                         </div>
@@ -194,22 +202,24 @@
                         <div class="section-line"></div>
 
                         <div class="form-grid">
-
-
                         </div>
 
                         <div class="form-group">
 
-                            <label for="txtSchool">
+                            <label >
                                 School
                             </label>
 
-                            <asp:TextBox
-                                ID="txtSchool"
-                                runat="server"
-                                CssClass="form-input"
-                                placeholder="Enter school name">
-                            </asp:TextBox>
+                            <asp:DropDownList ID="txtSchool" runat="server" CssClass="form-input" >
+                                <asp:ListItem Value="" Text="Select your school" />
+                                <asp:ListItem Value="school-a" Text="School A" />
+                                <asp:ListItem Value="school-b" Text="School B" />
+                                <asp:ListItem Value="school-c" Text="School C" />
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="SchoolRequired" runat="server"
+                                ControlToValidate="txtSchool" InitialValue=""
+                                ErrorMessage="Please select your school." CssClass="validation-message" Display="Dynamic" />
+
 
                         </div>
 
@@ -243,40 +253,40 @@
 
                             </div>
 
-<asp:RegularExpressionValidator
-    ID="PasswordStrengthValidator"
-    runat="server"
-    ControlToValidate="txtPassword"
-    ValidationExpression="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$"
-    ErrorMessage="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 symbol."
-    CssClass="validation-message"
-    Display="Dynamic" />
+                            <asp:RegularExpressionValidator
+                                ID="PasswordStrengthValidator"
+                                runat="server"
+                                ControlToValidate="txtPassword"
+                                ValidationExpression="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$"
+                                ErrorMessage="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 symbol."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
 
-                    </div>
+                        </div>
 
-                    <div class="profile-actions">
+                        <div class="profile-actions">
 
-                        <asp:Button
-                            ID="btnSave"
-                            runat="server"
-                            Text="Save changes"
-                            CssClass="save-button"
-                            OnClick="btnSave_Click" />
+                            <asp:Button
+                                ID="btnSave"
+                                runat="server"
+                                Text="Save changes"
+                                CssClass="save-button"
+                                OnClick="btnSave_Click" />
 
-                        <asp:Button
-                            ID="btnDiscard"
-                            runat="server"
-                            Text="Discard"
-                            CssClass="discard-button"
-                            CausesValidation="false" />
+                            <asp:Button
+                                ID="btnDiscard"
+                                runat="server"
+                                Text="Discard"
+                                CssClass="discard-button"
+                                CausesValidation="false" />
 
-                    </div>
+                        </div>
                 </section>
 
             </div>
         </main>
 
-    <uc:Footer runat="server" />
+        <uc:Footer runat="server" />
     </form>
 
 

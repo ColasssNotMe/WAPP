@@ -92,9 +92,6 @@
                                     <%# Eval("QuestionCount") %> Questions
                                 </span>
 
-                                <span class="quiz-duration">
-                                    <%# Eval("DurationText") %>
-                                </span>
 
                             </div>
 

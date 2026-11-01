@@ -25,10 +25,12 @@ namespace Assignment
             }
 
             welcomeTitle.InnerText = "Welcome, " + username + "!";
+            Session.Remove("classID");
 
             LoadLearningMaterials(userID);
             LoadRecentQuizzes(userID);
             LoadQuizProgress(userID);
+
         }
 
         private string GetLoggedInUserID()

@@ -16,9 +16,9 @@
 
     <form id="form1" runat="server">
 
-    <uc:Header runat="server" />
+        <uc:Header runat="server" />
         <div class="breadcrumb">
-            Learning Material <span> </span>
+            <a  runat="server" id="learningMaterialBreadCrumb">Learning Material </a><span></span>
             <span id="titleLabel" runat="server">/</span>
             <span id="chapterLabel" runat="server">/</span>
         </div>
@@ -28,7 +28,7 @@
             <div class="chapter-navigation">
 
                 <a href="<%: GetReturnUrl() %>" class="topic-navigation previous-topic">
-                    <img src="svg/left-arrow.svg" width="30" height="30" class="arrow"/>
+                    <img src="svg/left-arrow.svg" width="30" height="30" class="arrow" />
 
                     <span class="topic-text">
                         <span class="topic-title">Back to Learning Material</span>
@@ -58,7 +58,7 @@
 
         </main>
 
-    <uc:Footer runat="server" />
+        <uc:Footer runat="server" />
     </form>
 
 </body>

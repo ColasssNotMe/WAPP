@@ -69,8 +69,8 @@ namespace Assignment
                             txtUsername.Text = reader["username"].ToString();
                             txtEmail.Text = reader["email"].ToString();
                             txtRole.Text = reader["role"].ToString();
-                            txtSchool.Text = reader["school"].ToString();
-                            accountUserId.InnerText = reader["userId"].ToString();
+                            txtSchool.SelectedValue = reader["school"].ToString();
+                            //accountUserId.InnerText = reader["userId"].ToString();
                             accountUsername.InnerText = reader["username"].ToString();
                             accountRole.InnerText = reader["role"].ToString();
                             accountSchool.InnerText = reader["school"].ToString();

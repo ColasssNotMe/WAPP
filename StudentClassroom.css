@@ -224,8 +224,7 @@
     border-radius: 0.75rem;
     background: #ffffff;
 }
-
-.find-icon {
+/*.find-icon {
     width: 2.25rem;
     height: 2.25rem;
     flex-shrink: 0;
@@ -237,7 +236,7 @@
     color: #737b88;
     font-size: 1.1rem;
 }
-
+*/
 .find-content {
     flex: 1;
 }

@@ -61,6 +61,7 @@
                 </div>
             </header>
 
+            <!--
             <div class="live-session">
                 <h3 class="live-title">Join Live Session</h3>
 
@@ -84,6 +85,7 @@
                     visible="false">
                 </div>
             </div>
+            -->
 
             <section class="section-card">
 
