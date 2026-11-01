@@ -1,142 +1,230 @@
-﻿<!DOCTYPE html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TeacherProfile.aspx.cs" Inherits="Assignment.TeacherProfile" %>
+
+<%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
+<%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
+
+<!DOCTYPE html>
 <html lang="en">
-<head>
+<head runat="server">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Profile</title>
+    <title>Profile</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="TeacherProfile.css">
+    <link href="index.css" rel="stylesheet" />
+    <link href="StudentProfile.css" rel="stylesheet" />
 </head>
 <body>
+    <form id="form1" runat="server">
+        <uc:Header runat="server" />
 
-    <div class="profile-container">
+        <main class="profile-page">
+            <div class="profile-layout">
 
-        <header class="profile-header">
-            <a href="javascript:history.back()" class="back-btn" aria-label="Go Back">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-            </a>
-            <h1 class="page-title">Teacher Profile</h1>
-            <div class="header-spacer"></div>
-        </header>
-
-        <div class="profile-content-grid">
-
-            <aside class="card profile-summary-card">
-                <div class="avatar-header">
-                    <div class="avatar-circle">CN</div>
-                    <div class="user-identity">
-                        <h2>Cikgu Nurul</h2>
-                    </div>
-                </div>
-
-                <div class="meta-details-section">
-                    <span class="section-subtitle">ACCOUNT INFO</span>
-                    <div class="meta-details-list">
-                        <div class="meta-row">
-                            <span class="meta-label">User ID</span>
-                            <span class="meta-value">—</span>
+                <!-- Left Sidebar -->
+                <aside class="profile-sidebar">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <asp:Image
+                                ID="profilePic"
+                                runat="server"
+                                ImageUrl="~/svg/user.svg"
+                                AlternateText="Profile Picture"
+                                CssClass="profile-image" />
                         </div>
-                        <div class="meta-row">
-                            <span class="meta-label">Username</span>
-                            <span class="meta-value">—</span>
-                        </div>
-                        <div class="meta-row">
-                            <span class="meta-label">Role</span>
-                            <span class="meta-value">Teacher</span>
-                        </div>
-                        <div class="meta-row">
-                            <span class="meta-label">Date Registered</span>
-                            <span class="meta-value">January 2026</span>
-                        </div>
-                        <div class="meta-row">
-                            <span class="meta-label">School</span>
-                            <span class="meta-value">SMK Taman Melawati</span>
-                        </div>
-                        <div class="meta-row">
-                            <span class="meta-label">Subject</span>
-                            <span class="meta-value">Sejarah KSSM</span>
+                        <div class="profile-name">
+                            <strong id="usernameDisplay" runat="server">Username</strong>
                         </div>
                     </div>
-                </div>
 
-                <div class="upload-photo-container">
-                    <span class="upload-label">Profile picture</span>
-                    <button type="button" class="btn btn-upload">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="17 8 12 3 7 8"></polyline>
-                            <line x1="12" y1="3" x2="12" y2="15"></line>
-                        </svg>
-                        Upload photo
-                    </button>
-                </div>
-            </aside>
+                    <div class="profile-divider"></div>
 
-            <main class="card account-settings-card">
-                <h2 class="settings-title">Teacher Profile</h2>
+                    <div class="account-section">
+                        <span class="section-label">ACCOUNT INFO</span>
 
-                <form class="settings-form" onsubmit="event.preventDefault();">
+                        <div class="account-row">
+                            <span>Username</span>
+                            <span id="accountUsername" runat="server" class="account-value">—</span>
+                        </div>
 
-                    <div class="form-row-two">
+                        <div class="account-row">
+                            <span>Role</span>
+                            <span id="accountRole" runat="server" class="account-value">Teacher</span>
+                        </div>
+
+                        <div class="account-row">
+                            <span>Date Registered</span>
+                            <span id="accountDateRegistered" runat="server" class="account-value">—</span>
+                        </div>
+
+                        <div class="account-row">
+                            <span>School</span>
+                            <span id="accountSchool" runat="server" class="account-value">—</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-divider"></div>
+
+                    <div class="photo-section">
+                        <span class="photo-label">Profile picture</span>
+
+                        <asp:FileUpload
+                            ID="ProfileImageUpload"
+                            runat="server"
+                            CssClass="file-upload" />
+
+                        <label for="<%= ProfileImageUpload.ClientID %>" class="upload-button">
+                            <span class="upload-icon">↑</span>
+                            Upload photo
+                        </label>
+                    </div>
+                </aside>
+
+                <!-- Right Content Panel -->
+                <section class="profile-content">
+                    <h2 class="profile-title">Teacher Profile</h2>
+
+                    <div id="saveResult" runat="server" class="save-result" visible="false"></div>
+
+                    <div class="form-grid">
                         <div class="form-group">
-                            <label for="firstName">First name</label>
-                            <input type="text" id="firstName" class="form-control" value="Nurul" placeholder="Enter first name">
+                            <label for="txtFirstName">First name</label>
+                            <asp:TextBox
+                                ID="txtFirstName"
+                                runat="server"
+                                CssClass="form-input"
+                                placeholder="Enter first name"></asp:TextBox>
                         </div>
+
                         <div class="form-group">
-                            <label for="lastName">Last name</label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Enter last name">
+                            <label for="txtLastName">Last name</label>
+                            <asp:TextBox
+                                ID="txtLastName"
+                                runat="server"
+                                CssClass="form-input"
+                                placeholder="Enter last name"></asp:TextBox>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" class="form-control" placeholder="Enter username">
+                        <label for="txtUsername">Username</label>
+                        <asp:TextBox
+                            ID="txtUsername"
+                            runat="server"
+                            CssClass="form-input"
+                            placeholder="Enter username"></asp:TextBox>
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" id="email" class="form-control" value="nurul@ncient.edu.my" placeholder="Enter email address">
+                        <label for="txtEmail">Email address</label>
+                        <asp:TextBox
+                            ID="txtEmail"
+                            runat="server"
+                            CssClass="form-input"
+                            TextMode="Email"></asp:TextBox>
                     </div>
 
                     <div class="form-group">
-                        <label for="role">Role</label>
-                        <input type="text" id="role" class="form-control" value="Teacher" placeholder="Enter role">
+                        <label for="txtRole">Role</label>
+                        <asp:TextBox
+                            ID="txtRole"
+                            runat="server"
+                            CssClass="form-input disabled-input"
+                            ReadOnly="true"
+                            Text="Teacher"></asp:TextBox>
                     </div>
 
-                    <div class="form-group">
-                        <label for="schoolInput">School</label>
-                        <input type="text" id="schoolInput" class="form-control" value="SMK Taman Melawati" placeholder="Enter school name">
-                    </div>
+                    <div class="form-section">
+                        <div class="form-section-header">Teacher Information</div>
+                        <div class="section-line"></div>
 
-                    <div class="form-section-group">
-                        <h3 class="group-subtitle">Security</h3>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <div class="input-with-button">
-                                <input type="password" id="password" class="form-control" value="••••••••" placeholder="Enter password">
-                                <button type="button" class="btn btn-inline">Change</button>
+                            <label>School</label>
+                            <asp:DropDownList ID="txtSchool" runat="server" CssClass="form-input">
+                                <asp:ListItem Value="" Text="Select your school" />
+                                <asp:ListItem Value="School A" Text="School A" />
+                                <asp:ListItem Value="School B" Text="School B" />
+                                <asp:ListItem Value="School C" Text="School C" />
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="SchoolRequired" runat="server"
+                                ControlToValidate="txtSchool" InitialValue=""
+                                ErrorMessage="Please select your school." CssClass="validation-message" Display="Dynamic" />
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="txtPassword">Password</label>
+                            <div class="password-wrapper">
+                                <asp:TextBox
+                                    ID="txtPassword"
+                                    runat="server"
+                                    CssClass="form-input password-input"
+                                    TextMode="Password"></asp:TextBox>
+
+                                <button
+                                    type="button"
+                                    class="toggle-password"
+                                    aria-label="Show password"
+                                    aria-pressed="false"
+                                    onclick="togglePassword(this)">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M2.5 12s3.3-5.5 9.5-5.5 9.5 5.5 9.5 5.5S18.2 17.5 12 17.5 2.5 12 2.5 12Z"></path>
+                                        <circle cx="12" cy="12" r="2.5"></circle>
+                                    </svg>
+                                </button>
                             </div>
-                            <span class="field-hint">Use a strong password of at least 8 characters.</span>
+
+                            <asp:RegularExpressionValidator
+                                ID="PasswordStrengthValidator"
+                                runat="server"
+                                ControlToValidate="txtPassword"
+                                ValidationExpression="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$"
+                                ErrorMessage="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 symbol."
+                                CssClass="validation-message"
+                                Display="Dynamic" />
+                        </div>
+
+                        <div class="profile-actions">
+                            <asp:Button
+                                ID="btnSave"
+                                runat="server"
+                                Text="Save changes"
+                                CssClass="save-button"
+                                OnClick="btnSave_Click" />
+
+                            <asp:Button
+                                ID="btnDiscard"
+                                runat="server"
+                                Text="Discard"
+                                CssClass="discard-button"
+                                CausesValidation="false"
+                                OnClick="btnDiscard_Click" />
                         </div>
                     </div>
+                </section>
 
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary">Discard</button>
-                    </div>
-                </form>
-            </main>
+            </div>
+        </main>
 
-        </div>
+        <uc:Footer runat="server" />
+    </form>
 
-    </div>
+<script type="text/javascript">
+    // @ts-nocheck
+        function togglesPassword(button) {
+            const input = button.previousElementSibling;
+            if (!input) return;
 
+            if (input.type === "password") {
+                input.type = "text";
+                button.setAttribute("aria-label", "Hide password");
+                button.setAttribute("aria-pressed", "true");
+            } else {
+                input.type = "password";
+                button.setAttribute("aria-label", "Show password");
+                button.setAttribute("aria-pressed", "false");
+            }
+        }
+</script>
 </body>
 </html>
