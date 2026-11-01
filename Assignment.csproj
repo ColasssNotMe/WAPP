@@ -125,6 +125,8 @@
     <Content Include="AdminProfile.css" />
     <Content Include="AdminQuizManagement.aspx" />
     <Content Include="AdminQuizManagement.css" />
+    <Content Include="AdminSystemLog.aspx" />
+    <Content Include="AdminSystemlog.css" />
     <Content Include="AdminUserManagement.aspx" />
     <Content Include="AdminUserManagement.css" />
     <Content Include="AdminViewQuiz.aspx" />
@@ -341,6 +343,13 @@
     <Compile Include="AdminQuizManagement.aspx.designer.cs">
       <DependentUpon>AdminQuizManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminSystemLog.aspx.cs">
+      <DependentUpon>AdminSystemLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSystemLog.aspx.designer.cs">
+      <DependentUpon>AdminSystemLog.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminUserManagement.aspx.cs">
       <DependentUpon>AdminUserManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -371,6 +380,7 @@
     <Compile Include="ForgotPassword.aspx.designer.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logger.cs" />
     <Compile Include="ProgressCalculator.cs" />
     <Compile Include="Class.aspx.cs">
       <DependentUpon>Class.aspx</DependentUpon>

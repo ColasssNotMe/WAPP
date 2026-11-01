@@ -19,7 +19,9 @@ namespace Assignment
 
             if (!IsPostBack)
             {
+                Logger.LogActivity("Username: " +Session["username"].ToString() + " Role: " + Session["role"].ToString() + " | logged in successfully.");
                 loadData();
+                LoadRecentLogs();
                 welcomeMessage.InnerText = "Welcome, " + Session["Username"].ToString() + "!";
             }
         }
@@ -61,6 +63,27 @@ namespace Assignment
             {
                 student_num.InnerText = "Error: " + ex.Message;
             }
+        }
+
+        private void LoadRecentLogs()
+        {
+            string connString = ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
+            string sql = @"
+                SELECT TOP 5 description, createdAt 
+                FROM [Syslog] 
+                ORDER BY createdAt DESC";
+
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            {
+                da.Fill(dt);
+            }
+
+            rptRecentLogs.DataSource = dt;
+            rptRecentLogs.DataBind();
         }
 
     }

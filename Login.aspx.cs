@@ -80,6 +80,7 @@ namespace Assignment
                             Session["role"] = reader["role"].ToString().Trim();
                             Session["studentId"] = reader["studentID"].ToString().Trim();
 
+
                             if (reader["profilePic"] == DBNull.Value ||
                                 string.IsNullOrWhiteSpace(reader["profilePic"].ToString()))
                             {

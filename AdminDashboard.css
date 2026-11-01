@@ -280,56 +280,65 @@
         outline-offset: 0.125rem;
     }
 
-@media (max-width: 56.25rem) {
-    .dashboard {
-        width: min(calc(100% - 2.5rem), 45rem);
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
+/* Recent Activity Panel */
+.recent-activity-panel {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 24px;
 }
 
-@media (max-width: 35rem) {
-    .dashboard {
-        width: calc(100% - 1.75rem);
-        padding-top: 1.5rem;
+    .recent-activity-panel .panel-heading {
+        margin-bottom: 16px;
+        font-size: 16px;
+        font-weight: 600;
     }
 
-    .page-header {
-        align-items: flex-start;
-        flex-direction: column;
-        margin-bottom: 1.375rem;
-    }
-
-        .page-header h1 {
-            font-size: 1.5625rem;
-        }
-
-    .stats-grid {
-        gap: 0.625rem;
-        margin-bottom: 1.375rem;
-    }
-
-    .stat-card {
-        min-height: 6.75rem;
-        padding: 0.875rem;
-    }
-
-    .stat-value {
-        font-size: 1.5rem;
-    }
-
-    .action-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .quick-panel,
-    .attention-panel {
-        padding: 1rem;
-    }
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
 }
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .data-table th {
+        padding: 10px 12px;
+        background: var(--bg-light);
+        color: var(--secondary-color);
+        font-size: 11px;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    .data-table td {
+        padding: 12px;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 13px;
+        color: var(--primary-color);
+        vertical-align: middle;
+    }
+
+    .data-table tr:hover td {
+        background: rgba(240, 234, 225, .4);
+    }
+
+    .data-table tr:last-child td {
+        border-bottom: none;
+    }
+
+.btn.primary {
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: var(--white);
+    transition: background 0.2s;
+}
+
+    .btn.primary:hover {
+        background: #151c33;
+    }

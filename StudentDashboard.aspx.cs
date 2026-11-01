@@ -23,7 +23,7 @@ namespace Assignment
             {
                 username = Session["username"].ToString();
             }
-
+            Logger.LogActivity("Username: " + Session["username"].ToString() + " Role: " + Session["role"].ToString() + " | logged in successfully.");
             welcomeTitle.InnerText = "Welcome, " + username + "!";
             Session.Remove("classID");
 
