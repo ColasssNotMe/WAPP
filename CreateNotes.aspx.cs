@@ -16,6 +16,12 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 LoadClassrooms();
@@ -26,7 +32,7 @@ namespace Assignment
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = "SELECT classID, className FROM Class";
+                string query = "SELECT classID, className FROM Class ORDER BY className ASC";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     conn.Open();
@@ -41,12 +47,22 @@ namespace Assignment
 
         protected void btnSubmitNote_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(ddlClassroom.SelectedValue))
+            string title = txtTitle.Text.Trim();
+
+            // 1. Validate Note Title
+            if (string.IsNullOrEmpty(title))
             {
+                ScriptManager.RegisterStartupScript(this, GetType(), "alertTitle", "alert('Please enter a note title before saving.');", true);
                 return;
             }
 
-            string title = txtTitle.Text.Trim();
+            // 2. Validate Classroom Selection
+            if (string.IsNullOrEmpty(ddlClassroom.SelectedValue))
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "alertClassroom", "alert('Please select a classroom before saving the note.');", true);
+                return;
+            }
+
             int classId = Convert.ToInt32(ddlClassroom.SelectedValue);
             int durationMins = string.IsNullOrEmpty(txtDurationMins.Text.Trim()) ? 15 : Convert.ToInt32(txtDurationMins.Text.Trim());
             string status = ddlStatus.SelectedValue;
@@ -58,8 +74,14 @@ namespace Assignment
                 string extension = Path.GetExtension(fileUploadPdf.FileName).ToLower();
                 if (extension == ".pdf")
                 {
+                    string uploadsDir = Server.MapPath("~/Uploads/");
+                    if (!Directory.Exists(uploadsDir))
+                    {
+                        Directory.CreateDirectory(uploadsDir);
+                    }
+
                     string uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(fileUploadPdf.FileName);
-                    string savePath = Server.MapPath("~/Uploads/" + uniqueFileName);
+                    string savePath = Path.Combine(uploadsDir, uniqueFileName);
                     fileUploadPdf.SaveAs(savePath);
                     fileUrl = "~/Uploads/" + uniqueFileName;
                 }
@@ -83,6 +105,11 @@ namespace Assignment
                 }
             }
 
+            Response.Redirect("ManageNotes.aspx");
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
             Response.Redirect("ManageNotes.aspx");
         }
     }

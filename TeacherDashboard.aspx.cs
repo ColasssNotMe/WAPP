@@ -154,87 +154,54 @@ namespace Assignment
         private void LoadDashboardCounts(int teacherID)
         {
             string query = @"
-                SELECT
+        SELECT
+            -- Total unique students enrolled
+            (
+                SELECT COUNT(DISTINCT e.studentID)
+                FROM Enrolment e
+                INNER JOIN Class c ON e.classID = c.classID
+                WHERE c.teacherID = @teacherID
+            ) AS studentCount,
 
-                    -- Total unique students enrolled
-                    (
-                        SELECT COUNT(DISTINCT e.studentID)
-                        FROM Enrolment e
-                        INNER JOIN Class c
-                            ON e.classID = c.classID
-                        WHERE c.teacherID = @teacherID
-                    ) AS studentCount,
+            -- Number of classrooms
+            (
+                SELECT COUNT(*)
+                FROM Class c
+                WHERE c.teacherID = @teacherID
+            ) AS classroomCount,
 
-                    -- Number of classrooms
-                    (
-                        SELECT COUNT(*)
-                        FROM Class c
-                        WHERE c.teacherID = @teacherID
-                    ) AS classroomCount,
+            -- Total quizzes belonging to this teacher's classes
+            (
+                SELECT COUNT(*)
+                FROM Quiz q
+                INNER JOIN Class c ON q.classID = c.classID
+                WHERE c.teacherID = @teacherID
+            ) AS quizCount,
 
-                    -- Total quizzes belonging to this teacher's classes
-                    (
-                        SELECT COUNT(*)
-                        FROM Quiz q
-                        INNER JOIN Class c
-                            ON q.classID = c.classID
-                        WHERE c.teacherID = @teacherID
-                    ) AS quizCount,
+            -- Total materials/notes across all classes
+            (
+                SELECT COUNT(*)
+                FROM Material m
+                INNER JOIN Class c ON m.classID = c.classID
+                WHERE c.teacherID = @teacherID
+            ) AS noteCount
+    ";
 
-                    -- Materials added during the current month
-                    (
-                        SELECT COUNT(*)
-                        FROM Material m
-                        INNER JOIN Class c
-                            ON m.classID = c.classID
-                        WHERE c.teacherID = @teacherID
-                          AND m.uploadDate >=
-                              DATEFROMPARTS(
-                                  YEAR(GETDATE()),
-                                  MONTH(GETDATE()),
-                                  1
-                              )
-                          AND m.uploadDate <
-                              DATEADD(
-                                  MONTH,
-                                  1,
-                                  DATEFROMPARTS(
-                                      YEAR(GETDATE()),
-                                      MONTH(GETDATE()),
-                                      1
-                                  )
-                              )
-                    ) AS noteCount
-            ";
-
-            using (SqlConnection connection =
-                new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand command =
-                    new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue(
-                        "@teacherID",
-                        teacherID);
-
+                    command.Parameters.AddWithValue("@teacherID", teacherID);
                     connection.Open();
 
-                    using (SqlDataReader reader =
-                        command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            lblStudentCount.Text =
-                                reader["studentCount"].ToString();
-
-                            lblActiveClassrooms.Text =
-                                reader["classroomCount"].ToString();
-
-                            lblQuizCount.Text =
-                                reader["quizCount"].ToString();
-
-                            lblNoteCount.Text =
-                                reader["noteCount"].ToString();
+                            lblStudentCount.Text = reader["studentCount"].ToString();
+                            lblActiveClassrooms.Text = reader["classroomCount"].ToString();
+                            lblQuizCount.Text = reader["quizCount"].ToString();
+                            lblNoteCount.Text = reader["noteCount"].ToString();
                         }
                     }
                 }

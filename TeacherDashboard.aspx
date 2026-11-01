@@ -183,41 +183,22 @@
 
                 </a>
 
-                <a href="ManageNotes.aspx"
-                   style="text-decoration: none; color: inherit; display: block;">
-
-                    <div class="metric-card green-card">
-
-                        <div class="metric-card-header">
-
-                            <span class="metric-label">
-                                Notes
-                            </span>
-
-                            <div class="metric-icon-box">
-                                <i data-lucide="file-text"
-                                   style="width: 18px; height: 18px;"></i>
-                            </div>
-
-                        </div>
-
-                        <div class="metric-value">
-
-                            <asp:Label
-                                ID="lblNoteCount"
-                                runat="server"
-                                Text="0">
-                            </asp:Label>
-
-                        </div>
-
-                        <div class="metric-subtitle">
-                            Added this month
-                        </div>
-
-                    </div>
-
-                </a>
+              <a href="ManageNotes.aspx" style="text-decoration: none; color: inherit; display: block;">
+    <div class="metric-card green-card">
+        <div class="metric-card-header">
+            <span class="metric-label">Notes</span>
+            <div class="metric-icon-box">
+                <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+            </div>
+        </div>
+        <div class="metric-value">
+            <asp:Label ID="lblNoteCount" runat="server" Text="0"></asp:Label>
+        </div>
+        <div class="metric-subtitle">
+            Across all classes
+        </div>
+    </div>
+</a>
 
             </section>
 
@@ -433,7 +414,7 @@
                             </a>
 
                             <a href="ManageNotes.aspx" class="quick-action-btn quick-action-secondary">
-                                Manage topics
+                                Manage Notes
                             </a>
 
                             <a href="ManageQuiz.aspx" class="quick-action-btn quick-action-secondary">

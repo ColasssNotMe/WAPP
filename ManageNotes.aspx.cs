@@ -109,7 +109,7 @@ namespace Assignment
                     {
                         try
                         {
-                            // 1. Delete associated comments referencing materialID
+                            // 1. Delete associated comments referencing materialID (if Comment table exists)
                             string deleteComments = "DELETE FROM Comment WHERE materialID = @materialID";
                             using (SqlCommand cmd = new SqlCommand(deleteComments, conn, transaction))
                             {
@@ -117,15 +117,7 @@ namespace Assignment
                                 cmd.ExecuteNonQuery();
                             }
 
-                            // 2. Delete associated progress tracking entries (contentID)
-                            string deleteProgress = "DELETE FROM Progress WHERE contentID = @materialID";
-                            using (SqlCommand cmd = new SqlCommand(deleteProgress, conn, transaction))
-                            {
-                                cmd.Parameters.AddWithValue("@materialID", materialId);
-                                cmd.ExecuteNonQuery();
-                            }
-
-                            // 3. Delete material record
+                            // 2. Delete material record directly
                             string deleteMaterial = "DELETE FROM Material WHERE materialID = @materialID";
                             using (SqlCommand cmd = new SqlCommand(deleteMaterial, conn, transaction))
                             {
@@ -143,6 +135,7 @@ namespace Assignment
                     }
                 }
 
+                // Reset UI Selection
                 ViewState["SelectedMaterialID"] = null;
                 pnlActions.Visible = false;
                 lblDetailTitle.Text = "Select a note";
@@ -151,6 +144,7 @@ namespace Assignment
                 lblDetailDate.Text = "-";
                 lblDetailStatus.Text = "-";
 
+                // Refresh List
                 BindNotesList();
             }
         }

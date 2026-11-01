@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageQuiz.aspx.cs" Inherits="Assignment.ManageQuiz" %>
 <%@ Register Src="~/Header.ascx" TagPrefix="uc" TagName="Header" %>
 <%@ Register Src="~/Footer.ascx" TagPrefix="uc" TagName="Footer" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,15 +12,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="ManageQuiz.css">
+    <style>
+        .quiz-row-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
    <form id="form1" runat="server">
         <uc:Header ID="HeaderControl" runat="server" />
-           <link href="index.css" rel="stylesheet" />
+        <link href="index.css" rel="stylesheet" />
         <div class="quizzes-container">
             <header class="page-header">
                 <div class="header-left">
-                 <a href="TeacherDashboard.aspx" class="back-btn" aria-label="Go Back">
+                    <a href="TeacherDashboard.aspx" class="back-btn" aria-label="Go Back">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="19" y1="12" x2="5" y2="12"></line>
                             <polyline points="12 19 5 12 12 5"></polyline>
@@ -40,19 +53,16 @@
                     <div class="quiz-items-wrapper">
                         <asp:Repeater ID="rptQuizzes" runat="server" OnItemCommand="rptQuizzes_ItemCommand">
                             <ItemTemplate>
-                                <div class="quiz-row">
+                                <asp:LinkButton ID="btnSelectQuizRow" runat="server"
+                                    CommandName="SelectQuiz"
+                                    CommandArgument='<%# Eval("quizID") %>'
+                                    CssClass="quiz-row quiz-row-link">
                                     <div class="quiz-info">
-                                        <h3 class="quiz-name">
-                                            <asp:LinkButton ID="lblQuizSelect" runat="server"
-                                                CommandName="SelectQuiz"
-                                                CommandArgument='<%# Eval("quizID") %>'
-                                                Text='<%# Eval("title") %>'
-                                                CssClass="quiz-link" />
-                                        </h3>
+                                        <h3 class="quiz-name"><%# Eval("title") %></h3>
                                         <p class="quiz-meta"><%# Eval("className") %> • <%# Eval("totalMarks") %> marks</p>
                                     </div>
                                     <span class="status-badge published">Published</span>
-                                </div>
+                                </asp:LinkButton>
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
@@ -91,7 +101,7 @@
                 </aside>
             </div>
         </div>
-          <uc:Footer ID="FooterControl" runat="server" />
+        <uc:Footer ID="FooterControl" runat="server" />
     </form>
 </body>
 </html>
