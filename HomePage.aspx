@@ -132,25 +132,6 @@
                 <div class="learning-card">
 
                     <div class="card-icon">
-                        <span class="material-symbols-outlined">co_present</span>
-                    </div>
-                    <h4 class="card-title">Live Session
-                    </h4>
-
-                    <p class="card-description">
-                        Join classroom live sessions and
-                learn directly with teachers. Ask
-                questions in real-time, clarify
-                confusing timelines, and review past
-                exam topics.
-                    </p>
-
-
-                </div>
-
-                <div class="learning-card">
-
-                    <div class="card-icon">
                         <span class="material-symbols-outlined">monitoring</span>
                     </div>
                     <h4 class="card-title">Learning Progress

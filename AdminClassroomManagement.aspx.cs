@@ -13,8 +13,7 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Session["userid"] ==null)
+            if (Session["userid"] == null)
             {
                 Response.Redirect("Login.aspx");
             }
@@ -48,15 +47,6 @@ namespace Assignment
             lblMessage.Visible = true;
             lblMessage.Text = text;
             lblMessage.Style["color"] = isError ? "#c9302c" : "#2e7d32";
-        }
-
-        private void ExecNonQuery(string sql, SqlConnection conn, SqlTransaction tx, int id)
-        {
-            using (SqlCommand cmd = new SqlCommand(sql, conn, tx))
-            {
-                cmd.Parameters.AddWithValue("@ID", id);
-                cmd.ExecuteNonQuery();
-            }
         }
 
         private void LoadClassroomList()
@@ -237,7 +227,6 @@ namespace Assignment
             LoadClassroomList();
         }
 
-
         protected void rptClassrooms_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectClass")
@@ -294,28 +283,89 @@ namespace Assignment
         protected void btnDeleteClassroom_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(hfSelectedClassID.Value)) return;
+
             int classID = Convert.ToInt32(hfSelectedClassID.Value);
             bool deleted = false;
 
             using (SqlConnection conn = GetConnection())
             {
                 conn.Open();
-                using (SqlTransaction tx = conn.BeginTransaction())
+                SqlTransaction tx = conn.BeginTransaction();
+
+                try
                 {
-                    try
+                    using (SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM Chat WHERE sessionID IN (SELECT sessionID FROM LiveSession WHERE classID = @ID)", conn, tx))
                     {
-                        ExecNonQuery("DELETE FROM LiveSession WHERE classID = @ID", conn, tx, classID);
-                        ExecNonQuery("DELETE FROM Quiz        WHERE classID = @ID", conn, tx, classID);
-                        ExecNonQuery("DELETE FROM Enrolment   WHERE classID = @ID", conn, tx, classID);
-                        ExecNonQuery("DELETE FROM [Class]     WHERE classID = @ID", conn, tx, classID);
-                        tx.Commit();
-                        deleted = true;
+                        cmd.Parameters.AddWithValue("@ID", classID);
+                        cmd.ExecuteNonQuery();
                     }
-                    catch (Exception ex)
+
+                    using (SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM Result WHERE quizID IN (SELECT quizID FROM Quiz WHERE classID = @ID)", conn, tx))
                     {
-                        tx.Rollback();
-                        ShowMessage("Delete failed: " + ex.Message, true);
+                        cmd.Parameters.AddWithValue("@ID", classID);
+                        cmd.ExecuteNonQuery();
                     }
+
+                    using (SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM Answer WHERE questionID IN (SELECT questionID FROM Question WHERE quizID IN (SELECT quizID FROM Quiz WHERE classID = @ID))", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", classID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM Question WHERE quizID IN (SELECT quizID FROM Quiz WHERE classID = @ID)", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", classID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM Quiz WHERE classID = @ID", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", classID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM Comment WHERE materialID IN (SELECT materialID FROM Material WHERE classID = @ID)", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", classID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM Material WHERE classID = @ID", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", classID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM Enrolment WHERE classID = @ID", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", classID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+
+                    // 10. Class
+                    using (SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM [Class] WHERE classID = @ID", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", classID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    tx.Commit();
+                    deleted = true;
+                }
+                catch (Exception ex)
+                {
+                    tx.Rollback();
+                    ShowMessage("Delete failed: " + ex.Message, true);
                 }
             }
 
@@ -325,6 +375,7 @@ namespace Assignment
                 pnlDetails.Visible = false;
                 pnlNoSelection.Visible = true;
                 LoadClassroomList();
+                ShowMessage("Classroom deleted successfully.", false);
             }
         }
 
@@ -356,6 +407,7 @@ namespace Assignment
                 ShowMessage("Could not remove student: " + ex.Message, true);
             }
         }
+
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             ClosePanel();
