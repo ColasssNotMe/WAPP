@@ -35,10 +35,8 @@
 
             <div class="footer-column">
                 <h4>SUPPORT</h4>
-                <a href="HelpCentre.aspx">Help Centre</a>
                 <a href="FAQ.aspx">FAQ</a>
                 <a href="ContactUs.aspx">Contact Us</a>
-                <a href="ReportProblem.aspx">Report a Problem</a>
             </div>
 
         </div>

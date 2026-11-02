@@ -175,6 +175,8 @@
     <Content Include="EditNotes.aspx" />
     <Content Include="EditQuiz.aspx" />
     <Content Include="EditQuiz.css" />
+    <Content Include="FAQ.aspx" />
+    <Content Include="FAQ.css" />
     <Content Include="favicon.ico" />
     <Content Include="Footer.css" />
     <Content Include="ForgotPassword.aspx" />
@@ -372,6 +374,13 @@
     </Compile>
     <Compile Include="ContactUs.aspx.designer.cs">
       <DependentUpon>ContactUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FAQ.aspx.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FAQ.aspx.designer.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForgotPassword.aspx.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
