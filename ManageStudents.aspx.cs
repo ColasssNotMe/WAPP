@@ -116,6 +116,7 @@ namespace Assignment
             {
                 conn.Open();
 
+                // 1. Delete previous enrolment record for this student
                 string deleteQuery = "DELETE FROM Enrolment WHERE studentID = @studentID";
                 using (SqlCommand delCmd = new SqlCommand(deleteQuery, conn))
                 {
@@ -123,13 +124,13 @@ namespace Assignment
                     delCmd.ExecuteNonQuery();
                 }
 
-                string insertQuery = @"INSERT INTO Enrolment (studentID, classID, enrolDate) 
-                                       VALUES (@studentID, @classID, @enrolDate)";
+                string insertQuery = @"INSERT INTO Enrolment (studentID, classID, enrollDate) 
+                                       VALUES (@studentID, @classID, @enrollDate)";
                 using (SqlCommand insCmd = new SqlCommand(insertQuery, conn))
                 {
                     insCmd.Parameters.AddWithValue("@studentID", studentId);
                     insCmd.Parameters.AddWithValue("@classID", classId);
-                    insCmd.Parameters.AddWithValue("@enrolDate", DateTime.Now);
+                    insCmd.Parameters.AddWithValue("@enrollDate", DateTime.Now);
                     insCmd.ExecuteNonQuery();
                 }
             }

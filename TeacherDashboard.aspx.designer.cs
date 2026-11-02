@@ -24,15 +24,6 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// HeaderControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Assignment.WebUserControl1 HeaderControl;
-
-        /// <summary>
         /// lblTeacherName control.
         /// </summary>
         /// <remarks>
@@ -78,13 +69,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblNoteCount;
 
         /// <summary>
-        /// rptMaterials control.
+        /// rptRecentMaterials control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptMaterials;
+        protected global::System.Web.UI.WebControls.Repeater rptRecentMaterials;
 
         /// <summary>
         /// pnlNoMaterials control.
@@ -96,13 +87,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Panel pnlNoMaterials;
 
         /// <summary>
-        /// rptQuizzes control.
+        /// rptRecentQuizzes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptQuizzes;
+        protected global::System.Web.UI.WebControls.Repeater rptRecentQuizzes;
 
         /// <summary>
         /// pnlNoQuizzes control.
@@ -114,13 +105,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Panel pnlNoQuizzes;
 
         /// <summary>
-        /// rptClassrooms control.
+        /// rptClassroomSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptClassrooms;
+        protected global::System.Web.UI.WebControls.Repeater rptClassroomSummary;
 
         /// <summary>
         /// pnlNoClassrooms control.
@@ -130,14 +121,5 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlNoClassrooms;
-
-        /// <summary>
-        /// FooterControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Assignment.Footer FooterControl;
     }
 }

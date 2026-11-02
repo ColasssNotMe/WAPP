@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+
 namespace Assignment
 {
     public partial class Login : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userId"] != null)
             {
-                Response.Redirect("Homepage");
+                Response.Redirect("Homepage.aspx");
             }
         }
 
@@ -20,21 +20,22 @@ namespace Assignment
                 ConfigurationManager.ConnectionStrings["WAPP"].ConnectionString;
 
             string query = @"
-        SELECT 
-            u.userID,
-            u.username,
-            u.role,
-            u.email,
-            u.password,
-            u.profilePic,
-            t.approved,
-            s.studentID
-        FROM [User] u
-        LEFT JOIN Student s
-            ON u.userID = s.userID
-        LEFT JOIN Teacher t
-            ON u.userID = t.userID
-        WHERE u.email = @email";
+                SELECT 
+                    u.userID,
+                    u.username,
+                    u.role,
+                    u.email,
+                    u.password,
+                    u.profilePic,
+                    t.approved,
+                    t.teacherID,
+                    s.studentID
+                FROM [User] u
+                LEFT JOIN Student s
+                    ON u.userID = s.userID
+                LEFT JOIN Teacher t
+                    ON u.userID = t.userID
+                WHERE u.email = @email";
 
             PasswordManager passwordManager = new PasswordManager();
 
@@ -70,16 +71,19 @@ namespace Assignment
                                     LoginMessage.Visible = true;
                                     return;
                                 }
-
                             }
-
 
                             Session["email"] = reader["email"].ToString().Trim();
                             Session["username"] = reader["username"].ToString().Trim();
                             Session["userId"] = reader["userID"];
                             Session["role"] = reader["role"].ToString().Trim();
-                            Session["studentId"] = reader["studentID"].ToString().Trim();
-
+                            Session["studentId"] = reader["studentID"] != DBNull.Value ? reader["studentID"].ToString().Trim() : "";
+                            
+                            // Save teacherID in session for teacher queries
+                            if (reader["teacherID"] != DBNull.Value)
+                            {
+                                Session["teacherID"] = reader["teacherID"];
+                            }
 
                             if (reader["profilePic"] == DBNull.Value ||
                                 string.IsNullOrWhiteSpace(reader["profilePic"].ToString()))
@@ -88,19 +92,18 @@ namespace Assignment
                             }
                             else
                             {
-                                Session["profilePic"] =
-                                    reader["profilePic"].ToString().Trim();
+                                Session["profilePic"] = reader["profilePic"].ToString().Trim();
                             }
 
-                            if (role.ToLower() == "admin")
+                            if (role == "admin")
                             {
                                 Response.Redirect("AdminDashboard.aspx");
                             }
-                            else if (role.ToLower() == "teacher")
+                            else if (role == "teacher")
                             {
                                 Response.Redirect("TeacherDashboard.aspx");
                             }
-                            else if (role.ToLower() == "student")
+                            else if (role == "student")
                             {
                                 Response.Redirect("StudentDashboard.aspx");
                             }
