@@ -13,12 +13,16 @@ namespace Assignment
         {
             get
             {
-                int classId;
+                int classID;
 
-                if (int.TryParse(Request.QueryString["classID"], out classId)
-                    && classId > 0)
+                if (Session["classID"] != null)
                 {
-                    return classId;
+                    if (int.TryParse(
+                        Session["classID"].ToString(),
+                        out classID))
+                    {
+                        return classID;
+                    }
                 }
 
                 return 0;
