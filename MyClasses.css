@@ -39,6 +39,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    min-height: 80vh;
 }
 
 .classes-header {
