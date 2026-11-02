@@ -60,7 +60,7 @@ namespace Assignment
             loadData();
         }
 
-        protected void Row_Command(object source, RepeaterCommandEventArgs e)
+        protected void Row_Command(object sender, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectQuiz")
             {
@@ -107,6 +107,15 @@ namespace Assignment
                 {
                     try
                     {
+                        // 1. Delete student results (references quizID)
+                        using (SqlCommand cmd = new SqlCommand(
+                            "DELETE FROM Result WHERE quizID = @quizID", conn, tran))
+                        {
+                            cmd.Parameters.AddWithValue("@quizID", SelectedQuizID.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // 2. Delete answers (references questionID, which references quizID)
                         using (SqlCommand cmd = new SqlCommand(
                             "DELETE FROM Answer WHERE questionID IN (SELECT questionID FROM Question WHERE quizID = @quizID)", conn, tran))
                         {
@@ -114,13 +123,17 @@ namespace Assignment
                             cmd.ExecuteNonQuery();
                         }
 
-                        using (SqlCommand cmd = new SqlCommand("DELETE FROM Question WHERE quizID = @quizID", conn, tran))
+                        // 3. Delete questions
+                        using (SqlCommand cmd = new SqlCommand(
+                            "DELETE FROM Question WHERE quizID = @quizID", conn, tran))
                         {
                             cmd.Parameters.AddWithValue("@quizID", SelectedQuizID.Value);
                             cmd.ExecuteNonQuery();
                         }
 
-                        using (SqlCommand cmd = new SqlCommand("DELETE FROM Quiz WHERE quizID = @quizID", conn, tran))
+                        // 4. Delete the quiz itself
+                        using (SqlCommand cmd = new SqlCommand(
+                            "DELETE FROM Quiz WHERE quizID = @quizID", conn, tran))
                         {
                             cmd.Parameters.AddWithValue("@quizID", SelectedQuizID.Value);
                             cmd.ExecuteNonQuery();
