@@ -25,11 +25,7 @@
                 <h1><asp:Label ID="lblQuizTitle" runat="server" Text="Quiz Title" /></h1>
                 <p>Read-only view. You cannot attempt or edit this quiz.</p>
             </div>
-            <div>
-                <asp:Button ID="btnBack" runat="server" Text="&larr; Back"
-                    CssClass="btn" CausesValidation="false"
-                    OnClick="btnBack_Click" />
-            </div>
+
         </div>
 
         <asp:Panel ID="pnlError" runat="server" Visible="false" CssClass="card empty">
