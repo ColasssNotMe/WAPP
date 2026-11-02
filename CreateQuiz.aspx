@@ -110,10 +110,6 @@
                                     <label>Question Type</label>
                                     <asp:DropDownList ID="ddlQuestionType" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlQuestionType_SelectedIndexChanged" SelectedValue='<%# Eval("QuestionType") %>'>
                                         <asp:ListItem Text="Multiple Choice" Value="MCQ" />
-                                        <!--
-                                        <asp:ListItem Text="Short Answer" Value="ShortAnswer" />
-                                        <asp:ListItem Text="True / False" Value="TrueFalse" />
-                                        -->
                                     </asp:DropDownList>
                                 </div>
                                 <div class="form-group" style="width: 100px;">

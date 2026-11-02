@@ -36,7 +36,7 @@
                 <asp:HyperLink
                     ID="BackToQuizzes"
                     runat="server"
-                    NavigateUrl="StudentQuizList.aspx"
+                    NavigateUrl="StudentClassQuizList.aspx"
                     CssClass="back-button">
                     ←&nbsp; Back to quizzes
                 </asp:HyperLink>

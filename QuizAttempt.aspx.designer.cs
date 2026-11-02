@@ -33,24 +33,6 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// quizHeading control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl quizHeading;
-
-        /// <summary>
-        /// classroomNameLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl classroomNameLabel;
-
-        /// <summary>
         /// quizElapsedSeconds control.
         /// </summary>
         /// <remarks>
@@ -60,6 +42,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.HiddenField quizElapsedSeconds;
 
         /// <summary>
+        /// quizHeading control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl quizHeading;
+
+        /// <summary>
         /// BackToQuizzes control.
         /// </summary>
         /// <remarks>
@@ -67,6 +58,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink BackToQuizzes;
+
+        /// <summary>
+        /// classroomNameLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl classroomNameLabel;
 
         /// <summary>
         /// quizTitle control.
