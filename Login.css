@@ -19,7 +19,7 @@ body {
     padding: 0;
     display: grid;
     place-items: center;
-    background: var(--bg-surface);
+    background: var(--bg-light);
     color: var(--primary-color);
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
@@ -34,7 +34,7 @@ body {
     margin: 28px auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: var(--bg-light);
+    background: var(--bg-surface);
     border: 1px solid var(--border-color);
 }
 
