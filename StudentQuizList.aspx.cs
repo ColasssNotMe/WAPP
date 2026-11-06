@@ -24,8 +24,11 @@ namespace Assignment
                 return;
             }
 
-            LoadAvailableQuizzes();
-            LoadCompletedQuizzes();
+            if (!IsPostBack)
+            {
+                LoadAvailableQuizzes();
+                LoadCompletedQuizzes();
+            }
         }
         private void LoadAvailableQuizzes()
         {

@@ -46,7 +46,7 @@
 
             <div class="quiz-search">
 
-                <span class="search-icon">⌕</span>
+                <img src="svg/search.svg" width="20" height="20" style="padding-left:20px"/>
 
 <asp:TextBox
     ID="searchBox"
