@@ -24,30 +24,21 @@ namespace Assignment
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// HeaderControl control.
+        /// rptClassrooms control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Assignment.WebUserControl1 HeaderControl;
+        protected global::System.Web.UI.WebControls.Repeater rptClassrooms;
 
         /// <summary>
-        /// rptClasses control.
+        /// pnlNoClasses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptClasses;
-
-        /// <summary>
-        /// FooterControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Assignment.Footer FooterControl;
+        protected global::System.Web.UI.WebControls.Panel pnlNoClasses;
     }
 }

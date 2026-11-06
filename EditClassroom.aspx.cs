@@ -14,75 +14,163 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 if (Request.QueryString["classID"] != null)
                 {
                     int classId = Convert.ToInt32(Request.QueryString["classID"]);
-                    LoadClassroomDetails(classId);
+                    LoadClassroomData(classId);
+                    btnDelete.Visible = true;
                 }
                 else
                 {
-                    Response.Redirect("MyClasses.aspx");
+                    lblPageTitle.Text = "Create Classroom";
+                    btnSaveChanges.Text = "Create classroom";
+                    btnDelete.Visible = false;
                 }
             }
         }
 
-        private void LoadClassroomDetails(int classId)
+        private void LoadClassroomData(int classId)
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = "SELECT className, description FROM Class WHERE classID = @classID";
+                string query = "SELECT className, subject, description FROM Class WHERE classID = @classID";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@classID", classId);
                     conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        txtClassroomName.Text = reader["className"].ToString();
-                        txtDescription.Text = reader["description"].ToString();
-                    }
-                    else
-                    {
-                        Response.Redirect("MyClasses.aspx");
+                        if (reader.Read())
+                        {
+                            txtClassName.Text = reader["className"] != DBNull.Value ? reader["className"].ToString() : "";
+                            txtSubject.Text = reader["subject"] != DBNull.Value ? reader["subject"].ToString() : "";
+                            txtDescription.Text = reader["description"] != DBNull.Value ? reader["description"].ToString() : "";
+                        }
                     }
                 }
             }
         }
 
-        protected void btnSaveClassroom_Click(object sender, EventArgs e)
+        protected void btnSaveChanges_Click(object sender, EventArgs e)
         {
-            if (Request.QueryString["classID"] == null)
-            {
-                Response.Redirect("MyClasses.aspx");
-                return;
-            }
-
-            int classId = Convert.ToInt32(Request.QueryString["classID"]);
-            string className = txtClassroomName.Text.Trim();
+            string className = txtClassName.Text.Trim();
+            string subject = txtSubject.Text.Trim();
             string description = txtDescription.Text.Trim();
 
             if (string.IsNullOrEmpty(className))
             {
+                ScriptManager.RegisterStartupScript(this, GetType(), "alertName", "alert('Please enter a classroom name.');", true);
                 return;
             }
 
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                string query = @"UPDATE Class 
-                                SET className = @className, 
-                                    description = @description 
-                                WHERE classID = @classID";
+                conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                if (Request.QueryString["classID"] != null)
                 {
-                    cmd.Parameters.AddWithValue("@className", className);
-                    cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@classID", classId);
+                    // Update existing classroom
+                    int classId = Convert.ToInt32(Request.QueryString["classID"]);
+                    string updateQuery = @"UPDATE Class 
+                                            SET className = @className, 
+                                                subject = @subject, 
+                                                description = @description 
+                                            WHERE classID = @classID";
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@className", className);
+                        cmd.Parameters.AddWithValue("@subject", subject);
+                        cmd.Parameters.AddWithValue("@description", description);
+                        cmd.Parameters.AddWithValue("@classID", classId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                else
+                {
+                    // Create new classroom
+                    string inviteCode = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
+                    int teacherId = Session["teacherID"] != null ? Convert.ToInt32(Session["teacherID"]) : 1;
+                    DateTime currentDate = DateTime.Now;
+
+                    string insertQuery = @"INSERT INTO Class (className, subject, description, teacherID, inviteCode, startDate, endDate) 
+                                           VALUES (@className, @subject, @description, @teacherID, @inviteCode, @startDate, @endDate)";
+
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@className", className);
+                        cmd.Parameters.AddWithValue("@subject", subject);
+                        cmd.Parameters.AddWithValue("@description", description);
+                        cmd.Parameters.AddWithValue("@teacherID", teacherId);
+                        cmd.Parameters.AddWithValue("@inviteCode", inviteCode);
+                        cmd.Parameters.AddWithValue("@startDate", currentDate);
+                        cmd.Parameters.AddWithValue("@endDate", currentDate);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            Response.Redirect("MyClasses.aspx");
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Request.QueryString["classID"] == null) return;
+
+            int classId = Convert.ToInt32(Request.QueryString["classID"]);
+
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                conn.Open();
+                using (SqlTransaction transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        string delEnrolment = "DELETE FROM Enrolment WHERE classID = @classID";
+                        using (SqlCommand cmd = new SqlCommand(delEnrolment, conn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@classID", classId);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        string delMaterial = "DELETE FROM Material WHERE classID = @classID";
+                        using (SqlCommand cmd = new SqlCommand(delMaterial, conn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@classID", classId);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        string delQuiz = "DELETE FROM Quiz WHERE classID = @classID";
+                        using (SqlCommand cmd = new SqlCommand(delQuiz, conn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@classID", classId);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        string delClass = "DELETE FROM Class WHERE classID = @classID";
+                        using (SqlCommand cmd = new SqlCommand(delClass, conn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@classID", classId);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
                 }
             }
 
